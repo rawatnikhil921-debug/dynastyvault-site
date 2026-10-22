@@ -11607,7 +11607,7 @@ function wire() {
    BOOT
    ========================================================= */
 function boot() {
-  try { if (!state.curAuto) { const tz = (Intl.DateTimeFormat().resolvedOptions().timeZone || ''); state.currency = /^Asia\/(Kolkata|Calcutta)$/.test(tz) ? 'INR' : 'USD'; state.curAuto = 1; } } catch (e) { /* keep the default */ }
+  try { if (!state.curAuto) { const tz = (Intl.DateTimeFormat().resolvedOptions().timeZone || ''); const langs = [].concat(navigator.languages || [], navigator.language || []); state.currency = (/^Asia\/(Kolkata|Calcutta)$/.test(tz) || langs.some(l => /(^|-)IN$/i.test(l))) ? 'INR' : 'USD'; state.curAuto = 1; } } catch (e) { /* keep the default */ }
   getSample(); getDownloads();
   wire();
   initV10();
