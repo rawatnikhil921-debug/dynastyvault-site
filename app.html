@@ -1844,7 +1844,7 @@ svg.leaflet-zoom-animated{will-change:transform}
       <button class="btn-ghost" id="btnFounder">👑 <span data-i18n="founder">Founder Profile</span></button>
       <button class="btn-ghost" data-open-map>🗺️ Migration Map</button>
       <button class="btn-ghost" id="btnInvite2"><svg class="ico" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="8" r="3"/><circle cx="16.5" cy="9" r="2.4"/><path d="M2.8 19c.6-3.3 2.6-5 5.2-5s4.6 1.7 5.2 5M13.6 14.4c.9-.6 1.8-.9 2.9-.9 2.2 0 3.8 1.4 4.3 4"/><path d="M19.5 2.5v4M17.5 4.5h4" stroke="var(--gold-hi)"/></svg> <span data-i18n="invite">Invite Family</span></button>
-      <button class="btn-gold" data-open-portrait>🖼️ <span data-i18n="portrait">Reunion Portrait</span></button>
+      <button class="btn-gold" data-open-portrait="photo">🖼️ <span data-i18n="portrait">Reunion Portrait</span></button>
       <button class="btn-ghost" id="btnNewVault">＋ <span data-i18n="newVault">Create New Dynasty</span></button>
     </div>
   </section>
@@ -2094,10 +2094,24 @@ svg.leaflet-zoom-animated{will-change:transform}
         <h2 class="font-regal gold-text text-3xl sm:text-5xl font-bold mt-3">Every Generation in One Frame</h2>
         <p class="muted mt-4">Everyone’s real photo — past and present — arranged one generation per row, husband and wife side by side, with names and years. Ready to print and gift.</p>
         <ul class="flist"><li>100% real faces — nothing is changed by AI</li><li>Royal navy or Ivory album style, tall or wide</li><li>Gilded frame and a name plaque</li></ul>
-        <div class="flex flex-wrap gap-3"><button class="btn-gold" data-open-portrait>🧩 Make our family collage</button></div>
+        <div class="flex flex-wrap gap-3"><button class="btn-gold" data-open-portrait="collage">🧩 Make our family collage</button></div>
         <p class="tiny muted mt-4">Free watermarked preview · 4K printable PDF <span data-price="addons.portrait4k"></span> · unlimited with Royal</p>
       </div>
-      <button class="ps-promo-art" data-open-portrait aria-label="Open the Reunion Portrait Studio"><canvas id="psPromo" width="960" height="540"></canvas></button>
+      <button class="ps-promo-art" data-open-portrait="collage" aria-label="Open the Family Collage studio"><canvas id="psPromo" width="960" height="540"></canvas></button>
+    </div>
+  </section>
+
+  <!-- REUNION PORTRAIT PROMO -->
+  <section id="reunionPortrait" data-panel="reunion" class="py-12 sm:py-16 reveal">
+    <div class="ps-promo glass gborder">
+      <div class="min-w-0">
+        <div class="eyebrow">◆ Reunion Portrait</div>
+        <h2 class="font-regal gold-text text-3xl sm:text-5xl font-bold mt-3" data-hn="Poori family ek asli jaisi photo mein">The Whole Family in One Real-Looking Photo</h2>
+        <p class="muted mt-4" data-hn="Dada-dadi se lekar bachchon tak — sab ek saath, ek jagah, jaise sach mein photo khinchi ho. Photos aur tayyar prompt free Gemini app mein le jao, wahan banao, phir yahan frame aur naam ki plaque ke saath rakho.">Grandparents to grandchildren — everyone together in one place, as if the photo was really taken. Take everyone’s photos and a ready-made prompt to the free Gemini app, make it there, then keep it here with a gilded frame and a name plaque.</p>
+        <ul class="flist"><li>Choose the place — haveli courtyard, garden, palace hall, studio…</li><li>Choose the clothes and who sits or stands</li><li>Free with the Gemini app — no API key, no billing</li></ul>
+        <div class="flex flex-wrap gap-3"><button class="btn-gold" data-open-portrait="photo">✨ Make our reunion portrait</button><button class="btn-ghost" data-buy-service="photo">🎁 Get it made for you <span data-price="services.photo"></span></button></div>
+      </div>
+      <button class="ps-promo-art" data-open-portrait="photo" aria-label="Open the Reunion Portrait studio"><canvas id="rpPromo" width="960" height="540"></canvas></button>
     </div>
   </section>
 
@@ -5104,6 +5118,7 @@ const DASH_TABS = [
   { id:'voice', ico:'🎙️', en:'AI Voice Chronicles', hn:'AI Awaaz Kahaniyaan' },
   { id:'themes', ico:'🎨', en:'Theme Studio', hn:'Theme Studio' },
   { id:'photo', ico:'🧩', en:'Family Collage', hn:'Family Collage' },
+  { id:'reunion', ico:'✨', en:'Reunion Portrait', hn:'Reunion Portrait' },
   { id:'refer', ico:'🎁', en:'Referral & Rewards', hn:'Refer & Rewards' }
 ];
 const dash = { tab:null, syncing:false, inited:false };
@@ -9298,7 +9313,7 @@ async function generatePortrait(animate) {
 }
 async function openPortrait(mode) {
   markUsed('portrait');
-  const v = V();
+  const v = V(); if (mode === 'photo' || mode === 'collage') GM.tab = mode;
   $('#psTitle').textContent = `${v.name} · Family Collage`;
   openModal('portraitModal'); setEngine();
   await generatePortrait(PS.engine === 'photo');
@@ -10035,8 +10050,11 @@ let promoTimer = 0;
 function renderPromo() {
   clearTimeout(promoTimer);
   promoTimer = setTimeout(async () => {
-    const c = $('#psPromo'); if (!c) return; const v = V();
-    if (v.reunion && v.reunion.src) { const ri = await loadImg(v.reunion.src); await psFonts(); if (ri) { gmDraw(c.getContext('2d'), c.width, c.height, ri, { frame:'gilded', plaque:`The ${v.name}` }); return; } }
+    const v = V(); const photo = v.reunion && v.reunion.by !== 'collage' ? v.reunion : v.reunionPhoto;
+    const rp = $('#rpPromo');
+    if (rp) { const pi = photo && photo.src ? await loadImg(photo.src) : null; await psFonts(); if (pi) gmDraw(rp.getContext('2d'), rp.width, rp.height, pi, { frame:'gilded', plaque:`The ${v.name}` }); else { const [pp, pb] = await Promise.all([loadPhotoPeople(v), loadImg(v.bg || DEFAULT_BG)]); drawPhotoGroup(rp.getContext('2d'), rp.width, rp.height, { look:'natural', harmony:0, scale:100, light:55, shadows:true, frame:'gilded', plaque:`The ${v.name}`, place:{} }, pp, pb, { emptyNote:'Add portrait photos in the profiles, then make your reunion portrait' }); } }
+    const c = $('#psPromo'); if (!c) return;
+    if (v.reunion && v.reunion.src && v.reunion.by === 'collage') { const ri = await loadImg(v.reunion.src); await psFonts(); if (ri) { gmDraw(c.getContext('2d'), c.width, c.height, ri, { frame:'gilded', plaque:`The ${v.name}` }); return; } }
     const [people, bg] = await Promise.all([loadPhotoPeople(v), loadImg(v.bg || DEFAULT_BG)]); await psFonts();
     drawPhotoGroup(c.getContext('2d'), c.width, c.height, { look:'natural', harmony:0, scale:100, light:55, shadows:true, frame:'gilded', plaque:`The ${v.name}`, place:{} }, people, bg, { emptyNote:'Add portrait photos in the profiles to place your family here' });
   }, 250);
@@ -11489,13 +11507,19 @@ window.__acctDirty = function () {
 };
 function acctRender() {
   const b = $('#acctBtn'); if (!b) return;
-  if (!SB) { b.classList.add('hidden'); return; }
   b.classList.remove('hidden'); b.textContent = sess ? '☁ ' + acctShort(sess.email) : '☁ Sign in';
   if (isOpen('acctModal')) acctBody();
 }
 function acctBody() {
   const el = $('#acctBody'), ti = $('#acctTitle'); if (!el) return;
   const when = sess && sess.last ? new Date(sess.last).toLocaleString('en-IN', { day:'numeric', month:'short', hour:'numeric', minute:'2-digit' }) : '—';
+  if (!SB) {
+    ti.textContent = 'Sign in';
+    el.innerHTML = `<p class="text-sm">Accounts are coming very soon — then you can sign in with your email and open your family on any phone.</p>
+      <p class="tiny muted mt-3">Right now everything is saved safely on this phone. To keep a copy or move to a new phone, use <b>1-Click Family Archive</b> (download) and <b>Restore</b>.</p>
+      <button class="btn-gold w-full mt-5" data-close>OK</button>`;
+    return;
+  }
   if (sess) {
     ti.textContent = 'Your account';
     el.innerHTML = `<p class="text-sm">Signed in as <b>${esc(sess.email || '')}</b></p>
