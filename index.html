@@ -151,6 +151,12 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:space-bet
 footer nav{display:flex;flex-wrap:wrap;gap:6px 18px}
 footer a{color:var(--ink);text-decoration:none}footer a:hover{color:var(--gold-hi)}
 .hero .wrap>*{min-width:0}.hero svg{max-width:100%}
+.lang-pick{position:relative;display:inline-flex;align-items:center;gap:4px;border:1px solid var(--line-strong);border-radius:999px;padding:0 6px 0 10px;min-height:42px;color:var(--ink)}
+.lang-pick select{appearance:none;-webkit-appearance:none;background:transparent;border:0;color:var(--ink);font:600 .88rem var(--f-body);padding:0 4px;min-height:40px;max-width:120px;cursor:pointer}
+.lang-pick select option{background:#0F1016;color:#EFE8D6}
+[data-script=complex] .eyebrow,[data-script=complex] .launch,[data-script=complex] .heirloom .label small,[data-script=complex] .field span,[data-script=complex] .brand-t{letter-spacing:0!important}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (max-width:560px){.top .wrap{flex-wrap:wrap;row-gap:6px;padding-block:8px}.top-cta{width:100%;justify-content:flex-end}.lang-pick{margin-right:auto}}
 </style>
 </head>
 <body>
@@ -158,12 +164,15 @@ footer a{color:var(--ink);text-decoration:none}footer a:hover{color:var(--gold-h
   <div class="wrap">
     <a class="brand" href="index.html" aria-label="DynastyVault home">
       <svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#0F1016" stroke="#D4AF37" stroke-opacity=".5"/><path d="M10 24 L22 34 L32 14 L42 34 L54 24 L49 46 H15 Z" fill="#D4AF37"/></svg>
-      DYNASTYVAULT
+      <span class="brand-t">DYNASTYVAULT</span>
     </a>
     <nav class="nav" aria-label="Main">
-      <a href="#features">Features</a><a href="#how">How it works</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a><a href="#contact">Contact</a>
+      <a href="#features" data-t="nav_features">Features</a><a href="#how" data-t="nav_how">How it works</a><a href="#pricing" data-t="nav_pricing">Pricing</a><a href="#faq" data-t="nav_faq">FAQ</a><a href="#contact" data-t="nav_contact">Contact</a>
     </nav>
-    <div class="top-cta"><a class="btn btn-ghost btn-login" href="app.html#login">Log in</a><a class="btn btn-gold btn-signup" href="app.html#signup">Sign up</a></div>
+    <div class="top-cta">
+      <label class="lang-pick" title="Language"><span aria-hidden="true">🌐</span><span class="sr" data-t="lang_label">Language</span><select id="langSel" aria-label="Language"></select></label>
+      <a class="btn btn-ghost btn-login" href="app.html#login" data-t="login">Log in</a><a class="btn btn-gold btn-signup" href="app.html#signup" data-t="signup">Sign up</a>
+    </div>
   </div>
 </header>
 
@@ -171,19 +180,18 @@ footer a{color:var(--ink);text-decoration:none}footer a:hover{color:var(--gold-h
   <section class="hero">
     <div class="wrap">
       <div>
-        <div class="eyebrow">◆ Vanshavali for the WhatsApp generation</div>
-        <h1>Every family is a dynasty.</h1>
-        <p class="lede">Build both sides of your family tree, save your grandparents’ voices, and hear their life stories told in their own voice.</p>
-        <p class="hn">Dada-Dadi aur Nana-Nani ki kahaniyan, unki apni awaaz mein — hamesha ke liye.</p>
+        <div class="eyebrow">◆ <span data-t="eyebrow">A family tree for the WhatsApp generation</span></div>
+        <h1 data-t="h1">Every family is a dynasty.</h1>
+        <p class="lede" data-t="lede">Build both sides of your family tree, save your grandparents’ voices, and hear their life stories told in their own voice.</p>
         <div class="cta-row">
-          <a class="btn btn-gold" href="app.html">Start your family tree — free</a>
-          <a class="btn btn-ghost" href="app.html#demo">See a demo family</a>
+          <a class="btn btn-gold" href="app.html" data-t="cta_start">Start your family tree — free</a>
+          <a class="btn btn-ghost" href="app.html#demo" data-t="cta_demo">See a demo family</a>
         </div>
-        <div class="trust"><span>Free to start, no card</span><span>Your data stays on your device</span><span>English, Hinglish &amp; Hindi</span></div>
+        <div class="trust"><span data-t="trust1">Free to start, no card</span><span data-t="trust2">Your data stays on your device</span><span data-t="trust3">Available in 16 languages</span></div>
       </div>
 
-      <figure class="heirloom" aria-label="Example: the Rawat family register">
-        <div class="label"><b>The Rawat Vanshavali</b><small>3 generations</small></div>
+      <figure class="heirloom" aria-label="Example family tree">
+        <div class="label"><b data-t="card_title">The Rawat Family Tree</b><small data-t="card_gen">3 generations</small></div>
         <svg class="tree" viewBox="0 0 420 210" role="img" aria-label="Grandparents on both sides joined to their children and to you">
           <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#8A6510"/><stop offset=".5" stop-color="#F3D774"/><stop offset="1" stop-color="#D4AF37"/></linearGradient></defs>
           <g fill="none" stroke="#D4AF37" stroke-opacity=".55" stroke-width="2">
@@ -193,15 +201,15 @@ footer a{color:var(--ink);text-decoration:none}footer a:hover{color:var(--gold-h
             <circle cx="54" cy="44" r="22"/><circle cx="156" cy="44" r="22"/><circle cx="264" cy="44" r="22"/><circle cx="366" cy="44" r="22"/>
             <circle cx="160" cy="112" r="22"/><circle cx="260" cy="112" r="22"/><circle cx="210" cy="178" r="26" stroke-width="4.5"/>
           </g>
-          <g fill="#E9CF7A" font-size="13" text-anchor="middle">
-            <text x="54" y="49">DA</text><text x="156" y="49">DI</text><text x="264" y="49">NA</text><text x="366" y="49">NI</text>
-            <text x="160" y="117">PA</text><text x="260" y="117">MA</text><text x="210" y="184" fill="#F3D774" font-size="14">YOU</text>
+          <g fill="#E9CF7A" font-size="12" text-anchor="middle" class="tl">
+            <text x="54" y="48" data-t="t_gf1">GPA</text><text x="156" y="48" data-t="t_gm1">GMA</text><text x="264" y="48" data-t="t_gf2">GPA</text><text x="366" y="48" data-t="t_gm2">GMA</text>
+            <text x="160" y="116" data-t="t_dad">DAD</text><text x="260" y="116" data-t="t_mom">MOM</text><text x="210" y="183" fill="#F3D774" font-size="13" data-t="t_you">YOU</text>
           </g>
           <g fill="#D4AF37"><path d="M105 40l4 4-4 4-4-4z"/><path d="M315 40l4 4-4 4-4-4z"/><path d="M210 108l4 4-4 4-4-4z"/></g>
         </svg>
         <div class="voice">
           <span class="play" aria-hidden="true">▶</span>
-          <div class="meta"><b>Dadaji · “1947 mein hum Lahore se aaye…”</b><small>0:24 · in his own cloned voice</small><div class="wave" id="wave" aria-hidden="true"></div></div>
+          <div class="meta"><b data-t="voice_title">Grandpa · “In 1947 we came from Lahore…”</b><small data-t="voice_sub">0:24 · in his own cloned voice</small><div class="wave" id="wave" aria-hidden="true"></div></div>
         </div>
       </figure>
     </div>
@@ -209,68 +217,68 @@ footer a{color:var(--ink);text-decoration:none}footer a:hover{color:var(--gold-h
 
   <section class="band" id="features">
     <div class="wrap">
-      <div class="sec-head"><div class="eyebrow">What you can do</div><h2 style="margin-top:10px">One home for your family’s names, faces and voices</h2>
-        <p>Made for Indian families spread across cities and countries — simple enough for your parents, rich enough to pass on.</p></div>
+      <div class="sec-head"><div class="eyebrow" data-t="f_eyebrow">What you can do</div><h2 style="margin-top:10px" data-t="f_h2">One home for your family’s names, faces and voices</h2>
+        <p data-t="f_p">Made for families spread across cities and countries — simple enough for your parents, rich enough to pass on.</p></div>
       <div class="feats">
-        <div class="feat"><div class="glyph">⚭</div><h3>Both sides, one tree</h3><p>Father’s and mother’s families meet at you. Add great-grandparents, marriages and every generation since.</p></div>
-        <div class="feat"><div class="glyph">◉</div><h3>Voices that stay</h3><p>Record 20 seconds, or upload an old WhatsApp voice note or video. Their stories are then read aloud in that same voice.</p></div>
-        <div class="feat"><div class="glyph">✎</div><h3>AI writes the life story</h3><p>Type or speak a few memories in any language. AI turns them into a warm life story — using only what you told it.</p></div>
-        <div class="feat"><div class="glyph">▦</div><h3>Family collage</h3><p>Everyone’s real photos, generation by generation, with names and years — in a gold frame, ready to print and gift. <a href="app.html#collage">See it →</a></p></div>
-        <div class="feat"><div class="glyph">✦</div><h3>Reunion portrait</h3><p>The whole family together in one real-looking photo — pick the place and the clothes, make it free in the Gemini app, keep it here in a gold frame. <a href="app.html#portrait">See it →</a></p></div>
-        <div class="feat"><div class="glyph">⌖</div><h3>Migration map</h3><p>Pin the ancestral village, the move after 1947, the city you live in now. See your family’s journey on one map.</p></div>
-        <div class="feat"><div class="glyph">⛨</div><h3>Private and yours</h3><p>Your tree is saved on your own device. Download the full family archive any time with one click.</p></div>
+        <div class="feat"><div class="glyph">⚭</div><h3 data-t="f1_h">Both sides, one tree</h3><p data-t="f1_p"></p></div>
+        <div class="feat"><div class="glyph">◉</div><h3 data-t="f2_h">Voices that stay</h3><p data-t="f2_p"></p></div>
+        <div class="feat"><div class="glyph">✎</div><h3 data-t="f3_h">AI writes the life story</h3><p data-t="f3_p"></p></div>
+        <div class="feat"><div class="glyph">▦</div><h3 data-t="f4_h">Family collage</h3><p><span data-t="f4_p"></span> <a href="app.html#collage" data-t="see">See it →</a></p></div>
+        <div class="feat"><div class="glyph">✦</div><h3 data-t="f5_h">Reunion portrait</h3><p><span data-t="f5_p"></span> <a href="app.html#portrait" data-t="see">See it →</a></p></div>
+        <div class="feat"><div class="glyph">⌖</div><h3 data-t="f6_h">Migration map</h3><p data-t="f6_p"></p></div>
+        <div class="feat"><div class="glyph">⛨</div><h3 data-t="f7_h">Private and yours</h3><p data-t="f7_p"></p></div>
       </div>
     </div>
   </section>
 
   <section class="band" id="how">
     <div class="wrap">
-      <div class="sec-head"><div class="eyebrow">How it works</div><h2 style="margin-top:10px">Start tonight, finish over chai</h2></div>
+      <div class="sec-head"><div class="eyebrow" data-t="how_eyebrow">How it works</div><h2 style="margin-top:10px" data-t="how_h2">Start tonight, finish over a cup of tea</h2></div>
       <div class="steps">
-        <div class="step"><h3>Add your family</h3><p>Type your parents’ and grandparents’ names — one minute. Add photos from your phone whenever you like.</p></div>
-        <div class="step"><h3>Save a voice</h3><p>Record Dadaji for 20 seconds, or upload a voice note he sent on WhatsApp. That becomes his voice in the app.</p></div>
-        <div class="step"><h3>Hear and share</h3><p>Write his story (or let AI write it), press play, and hear it in his voice. Print the family collage for the wall.</p></div>
+        <div class="step"><h3 data-t="s1_h">Add your family</h3><p data-t="s1_p"></p></div>
+        <div class="step"><h3 data-t="s2_h">Save a voice</h3><p data-t="s2_p"></p></div>
+        <div class="step"><h3 data-t="s3_h">Hear and share</h3><p data-t="s3_p"></p></div>
       </div>
     </div>
   </section>
 
   <section class="band" id="pricing">
     <div class="wrap">
-      <div class="sec-head"><div class="eyebrow">Pricing</div><h2 style="margin-top:10px">Free to begin. Royal for life.</h2>
-        <p>One payment, no subscription. <span class="launch">Launch prices — 50% off</span> <span class="cur-switch" role="group" aria-label="Currency"><button type="button" data-cur="inr">₹ INR</button><button type="button" data-cur="usd">$ USD</button></span></p></div>
+      <div class="sec-head"><div class="eyebrow" data-t="pr_eyebrow">Pricing</div><h2 style="margin-top:10px" data-t="pr_h2">Free to begin. Royal for life.</h2>
+        <p><span data-t="pr_p">One payment, no subscription.</span> <span class="launch" data-t="launch">Launch prices — 50% off</span> <span class="cur-switch" role="group" aria-label="Currency"><button type="button" data-cur="inr">₹ INR</button><button type="button" data-cur="usd">$ USD</button></span></p></div>
       <div class="plans">
         <article class="plan">
-          <h3>Free Vault</h3><div class="price"><span data-inr="₹0" data-usd="$0">₹0</span><small>forever</small></div>
-          <ul><li>Up to 10 family members</li><li>Father’s side of the family</li><li>Family collage &amp; AI story writer</li><li>Voice recording and cloned-voice stories</li><li>Migration map &amp; one-click backup</li></ul>
-          <a class="btn btn-ghost" href="app.html">Start free</a>
+          <h3 data-t="free_h">Free Vault</h3><div class="price"><span data-inr="₹0" data-usd="$0">₹0</span><small data-t="forever">forever</small></div>
+          <ul><li data-t="free_li1"></li><li data-t="free_li2"></li><li data-t="free_li3"></li><li data-t="free_li4"></li><li data-t="free_li5"></li></ul>
+          <a class="btn btn-ghost" href="app.html" data-t="start_free">Start free</a>
         </article>
         <article class="plan royal">
-          <h3 style="color:var(--gold-hi)">Royal Dynasty Lifetime</h3><div class="price"><span data-inr="₹999" data-usd="$19">₹999</span> <s class="was" data-inr="₹1,999" data-usd="$39">₹1,999</s><small>pay once</small></div>
-          <ul><li>Both sides — mother’s and father’s families</li><li>Unlimited members &amp; generations</li><li data-cloud="1" hidden>About 100 stories in their cloned voice, on any phone</li><li>Stories in 15 languages with audio</li><li>Unlimited 4K print-ready collage &amp; tree</li><li>All premium themes &amp; every future feature</li></ul>
-          <a class="btn btn-gold" href="app.html#buy-royal">Get Royal for life</a>
+          <h3 style="color:var(--gold-hi)" data-t="royal_h">Royal Dynasty Lifetime</h3><div class="price"><span data-inr="₹999" data-usd="$19">₹999</span> <s class="was" data-inr="₹1,999" data-usd="$39">₹1,999</s><small data-t="pay_once">pay once</small></div>
+          <ul><li data-t="royal_li1"></li><li data-t="royal_li2"></li><li data-cloud="1" hidden data-t="royal_li3"></li><li data-t="royal_li4"></li><li data-t="royal_li5"></li><li data-t="royal_li6"></li></ul>
+          <a class="btn btn-gold" href="app.html#buy-royal" data-t="get_royal">Get Royal for life</a>
         </article>
       </div>
       <div class="svc" aria-label="Made for you">
-        <div class="svc-row"><div><b>Real Reunion Photo — made for you</b><small>Send everyone’s photos on WhatsApp; we make one real-looking group photo and check every face.</small></div><span class="amt"><span data-inr="₹199" data-usd="$4.99">₹199</span></span><a class="btn btn-ghost" href="app.html#buy-photo">Order</a></div>
-        <div class="svc-row" data-cloud="1" hidden><div><b>Voice Story Pack — instant, on any phone</b><small>About 20–25 stories read in your elder’s own cloned voice, made right in the app. No laptop needed.</small></div><span class="amt"><span data-inr="₹99" data-usd="$2.99">₹99</span></span><a class="btn btn-ghost" href="app.html#buy-voicepack">Get it</a></div>
-        <div class="svc-row" data-cloud="0"><div><b>Story in their own voice — made for you</b><small>Send a 20-second voice note and the story; get back an MP3 in that voice within 48 hours.</small></div><span class="amt"><span data-inr="₹199" data-usd="$4.99">₹199</span></span><a class="btn btn-ghost" href="app.html#buy-voice">Order</a></div>
-        <div class="svc-row"><div><b>Heritage Gift Box</b><small>Royal for life + one real reunion photo + three stories in an elder’s voice. A gift parents remember.</small></div><span class="amt"><span data-inr="₹1,499" data-usd="$29">₹1,499</span></span><a class="btn btn-gold" href="app.html#buy-gift">Order the gift</a></div>
+        <div class="svc-row"><div><b data-t="svc1_b"></b><small data-t="svc1_s"></small></div><span class="amt"><span data-inr="₹199" data-usd="$4.99">₹199</span></span><a class="btn btn-ghost" href="app.html#buy-photo" data-t="order">Order</a></div>
+        <div class="svc-row" data-cloud="1" hidden><div><b data-t="svc2_b"></b><small data-t="svc2_s"></small></div><span class="amt"><span data-inr="₹99" data-usd="$2.99">₹99</span></span><a class="btn btn-ghost" href="app.html#buy-voicepack" data-t="get_it">Get it</a></div>
+        <div class="svc-row" data-cloud="0"><div><b data-t="svc3_b"></b><small data-t="svc3_s"></small></div><span class="amt"><span data-inr="₹199" data-usd="$4.99">₹199</span></span><a class="btn btn-ghost" href="app.html#buy-voice" data-t="order">Order</a></div>
+        <div class="svc-row"><div><b data-t="svc4_b"></b><small data-t="svc4_s"></small></div><span class="amt"><span data-inr="₹1,499" data-usd="$29">₹1,499</span></span><a class="btn btn-gold" href="app.html#buy-gift" data-t="order_gift">Order the gift</a></div>
       </div>
-      <p class="pay-line">India: pay by UPI — Google Pay, PhonePe, Paytm or any bank app. Other countries: scan the QR and pay by card or PayPal in your own currency. You get your unlock code on WhatsApp, usually within a few hours. <a href="refund.html">Refund policy</a>.</p>
+      <p class="pay-line" data-t="pay_line"></p>
     </div>
   </section>
 
   <section class="band" id="faq">
     <div class="wrap">
-      <div class="sec-head"><div class="eyebrow">Questions</div><h2 style="margin-top:10px">Things families ask us</h2></div>
+      <div class="sec-head"><div class="eyebrow" data-t="faq_eyebrow">Questions</div><h2 style="margin-top:10px" data-t="faq_h2">Things families ask us</h2></div>
       <div class="faq">
-        <details><summary>Where is my family’s data stored?</summary><p>In your own browser, on your own device. We don’t keep a copy. Use “1-Click Family Archive” in the app to download a backup, and “Restore” to open it on another phone or laptop.</p></details>
-        <details><summary>How does the cloned voice work?</summary><p>You record about 20 seconds of the person, or upload a voice note or video where they speak. Press Play and the story is read in that voice — included with Royal, or with a Voice Story Pack, on any phone.</p></details>
-        <details><summary>Can I use an old voice note of someone who has passed away?</summary><p>Yes, if the family agrees. Upload the clearest 15–30 seconds you have, with one voice and no music. Please only clone a voice with the family’s permission.</p></details>
-        <details><summary>Is the reunion photo real?</summary><p>The family collage uses everyone’s real photos, unchanged. If you want one photo where everyone stands together, our team makes it with AI and checks every face before sending it.</p></details>
-        <details><summary>Can I pay from outside India?</summary><p>Yes. Outside India the app shows prices in US dollars and a QR that opens a card / PayPal payment — your bank converts it to your own currency. Indians abroad with a UPI app can also pay in rupees by UPI.</p></details>
-        <details><summary>How do I pay, and when does Royal unlock?</summary><p>Scan the QR in the app, then type the transaction ID. We see the payment and send an unlock code on WhatsApp — usually within a few hours. Enter the code and Royal opens on that device.</p></details>
-        <details><summary>Which languages are there?</summary><p>The app works in English, Hinglish and Hindi. With Royal, stories can be translated and read in 15 languages including Gujarati, Marathi, Punjabi, Bengali, Tamil and Telugu.</p></details>
+        <details><summary data-t="q1"></summary><p data-t="a1"></p></details>
+        <details><summary data-t="q2"></summary><p data-t="a2"></p></details>
+        <details><summary data-t="q3"></summary><p data-t="a3"></p></details>
+        <details><summary data-t="q4"></summary><p data-t="a4"></p></details>
+        <details><summary data-t="q5"></summary><p data-t="a5"></p></details>
+        <details><summary data-t="q6"></summary><p data-t="a6"></p></details>
+        <details><summary data-t="q7"></summary><p data-t="a7"></p></details>
       </div>
     </div>
   </section>
@@ -278,10 +286,10 @@ footer a{color:var(--ink);text-decoration:none}footer a:hover{color:var(--gold-h
   <section class="band" id="contact">
     <div class="wrap">
       <div class="contact">
-        <div><div class="eyebrow">Talk to us</div><h2 style="margin-top:10px;font-size:var(--step-2)">Questions, orders or help setting up?</h2>
-          <p class="muted" style="margin-top:8px" id="contactLine">Message us on WhatsApp — we usually reply the same day.</p>
+        <div><div class="eyebrow" data-t="c_eyebrow">Talk to us</div><h2 style="margin-top:10px;font-size:var(--step-2)" data-t="c_h2">Questions, orders or help setting up?</h2>
+          <p class="muted" style="margin-top:8px" id="contactLine" data-t="c_line">Message us on WhatsApp — we usually reply the same day.</p>
           <p class="num" id="waNum" style="margin-top:10px"></p><p class="muted" id="mailLine" style="margin-top:4px"></p></div>
-        <div class="btns"><a class="btn btn-gold" id="waBtn" href="#contact" target="_blank" rel="noopener">Chat on WhatsApp</a><button class="btn btn-ghost" id="copyBtn" type="button">Copy number</button></div>
+        <div class="btns"><a class="btn btn-gold" id="waBtn" href="#contact" target="_blank" rel="noopener" data-t="c_wa">Chat on WhatsApp</a><button class="btn btn-ghost" id="copyBtn" type="button" data-t="c_copy">Copy number</button></div>
       </div>
     </div>
   </section>
@@ -290,42 +298,72 @@ footer a{color:var(--ink);text-decoration:none}footer a:hover{color:var(--gold-h
 <footer>
   <div class="wrap">
     <span>© <span id="yr">2026</span> DynastyVault<span id="ownerLine"></span></span>
-    <nav aria-label="Legal"><a href="terms.html">Terms</a><a href="privacy.html">Privacy</a><a href="refund.html">Refunds</a><a href="#contact">Contact</a><a href="app.html">Open the app</a></nav>
+    <nav aria-label="Legal"><a href="terms.html" data-t="foot_terms">Terms</a><a href="privacy.html" data-t="foot_privacy">Privacy</a><a href="refund.html" data-t="foot_refunds">Refunds</a><a href="#contact" data-t="nav_contact">Contact</a><a href="app.html" data-t="open_app">Open the app</a></nav>
   </div>
 </footer>
 
+<script src="i18n.js"></script>
 <script>
 (() => {
   const C = window.DV_CONFIG || {};
+  const I = window.DV_I18N || { langs:[{ code:'en', native:'English' }], home:{ en:{} } };
   const $ = s => document.querySelector(s);
   $('#yr').textContent = new Date().getFullYear();
-  // prices: rupees in India, dollars everywhere else (visitor can switch)
+  // ---- language: saved choice → browser language → English. Hinglish only when chosen.
+  const codes = I.langs.map(l => l.code);
+  const pickDefault = () => {
+    try { const q = new URLSearchParams(location.search).get('lang'); if (q && codes.includes(q)) return q; } catch (e) { /* ignore */ }
+    try { const s = localStorage.getItem('dv.lang'); if (s && codes.includes(s)) return s; } catch (e) { /* storage blocked */ }
+    const nav = [].concat(navigator.languages || [], navigator.language || []).map(x => String(x).toLowerCase().split('-')[0]);
+    for (const n of nav) if (codes.includes(n) && n !== 'hn') return n;
+    return 'en';
+  };
+  let lang = pickDefault();
+  const T = k => { const d = I.home[lang] || {}; return d[k] != null ? d[k] : (I.home.en || {})[k]; };
+  const sel = $('#langSel');
+  sel.innerHTML = I.langs.map(l => `<option value="${l.code}">${l.native}</option>`).join('');
+  const contactState = { soon:false };
+  function apply() {
+    document.documentElement.lang = lang === 'hn' ? 'hi-Latn' : lang;
+    document.documentElement.dataset.script = ['hi','gu','mr','pa','bn','ta','te','kn','ml','ja'].includes(lang) ? 'complex' : 'latin';
+    sel.value = lang;
+    document.querySelectorAll('[data-t]').forEach(el => {
+      if (el.id === 'contactLine' && contactState.soon) { el.textContent = T('c_soon'); return; }
+      const v = T(el.dataset.t); if (v == null) return;
+      if (/[<&]/.test(v)) el.innerHTML = v; else el.textContent = v;
+    });
+    document.querySelectorAll('.tl text').forEach(t => { t.removeAttribute('textLength'); t.removeAttribute('lengthAdjust'); try { const max = t.dataset.t === 't_you' ? 44 : 38; if (t.getComputedTextLength() > max) { t.setAttribute('textLength', max); t.setAttribute('lengthAdjust', 'spacingAndGlyphs'); } } catch (e) { /* not rendered yet */ } });
+    document.title = T('meta_title') || 'DynastyVault';
+    if (C.email) $('#mailLine').textContent = T('c_email') + ' ' + C.email;
+    if (C.owner) $('#ownerLine').textContent = ' · ' + T('run_by') + ' ' + C.owner + (C.city ? ', ' + C.city : '');
+    if (num) $('#waBtn').href = 'https://wa.me/' + num + '?text=' + encodeURIComponent(T('wa_hello'));
+    // carry the language into the app
+    document.querySelectorAll('a[href^="app.html"]').forEach(a => {
+      const raw = a.getAttribute('data-href') || a.getAttribute('href'); a.setAttribute('data-href', raw);
+      const [path, hash] = raw.split('#'); a.setAttribute('href', path.split('?')[0] + '?lang=' + lang + (hash ? '#' + hash : ''));
+    });
+  }
+  sel.addEventListener('change', () => { lang = sel.value; try { localStorage.setItem('dv.lang', lang); } catch (e) { /* ignore */ } apply(); });
+  // ---- prices: rupees in India, dollars elsewhere (visitor can switch)
   let cur = 'inr'; try { const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; if (!/^Asia\/(Kolkata|Calcutta)$/.test(tz)) cur = 'usd'; } catch (e) { /* keep rupees */ }
   const showCur = c => { document.querySelectorAll('[data-inr]').forEach(el => { el.textContent = el.dataset[c]; }); document.querySelectorAll('.cur-switch button').forEach(b => b.classList.toggle('on', b.dataset.cur === c)); };
   document.querySelectorAll('.cur-switch button').forEach(b => b.addEventListener('click', () => showCur(b.dataset.cur)));
   showCur(cur);
-  const cloud = !!String(C.server || '').trim();   // cloud voice switched on in config.js
+  const cloud = !!String(C.server || '').trim();
   document.querySelectorAll('[data-cloud]').forEach(el => { el.hidden = (el.dataset.cloud === '1') !== cloud; });
-  // animated voice waveform in the hero card
   const w = $('#wave'); if (w) { const hs = [8,14,22,12,26,18,9,20,28,16,10,24,14,7,18,26,12,20,9,15,23,11,17,8]; w.innerHTML = hs.map((h, i) => `<i style="height:${h}px;animation-delay:${(i % 8) * 0.12}s"></i>`).join(''); }
-  // contact details from config.js
+  // ---- contact details from config.js
   const num = String(C.whatsapp || '').replace(/\D/g, '');
   if (num) {
-    const pretty = num.length > 10 ? '+' + num.slice(0, num.length - 10) + ' ' + num.slice(-10, -5) + ' ' + num.slice(-5) : num;
-    $('#waNum').textContent = pretty;
-    $('#waBtn').href = 'https://wa.me/' + num + '?text=' + encodeURIComponent('Hi DynastyVault! I have a question.');
-  } else {
-    $('#contactLine').textContent = 'Contact details are being added — please check back soon.';
-    $('#waBtn').hidden = true; $('#copyBtn').hidden = true;
-  }
-  if (C.email) $('#mailLine').textContent = 'Email: ' + C.email;
-  if (C.owner) $('#ownerLine').textContent = ' · run by ' + C.owner + (C.city ? ', ' + C.city : '');
+    $('#waNum').textContent = num.length > 10 ? '+' + num.slice(0, num.length - 10) + ' ' + num.slice(-10, -5) + ' ' + num.slice(-5) : num;
+  } else { contactState.soon = true; $('#waBtn').hidden = true; $('#copyBtn').hidden = true; }
   $('#copyBtn').addEventListener('click', () => {
     const t = $('#waNum').textContent;
-    const done = () => { $('#copyBtn').textContent = 'Copied'; setTimeout(() => { $('#copyBtn').textContent = 'Copy number'; }, 1800); };
-    try { navigator.clipboard.writeText(t).then(done, () => { const r = document.createRange(); r.selectNodeContents($('#waNum')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); }); }
-    catch (e) { const r = document.createRange(); r.selectNodeContents($('#waNum')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); }
+    const done = () => { $('#copyBtn').textContent = T('c_copied'); setTimeout(() => { $('#copyBtn').textContent = T('c_copy'); }, 1800); };
+    const sel2 = () => { const r = document.createRange(); r.selectNodeContents($('#waNum')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); };
+    try { navigator.clipboard.writeText(t).then(done, sel2); } catch (e) { sel2(); }
   });
+  apply();
 })();
 </script>
 </body>
