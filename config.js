@@ -25,3 +25,5 @@ window.DV_CONFIG = {
   adminPin: '2468',          // admin page (app.html#admin) ka PIN — badal do
   demo: false                // true = "Try Royal free (demo)" button dikhega — sirf testing ke liye
 };
+
+
