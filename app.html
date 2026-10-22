@@ -796,6 +796,7 @@ textarea.comp-ta{min-height:0;height:76px;flex:1}
 @keyframes ringFlash{40%{box-shadow:0 0 0 8px rgba(var(--hi-rgb),.15),0 0 80px rgba(var(--hi-rgb),.85)}}
 /* ---------- v7: welcome canvas, wizard, stories, share, arena ---------- */
 body.welcome-mode .vault-select,body.welcome-mode #planBadge{display:none!important}
+.wl-see{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
 .ac-social{display:flex;align-items:center;justify-content:center;gap:10px;font-weight:700}
 .ac-or{display:flex;align-items:center;gap:12px;margin:18px 0 6px;color:var(--muted,#9a9aa5);font-size:.78rem}
 .ac-or::before,.ac-or::after{content:'';flex:1;height:1px;background:rgba(212,175,55,.25)}
@@ -1808,6 +1809,7 @@ svg.leaflet-zoom-animated{will-change:transform}
       <p class="muted wl-sub" data-hn="Dono taraf ka zinda family tree banao — Dada-Dadi aur Nana-Nani — photos, awaaz, 24-ghante ki stories aur yaadon ke saath, jo aapke pote-poti bhi sunenge.">Build a living tree of both sides — paternal and maternal — with photos, voices, 24-hour stories and memories your grandchildren will hear.</p>
       <button class="btn-gold wl-cta" id="wlCreate" data-hn="👑 Apna Dynasty Tree banao">👑 Create Your Dynasty Tree</button>
       <button class="btn-ghost mt-3 wl-login" id="wlLogin" type="button" data-hn="👤 Pehle se account hai? Log in">👤 Already have an account? Log in</button>
+      <div class="wl-see mt-3"><button class="chip" type="button" data-wl-see="photo">🧩 Family Collage</button><button class="chip" type="button" data-wl-see="reunion">✨ Reunion Portrait</button></div>
       <button class="btn-ghost mt-4" id="wlDemo" data-hn="<svg class=&quot;ico&quot; width=&quot;17&quot; height=&quot;17&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linejoin=&quot;round&quot; aria-hidden=&quot;true&quot;><circle cx=&quot;6&quot; cy=&quot;5&quot; r=&quot;2.6&quot;/><circle cx=&quot;18&quot; cy=&quot;5&quot; r=&quot;2.6&quot;/><circle cx=&quot;12&quot; cy=&quot;19&quot; r=&quot;2.8&quot;/><path d=&quot;M8.6 5h6.8M12 5v11.2&quot; stroke-linecap=&quot;round&quot;/><path d=&quot;M10.9 17.6l2.6 1.4-2.6 1.4z&quot; fill=&quot;var(--gold-hi)&quot; stroke=&quot;none&quot;/></svg> Interactive Demo Tree dekho"><svg class="ico" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="5" r="2.6"/><circle cx="18" cy="5" r="2.6"/><circle cx="12" cy="19" r="2.8"/><path d="M8.6 5h6.8M12 5v11.2" stroke-linecap="round"/><path d="M10.9 17.6l2.6 1.4-2.6 1.4z" fill="var(--gold-hi)" stroke="none"/></svg> Explore Interactive Demo Tree</button>
       <svg class="wl-mini" viewBox="0 0 560 200" aria-hidden="true">
         <defs><linearGradient id="wlGold" x1="0" x2="1"><stop offset="0" stop-color="#AA7C11"/><stop offset=".5" stop-color="#FFDF00"/><stop offset="1" stop-color="#D4AF37"/></linearGradient></defs>
@@ -11745,6 +11747,8 @@ function wire() {
     const sb = e.target.closest('[data-buy-service]'); if (sb && !sb.closest('#addonGrid')) { openCheckout('service', sb.dataset.buyService); return; }
     if (e.target.closest('[data-unlock-code]')) openCheckout('unlock');
   });
+  const goDashTab = (tab, open) => { const go = () => { showTab(tab); if (open) setTimeout(() => openPortrait(open), 400); }; if (document.body.classList.contains('welcome-mode')) { startDemo(); setTimeout(go, 1300); } else go(); };
+  document.addEventListener('click', e => { const w = e.target.closest('[data-wl-see]'); if (w) goDashTab(w.dataset.wlSee); });
   const adminRoute = () => {
     const h = location.hash.slice(1); if (!h) return;
     const clear = () => history.replaceState(null, '', location.pathname + location.search);
@@ -11753,6 +11757,7 @@ function wire() {
     else if (h === 'buy-royal') { clear(); openCheckout('plan', 'royal'); }
     else if (h === 'buy-voicepack') { clear(); openCheckout('addon', 'voicepack'); }
     else if (/^buy-(photo|voice|gift)$/.test(h)) { clear(); openCheckout('service', h.slice(4)); }
+    else if (h === 'portrait' || h === 'collage') { clear(); goDashTab(h === 'portrait' ? 'reunion' : 'photo'); }
     else if (/^(signin|login|signup)$/.test(h)) { clear(); acctOpen(h === 'signup' ? 'signup' : 'login'); }
     else if (h === 'demo') { clear(); const d = $('#wlDemo') && !$('#wlDemo').closest('[hidden]') && document.body.classList.contains('welcome-mode') ? $('#wlDemo') : $('#btnDemo'); if (d) d.click(); }
   };
