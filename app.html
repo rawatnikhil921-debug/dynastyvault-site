@@ -2155,7 +2155,7 @@ svg.leaflet-zoom-animated{will-change:transform}
 <div class="modal" id="portraitModal" role="dialog" aria-modal="true" aria-label="Grand Family Reunion Portrait Studio">
   <div class="modal-panel max-w-[1280px]">
     <div class="flex items-start justify-between gap-4 p-5 sm:p-7 border-b hairline">
-      <div class="min-w-0"><div class="eyebrow">◆ Family Collage Studio</div><h3 class="font-regal gold-text text-2xl sm:text-3xl font-bold mt-1 break-words" id="psTitle"></h3></div>
+      <div class="min-w-0"><div class="eyebrow">◆ Collage &amp; Reunion Portrait Studio</div><h3 class="font-regal gold-text text-2xl sm:text-3xl font-bold mt-1 break-words" id="psTitle"></h3></div>
       <button class="icon-btn" data-close aria-label="Close the portrait studio">✕</button>
     </div>
     <div class="ps-grid">
@@ -7145,6 +7145,36 @@ async function cloneNarrate(p, text) {
   }
 }
 
+// ⬇ the whole story in their cloned voice as ONE audio file (MP3, or WAV if the encoder can't load) — to send on WhatsApp
+async function cloneSaveAudio(p) {
+  const b = $('#stSaveVoice'); if (!p || (b && b.disabled)) return;
+  if (!p.voice || !p.voice.sample) { toast(hx(`Record or upload ${firstName(p.name)}’s voice in this profile first.`, `Pehle is profile mein ${firstName(p.name)} ki awaaz record ya upload karo.`), 'warn', 6000); return; }
+  const text = cloneBody(p);
+  if (!text) { toast(hx('Write their story first — the cloned voice reads the story.', 'Pehle unki kahani likho — clone awaaz wahi kahani padhti hai.'), 'warn', 6000); return; }
+  const lang = cloneLangFor(text); if (!lang) { toast(hx('The voice clone cannot read this script yet — write the story in English, Hinglish or Hindi.', 'Clone awaaz yeh lipi nahi padh sakti — kahani English, Hinglish ya Hindi mein likho.'), 'warn', 6000); return; }
+  await checkClone();
+  if (!cloneReady()) { toast(hx('Turn on the real voice clone first (the laptop program, or Royal / Voice Story Pack), then save the audio.', 'Pehle asli voice clone chalu karo (laptop program, ya Royal / Voice Story Pack), phir audio save karo.'), 'warn', 7000); return; }
+  const label = b ? b.innerHTML : ''; if (b) b.disabled = true;
+  try {
+    const OAC = window.OfflineAudioContext || window.webkitOfflineAudioContext; if (!OAC) throw new Error('no-audio');
+    const ref = await sampleWav(p); const parts = cloneParts(text); const sr = 24000; const chunks = []; let total = 0;
+    for (let i = 0; i < parts.length; i++) {
+      if (b) b.textContent = hx(`⏳ Making part ${i + 1}/${parts.length}…`, `⏳ Hissa ${i + 1}/${parts.length} ban raha hai…`);
+      const url = await cloneMake(p, lang, ref, parts[i]);
+      const dec = await decodeAudio(await (await fetch(url)).arrayBuffer());
+      const oc = new OAC(1, Math.max(1, Math.ceil(dec.duration * sr)), sr); const src = oc.createBufferSource(); src.buffer = dec; src.connect(oc.destination); src.start();
+      const f = (await oc.startRendering()).getChannelData(0); chunks.push(f); total += f.length;
+      if (i + 1 < parts.length) { const gap = new Float32Array(Math.round(sr * 0.35)); chunks.push(gap); total += gap.length; }
+    }
+    const out = new Float32Array(total); let o = 0; chunks.forEach(c => { out.set(c, o); o += c.length; });
+    const wav = pcmToWavBlob(out, sr); let blob = wav, ext = 'wav';
+    if (b) b.textContent = hx('⏳ Packing the file…', '⏳ File ban rahi hai…');
+    try { const a = await audioForArchive(await blobToDataURL(wav), { mp3:0, wav:0, orig:0 }); if (a && a.ext === 'mp3') { blob = new Blob([a.data], { type:'audio/mpeg' }); ext = 'mp3'; } } catch (e) { /* keep WAV */ }
+    await saveFile(`${slug(p.name)}-story-in-their-voice.${ext}`, blob);
+  } catch (e) { toast(hx(`The audio file could not be made (${e.message || e}).`, `Audio file nahi ban payi (${e.message || e}).`), 'warn', 6500); }
+  finally { if (b) { b.disabled = false; b.innerHTML = label; } }
+}
+
 /* =========================================================
    STATE — seed data & persistence
    ========================================================= */
@@ -8088,6 +8118,7 @@ function openStudio(pid, keepScroll, tab) {
         <div class="speak-row mt-6">
           <button class="btn-gold flex-1 sm:flex-none btn-wrap" id="stSpeak"></button>
           <button class="btn-ghost" id="stStop" disabled>⏹ Stop</button>
+          <button class="btn-ghost" id="stSaveVoice" title="${esc(hx('Save the whole story in their cloned voice as one audio file — to send on WhatsApp', 'Poori kahani unki clone awaaz mein ek audio file — WhatsApp pe bhejne ke liye'))}">⬇ ${hx('Save audio', 'Audio save karo')}</button>
           <span class="eq" id="stEq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
         </div>
         <div class="progress mt-4"><i id="stProg"></i></div>
@@ -8192,6 +8223,7 @@ function bindStudio(p) {
     if (on) apply(); else { p.voice.clean = false; save(); const n = $('#stCleanNote'); n.textContent = 'Removes hiss, mains hum and room noise from old ancestor recordings while they play.'; n.classList.remove('on'); if (sampleAudio) { stopSample(); playSample(p); } }
   });
   $('#stStop').addEventListener('click', stopSpeaking);
+  $('#stSaveVoice').addEventListener('click', () => cloneSaveAudio(p));
 }
 
 function updateBioMeta() {
@@ -10016,7 +10048,7 @@ function renderPromo() {
    makes one real-looking group photo in the Gemini app and uploads it back
    here, where it is framed, saved and printed.
    ========================================================= */
-const GM = { mode:'gemini', place:'porch', attire:'formal', shape:'portrait', grid:null, edited:null, busy:false };
+const GM = { tab:'', mode:'gemini', place:'porch', attire:'formal', shape:'portrait', grid:null, edited:null, busy:false };
 const GM_MAX_FILES = 10;   // the Gemini app takes about 10 images in one message
 const GM_PLACES = {
   porch:['Home porch', 'Ghar ka porch', 'on the front porch of a grand family home — white pillars, potted plants and a soft green garden behind'],
@@ -10445,7 +10477,10 @@ async function gmSaveReunion(url, by) {
   const c = document.createElement('canvas'); const sc = Math.min(1, 2000 / Math.max(img.naturalWidth, img.naturalHeight));
   c.width = Math.round(img.naturalWidth * sc); c.height = Math.round(img.naturalHeight * sc);
   const g = c.getContext('2d'); g.imageSmoothingQuality = 'high'; g.drawImage(img, 0, 0, c.width, c.height);
-  const v = V(); v.reunion = { src:c.toDataURL('image/jpeg', 0.9), at:Date.now(), w:c.width, h:c.height, by };
+  const v = V();
+  if (by === 'collage' && v.reunion && v.reunion.by !== 'collage') v.reunionPhoto = v.reunion;   // keep the Gemini photo while the collage tab is open
+  if (by !== 'collage') delete v.reunionPhoto;
+  v.reunion = { src:c.toDataURL('image/jpeg', 0.9), at:Date.now(), w:c.width, h:c.height, by };
   const kept = saveNow(); if (PH.frame === 'none') PH.frame = 'gilded'; if (!PH.plaque) PH.plaque = `${v.name} · ${new Date().getFullYear()}`;
   return kept;
 }
@@ -10705,7 +10740,7 @@ function gmPanel() {
   const rl = { seated:hx('🪑 Seated', '🪑 Baithe'), standing:hx('🧍 Standing', '🧍 Khade'), kid:hx('🧒 Child', '🧒 Bachcha') };
   const chips = (obj, cur, attr) => Object.entries(obj).map(([k, l]) => `<button class="chip${cur === k ? ' on' : ''}" data-${attr}="${k}">${esc(hx(l[0], l[1]))}</button>`).join('');
   const say = $('#gmSay'); const keep = say && !say.hidden ? { t:say.textContent, c:say.className } : null;
-  box.innerHTML = `
+  const colHTML = `
     <div class="fc-box">
         <div class="flex items-center justify-between gap-2 flex-wrap"><b class="fc-h">🧩 ${hx('Family collage', 'Family collage')}</b><span class="tiny muted">${hx('instant · free · real faces', 'turant · free · asli chehre')}</span></div>
         <p class="tiny muted mt-1">${hx('Everyone in the tree, one generation per row, husband and wife side by side, with names and years.', 'Tree ke sab log, har peedhi ek line mein, pati-patni saath-saath, naam aur saal ke saath.')}</p>
@@ -10714,6 +10749,36 @@ function gmPanel() {
       </div>
     <div><div class="field"><span>${hx('Shape', 'Shape')}</span></div><div class="gm-chips mt-2"><button class="chip${GM.shape === 'portrait' ? ' on' : ''}" data-gm-shape="portrait">▯ ${hx('Tall 4:5', 'Lambi 4:5')}</button><button class="chip${GM.shape === 'wide' ? ' on' : ''}" data-gm-shape="wide">▭ ${hx('Wide 16:9', 'Chaudi 16:9')}</button></div></div>
     ${n < Object.keys(lineageGraph(v)).length ? `<p class="tiny gm-warn">${hx('Some people have no photo yet — their initials are shown. Add photos in their profiles and make the collage again.', 'Kuch logon ki photo nahi hai — unke naam ke akshar dikhte hain. Profile mein photo daal ke collage phir banao.')}</p>` : ''}
+`;
+  const phoHTML = `
+    <div class="gm-step"><b class="gm-n">1</b><div class="min-w-0"><div class="gm-h">${hx('How should the photo look?', 'Photo kaisi ho?')}</div>
+      <div class="tiny muted mb-1">${hx('Place', 'Jagah')}</div><div class="gm-chips">${chips(GM_PLACES, GM.place, 'gm-place')}</div>
+      <div class="tiny muted mt-3 mb-1">${hx('Clothes', 'Kapde')}</div><div class="gm-chips">${chips(GM_ATTIRE, GM.attire, 'gm-attire')}</div>
+      <div class="tiny muted mt-3 mb-1">${hx('Shape', 'Shape')}</div><div class="gm-chips"><button class="chip${GM.shape === 'portrait' ? ' on' : ''}" data-gm-shape="portrait">▯ ${hx('Tall 4:5', 'Lambi 4:5')}</button><button class="chip${GM.shape === 'wide' ? ' on' : ''}" data-gm-shape="wide">▭ ${hx('Wide 16:9', 'Chaudi 16:9')}</button></div>
+    </div></div>
+    <div class="gm-step"><b class="gm-n">2</b><div class="min-w-0"><div class="gm-h">${hx('Who is in the photo', 'Photo mein kaun hoga')}</div>
+      ${n ? `<div class="gm-ppl">${list.map(p => `<button class="gm-p" data-gm-role="${p.id}" title="${esc(hx('Tap to change: seated / standing / child', 'Tap karke badlo: baithe / khade / bachcha'))}"><img src="${p.avatar}" alt=""><span>${p.n}. ${esc(p.name)}</span><i>${rl[p.role]}</i></button>`).join('')}</div>
+      <p class="tiny muted mt-2">${hx('Tap a name to change who sits, stands or is a child.', 'Naam pe tap karke badlo kaun baithega, khada hoga ya bachcha hai.')}</p>
+      ${n > GM_MAX_FILES ? `<p class="tiny mt-2 gm-warn">${hx(`Gemini takes about ${GM_MAX_FILES} photos at once, so for ${n} people the zip has one numbered grid photo of everyone.`, `Gemini ek baar mein ~${GM_MAX_FILES} photos leta hai, isliye ${n} logon ke liye zip mein sabki ek numbered grid photo hai.`)}</p>` : ''}
+      <details class="gm-det mt-3"><summary>${hx('See / edit the prompt', 'Prompt dekho / badlo')}</summary><textarea class="input mt-2" id="gmPrompt" spellcheck="false">${esc(gmPromptNow(list))}</textarea>${GM.edited != null ? `<button class="chip mt-2" id="gmPromptReset">↺ ${hx('Back to the automatic prompt', 'Apne aap wala prompt wapas')}</button>` : ''}</details>`
+      : `<p class="tiny gm-warn">${hx('Nobody has a photo yet — open each family member’s profile and add a clear, front-facing photo.', 'Abhi kisi ki photo nahi hai — har member ki profile kholo aur saamne se saaf photo daalo.')}</p>`}
+    </div></div>
+    <div class="gm-step"><b class="gm-n">3</b><div class="min-w-0"><div class="gm-h">${hx('Make it in Gemini, then upload it here', 'Gemini mein banao, phir yahan upload karo')}</div>
+      ${DV_SERVER ? `<div class="mt-3">${gaHTML()}</div>` : `<details class="gm-det mt-3"${GA.busy || gaKey() ? ' open' : ''}><summary>🔑 ${hx('Paid: one-tap real photo with your Google API key', 'Paid: Google API key se ek click mein asli photo')}</summary><div class="mt-2">${gaHTML()}</div></details>`}
+      <p class="tiny muted">${hx('Take the photos and the prompt, make it yourself in the Gemini app, then upload the result here.', 'Photos aur prompt le jao, Gemini app mein khud banao, phir yahan upload kar do.')}</p>
+      <div class="grid gap-2 mt-2">
+        <button class="btn-ghost sm w-full btn-wrap" id="gmZip">⬇ ${hx(`${grid ? 'Photo grid' : `All ${n} photos`} + prompt (zip)`, `${grid ? 'Grid photo' : `Sabki ${n} photos`} + prompt (zip)`)}</button>
+        ${gmCanShare() ? `<button class="btn-ghost sm w-full btn-wrap" id="gmShare">📤 ${hx('Send them straight to the Gemini app', 'Seedha Gemini app ko bhejo')}</button>` : ''}
+        <button class="btn-ghost sm w-full" id="gmCopy">📋 ${hx('Copy the prompt', 'Prompt copy karo')}</button>
+        <a class="btn-ghost sm w-full" href="https://gemini.google.com/app" target="_blank" rel="noopener">✨ ${hx('Open Gemini', 'Gemini kholo')} ↗</a>
+        <label class="btn-ghost sm w-full btn-wrap gm-up"><input type="file" id="gmFile" accept="image/*" class="hidden">📁 ${hx('Upload the finished photo', 'Bani hui photo upload karo')}</label>
+      </div>
+      ${v.reunion ? `<button class="chip mt-2" id="gmRemove">✕ ${hx('Remove this photo', 'Yeh photo hatao')}</button>` : ''}
+    </div></div>
+`;
+  box.innerHTML = `
+    <div class="gm-tabs" role="tablist" aria-label="${esc(hx('Portrait type', 'Portrait type'))}"><button role="tab" data-gm-tab="collage" class="${GM.tab !== 'photo' ? 'on' : ''}" aria-selected="${GM.tab !== 'photo'}">🧩 ${hx('Family Collage', 'Family Collage')}<small>${hx('free · instant', 'free · turant')}</small></button><button role="tab" data-gm-tab="photo" class="${GM.tab === 'photo' ? 'on' : ''}" aria-selected="${GM.tab === 'photo'}">✨ ${hx('Reunion Portrait', 'Reunion Portrait')}<small>${hx('real-looking · Gemini', 'asli jaisi · Gemini')}</small></button></div>
+    ${GM.tab === 'photo' ? phoHTML : colHTML}
     <div class="gm-say" id="gmSay" hidden></div>
     <div><div class="field"><span>${hx('Frame', 'Frame')}</span></div><div class="ps-frames mt-2">${Object.entries(PS_FRAMES).map(([k, l]) => `<button class="chip${PH.frame === k ? ' on' : ''}" data-ph-frame="${k}">${esc(l)}</button>`).join('')}</div></div>
     <label class="field"><span>${hx('Plaque inscription (optional)', 'Plaque pe naam (optional)')}</span><input class="input" id="gmPlaque" maxlength="48" value="${esc(PH.plaque)}" placeholder="e.g. The Kapoor Dynasty · 2026"></label>`;
@@ -10724,9 +10789,22 @@ function gmApplyMode() {
   $$('[data-ps-mode]').forEach(b => { b.classList.toggle('on', b.dataset.psMode === GM.mode); b.setAttribute('aria-selected', String(b.dataset.psMode === GM.mode)); });
   $('#gmPanel').hidden = !gem; $('#psPhotoPanel').hidden = gem;
   $('#psHow').textContent = gem
-    ? hx('Family collage: everyone’s real photos, arranged generation by generation, with names and years — instant and free. Pick a frame and download or print it.', 'Family collage: sabki asli photos, peedhi dar peedhi, naam aur saal ke saath — turant aur free. Frame chuno aur download ya print karo.')
+    ? (GM.tab === 'photo' ? hx('Reunion portrait: a real-looking photo of the whole family together. Take the photos and the prompt to the free Gemini app, make it there, then upload it here — it gets the frame and the name plaque.', 'Reunion portrait: poori family ki saath mein asli jaisi photo. Photos aur prompt free Gemini app mein le jao, wahan banao, phir yahan upload karo — frame aur naam ki plaque lag jaati hai.') : hx('Family collage: everyone’s real photos, generation by generation, with names and years — instant and free. Pick a frame and download or print it.', 'Family collage: sabki asli photos, peedhi dar peedhi, naam aur saal ke saath — turant aur free. Frame chuno aur download ya print karo.'))
     : hx('Quick collage: everyone’s real photos are cut out and placed on your background. It looks like a collage — for a real-looking photo use the Gemini tab.', 'Quick collage: sabki asli photos kaat ke background pe lagti hain. Yeh collage hi lagta hai — asli jaisi photo ke liye Gemini wala tab use karo.');
   refreshPortraitButtons();
+}
+async function gmTab(t) {
+  const v = V(); GM.tab = t === 'photo' ? 'photo' : 'collage';
+  $('#psTitle').textContent = `${v.name} · ${GM.tab === 'photo' ? hx('Reunion Portrait', 'Reunion Portrait') : hx('Family Collage', 'Family Collage')}`;
+  if (GM.tab === 'photo') {
+    if (v.reunion && v.reunion.by === 'collage') { v.reunion = v.reunionPhoto || null; if (!v.reunion) delete v.reunion; delete v.reunionPhoto; saveNow(); }
+    gmApplyMode(); gmPanel(); gmFacts(); await psFonts(); await gmRender(true);
+    if (!v.reunion) { const n = $('#psStageNote'); n.textContent = hx('No reunion photo yet — follow the 3 steps on the right: download the photos + prompt, make it in the Gemini app, then upload it here.', 'Abhi reunion photo nahi hai — right side ke 3 steps karo: photos + prompt download karo, Gemini app mein banao, phir yahan upload karo.'); n.hidden = false; }
+  } else {
+    gmApplyMode(); gmPanel(); gmFacts(); await psFonts();
+    if (!v.reunion || v.reunion.by !== 'collage') { await gmCollage(); return; }
+    await gmRender(true);
+  }
 }
 async function gmOpen() {
   const v = V();
@@ -10734,8 +10812,8 @@ async function gmOpen() {
   if (v.reunion && PH.frame === 'none') PH.frame = 'gilded';
   gmApplyMode(); gmPanel(); gmFacts(); $('#psProc').hidden = true;
   await psFonts();
-  if (!v.reunion || v.reunion.by !== 'collage') { await gmCollage(); return; }
-  await gmRender(true);
+  if (!GM.tab) GM.tab = v.reunion && v.reunion.by !== 'collage' ? 'photo' : 'collage';
+  await gmTab(GM.tab);
 }
 
 /* =========================================================
@@ -11653,10 +11731,11 @@ function wire() {
   bindPhotoCanvas();
   psRoot.addEventListener('click', async e => {
     const bg = e.target.closest('[data-ph-bg]'), fr = e.target.closest('[data-ph-frame]'), cutb = e.target.closest('[data-ph-cut]'), lk = e.target.closest('[data-ph-look]'), rb = e.target.closest('[data-ph-role]');
+    const gtb = e.target.closest('[data-gm-tab]'); if (gtb) { if (GM.tab !== gtb.dataset.gmTab) gmTab(gtb.dataset.gmTab); return; }
     const pm = e.target.closest('[data-ps-mode]');
     if (pm) { if (GM.mode !== pm.dataset.psMode) { GM.mode = pm.dataset.psMode; generatePortrait(GM.mode === 'collage' && !PH.people); } return; }
     const gp = e.target.closest('[data-gm-place]'), ga = e.target.closest('[data-gm-attire]'), gs = e.target.closest('[data-gm-shape]'), gr = e.target.closest('[data-gm-role]');
-    if (gp || ga || gs) { if (gp) GM.place = gp.dataset.gmPlace; if (ga) GM.attire = ga.dataset.gmAttire; if (gs) GM.shape = gs.dataset.gmShape; GM.edited = null; gmPanel(); if (gs) gmCollage(); return; }
+    if (gp || ga || gs) { if (gp) GM.place = gp.dataset.gmPlace; if (ga) GM.attire = ga.dataset.gmAttire; if (gs) GM.shape = gs.dataset.gmShape; GM.edited = null; gmPanel(); if (gs && GM.tab !== 'photo') gmCollage(); return; }
     if (gr) { const id = gr.dataset.gmRole; const cur = (gmPeople().list.find(p => p.id === id) || {}).role; PH.roles[id] = { seated:'standing', standing:'kid', kid:'seated' }[cur] || 'standing'; delete PH.place[id]; GM.edited = null; gmPanel(); return; }
     const gmd = e.target.closest('[data-ga-model]'), gsz = e.target.closest('[data-ga-size]');
     if (gmd) { state.gModel = gmd.dataset.gaModel; save(); gmPanel(); return; }
@@ -11674,7 +11753,7 @@ function wire() {
     if (e.target.closest('#gmShare')) { gmShare(); return; }
     if (e.target.closest('#gmCopy')) { const ok = await copyText(gmPromptNow(gmPeople().list)); gmSay(ok ? hx('✓ Prompt copied — paste it in Gemini.', '✓ Prompt copy ho gaya — Gemini mein paste karo.') : hx('This browser blocked copying — open “See / edit the prompt” and copy it by hand.', 'Browser ne copy rok diya — “Prompt dekho / badlo” kholke khud copy karo.'), ok ? 'ok' : 'warn'); return; }
     if (e.target.closest('#gmPromptReset')) { GM.edited = null; gmPanel(); const d = $('.gm-det'); if (d) d.open = true; return; }
-    if (e.target.closest('#gmRemove')) { delete V().reunion; save(); gmPanel(); gmFacts(); gmRender(true); renderPromo(); return; }
+    if (e.target.closest('#gmRemove')) { delete V().reunion; delete V().reunionPhoto; save(); gmPanel(); gmFacts(); gmRender(true); renderPromo(); return; }
     if (e.target.closest('#phBodyGo')) { phMakeBody(!!phOpts().aiImg); return; }
     if (e.target.closest('#phBodyOff')) { PH.aiImg = null; PB.msg = ''; renderPhotoPanel(); phRender(); return; }
     if (rb) { const id = rb.dataset.phRole; const cur = phRoles(PH.people || [], PH.roles)[id]; const nx = { seated:'standing', standing:'kid', kid:'seated' }[cur] || 'standing'; PH.roles[id] = nx; delete PH.place[id]; renderPhotoPanel(); phRender(); return; }
