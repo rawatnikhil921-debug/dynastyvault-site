@@ -11,7 +11,7 @@ window.DV_CONFIG = {
   email: 'rawatnikhil921@gmail.com',                 // support email — jaise 'hello@dynastyvault.in' ya apna Gmail
   owner: 'Nikhil Rawat',                 // aapka poora naam (Terms / Refund page pe dikhta hai — payment ke liye zaroori)
   city: 'Delhi',                  // shehar aur state — jaise 'Dehradun, Uttarakhand'
-  server: '',                // Render wale server ka link (SERVER-SETUP.txt) — jaise 'https://dynastyvault.onrender.com'
+  server: 'https://dynastyvault-server.onrender.com',                // Render wale server ka link (SERVER-SETUP.txt) — jaise 'https://dynastyvault.onrender.com'
                              //   isse: customer ke phone pe automatic voice clone + pakke unlock codes (admin page server se code banata hai)
   paypal: '',                // DUNIYA BHAR SE PAYMENT: apna PayPal.me naam — jaise 'naburawat' (paypal.me/naburawat)
                              //   bahar ke customer QR scan karke card/PayPal se apni currency mein pay karte hain, aapko rupaye milte hain
@@ -27,7 +27,7 @@ window.DV_CONFIG = {
     google: false,           //   true = "Continue with Google" chalu (SUPABASE-SETUP.txt → Step 7)
     facebook: false          //   true = "Continue with Facebook" chalu (SUPABASE-SETUP.txt → Step 8)
   },
-  secret: '0VQNtZXW2VB5iskvuZlixmb5',   // unlock code ka secret — koi bhi lamba shabd likh do, kisi ko mat batana
+  secret: 'DynastyVaultSecret2026XyZ',   // unlock code ka secret — koi bhi lamba shabd likh do, kisi ko mat batana
   adminPin: '111550',          // admin page (app.html#admin) ka PIN — badal do
   demo: false                // true = "Try Royal free (demo)" button dikhega — sirf testing ke liye
 };
