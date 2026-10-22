@@ -1,0 +1,80 @@
+DYNASTYVAULT — CUSTOMER LOGIN (family data kisi bhi phone par)         OPTIONAL · FREE · phone se ho jaata hai
+==========================================================================================================
+
+Yeh kya karta hai
+- Customer "☁ Sign in" dabata hai → email daalta hai → email mein aaya code daalta hai (koi password nahi).
+- Uska poora family data (tree, photos, kahaniyan, awaaz) uske account mein apne aap save hota hai.
+- Doosre phone par usi email se sign in → sab wahi aa jaata hai.
+- Login ke bina bhi app poori chalti hai (tab data sirf usi phone mein rehta hai).
+- Jab tak config.js mein Supabase ki details nahi bharte, "Sign in" button dikhta hi nahi.
+
+Kharcha: ₹0 (Supabase free plan: 1 GB file storage, 50,000 users/month).
+Dhyan: Supabase free project 1 hafte tak koi use na ho toh "pause" ho jaata hai (dashboard se ek click mein wapas chalu).
+
+
+STEP 1 — SUPABASE PROJECT BANAO (5 min)
+1. supabase.com → "Start your project" → GitHub se sign in.
+2. "New project" → naam: dynastyvault → Database password: koi bhi lamba (kahin likh lo) → Region: "South Asia (Mumbai)" → Create.
+3. 1–2 minute ruko jab tak project ready ho.
+
+STEP 2 — STORAGE KA SQL CHALAO (1 min)
+1. Left menu → "SQL Editor" → "New query".
+2. Neeche ka poora SQL copy karke paste karo → "Run". "Success" dikhna chahiye.
+
+-- ------- yahan se copy karo -------
+insert into storage.buckets (id, name, public) values ('vaults', 'vaults', false) on conflict (id) do nothing;
+
+create policy "dv read own"   on storage.objects for select to authenticated
+  using (bucket_id = 'vaults' and (storage.foldername(name))[1] = auth.uid()::text);
+create policy "dv insert own" on storage.objects for insert to authenticated
+  with check (bucket_id = 'vaults' and (storage.foldername(name))[1] = auth.uid()::text);
+create policy "dv update own" on storage.objects for update to authenticated
+  using (bucket_id = 'vaults' and (storage.foldername(name))[1] = auth.uid()::text);
+-- ------- yahan tak -------
+
+(Matlab: har customer sirf APNI file padh/likh sakta hai. Doosre ka data koi nahi dekh sakta.)
+
+STEP 3 — EMAIL MEIN "CODE" DIKHANE KE LIYE TEMPLATE BADLO (zaroori!)
+Supabase ki default email mein sirf link hota hai, code nahi. App ko code chahiye.
+1. Left menu → Authentication → "Email Templates".
+2. "Magic Link" kholo → Message body mein yeh likho (purana sab hata do):
+      <h2>DynastyVault sign-in code</h2>
+      <p>Your code is: <b>{{ .Token }}</b></p>
+      <p>Enter it in the app. If you did not ask for this, ignore this email.</p>
+   → Save.
+3. "Confirm signup" kholo → wahi body daalo → Save.
+   (Naye customer ko "Confirm signup" wali mail jaati hai, purane ko "Magic Link" wali. Dono mein {{ .Token }} chahiye.)
+
+STEP 4 — EMAIL BHEJNE KI LIMIT HATAO (zaroori, warna sirf ~2 mail/ghanta jaati hain)
+Supabase ki apni email service sirf testing ke liye hai. Apna SMTP jodo — sabse aasaan GMAIL:
+1. Google account → Security → 2-Step Verification ON karo → phir "App passwords" → naam: dynastyvault → 16 akshar ka password copy karo.
+2. Supabase → Authentication → Settings (ya "Emails" → "SMTP Settings") → "Enable Custom SMTP":
+      Sender email:  aapka Gmail (rawatnikhil921@gmail.com)
+      Sender name:   DynastyVault
+      Host:          smtp.gmail.com
+      Port:          465
+      Username:      aapka Gmail
+      Password:      woh 16 akshar ka App password
+   → Save.
+3. Authentication → Rate Limits mein "emails per hour" badha do (jaise 30).
+   Gmail se roz ~500 mail tak jaa sakti hain — shuruaat ke liye kaafi. Customer bahut badhein tab Brevo/Resend jaisi service lena.
+
+STEP 5 — DO CHABIYAAN CONFIG.JS MEIN DAALO
+1. Supabase → Project Settings → API:
+     "Project URL"            →  config.js ke  supabase: { url: '...'
+     "anon public" key        →  config.js ke  supabase: { anonKey: '...'
+   (anon key public hoti hai — website mein dikhna theek hai. "service_role" key KABHI mat daalna.)
+2. GitHub par config.js → ✏️ → dono bharo → Commit. 2 minute baad website par "☁ Sign in" dikhega.
+
+STEP 6 — TEST (khud karo)
+1. Website kholo → ☁ Sign in → apna email → "Email me a code".
+2. Email aaye (Spam bhi dekho) → code daalo → "Signed in".
+3. Koi family member jodo. 10 second ruko → "☁ Save now" dabao → "Saved to cloud ✓".
+4. Doosre phone (ya Chrome incognito) mein sign in karo → wahi family dikhna chahiye.
+
+KUCH SEEDHI BAATEIN
+- Data sync "last save jeeta hai" tarah chalta hai: do phone mein ek saath alag badlav karoge toh jo baad mein save hua woh rahega.
+  Purane phone par kholne par app poochta hai "account ka naya copy use karun?" — Haan dabane se woh phone update ho jaata hai.
+- Bahut badi photos/awaaz ka data phone ki storage limit tak hi rehta hai; sync usi data ko save karta hai jo phone mein hai.
+- Customer ka data aapke Supabase mein file ke roop mein rehta hai. Terms/Privacy pages mein ise "account sync" kehkar likhna theek rahega.
+- "Continue with Google" optional hai: Google Cloud mein OAuth client banana padta hai (laptop par aasaan). Abhi email-code kaafi hai; google:false rehne do.

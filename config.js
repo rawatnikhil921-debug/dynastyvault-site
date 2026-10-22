@@ -21,6 +21,11 @@ window.DV_CONFIG = {
     gift: '',                //   Gift Box ₹1,499
     any: ''                  //   koi bhi amount wala page (baaki sab ke liye)
   },                         //   bahar ke liye alag dollar page ho toh: royal_usd: 'https://rzp.io/rzp/xyz'
+  supabase: {                // OPTIONAL — CUSTOMER LOGIN (SUPABASE-SETUP.txt): family data kisi bhi phone par
+    url: '',                 //   jaise 'https://abcdxyz.supabase.co'
+    anonKey: '',             //   Supabase → Project Settings → API → "anon public" key (yeh key public ho sakti hai)
+    google: false            //   true = "Continue with Google" button bhi (Google setup alag se lagta hai)
+  },
   secret: '0VQNtZXW2VB5iskvuZlixmb5',   // unlock code ka secret — koi bhi lamba shabd likh do, kisi ko mat batana
   adminPin: '111550',          // admin page (app.html#admin) ka PIN — badal do
   demo: false                // true = "Try Royal free (demo)" button dikhega — sirf testing ke liye
