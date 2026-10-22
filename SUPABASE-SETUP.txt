@@ -77,4 +77,32 @@ KUCH SEEDHI BAATEIN
   Purane phone par kholne par app poochta hai "account ka naya copy use karun?" — Haan dabane se woh phone update ho jaata hai.
 - Bahut badi photos/awaaz ka data phone ki storage limit tak hi rehta hai; sync usi data ko save karta hai jo phone mein hai.
 - Customer ka data aapke Supabase mein file ke roop mein rehta hai. Terms/Privacy pages mein ise "account sync" kehkar likhna theek rahega.
-- "Continue with Google" optional hai: Google Cloud mein OAuth client banana padta hai (laptop par aasaan). Abhi email-code kaafi hai; google:false rehne do.
+
+STEP 7 — "CONTINUE WITH GOOGLE" (optional, free) — laptop par aasaan, phone par bhi ho jaata hai
+1. Supabase → Authentication → URL Configuration:
+     Site URL:       https://rawatnikhil921-debug.github.io/dynastyvault-site/app.html
+     Redirect URLs:  https://rawatnikhil921-debug.github.io/dynastyvault-site/app.html   → Add → Save
+2. console.cloud.google.com → naya project "dynastyvault" → "APIs & Services" → "OAuth consent screen":
+     User type: External → App name: DynastyVault → aapka email → Save. Phir "Publish app" (Testing se Production).
+3. "Credentials" → "Create credentials" → "OAuth client ID" → Web application:
+     Authorized redirect URI:  https://<aapka-project>.supabase.co/auth/v1/callback   (Supabase → Authentication → Providers → Google mein yahi likha hota hai)
+   → Create → Client ID aur Client Secret copy karo.
+4. Supabase → Authentication → Providers → Google → Enable → Client ID + Secret paste → Save.
+5. config.js mein  google: true  → Commit.
+
+STEP 8 — "CONTINUE WITH FACEBOOK" (optional, free)
+1. developers.facebook.com → My Apps → Create app → "Authenticate and request data from users with Facebook Login".
+2. App settings → Basic: Privacy Policy URL = https://rawatnikhil921-debug.github.io/dynastyvault-site/privacy.html
+                          Terms URL = .../terms.html , User data deletion = "Data deletion instructions URL" = .../privacy.html
+3. Facebook Login → Settings → Valid OAuth Redirect URIs:  https://<aapka-project>.supabase.co/auth/v1/callback  → Save.
+4. App ID aur App Secret (Settings → Basic) → Supabase → Authentication → Providers → Facebook → Enable → paste → Save.
+5. App ko "Live" mode mein daalo (upar toggle). Facebook kabhi-kabhi business verification maangta hai — tab tak sirf aap (admin) login kar paoge.
+6. config.js mein  facebook: true  → Commit.
+
+INSTAGRAM SE LOGIN KYUN NAHI
+- Instagram ab aam logon ke liye "Login with Instagram" nahi deta (Meta ne 2024 mein woh band kar diya). Sirf business/creator
+  accounts ke liye alag API hai, jo Supabase support nahi karta. Isliye Instagram button nahi lagaya — Facebook login wahi Meta account use karta hai.
+
+KUCH SEEDHI BAATEIN (login)
+- Log in aur Sign up ek hi tarah chalte hain: pehli baar Google/Facebook/email se aaye toh account ban jaata hai, agli baar wahi khulta hai.
+- Jab tak supabase / google / facebook config.js mein ON nahi, button dabane par "being switched on" message aata hai — kuch tootta nahi.
