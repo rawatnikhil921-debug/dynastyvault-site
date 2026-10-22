@@ -2117,8 +2117,8 @@ svg.leaflet-zoom-animated{will-change:transform}
       <div class="min-w-0">
         <div class="eyebrow">◆ Reunion Portrait</div>
         <h2 class="font-regal gold-text text-3xl sm:text-5xl font-bold mt-3" data-hn="Poori family ek asli jaisi photo mein">The Whole Family in One Real-Looking Photo</h2>
-        <p class="muted mt-4" data-hn="Dada-dadi se lekar bachchon tak — sab ek saath, ek jagah, jaise sach mein photo khinchi ho. Photos aur tayyar prompt free Gemini app mein le jao, wahan banao, phir yahan frame aur naam ki plaque ke saath rakho.">Grandparents to grandchildren — everyone together in one place, as if the photo was really taken. Take everyone’s photos and a ready-made prompt to the free Gemini app, make it there, then keep it here with a gilded frame and a name plaque.</p>
-        <ul class="flist"><li>Choose the place — haveli courtyard, garden, palace hall, studio…</li><li>Choose the clothes and who sits or stands</li><li>Free with the Gemini app — no API key, no billing</li></ul>
+        <p class="muted mt-4" data-hn="Dada-dadi se lekar bachchon tak — sab ek saath, ek jagah, jaise sach mein photo khinchi ho. Jagah aur kapde chuno, ek tap mein portrait banao, aur sone ke frame aur naam ki plaque ke saath rakho.">Grandparents to grandchildren — everyone together in one place, as if the photo was really taken. Choose the place and the clothes, generate the portrait in one tap, and keep it with a gilded frame and a name plaque.</p>
+        <ul class="flist"><li>Choose the place — haveli courtyard, garden, palace hall, studio…</li><li>Choose the clothes and who sits or stands</li><li data-hn="Royal ke saath shaamil">Included with Royal</li></ul>
         <div class="flex flex-wrap gap-3"><button class="btn-gold" data-open-portrait="photo">✨ Make our reunion portrait</button><button class="btn-ghost" data-buy-service="photo">🎁 Get it made for you <span data-price="services.photo"></span></button></div>
       </div>
       <button class="ps-promo-art" data-open-portrait="photo" aria-label="Open the Reunion Portrait studio"><canvas id="rpPromo" width="960" height="540"></canvas></button>
@@ -2194,7 +2194,7 @@ svg.leaflet-zoom-animated{will-change:transform}
         <p class="tiny muted mt-3" id="psHow"></p>
       </div>
       <aside class="ps-aside p-5 sm:p-6">
-        <div class="gm-tabs" role="tablist" aria-label="Portrait type" hidden><button role="tab" data-ps-mode="gemini" class="on">✨ Gemini photo<small>real-looking</small></button><button role="tab" data-ps-mode="collage">🧩 Quick collage<small>cut &amp; paste</small></button></div>
+        <div class="gm-tabs" role="tablist" aria-label="Portrait type" hidden><button role="tab" data-ps-mode="gemini" class="on">✨ Portrait<small>real-looking</small></button><button role="tab" data-ps-mode="collage">🧩 Quick collage<small>cut &amp; paste</small></button></div>
         <div id="gmPanel" class="grid gap-5"></div>
         <div id="psPhotoPanel" class="grid gap-5" hidden>
           <div><div class="field"><span>Portrait style</span></div><div class="grid gap-2 mt-2" id="phLooks"></div></div>
@@ -2622,7 +2622,9 @@ const SERVICES = {
   gift:{ id:'gift', icon:'🎁', name:'Heritage Gift Box', unit:'one-time', desc:'Royal Dynasty Lifetime + one real reunion photo + three stories in an elder’s voice. The perfect birthday or anniversary gift for parents.' }
 };
 
-const HAS_CLOUD = !!String((window.DV_CONFIG || {}).server || '').trim();   // cloud voice + server unlock codes are switched on in config.js
+const HAS_SERVER = !!String((window.DV_CONFIG || {}).server || '').trim();   // server = safe unlock codes (works with no paid keys)
+// Cloud voice is only advertised once the server says its voice key is in (DEEPINFRA_KEY) — checked at start-up, remembered
+let HAS_CLOUD = false; try { HAS_CLOUD = HAS_SERVER && localStorage.getItem('dv.voiceLive') === '1'; } catch (e) { /* storage blocked */ }
 const PLANS = [
   { id:'free', name:'Free Vault', icon:'🕯️', blurb:'Begin your lineage with the essentials.', period:'forever',
     features:[`Up to ${FREE_NODE_LIMIT} family members`, 'Single branch — the paternal lineage', 'Unlimited migration places on the live map', 'Hinglish, English & Hindi app language and chronicles', 'English & Hinglish narration of every chronicle', 'Imperial Gold theme & Dual-Ring frames', 'Referral rewards — 5 invites unlock Royal free', 'Basic voice notes, posts & 24-hour stories', `Migration trail with up to ${FREE_TRAIL} places`, 'WhatsApp Dynasty Co-Op invites', 'Live family presence & private family feed', 'Anniversary reminders & memorial tribute walls', '1-click family backup archive', 'Royalty Score, trivia & watermarked portrait previews'] },
@@ -2630,7 +2632,8 @@ const PLANS = [
     features:['Dual-lineage fusion — maternal + paternal', 'Unlimited members & generations', '15 global & regional languages with audio narration', 'AI voice cloning studio', 'AI voice restoration & noise removal', 'Migration map — unlimited places, photos & voices', 'Premium themes & custom portrait frames', 'Future Time Capsule Lockers', 'Royal badge on global & friends’ leaderboards', 'VaultGPT lineage search', 'Unlimited 4K vector PDF / SVG exports and portrait PDFs'] }
 ];
 PLANS[0].features = [`Up to ${FREE_NODE_LIMIT} family members`, 'Father’s side of the family', 'Family collage with real photos', 'AI story writer (free Google key)', 'Record voices & hear stories in their cloned voice*', 'Migration map with unlimited places', 'English, Hinglish & Hindi', '1-click family backup'];
-PLANS[1].features = ['Both sides — father’s and mother’s families, fused', 'Unlimited members & generations', 'Stories in 15 languages with audio', HAS_CLOUD ? '~100 stories in their cloned voice on any phone' : 'Cloned-voice narration in every language*', 'Unlimited 4K print-ready collage & tree exports', 'All premium themes & frames', 'VaultGPT family search & Royal badge', 'Every future feature, for life'];
+function setRoyalFeatures() { PLANS[1].features = ['Both sides — father’s and mother’s families, fused', 'Unlimited members & generations', 'Stories in 15 languages with audio', HAS_CLOUD ? '~100 stories in their cloned voice on any phone' : 'Cloned-voice narration in every language*', 'Unlimited 4K print-ready collage & tree exports', 'All premium themes & frames', 'VaultGPT family search & Royal badge', 'Every future feature, for life']; }
+setRoyalFeatures();
 const PLAN_BY = Object.fromEntries(PLANS.map(p => [p.id, p]));
 const PLAN_COMPARE = [
   ['Lineage branches', 'Single (paternal)', 'Maternal + paternal, fused'],
@@ -6776,7 +6779,7 @@ function accentHint(p, lang) {
 const CLONE_LANG = { en:'en', hn:'en', hi:'hi', es:'es', fr:'fr', pt:'pt', ru:'ru', ja:'ja' };
 // paying customers on any phone: stories are read in the cloned voice by the DynastyVault server (cloud). On Nabu's laptop the free local clone is used first.
 const DV_API = String((window.DV_CONFIG || {}).server || '').trim().replace(/\/+$/, '');
-const cloudOn = () => !!(DV_API && state.cloud && state.cloud.orderId && state.cloud.code);
+const cloudOn = () => !!(DV_API && HAS_CLOUD && state.cloud && state.cloud.orderId && state.cloud.code);
 const cloneSrv = { st:'idle', info:null, checkedAt:0, audio:null, cache:new Map(), refWav:new Map(), busy:false };
 function cloneBases() {
   const custom = (state.cloneURL || '').trim().replace(/\/+$/, '');
@@ -7000,7 +7003,7 @@ function gemText(j) {
 function gemMsg(res, what) {
   const k = res.kind;
   if (k === 'not-free') return what === 'image'
-    ? hx('This is a free Google key — Google does not offer its image models on the free tier, so one-click photos need billing switched on. To make the photo free, use the Gemini app steps above (copy prompt → Gemini → upload).', 'Yeh free Google key hai — Google image model free tier mein nahi deta, isliye one-click photo ke liye billing on karni padegi. Free mein photo ke liye upar wale Gemini app steps use karo (prompt copy → Gemini → upload).')
+    ? hx('This is a free Google key — Google does not offer its image models on the free tier, so one-click photos need billing switched on. To make the photo free, use the AI steps above (copy prompt → AI → upload).', 'Yeh free Google key hai — Google image model free tier mein nahi deta, isliye one-click photo ke liye billing on karni padegi. Free mein photo ke liye upar wale AI steps use karo (prompt copy → AI → upload).')
     : hx('This model is not on the free tier for your key.', 'Yeh model aapki free key pe nahi chalta.');
   if (k === 'daily') return hx('Today’s free Google quota is used up. It resets at midnight US Pacific time (around 12:30–1:30 pm in India) — try again after that.', 'Aaj ka free Google quota khatam ho gaya. Yeh US Pacific midnight pe reset hota hai (India mein dopahar ~12:30–1:30 baje) — uske baad dobara try karo.');
   if (k === 'rate') return hx('Google is limiting this free key (only a few requests per minute). Wait one minute and try again.', 'Google is free key ko rok raha hai (ek minute mein kuch hi requests). Ek minute ruk ke dobara try karo.');
@@ -7074,7 +7077,7 @@ async function awCall(prompt) {
     if (r.ok) {
       const txt = gemText(r.j);
       if (txt) { if (!fresh || state.tModel !== m) { state.tModel = m; state.tModelKey = gaKeyTag(); state.tModelAt = Date.now(); save(); } return txt; }
-      last = hx('Gemini returned an empty answer. Add a few more notes and try again.', 'Gemini ne khaali jawab diya. Thodi aur baatein likho aur dobara try karo.'); continue;
+      last = hx('AI returned an empty answer. Add a few more notes and try again.', 'AI ne khaali jawab diya. Thodi aur baatein likho aur dobara try karo.'); continue;
     }
     // remember the most useful reason: a quota/limit message beats a later "model not found"
     if (!lastRes || r.kind !== 'missing') { lastRes = r; last = gemMsg(r, 'text'); }
@@ -7089,7 +7092,7 @@ async function awWrite(p) {
   const notes = ($('#stAiNotes').value || '').trim(); const lang = $('#stAiLang').value; AW.lang = lang;
   if (notes.length < 15 && !(p.born || p.position)) { awSay(hx('Write a few lines first — where they were born, their work, a memory.', 'Pehle kuch lines likho — kahan paida hue, kya kaam kiya, koi yaad.'), 'warn'); return; }
   AW.busy = true; const btn = $('#stAiGo'); if (btn) { btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> ' + hx('Writing…', 'Likh rahe hain…'); }
-  awSay(hx('✨ Gemini is writing the story…', '✨ Gemini kahani likh raha hai…'));
+  awSay(hx('✨ AI is writing the story…', '✨ AI kahani likh raha hai…'));
   try {
     let text = await awCall(awPrompt(p, notes, lang));
     text = text.replace(/^["“]|["”]$/g, '').replace(/^#+\s.*\n+/, '').trim();
@@ -7105,7 +7108,7 @@ async function awWrite(p) {
 function awHTML(p) {
   const lang = AW.lang || awDefaultLang();
   return `<div class="aw-box mt-4">
-    <div class="flex items-center justify-between gap-2 flex-wrap"><b class="aw-h">✨ ${hx('Let AI write the story', 'AI se kahani likhwao')}</b><span class="tiny muted">${hx('Gemini · from your notes only', 'Gemini · sirf aapki baaton se')}</span></div>
+    <div class="flex items-center justify-between gap-2 flex-wrap"><b class="aw-h">✨ ${hx('Let AI write the story', 'AI se kahani likhwao')}</b><span class="tiny muted">${hx('AI · from your notes only', 'AI · sirf aapki baaton se')}</span></div>
     <textarea id="stAiNotes" class="input mt-2" rows="3" placeholder="${esc(hx(`A few lines about ${firstName(p.name)}: where they were born, their work, a habit, a memory… (any language)`, `${firstName(p.name)} ke baare mein kuch lines: kahan paida hue, kya kaam kiya, koi aadat, koi yaad… (kisi bhi bhasha mein)`))}"></textarea>
     ${!DV_SERVER && !gaKey() ? `<label class="field mt-2"><span>${hx('Google API key (free)', 'Google API key (free)')} · <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">${hx('get one', 'yahan se lo')} ↗</a></span><input class="input" id="stAiKey" type="password" autocomplete="off" spellcheck="false" placeholder="AQ… / AIza…"></label>` : ''}
     <div class="flex flex-wrap items-center gap-2 mt-2">
@@ -9349,7 +9352,7 @@ async function renderPortraitBlob(W, H, opts) {
   drawPhotoGroup(c.getContext('2d'), W, H, phOpts(), PH.people, PH.bgImg, opts);
   return new Promise(res => c.toBlob(b => { if (b) { b._w = W; b._h = H; } res(b); }, 'image/jpeg', 0.93));
 }
-function gmNeedPhoto() { if (GM.mode === 'gemini' && !V().reunion) { toast(hx('First make the photo in Gemini and upload it (step 4).', 'Pehle Gemini mein photo banao aur upload karo (step 4).'), 'warn', 5000); return true; } return false; }
+function gmNeedPhoto() { if (GM.mode === 'gemini' && !V().reunion) { toast(hx('First generate the portrait (step 3).', 'Pehle portrait banao (step 3).'), 'warn', 5000); return true; } return false; }
 async function downloadPreview() {
   if (gmNeedPhoto()) return;
   const b = await renderPortraitBlob(1600, 900, { watermark:true });
@@ -10177,17 +10180,12 @@ function gmZip(files) {
   return new Blob([...parts, ...central, new Uint8Array(e.buffer)], { type:'application/zip' });
 }
 const GM_HOWTO = [
-  'DYNASTYVAULT — GEMINI SE ASLI FAMILY PHOTO (FREE)',
+  'DYNASTYVAULT — REUNION PORTRAIT PHOTOS',
   '',
-  '1. gemini.google.com kholo (ya phone pe Gemini app) aur apne Google account se login karo.',
-  '2. Neeche "+" / "Upload" dabao aur is folder ki saari numbered photos ek saath chuno (01, 02, 03… isi kram mein).',
-  '   10 se zyada log hon toh sirf "00-SAB-EK-PHOTO-MEIN.jpg" daalo — prompt usi hisaab se bana hai.',
-  '3. PROMPT.txt kholo, poora text copy karo, Gemini mein paste karo aur bhejo.',
-  '4. Photo ban jaaye toh download karo. Pasand na aaye toh Gemini ko likho, jaise:',
-  '   "Dadaji ka chehra unki photo jaisa hi rakho" ya "sabko thoda paas khada karo" ya "phir se banao".',
-  '5. DynastyVault → Reunion Portrait → "Gemini wali photo upload karo" se woh photo daalo. Frame aur naam ki plaque wahan lag jayegi.',
+  'These are the family photos for your reunion portrait.',
+  'Send this whole file to DynastyVault in the same WhatsApp chat. We make the portrait and send it back.',
   '',
-  'Note: Gemini ki photo mein chhota sa ✦ nishaan / "AI generated" label ho sakta hai — yeh Google lagata hai.'
+  'Yeh aapke reunion portrait ki family photos hain. Yeh poori file usi WhatsApp chat mein DynastyVault ko bhejo.'
 ].join('\r\n');
 async function gmZipBlob() {
   const { list } = gmPeople(); if (!list.length) return null; const enc = new TextEncoder(); const files = [];
@@ -10195,15 +10193,76 @@ async function gmZipBlob() {
   if (!grid) list.forEach(p => files.push({ name:`${String(p.n).padStart(2, '0')}-${gmSafe(p.name)}.${gmExt(p.avatar)}`, data:gmBytes(p.avatar) }));
   files.push({ name:'00-SAB-EK-PHOTO-MEIN.jpg', data:new Uint8Array(await gb.arrayBuffer()) });
   files.push({ name:'PROMPT.txt', data:enc.encode('﻿' + gmPromptNow(list).replace(/\n/g, '\r\n')) });
-  files.push({ name:'KAISE-KARE.txt', data:enc.encode('﻿' + GM_HOWTO) });
+  files.push({ name:'README.txt', data:enc.encode('﻿' + GM_HOWTO) });
   return gmZip(files);
 }
-async function gmDownloadZip() {
+/* ---------- ✨ Reunion portrait: ONE "Generate" button, Royal only ----------
+   With the server set up (config.js → server, and GEMINI_KEY on the server) it is made automatically.
+   Until then the request goes to Nabu on WhatsApp and he makes it by hand (made-for-you). */
+const RP = { busy:false, abort:null, t0:0, timer:0, left:null, ready:null };
+async function rpServerReady() {
+  if (!DV_API || !state.cloud || !state.cloud.orderId) return false;
+  if (RP.ready != null) return RP.ready;
+  try { const r = await fetch(DV_API + '/api/health'); const j = await r.json(); RP.ready = !!j.portrait; } catch (e) { RP.ready = false; }
+  return RP.ready;
+}
+function rpHTML(v, n) {
+  const royal = isRoyal();
+  let btn;
+  if (!royal) btn = `<button class="btn-gold w-full btn-wrap" id="rpBuy">🔒 ${hx('Generate portrait', 'Portrait banao')}</button>
+      <p class="tiny muted mt-2">${hx('Included with Royal Dynasty Lifetime. Get Royal to generate your family’s reunion portrait.', 'Royal Dynasty Lifetime ke saath milta hai. Portrait banane ke liye Royal lo.')}</p>`;
+  else if (RP.busy) btn = `<button class="btn-ghost w-full" id="rpGo">⏳ ${hx('Generating…', 'Ban raha hai…')} <span id="rpT">0s</span> · ${hx('Stop', 'Roko')}</button>`;
+  else btn = `<button class="btn-gold w-full btn-wrap" id="rpGo">✨ ${v.reunion ? hx('Generate again', 'Phir se banao') : hx('Generate portrait', 'Portrait banao')}</button>
+      ${RP.left != null ? `<p class="tiny muted mt-2">${hx(`${RP.left} portraits left in your plan`, `Plan mein ${RP.left} portrait baaki`)}</p>` : ''}
+      ${state.rpAsked && !RP.ready ? `<label class="chip mt-2 gm-up" style="cursor:pointer"><input type="file" id="gmFile" accept="image/*" class="hidden">📁 ${hx('Add the portrait we sent you', 'Humari bheji portrait yahan daalo')}</label>` : ''}`;
+  return `<div class="gm-step"><b class="gm-n">3</b><div class="min-w-0"><div class="gm-h">${hx('Generate', 'Banao')}</div>
+      ${n ? btn : `<p class="tiny gm-warn">${hx('Add photos to the family profiles first.', 'Pehle family profiles mein photos daalo.')}</p>`}
+      ${v.reunion ? `<button class="chip mt-2" id="gmRemove">✕ ${hx('Remove this portrait', 'Yeh portrait hatao')}</button>` : ''}
+    </div></div>`;
+}
+function rpTick() { const t = $('#rpT'); if (t) t.textContent = Math.round((Date.now() - RP.t0) / 1000) + 's'; }
+async function rpMake() {
+  if (!isRoyal()) { openCheckout('plan', 'royal'); return; }
+  if (RP.busy) { if (RP.abort) RP.abort.abort(); return; }
+  const { list } = gmPeople(); const v = V();
+  if (!list.length) { gmSay(hx('Add photos to the family profiles first.', 'Pehle family profiles mein photos daalo.'), 'warn'); return; }
+  if (!(await rpServerReady())) return rpAsk(list);
+  const prompt = gmPromptNow(list) + (v.reunion ? '\n\nMake a different version from the last one: change the pose and spacing a little, but keep every face exactly the same.' : '');
+  const images = list.map(p => ({ mime:'image/' + (gmExt(p.avatar) === 'jpg' ? 'jpeg' : gmExt(p.avatar)), b64:p.avatar.slice(p.avatar.indexOf(',') + 1) }));
+  RP.busy = true; RP.abort = new AbortController(); RP.t0 = Date.now(); gmPanel(); RP.timer = setInterval(rpTick, 1000);
+  try {
+    const r = await fetch(DV_API + '/api/portrait', { method:'POST', signal:RP.abort.signal, headers:{ 'Content-Type':'application/json' },
+      body:JSON.stringify({ orderId:state.cloud.orderId, code:state.cloud.code, prompt, images, aspectRatio:GM.shape === 'portrait' ? '4:5' : '16:9' }) });
+    const j = await r.json().catch(() => ({}));
+    if (j.left != null) RP.left = j.left;
+    if (!r.ok) {
+      if (j.code === 'NOT_READY') { RP.ready = false; return rpAsk(list); }
+      gmSay(j.code === 'NO_PORTRAITS' ? hx('All the portraits included in your plan are used. Message us on WhatsApp for more.', 'Plan ke saare portrait use ho gaye. Aur ke liye WhatsApp karo.') : (j.error || hx('The portrait could not be made this time. Try again.', 'Is baar portrait nahi bana. Phir try karo.')), 'warn');
+      return;
+    }
+    const kept = await gmSaveReunion(`data:${j.mime || 'image/png'};base64,${j.b64}`, 'portrait');
+    clearInterval(RP.timer); RP.busy = false; gmPanel(); await gmRender(true); gmFacts(); renderPromo();
+    gmSay(hx(`✓ Your reunion portrait is ready. Check every face — if someone looks wrong, tap “Generate again”.${kept ? '' : ' (Browser storage is full, so it may not stay after a reload.)'}`, `✓ Reunion portrait taiyaar. Har chehra dekh lo — koi galat lage toh “Phir se banao” dabao.${kept ? '' : ' (Browser storage bhar gaya hai, reload ke baad shayad na rahe.)'}`), 'ok');
+  } catch (e) {
+    gmSay(e.name === 'AbortError' ? hx('Stopped.', 'Rok diya.') : hx('Could not reach the server. Check the internet and try again.', 'Server tak nahi pahunche. Internet check karke phir try karo.'), 'warn');
+  } finally { clearInterval(RP.timer); RP.busy = false; RP.abort = null; gmPanel(); }
+}
+// made-for-you: save the photos on the phone and send the request to Nabu on WhatsApp
+async function rpAsk(list) {
+  const v = V(); const oid = (state.cloud && state.cloud.orderId) || ((state.orders || []).slice(-1)[0] || {}).id || '';
+  const place = (GM_PLACES[GM.place] || [GM.place])[0], dress = (GM_ATTIRE[GM.attire] || [GM.attire])[0];
+  const msg = `Hi DynastyVault! I am a Royal member${oid ? ' (order ' + oid + ')' : ''}. Please make our family reunion portrait.\nFamily: ${v.name}\nPeople: ${list.length}\nPlace: ${place}\nClothes: ${dress}\nShape: ${GM.shape === 'portrait' ? 'tall' : 'wide'}\nI am sending the photos now.`;
+  await gmDownloadZip(true);
+  state.rpAsked = Date.now(); save(); gmPanel();
+  const wa = payWa(msg); if (wa) window.open(wa, '_blank', 'noopener');
+  gmSay(hx('✓ Request sent. The family photos were saved on this phone — send that file to us in the same WhatsApp chat. We make the portrait and send it back, usually within 24 hours. Then tap “Add the portrait we sent you”.', '✓ Request bhej di. Family photos is phone mein save ho gayi — wahi file usi WhatsApp chat mein bhejo. Hum portrait banake bhejenge, aam taur pe 24 ghante mein. Phir “Humari bheji portrait yahan daalo” dabao.'), 'ok');
+}
+async function gmDownloadZip(quiet) {
   if (GM.busy) return; GM.busy = true; gmSay(hx('Packing the photos…', 'Photos pack ho rahi hain…'));
   try { const z = await gmZipBlob(); if (!z) { gmSay(hx('Add a photo to the family profiles first.', 'Pehle family profiles mein photos daalo.'), 'warn'); return; }
     await copyText(gmPromptNow(gmPeople().list));
-    const ok = await saveFile(`${slug(V().name)}-gemini-photos.zip`, z);
-    if (ok) gmSay(hx('✓ Zip downloaded and the prompt is copied. Unzip it, then open Gemini (step 3).', '✓ Zip download ho gaya aur prompt copy ho gaya. Zip kholo, phir Gemini kholo (step 3).'), 'ok');
+    const ok = await saveFile(`${slug(V().name)}-portrait-photos.zip`, z);
+    if (ok && !quiet) gmSay(hx('✓ Photos saved.', '✓ Photos save ho gayi.'), 'ok');
   } catch (e) { gmSay(hx('Could not make the zip: ', 'Zip nahi ban paya: ') + (e.message || e), 'warn'); }
   finally { GM.busy = false; }
 }
@@ -10214,7 +10273,7 @@ async function gmShare() {
     const prompt = gmPromptNow(list); await copyText(prompt);
     const files = gmGridOn(list.length) ? [new File([await gmGridBlob(list)], '00-sab-ek-photo-mein.jpg', { type:'image/jpeg' })]
       : list.map(p => new File([gmBytes(p.avatar)], `${String(p.n).padStart(2, '0')}-${gmSafe(p.name)}.${gmExt(p.avatar)}`, { type:'image/' + (gmExt(p.avatar) === 'jpg' ? 'jpeg' : gmExt(p.avatar)) }));
-    gmSay(hx('Prompt copied ✓ — in the share sheet pick Gemini, then paste the prompt.', 'Prompt copy ho gaya ✓ — share mein Gemini chuno, phir prompt paste karo.'), 'ok');
+    gmSay(hx('Prompt copied ✓ — in the share sheet pick AI, then paste the prompt.', 'Prompt copy ho gaya ✓ — share mein AI chuno, phir prompt paste karo.'), 'ok');
     await navigator.share({ files, title:hx('Family photos', 'Family photos'), text:prompt });
   } catch (e) { if (e && e.name !== 'AbortError') gmSay(hx('Sharing did not work here — use the zip download instead.', 'Yahan share nahi chala — zip download use karo.'), 'warn'); }
   finally { GM.busy = false; }
@@ -10353,9 +10412,9 @@ function gaPickImage(j) {
 function gaWhyEmpty(j) {
   const c = (j.candidates || [])[0] || {}; const fr = c.finishReason || (j.promptFeedback || {}).blockReason;
   const txt = (((c.content || {}).parts) || []).map(p => p.text).filter(Boolean).join(' ').slice(0, 220);
-  if (/SAFETY|PROHIBITED|BLOCK/i.test(fr || '')) return hx('Gemini refused this request (safety filter). Try fewer people, or plainer clothing wording.', 'Gemini ne mana kar diya (safety filter). Kam logon ke saath ya simple kapdon ke saath try karo.');
-  if (/RECITATION|IMAGE_OTHER|OTHER/i.test(fr || '')) return hx('Gemini did not return a picture this time. Tap “Make it again”.', 'Is baar Gemini ne photo nahi di. “Phir se banao” dabao.');
-  return txt ? hx('Gemini replied with text instead of a picture: ', 'Gemini ne photo ki jagah likh ke bheja: ') + txt : hx('Gemini returned no picture. Tap “Make it again”.', 'Gemini ne koi photo nahi bheji. “Phir se banao” dabao.');
+  if (/SAFETY|PROHIBITED|BLOCK/i.test(fr || '')) return hx('AI refused this request (safety filter). Try fewer people, or plainer clothing wording.', 'AI ne mana kar diya (safety filter). Kam logon ke saath ya simple kapdon ke saath try karo.');
+  if (/RECITATION|IMAGE_OTHER|OTHER/i.test(fr || '')) return hx('AI did not return a picture this time. Tap “Make it again”.', 'Is baar AI ne photo nahi di. “Phir se banao” dabao.');
+  return txt ? hx('AI replied with text instead of a picture: ', 'AI ne photo ki jagah likh ke bheja: ') + txt : hx('AI returned no picture. Tap “Make it again”.', 'AI ne koi photo nahi bheji. “Phir se banao” dabao.');
 }
 function gaErrMsg(st, j) {
   const m = ((j || {}).error || {}).message || '';
@@ -10384,7 +10443,7 @@ async function gaCall(prompt, imgs, model, cfg) {
 }
 function gaTick() {
   const s = Math.round((Date.now() - GA.t0) / 1000);
-  gmSay(hx(`✨ Gemini is making your family photo… ${s}s${GA.tried ? ' · ' + GA.tried : ''}`, `✨ Gemini aapki family photo bana raha hai… ${s}s${GA.tried ? ' · ' + GA.tried : ''}`));
+  gmSay(hx(`✨ AI is making your family photo… ${s}s${GA.tried ? ' · ' + GA.tried : ''}`, `✨ AI aapki family photo bana raha hai… ${s}s${GA.tried ? ' · ' + GA.tried : ''}`));
 }
 async function gaMake(again) {
   if (GA.busy) { if (GA.abort) GA.abort.abort(); return; }
@@ -10407,7 +10466,7 @@ async function gaMake(again) {
         if (d) {
           const url = `data:${(d.mimeType || d.mime_type || 'image/png')};base64,${d.data}`;
           const img = await loadImg(url); imgCache.delete(url);
-          if (!img) throw new Error(hx('The picture Gemini sent could not be opened.', 'Gemini ki bheji photo khul nahi payi.'));
+          if (!img) throw new Error(hx('The picture AI sent could not be opened.', 'AI ki bheji photo khul nahi payi.'));
           const c = document.createElement('canvas'); const sc = Math.min(1, 2000 / Math.max(img.naturalWidth, img.naturalHeight));
           c.width = Math.round(img.naturalWidth * sc); c.height = Math.round(img.naturalHeight * sc);
           const g = c.getContext('2d'); g.imageSmoothingQuality = 'high'; g.drawImage(img, 0, 0, c.width, c.height);
@@ -10445,7 +10504,7 @@ function gaHTML() {
       <input class="input" id="gaKey" type="password" autocomplete="off" spellcheck="false" placeholder="AIza…" value="${esc(gaKey())}"></label>
     <p class="tiny muted mt-1">${hx('Free to get, but image models need billing switched on — about ', 'Lena free hai, par image model ke liye billing on karni padti hai — lagbhag ')}<b>${cost}</b>${hx(' per photo, paid to Google. The key stays in this browser and is sent only to Google.', ' per photo, Google ko. Key isi browser mein rehti hai aur sirf Google ko jaati hai.')}
       <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">${hx('Get a key', 'Key lo')} ↗</a></p>
-    ${gaIsFreeKey() ? `<p class="gm-say warn mt-2">${hx('This key is on Google’s free tier — it writes stories fine, but Google gives no free image model. For a free photo, use the Gemini app steps above. After you switch billing on, tap “Make the photo now” again.', 'Yeh key Google ke free tier pe hai — kahani likhne ke liye theek hai, par Google free mein image model nahi deta. Free photo ke liye upar wale Gemini app steps use karo. Billing on karne ke baad “Abhi photo banao” phir dabao.')}</p>` : ''}
+    ${gaIsFreeKey() ? `<p class="gm-say warn mt-2">${hx('This key is on Google’s free tier — it writes stories fine, but Google gives no free image model. For a free photo, use the AI steps above. After you switch billing on, tap “Make the photo now” again.', 'Yeh key Google ke free tier pe hai — kahani likhne ke liye theek hai, par Google free mein image model nahi deta. Free photo ke liye upar wale AI steps use karo. Billing on karne ke baad “Abhi photo banao” phir dabao.')}</p>` : ''}
     ${has ? `<div class="gm-chips mt-3">${GA_MODELS.map(x => `<button class="chip${m.id === x.id ? ' on' : ''}" data-ga-model="${x.id}" title="${esc(hx(x.note[0], x.note[1]))}">${esc(x.label)}</button>`).join('')}</div>
     <div class="gm-chips mt-2"><button class="chip${gaSize() === '1K' ? ' on' : ''}" data-ga-size="1K">${hx('Normal', 'Normal')}</button><button class="chip${gaSize() === '2K' ? ' on' : ''}" data-ga-size="2K">${hx('HD · costs more', 'HD · zyada paisa')}</button></div>
     <button class="btn-gold w-full btn-wrap mt-3" id="gaGo">✨ ${v.reunion ? hx('Make it again', 'Phir se banao') : hx('Make the photo now', 'Abhi photo banao')}</button>` : ''}
@@ -10604,7 +10663,7 @@ function fcHTML() {
     ${url ? `<button class="btn-gold w-full btn-wrap mt-3" id="fcGo">🆓 ${v.reunion ? hx('Make it again — free', 'Phir se banao — free') : hx('Make the photo — free', 'Free AI se photo banao')}</button>
     ${n > max ? `<p class="tiny mt-2 gm-warn">${hx(`The free GPU takes ${max} people at once — the first ${max} (seated elders first) will be in the photo.`, `Free GPU ek baar mein ${max} log leta hai — pehle ${max} (baithe buzurg pehle) photo mein aayenge.`)}</p>` : ''}
     <details class="tiny mt-2"><summary class="muted" style="cursor:pointer">${hx('Steps / notebook again', 'Steps / notebook dobara')}</summary>${steps}</details>` : ''}
-    <p class="tiny muted mt-2">${hx('Free model on Google’s free GPU — faces may come out a little different from Gemini. Always check every face.', 'Google ke free GPU pe free model — chehre Gemini se thode alag aa sakte hain. Har chehra zaroor dekh lo.')}</p>
+    <p class="tiny muted mt-2">${hx('Free model on Google’s free GPU — faces may come out a little different from AI. Always check every face.', 'Google ke free GPU pe free model — chehre AI se thode alag aa sakte hain. Har chehra zaroor dekh lo.')}</p>
   </div>`;
 }
 
@@ -10795,26 +10854,13 @@ function gmPanel() {
     </div></div>
     <div class="gm-step"><b class="gm-n">2</b><div class="min-w-0"><div class="gm-h">${hx('Who is in the photo', 'Photo mein kaun hoga')}</div>
       ${n ? `<div class="gm-ppl">${list.map(p => `<button class="gm-p" data-gm-role="${p.id}" title="${esc(hx('Tap to change: seated / standing / child', 'Tap karke badlo: baithe / khade / bachcha'))}"><img src="${p.avatar}" alt=""><span>${p.n}. ${esc(p.name)}</span><i>${rl[p.role]}</i></button>`).join('')}</div>
-      <p class="tiny muted mt-2">${hx('Tap a name to change who sits, stands or is a child.', 'Naam pe tap karke badlo kaun baithega, khada hoga ya bachcha hai.')}</p>
-      ${n > GM_MAX_FILES ? `<p class="tiny mt-2 gm-warn">${hx(`Gemini takes about ${GM_MAX_FILES} photos at once, so for ${n} people the zip has one numbered grid photo of everyone.`, `Gemini ek baar mein ~${GM_MAX_FILES} photos leta hai, isliye ${n} logon ke liye zip mein sabki ek numbered grid photo hai.`)}</p>` : ''}
-      <details class="gm-det mt-3"><summary>${hx('See / edit the prompt', 'Prompt dekho / badlo')}</summary><textarea class="input mt-2" id="gmPrompt" spellcheck="false">${esc(gmPromptNow(list))}</textarea>${GM.edited != null ? `<button class="chip mt-2" id="gmPromptReset">↺ ${hx('Back to the automatic prompt', 'Apne aap wala prompt wapas')}</button>` : ''}</details>`
+      <p class="tiny muted mt-2">${hx('Tap a name to change who sits, stands or is a child.', 'Naam pe tap karke badlo kaun baithega, khada hoga ya bachcha hai.')}</p>`
       : `<p class="tiny gm-warn">${hx('Nobody has a photo yet — open each family member’s profile and add a clear, front-facing photo.', 'Abhi kisi ki photo nahi hai — har member ki profile kholo aur saamne se saaf photo daalo.')}</p>`}
     </div></div>
-    <div class="gm-step"><b class="gm-n">3</b><div class="min-w-0"><div class="gm-h">${hx('Make it in Gemini, then upload it here', 'Gemini mein banao, phir yahan upload karo')}</div>
-      ${DV_SERVER ? `<div class="mt-3">${gaHTML()}</div>` : `<details class="gm-det mt-3"${GA.busy || gaKey() ? ' open' : ''}><summary>🔑 ${hx('Paid: one-tap real photo with your Google API key', 'Paid: Google API key se ek click mein asli photo')}</summary><div class="mt-2">${gaHTML()}</div></details>`}
-      <p class="tiny muted">${hx('Take the photos and the prompt, make it yourself in the Gemini app, then upload the result here.', 'Photos aur prompt le jao, Gemini app mein khud banao, phir yahan upload kar do.')}</p>
-      <div class="grid gap-2 mt-2">
-        <button class="btn-ghost sm w-full btn-wrap" id="gmZip">⬇ ${hx(`${grid ? 'Photo grid' : `All ${n} photos`} + prompt (zip)`, `${grid ? 'Grid photo' : `Sabki ${n} photos`} + prompt (zip)`)}</button>
-        ${gmCanShare() ? `<button class="btn-ghost sm w-full btn-wrap" id="gmShare">📤 ${hx('Send them straight to the Gemini app', 'Seedha Gemini app ko bhejo')}</button>` : ''}
-        <button class="btn-ghost sm w-full" id="gmCopy">📋 ${hx('Copy the prompt', 'Prompt copy karo')}</button>
-        <a class="btn-ghost sm w-full" href="https://gemini.google.com/app" target="_blank" rel="noopener">✨ ${hx('Open Gemini', 'Gemini kholo')} ↗</a>
-        <label class="btn-ghost sm w-full btn-wrap gm-up"><input type="file" id="gmFile" accept="image/*" class="hidden">📁 ${hx('Upload the finished photo', 'Bani hui photo upload karo')}</label>
-      </div>
-      ${v.reunion ? `<button class="chip mt-2" id="gmRemove">✕ ${hx('Remove this photo', 'Yeh photo hatao')}</button>` : ''}
-    </div></div>
+    ${rpHTML(v, n)}
 `;
   box.innerHTML = `
-    <div class="gm-tabs" role="tablist" aria-label="${esc(hx('Portrait type', 'Portrait type'))}"><button role="tab" data-gm-tab="collage" class="${GM.tab !== 'photo' ? 'on' : ''}" aria-selected="${GM.tab !== 'photo'}">🧩 ${hx('Family Collage', 'Family Collage')}<small>${hx('free · instant', 'free · turant')}</small></button><button role="tab" data-gm-tab="photo" class="${GM.tab === 'photo' ? 'on' : ''}" aria-selected="${GM.tab === 'photo'}">✨ ${hx('Reunion Portrait', 'Reunion Portrait')}<small>${hx('real-looking · Gemini', 'asli jaisi · Gemini')}</small></button></div>
+    <div class="gm-tabs" role="tablist" aria-label="${esc(hx('Portrait type', 'Portrait type'))}"><button role="tab" data-gm-tab="collage" class="${GM.tab !== 'photo' ? 'on' : ''}" aria-selected="${GM.tab !== 'photo'}">🧩 ${hx('Family Collage', 'Family Collage')}<small>${hx('free · instant', 'free · turant')}</small></button><button role="tab" data-gm-tab="photo" class="${GM.tab === 'photo' ? 'on' : ''}" aria-selected="${GM.tab === 'photo'}">✨ ${hx('Reunion Portrait', 'Reunion Portrait')}<small>${hx('real-looking · Royal', 'asli jaisi · Royal')}</small></button></div>
     ${GM.tab === 'photo' ? phoHTML : colHTML}
     <div class="gm-say" id="gmSay" hidden></div>
     <div><div class="field"><span>${hx('Frame', 'Frame')}</span></div><div class="ps-frames mt-2">${Object.entries(PS_FRAMES).map(([k, l]) => `<button class="chip${PH.frame === k ? ' on' : ''}" data-ph-frame="${k}">${esc(l)}</button>`).join('')}</div></div>
@@ -10826,8 +10872,8 @@ function gmApplyMode() {
   $$('[data-ps-mode]').forEach(b => { b.classList.toggle('on', b.dataset.psMode === GM.mode); b.setAttribute('aria-selected', String(b.dataset.psMode === GM.mode)); });
   $('#gmPanel').hidden = !gem; $('#psPhotoPanel').hidden = gem;
   $('#psHow').textContent = gem
-    ? (GM.tab === 'photo' ? hx('Reunion portrait: a real-looking photo of the whole family together. Take the photos and the prompt to the free Gemini app, make it there, then upload it here — it gets the frame and the name plaque.', 'Reunion portrait: poori family ki saath mein asli jaisi photo. Photos aur prompt free Gemini app mein le jao, wahan banao, phir yahan upload karo — frame aur naam ki plaque lag jaati hai.') : hx('Family collage: everyone’s real photos, generation by generation, with names and years — instant and free. Pick a frame and download or print it.', 'Family collage: sabki asli photos, peedhi dar peedhi, naam aur saal ke saath — turant aur free. Frame chuno aur download ya print karo.'))
-    : hx('Quick collage: everyone’s real photos are cut out and placed on your background. It looks like a collage — for a real-looking photo use the Gemini tab.', 'Quick collage: sabki asli photos kaat ke background pe lagti hain. Yeh collage hi lagta hai — asli jaisi photo ke liye Gemini wala tab use karo.');
+    ? (GM.tab === 'photo' ? hx('Reunion portrait: a real-looking photo of the whole family together. Choose the place and clothes, then tap Generate — it gets the frame and the name plaque.', 'Reunion portrait: poori family ki saath mein asli jaisi photo. Jagah aur kapde chuno, phir Banao dabao — frame aur naam ki plaque lag jaati hai.') : hx('Family collage: everyone’s real photos, generation by generation, with names and years — instant and free. Pick a frame and download or print it.', 'Family collage: sabki asli photos, peedhi dar peedhi, naam aur saal ke saath — turant aur free. Frame chuno aur download ya print karo.'))
+    : hx('Quick collage: everyone’s real photos are cut out and placed on your background. It looks like a collage — for a real-looking photo use the AI tab.', 'Quick collage: sabki asli photos kaat ke background pe lagti hain. Yeh collage hi lagta hai — asli jaisi photo ke liye AI wala tab use karo.');
   refreshPortraitButtons();
 }
 async function gmTab(t) {
@@ -10836,7 +10882,7 @@ async function gmTab(t) {
   if (GM.tab === 'photo') {
     if (v.reunion && v.reunion.by === 'collage') { v.reunion = v.reunionPhoto || null; if (!v.reunion) delete v.reunion; delete v.reunionPhoto; saveNow(); }
     gmApplyMode(); gmPanel(); gmFacts(); await psFonts(); await gmRender(true);
-    if (!v.reunion) { const n = $('#psStageNote'); n.textContent = hx('No reunion photo yet — follow the 3 steps on the right: download the photos + prompt, make it in the Gemini app, then upload it here.', 'Abhi reunion photo nahi hai — right side ke 3 steps karo: photos + prompt download karo, Gemini app mein banao, phir yahan upload karo.'); n.hidden = false; }
+    if (!v.reunion) { const n = $('#psStageNote'); n.textContent = hx('No reunion portrait yet — choose the place and clothes, then tap Generate.', 'Abhi reunion portrait nahi hai — jagah aur kapde chuno, phir Banao dabao.'); n.hidden = false; }
   } else {
     gmApplyMode(); gmPanel(); gmFacts(); await psFonts();
     if (!v.reunion || v.reunion.by !== 'collage') { await gmCollage(); return; }
@@ -11615,6 +11661,16 @@ async function acctInit() {
   if (sess) acctReconcile(true);
 }
 setTimeout(acctInit, 700);
+// ask the server which paid parts are switched on (voice clone / portraits); costs nothing
+setTimeout(async () => {
+  if (!HAS_SERVER) return;
+  try {
+    const j = await (await fetch(String(window.DV_CONFIG.server).trim().replace(/\/+$/, '') + '/api/health')).json();
+    const live = !!j.voice; try { localStorage.setItem('dv.voiceLive', live ? '1' : '0'); } catch (e) { /* ignore */ }
+    if (typeof RP !== 'undefined') RP.ready = !!j.portrait;
+    if (live !== HAS_CLOUD) { HAS_CLOUD = live; setRoyalFeatures(); try { renderPlans(); renderAddons(); updatePrices(true); } catch (e) { /* views refresh later */ } }
+  } catch (e) { /* server asleep or offline — keep the last known state */ }
+}, 900);
 if (/[?&]dvtest=1/.test(location.search)) window.__dv = { get state() { return state; }, save, saveNow };   // test hook, only with ?dvtest=1
 
 
@@ -11805,9 +11861,11 @@ function wire() {
     if (e.target.closest('#fcNb')) { fcDownloadNb(); return; }
     if (e.target.closest('#gcGo')) { gcMake(!!V().reunion); return; }
     const gcBuyBtn = e.target.closest('[data-gc-buy]'); if (gcBuyBtn) { gcBuy(gcBuyBtn.dataset.gcBuy); return; }
+    if (e.target.closest('#rpGo')) { rpMake(); return; }
+    if (e.target.closest('#rpBuy')) { openCheckout('plan', 'royal'); return; }
     if (e.target.closest('#gmZip')) { gmDownloadZip(); return; }
     if (e.target.closest('#gmShare')) { gmShare(); return; }
-    if (e.target.closest('#gmCopy')) { const ok = await copyText(gmPromptNow(gmPeople().list)); gmSay(ok ? hx('✓ Prompt copied — paste it in Gemini.', '✓ Prompt copy ho gaya — Gemini mein paste karo.') : hx('This browser blocked copying — open “See / edit the prompt” and copy it by hand.', 'Browser ne copy rok diya — “Prompt dekho / badlo” kholke khud copy karo.'), ok ? 'ok' : 'warn'); return; }
+    if (e.target.closest('#gmCopy')) { const ok = await copyText(gmPromptNow(gmPeople().list)); gmSay(ok ? hx('✓ Prompt copied — paste it in AI.', '✓ Prompt copy ho gaya — AI mein paste karo.') : hx('This browser blocked copying — open “See / edit the prompt” and copy it by hand.', 'Browser ne copy rok diya — “Prompt dekho / badlo” kholke khud copy karo.'), ok ? 'ok' : 'warn'); return; }
     if (e.target.closest('#gmPromptReset')) { GM.edited = null; gmPanel(); const d = $('.gm-det'); if (d) d.open = true; return; }
     if (e.target.closest('#gmRemove')) { delete V().reunion; delete V().reunionPhoto; save(); gmPanel(); gmFacts(); gmRender(true); renderPromo(); return; }
     if (e.target.closest('#phBodyGo')) { phMakeBody(!!phOpts().aiImg); return; }
