@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DynastyVault</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Build both sides of your family tree, save your grandparents' voices, and hear their life stories in their own voice. Free to start.">
+<meta name="theme-color" content="#07080B">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2307080B'/%3E%3Cpath d='M10 24 L22 34 L32 14 L42 34 L54 24 L49 46 H15 Z' fill='%23D4AF37'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="config.js"></script>
+<style>
+/* Layout concept: a family register — a narrow reading column, left-aligned headings, one heirloom card in the hero.
+   Single dark look by choice (the app is dark-and-gold), so every colour is set explicitly here. */
+:root{
+  --bg:#07080B; --panel:#0F1016; --panel2:#15161E;
+  --gold:#D4AF37; --gold-hi:#F3D774; --gold-deep:#8A6510;
+  --ink:#EFE8D6; --muted:#A49C88; --line:rgba(212,175,55,.2); --line-strong:rgba(212,175,55,.45);
+  --ok:#8FD3A4; --on-gold:#1A1405;
+  --f-display:'Cinzel', 'Trajan Pro', Georgia, serif;
+  --f-body:'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --step-0:1rem; --step-1:1.2rem; --step-2:1.55rem; --step-3:2.1rem; --step-4:clamp(2.4rem, 6vw, 4.1rem);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:var(--step-0);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--bg)}
+a{color:var(--gold-hi)}
+img{max-width:100%}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--f-display);font-weight:700;line-height:1.12;text-wrap:balance;margin:0}
+h2{font-size:var(--step-3);color:var(--gold-hi)}
+h3{font-size:var(--step-1);letter-spacing:.02em}
+p{margin:0}
+.eyebrow{font-size:.78rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.muted{color:var(--muted)}
+:focus-visible{outline:2px solid var(--gold-hi);outline-offset:3px;border-radius:6px}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 22px;border-radius:999px;font:700 .98rem var(--f-body);text-decoration:none;cursor:pointer;border:1px solid transparent;transition:transform .15s ease, box-shadow .15s ease}
+.btn-gold{background:linear-gradient(135deg,#8A6510,#D4AF37 35%,#F7E39A 55%,#C99A22 80%);color:var(--on-gold);box-shadow:0 8px 28px rgba(212,175,55,.22)}
+.btn-gold:hover{transform:translateY(-1px);box-shadow:0 12px 34px rgba(212,175,55,.32)}
+.btn-ghost{border-color:var(--line-strong);color:var(--ink);background:transparent}
+.btn-ghost:hover{border-color:var(--gold)}
+
+/* header */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(7,8,11,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:18px;min-height:64px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--gold-hi);font:800 .95rem var(--f-display);letter-spacing:.18em}
+.brand svg{width:30px;height:30px}
+.nav{display:flex;gap:4px;margin-left:auto}
+.nav a{color:var(--ink);text-decoration:none;font-weight:600;font-size:.92rem;padding:8px 12px;border-radius:999px}
+.nav a:hover{background:rgba(212,175,55,.1)}
+.top .btn{min-height:40px;padding:0 16px;font-size:.9rem}
+@media (max-width:820px){.nav{display:none}.top .btn{margin-left:auto}}
+
+/* hero */
+.hero{padding-block:clamp(40px,7vw,88px) clamp(36px,6vw,72px)}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(28px,5vw,64px);align-items:center}
+.hero h1{font-size:var(--step-4);background:linear-gradient(120deg,#C99A22,#F7E39A 45%,#D4AF37 70%);-webkit-background-clip:text;background-clip:text;color:transparent;margin-top:14px}
+.hero .lede{font-size:var(--step-1);color:var(--ink);max-width:34ch;margin-top:18px}
+.hero .hn{color:var(--muted);margin-top:10px;font-style:italic}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.trust{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:22px;font-size:.88rem;color:var(--muted)}
+.trust span::before{content:"✓";color:var(--ok);font-weight:800;margin-right:6px}
+@media (max-width:880px){.hero .wrap{grid-template-columns:1fr}}
+
+/* heirloom card */
+.heirloom{position:relative;border-radius:22px;padding:22px;background:radial-gradient(120% 90% at 50% 0%,#1a1c28 0%,var(--panel) 55%,#090a0e 100%);border:1px solid var(--line-strong);box-shadow:0 30px 80px rgba(0,0,0,.55), inset 0 0 0 6px rgba(212,175,55,.05)}
+.heirloom .label{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.heirloom .label b{font:700 1.05rem var(--f-display);color:var(--gold-hi)}
+.heirloom .label small{color:var(--muted);font-size:.78rem;letter-spacing:.12em;text-transform:uppercase}
+.tree{display:block;width:100%;height:auto;margin-top:12px}
+.tree text{font-family:var(--f-display);font-weight:700}
+.voice{display:flex;align-items:center;gap:12px;margin-top:14px;padding:12px 14px;border-radius:14px;background:rgba(212,175,55,.07);border:1px solid var(--line)}
+.voice .play{flex:none;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#8A6510,#F3D774);color:var(--on-gold);font-size:15px;border:0}
+.voice .meta{min-width:0;flex:1}
+.voice .meta b{display:block;font-size:.92rem}
+.voice .meta small{color:var(--muted);font-size:.78rem}
+.wave{display:flex;align-items:center;gap:3px;height:30px;margin-top:4px}
+.wave i{display:block;width:3px;border-radius:2px;background:var(--gold);opacity:.85;animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{50%{transform:scaleY(.45);opacity:.5}}
+@media (prefers-reduced-motion:reduce){.wave i{animation:none}.btn{transition:none}html{scroll-behavior:auto}}
+
+/* sections */
+section.band{padding-block:clamp(48px,7vw,84px);border-top:1px solid var(--line)}
+.sec-head{max-width:640px}
+.sec-head p{margin-top:12px;color:var(--muted)}
+.feats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px 32px;margin-top:40px}
+.feat{min-width:0}
+.feat .glyph{font:700 1.5rem var(--f-display);color:var(--gold);line-height:1}
+.feat h3{margin-top:12px;color:var(--ink)}
+.feat p{margin-top:8px;color:var(--muted);font-size:.96rem}
+@media (max-width:900px){.feats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.feats{grid-template-columns:1fr}}
+
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:40px;counter-reset:s}
+.step{position:relative;padding:22px;border-radius:18px;background:var(--panel);border:1px solid var(--line);min-width:0}
+.step::before{counter-increment:s;content:counter(s);display:grid;place-items:center;width:34px;height:34px;border-radius:50%;border:1px solid var(--line-strong);font:700 1rem var(--f-display);color:var(--gold-hi)}
+.step h3{margin-top:14px}
+.step p{margin-top:8px;color:var(--muted);font-size:.95rem}
+@media (max-width:820px){.steps{grid-template-columns:1fr}}
+
+.plans{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-top:40px;max-width:860px}
+.plan{display:flex;flex-direction:column;padding:26px;border-radius:20px;background:var(--panel);border:1px solid var(--line);min-width:0}
+.plan.royal{border-color:var(--line-strong);background:radial-gradient(120% 80% at 50% 0%,#1d1a10 0%,var(--panel) 60%)}
+.plan .price{font:800 2.4rem var(--f-display);color:var(--gold-hi);margin-top:10px;font-variant-numeric:tabular-nums}
+.plan .price small{font:600 .85rem var(--f-body);color:var(--muted);margin-left:6px;letter-spacing:0}
+.plan ul{list-style:none;padding:0;margin:16px 0 22px;display:grid;gap:8px;font-size:.95rem}
+.plan li{display:flex;gap:10px}.plan li::before{content:"◆";color:var(--gold);font-size:.7rem;margin-top:.45em;flex:none}
+.plan .btn{margin-top:auto}
+@media (max-width:700px){.plans{grid-template-columns:1fr}}
+
+.svc{margin-top:28px;border-radius:20px;border:1px solid var(--line);overflow:hidden;max-width:860px}
+.svc-row{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:16px;align-items:center;padding:16px 20px;border-top:1px solid var(--line)}
+.svc-row:first-child{border-top:0}
+.svc-row b{display:block}
+.svc-row small{color:var(--muted);font-size:.88rem}
+.svc-row .amt{font:700 1.2rem var(--f-display);color:var(--gold-hi);font-variant-numeric:tabular-nums;white-space:nowrap}
+.svc-row .btn{min-height:40px;padding:0 16px;font-size:.88rem}
+@media (max-width:620px){.svc-row{grid-template-columns:minmax(0,1fr) auto}.svc-row .btn{grid-column:1/-1;justify-self:start}}
+.pay-line{margin-top:18px;font-size:.92rem;color:var(--muted);max-width:860px}
+.launch{display:inline-block;font-size:.78rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--on-gold);background:linear-gradient(135deg,#8A6510,#F3D774 55%,#C99A22);border-radius:999px;padding:3px 10px;margin:0 6px 0 2px}
+.cur-switch{display:inline-flex;border:1px solid var(--line-strong);border-radius:999px;overflow:hidden;vertical-align:middle;margin-left:4px}
+.cur-switch button{font:700 .78rem var(--f-body);color:var(--muted);background:transparent;border:0;padding:5px 10px;cursor:pointer}
+.cur-switch button.on{background:rgba(212,175,55,.18);color:var(--gold-hi)}
+.price s.was,.amt s.was{font:600 1rem var(--f-body);color:var(--muted);text-decoration-thickness:2px}
+
+.faq{margin-top:32px;max-width:780px;display:grid;gap:10px}
+.faq details{border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:0 18px}
+.faq summary{cursor:pointer;list-style:none;padding:16px 0;font-weight:700;display:flex;justify-content:space-between;gap:12px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--gold);font-weight:800}
+.faq details[open] summary::after{content:"–"}
+.faq details p{padding-bottom:16px;color:var(--muted);font-size:.96rem}
+
+.contact{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:center;padding:28px;border-radius:22px;border:1px solid var(--line-strong);background:linear-gradient(135deg,#14120a,#0d0e14)}
+.contact .num{font:700 1.3rem var(--f-body);color:var(--gold-hi);user-select:all;font-variant-numeric:tabular-nums}
+.contact .btns{display:flex;flex-wrap:wrap;gap:10px}
+@media (max-width:700px){.contact{grid-template-columns:1fr}}
+
+footer{border-top:1px solid var(--line);padding-block:28px 40px;color:var(--muted);font-size:.88rem}
+footer .wrap{display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:space-between;align-items:center}
+footer nav{display:flex;flex-wrap:wrap;gap:6px 18px}
+footer a{color:var(--ink);text-decoration:none}footer a:hover{color:var(--gold-hi)}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="DynastyVault home">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#0F1016" stroke="#D4AF37" stroke-opacity=".5"/><path d="M10 24 L22 34 L32 14 L42 34 L54 24 L49 46 H15 Z" fill="#D4AF37"/></svg>
+      DYNASTYVAULT
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="#features">Features</a><a href="#how">How it works</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a><a href="#contact">Contact</a>
+    </nav>
+    <a class="btn btn-gold" href="app.html">Open the app</a>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <div class="eyebrow">◆ Vanshavali for the WhatsApp generation</div>
+        <h1>Every family is a dynasty.</h1>
+        <p class="lede">Build both sides of your family tree, save your grandparents’ voices, and hear their life stories told in their own voice.</p>
+        <p class="hn">Dada-Dadi aur Nana-Nani ki kahaniyan, unki apni awaaz mein — hamesha ke liye.</p>
+        <div class="cta-row">
+          <a class="btn btn-gold" href="app.html">Start your family tree — free</a>
+          <a class="btn btn-ghost" href="app.html#demo">See a demo family</a>
+        </div>
+        <div class="trust"><span>Free to start, no card</span><span>Your data stays on your device</span><span>English, Hinglish &amp; Hindi</span></div>
+      </div>
+
+      <figure class="heirloom" aria-label="Example: the Rawat family register">
+        <div class="label"><b>The Rawat Vanshavali</b><small>3 generations</small></div>
+        <svg class="tree" viewBox="0 0 420 210" role="img" aria-label="Grandparents on both sides joined to their children and to you">
+          <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#8A6510"/><stop offset=".5" stop-color="#F3D774"/><stop offset="1" stop-color="#D4AF37"/></linearGradient></defs>
+          <g fill="none" stroke="#D4AF37" stroke-opacity=".55" stroke-width="2">
+            <path d="M74 44H136M284 44H346"/><path d="M105 44V96H160M315 44V96H260"/><path d="M178 112H242"/><path d="M210 112V156"/>
+          </g>
+          <g fill="#0F1016" stroke="url(#g)" stroke-width="3.5">
+            <circle cx="54" cy="44" r="22"/><circle cx="156" cy="44" r="22"/><circle cx="264" cy="44" r="22"/><circle cx="366" cy="44" r="22"/>
+            <circle cx="160" cy="112" r="22"/><circle cx="260" cy="112" r="22"/><circle cx="210" cy="178" r="26" stroke-width="4.5"/>
+          </g>
+          <g fill="#E9CF7A" font-size="13" text-anchor="middle">
+            <text x="54" y="49">DA</text><text x="156" y="49">DI</text><text x="264" y="49">NA</text><text x="366" y="49">NI</text>
+            <text x="160" y="117">PA</text><text x="260" y="117">MA</text><text x="210" y="184" fill="#F3D774" font-size="14">YOU</text>
+          </g>
+          <g fill="#D4AF37"><path d="M105 40l4 4-4 4-4-4z"/><path d="M315 40l4 4-4 4-4-4z"/><path d="M210 108l4 4-4 4-4-4z"/></g>
+        </svg>
+        <div class="voice">
+          <span class="play" aria-hidden="true">▶</span>
+          <div class="meta"><b>Dadaji · “1947 mein hum Lahore se aaye…”</b><small>0:24 · in his own cloned voice</small><div class="wave" id="wave" aria-hidden="true"></div></div>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <section class="band" id="features">
+    <div class="wrap">
+      <div class="sec-head"><div class="eyebrow">What you can do</div><h2 style="margin-top:10px">One home for your family’s names, faces and voices</h2>
+        <p>Made for Indian families spread across cities and countries — simple enough for your parents, rich enough to pass on.</p></div>
+      <div class="feats">
+        <div class="feat"><div class="glyph">⚭</div><h3>Both sides, one tree</h3><p>Father’s and mother’s families meet at you. Add great-grandparents, marriages and every generation since.</p></div>
+        <div class="feat"><div class="glyph">◉</div><h3>Voices that stay</h3><p>Record 20 seconds, or upload an old WhatsApp voice note or video. Their stories are then read aloud in that same voice.</p></div>
+        <div class="feat"><div class="glyph">✎</div><h3>AI writes the life story</h3><p>Type or speak a few memories in any language. AI turns them into a warm life story — using only what you told it.</p></div>
+        <div class="feat"><div class="glyph">▦</div><h3>Family collage</h3><p>Everyone’s real photos, generation by generation, with names and years — in a gold frame, ready to print and gift.</p></div>
+        <div class="feat"><div class="glyph">⌖</div><h3>Migration map</h3><p>Pin the ancestral village, the move after 1947, the city you live in now. See your family’s journey on one map.</p></div>
+        <div class="feat"><div class="glyph">⛨</div><h3>Private and yours</h3><p>Your tree is saved on your own device. Download the full family archive any time with one click.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="how">
+    <div class="wrap">
+      <div class="sec-head"><div class="eyebrow">How it works</div><h2 style="margin-top:10px">Start tonight, finish over chai</h2></div>
+      <div class="steps">
+        <div class="step"><h3>Add your family</h3><p>Type your parents’ and grandparents’ names — one minute. Add photos from your phone whenever you like.</p></div>
+        <div class="step"><h3>Save a voice</h3><p>Record Dadaji for 20 seconds, or upload a voice note he sent on WhatsApp. That becomes his voice in the app.</p></div>
+        <div class="step"><h3>Hear and share</h3><p>Write his story (or let AI write it), press play, and hear it in his voice. Print the family collage for the wall.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="pricing">
+    <div class="wrap">
+      <div class="sec-head"><div class="eyebrow">Pricing</div><h2 style="margin-top:10px">Free to begin. Royal for life.</h2>
+        <p>One payment, no subscription. <span class="launch">Launch prices — 50% off</span> <span class="cur-switch" role="group" aria-label="Currency"><button type="button" data-cur="inr">₹ INR</button><button type="button" data-cur="usd">$ USD</button></span></p></div>
+      <div class="plans">
+        <article class="plan">
+          <h3>Free Vault</h3><div class="price"><span data-inr="₹0" data-usd="$0">₹0</span><small>forever</small></div>
+          <ul><li>Up to 10 family members</li><li>Father’s side of the family</li><li>Family collage &amp; AI story writer</li><li>Voice recording and cloned-voice stories</li><li>Migration map &amp; one-click backup</li></ul>
+          <a class="btn btn-ghost" href="app.html">Start free</a>
+        </article>
+        <article class="plan royal">
+          <h3 style="color:var(--gold-hi)">Royal Dynasty Lifetime</h3><div class="price"><span data-inr="₹999" data-usd="$19">₹999</span> <s class="was" data-inr="₹1,999" data-usd="$39">₹1,999</s><small>pay once</small></div>
+          <ul><li>Both sides — mother’s and father’s families</li><li>Unlimited members &amp; generations</li><li data-cloud="1" hidden>About 100 stories in their cloned voice, on any phone</li><li>Stories in 15 languages with audio</li><li>Unlimited 4K print-ready collage &amp; tree</li><li>All premium themes &amp; every future feature</li></ul>
+          <a class="btn btn-gold" href="app.html#buy-royal">Get Royal for life</a>
+        </article>
+      </div>
+      <div class="svc" aria-label="Made for you">
+        <div class="svc-row"><div><b>Real Reunion Photo — made for you</b><small>Send everyone’s photos on WhatsApp; we make one real-looking group photo and check every face.</small></div><span class="amt"><span data-inr="₹199" data-usd="$4.99">₹199</span></span><a class="btn btn-ghost" href="app.html#buy-photo">Order</a></div>
+        <div class="svc-row" data-cloud="1" hidden><div><b>Voice Story Pack — instant, on any phone</b><small>About 20–25 stories read in your elder’s own cloned voice, made right in the app. No laptop needed.</small></div><span class="amt"><span data-inr="₹99" data-usd="$2.99">₹99</span></span><a class="btn btn-ghost" href="app.html#buy-voicepack">Get it</a></div>
+        <div class="svc-row" data-cloud="0"><div><b>Story in their own voice — made for you</b><small>Send a 20-second voice note and the story; get back an MP3 in that voice within 48 hours.</small></div><span class="amt"><span data-inr="₹199" data-usd="$4.99">₹199</span></span><a class="btn btn-ghost" href="app.html#buy-voice">Order</a></div>
+        <div class="svc-row"><div><b>Heritage Gift Box</b><small>Royal for life + one real reunion photo + three stories in an elder’s voice. A gift parents remember.</small></div><span class="amt"><span data-inr="₹1,499" data-usd="$29">₹1,499</span></span><a class="btn btn-gold" href="app.html#buy-gift">Order the gift</a></div>
+      </div>
+      <p class="pay-line">India: pay by UPI — Google Pay, PhonePe, Paytm or any bank app. Other countries: scan the QR and pay by card or PayPal in your own currency. You get your unlock code on WhatsApp, usually within a few hours. <a href="refund.html">Refund policy</a>.</p>
+    </div>
+  </section>
+
+  <section class="band" id="faq">
+    <div class="wrap">
+      <div class="sec-head"><div class="eyebrow">Questions</div><h2 style="margin-top:10px">Things families ask us</h2></div>
+      <div class="faq">
+        <details><summary>Where is my family’s data stored?</summary><p>In your own browser, on your own device. We don’t keep a copy. Use “1-Click Family Archive” in the app to download a backup, and “Restore” to open it on another phone or laptop.</p></details>
+        <details><summary>How does the cloned voice work?</summary><p>You record about 20 seconds of the person, or upload a voice note or video where they speak. Press Play and the story is read in that voice — included with Royal, or with a Voice Story Pack, on any phone.</p></details>
+        <details><summary>Can I use an old voice note of someone who has passed away?</summary><p>Yes, if the family agrees. Upload the clearest 15–30 seconds you have, with one voice and no music. Please only clone a voice with the family’s permission.</p></details>
+        <details><summary>Is the reunion photo real?</summary><p>The family collage uses everyone’s real photos, unchanged. If you want one photo where everyone stands together, our team makes it with AI and checks every face before sending it.</p></details>
+        <details><summary>Can I pay from outside India?</summary><p>Yes. Outside India the app shows prices in US dollars and a QR that opens a card / PayPal payment — your bank converts it to your own currency. Indians abroad with a UPI app can also pay in rupees by UPI.</p></details>
+        <details><summary>How do I pay, and when does Royal unlock?</summary><p>Scan the QR in the app, then type the transaction ID. We see the payment and send an unlock code on WhatsApp — usually within a few hours. Enter the code and Royal opens on that device.</p></details>
+        <details><summary>Which languages are there?</summary><p>The app works in English, Hinglish and Hindi. With Royal, stories can be translated and read in 15 languages including Gujarati, Marathi, Punjabi, Bengali, Tamil and Telugu.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="contact">
+    <div class="wrap">
+      <div class="contact">
+        <div><div class="eyebrow">Talk to us</div><h2 style="margin-top:10px;font-size:var(--step-2)">Questions, orders or help setting up?</h2>
+          <p class="muted" style="margin-top:8px" id="contactLine">Message us on WhatsApp — we usually reply the same day.</p>
+          <p class="num" id="waNum" style="margin-top:10px"></p><p class="muted" id="mailLine" style="margin-top:4px"></p></div>
+        <div class="btns"><a class="btn btn-gold" id="waBtn" href="#contact" target="_blank" rel="noopener">Chat on WhatsApp</a><button class="btn btn-ghost" id="copyBtn" type="button">Copy number</button></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="yr">2026</span> DynastyVault<span id="ownerLine"></span></span>
+    <nav aria-label="Legal"><a href="terms.html">Terms</a><a href="privacy.html">Privacy</a><a href="refund.html">Refunds</a><a href="#contact">Contact</a><a href="app.html">Open the app</a></nav>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const C = window.DV_CONFIG || {};
+  const $ = s => document.querySelector(s);
+  $('#yr').textContent = new Date().getFullYear();
+  // prices: rupees in India, dollars everywhere else (visitor can switch)
+  let cur = 'inr'; try { const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; if (!/^Asia\/(Kolkata|Calcutta)$/.test(tz)) cur = 'usd'; } catch (e) { /* keep rupees */ }
+  const showCur = c => { document.querySelectorAll('[data-inr]').forEach(el => { el.textContent = el.dataset[c]; }); document.querySelectorAll('.cur-switch button').forEach(b => b.classList.toggle('on', b.dataset.cur === c)); };
+  document.querySelectorAll('.cur-switch button').forEach(b => b.addEventListener('click', () => showCur(b.dataset.cur)));
+  showCur(cur);
+  const cloud = !!String(C.server || '').trim();   // cloud voice switched on in config.js
+  document.querySelectorAll('[data-cloud]').forEach(el => { el.hidden = (el.dataset.cloud === '1') !== cloud; });
+  // animated voice waveform in the hero card
+  const w = $('#wave'); if (w) { const hs = [8,14,22,12,26,18,9,20,28,16,10,24,14,7,18,26,12,20,9,15,23,11,17,8]; w.innerHTML = hs.map((h, i) => `<i style="height:${h}px;animation-delay:${(i % 8) * 0.12}s"></i>`).join(''); }
+  // contact details from config.js
+  const num = String(C.whatsapp || '').replace(/\D/g, '');
+  if (num) {
+    const pretty = num.length > 10 ? '+' + num.slice(0, num.length - 10) + ' ' + num.slice(-10, -5) + ' ' + num.slice(-5) : num;
+    $('#waNum').textContent = pretty;
+    $('#waBtn').href = 'https://wa.me/' + num + '?text=' + encodeURIComponent('Hi DynastyVault! I have a question.');
+  } else {
+    $('#contactLine').textContent = 'Contact details are being added — please check back soon.';
+    $('#waBtn').hidden = true; $('#copyBtn').hidden = true;
+  }
+  if (C.email) $('#mailLine').textContent = 'Email: ' + C.email;
+  if (C.owner) $('#ownerLine').textContent = ' · run by ' + C.owner + (C.city ? ', ' + C.city : '');
+  $('#copyBtn').addEventListener('click', () => {
+    const t = $('#waNum').textContent;
+    const done = () => { $('#copyBtn').textContent = 'Copied'; setTimeout(() => { $('#copyBtn').textContent = 'Copy number'; }, 1800); };
+    try { navigator.clipboard.writeText(t).then(done, () => { const r = document.createRange(); r.selectNodeContents($('#waNum')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); }); }
+    catch (e) { const r = document.createRange(); r.selectNodeContents($('#waNum')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); }
+  });
+})();
+</script>
+</body>
+</html>
