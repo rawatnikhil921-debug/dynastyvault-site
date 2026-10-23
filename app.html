@@ -1649,6 +1649,7 @@ svg.leaflet-zoom-animated{will-change:transform}
 .map-view.leaf-on #mapSvg{display:none}
 .map-view.pin-mode .leaflet-container{cursor:crosshair}
 .lf-street .leaflet-tile-pane{filter:saturate(.85) contrast(1.02)}
+.lf-dark .leaflet-tile-pane{filter:invert(1) hue-rotate(180deg) brightness(.92) contrast(.92) saturate(.6)}
 .lf-arc{stroke-dasharray:7 7;animation:lfDash 1.4s linear infinite;filter:drop-shadow(0 0 3px rgba(255,223,0,.6))}
 @keyframes lfDash{to{stroke-dashoffset:-14}}
 .lf-comet{filter:drop-shadow(0 0 6px #FFDF00)}
@@ -2144,7 +2145,7 @@ svg.leaflet-zoom-animated{will-change:transform}
     <div id="planGrid" class="grid md:grid-cols-2 gap-6 mt-12 max-w-4xl mx-auto items-stretch"></div>
     <div class="cmp-wrap max-w-4xl mx-auto" id="planCompare"></div>
     <p class="pay-note max-w-4xl mx-auto mt-6 text-center">🔒 India: pay by <b>UPI</b> (Google Pay, PhonePe, Paytm, any bank app). Other countries: scan the QR and pay by <b>card or PayPal in your own currency</b>. After paying you get an <b>unlock code on WhatsApp</b>, usually within a few hours. <button class="chip ml-1" data-unlock-code>🔑 I have an unlock code</button></p>
-    <p class="tiny muted max-w-4xl mx-auto mt-3 text-center">* The cloned voice runs free on your own laptop with the DynastyVault voice program (see the setup guide). Or order “Story in their own voice” below and we make it for you.</p>
+    <p class="tiny muted max-w-4xl mx-auto mt-3 text-center">* Want a story in their voice right away? Order “Story in their own voice” below and we make it for you.</p>
     <p class="tiny muted text-center mt-8">USD prices are set for buyers outside India; your card or PayPal converts them to your own currency automatically.</p>
   </section>
 
@@ -2769,7 +2770,7 @@ function normalizeVault(v) {
 function seedKapoorRetention(v) {
   const by = n => Object.values(v.people).find(p => p.name === n);
   const set = (n, born, died, extra) => { const p = by(n); if (!p) return; if (!p.born) p.born = born; if (died && !p.died) p.died = died; Object.assign(p, extra || {}); };
-  set('Raghunath Kapoor', relDay(1938, 38), relDay(2016, 11), { tithi:'Kartik Krishna Ashtami', tithiDate:isoDay(new Date(todayStart().getTime() + 9 * DAY)) });
+  set('Raghunath Kapoor', relDay(1938, 38), relDay(2016, 11));
   set('Savitri Kapoor', relDay(1942, 4), relDay(2021, 160));
   set('Vikram Kapoor', relDay(1963, 71)); set('Meera Kapoor', relDay(1965, 120));
   set('Anjali Kapoor', relDay(1967, 200)); set('Arjun Malhotra', relDay(1964, 240));
@@ -2797,10 +2798,10 @@ function seedKapoorRetention(v) {
     const aarav = by('Aarav Kapoor'), kabir = by('Kabir Malhotra');
     const y = todayStart().getFullYear();
     v.capsules = [
-      { id:uid('c'), title:'Diwali letter to the grandchildren', to:'', toName:'All the grandchildren', from:'Raghunath Kapoor', message:'My dear children — when you read this I may be watching from the roof with Vikram’s telescope. Light the first diya at the shop door, the way we always did. Keep Sunday lunch. Keep your promises. And never sell the brass trunk: it carried everything we had across the border, and it still carries us.', photo:null, audio:null, audioType:'', sealedAt:ago(365 * 10 + 40), unlockAt:isoDay(new Date(todayStart().getTime() - 6 * DAY)), opened:false },
+      { id:uid('c'), title:'New Year letter to the grandchildren', to:'', toName:'All the grandchildren', from:'Raghunath Kapoor', message:'My dear children — when you read this I may be watching from the roof with Vikram’s telescope. Light the first diya at the shop door, the way we always did. Keep Sunday lunch. Keep your promises. And never sell the brass trunk: it carried everything we had across the border, and it still carries us.', photo:null, audio:null, audioType:'', sealedAt:ago(365 * 10 + 40), unlockAt:isoDay(new Date(todayStart().getTime() - 6 * DAY)), opened:false },
       { id:uid('c'), title:'For our first great-grandchild’s 18th birthday', to:'', toName:'Our first great-grandchild', from:'Vikram & Meera Kapoor', message:'You were not yet born when we sealed this. By now you will know the stories of Lahore, of the silk house and of your great-grandmother’s ragas. This vault is yours to carry forward.', photo:null, audio:null, audioType:'', sealedAt:ago(30), unlockAt:'2035-03-14', opened:false },
       aarav ? { id:uid('c'), title:'For Aarav on his wedding day', to:aarav.id, toName:'', from:'Savitri Kapoor', message:'Beta, marry someone who laughs at your jokes and argues with your plans. Sing at your wedding even if you are shy — your grandfather did.', photo:null, audio:null, audioType:'', sealedAt:ago(365 * 6), unlockAt:'2030-11-25', opened:false } : null,
-      kabir && kabir.born ? { id:uid('c'), title:'For Kabir’s 30th birthday', to:kabir.id, toName:'', from:'Anjali & Arjun Malhotra', message:'Thirty! Play us the tabla piece you recorded at Diwali when you were twenty-two, and tell us who you have become.', photo:null, audio:null, audioType:'', sealedAt:ago(200), unlockAt:addYears(kabir.born, 30), opened:false } : null
+      kabir && kabir.born ? { id:uid('c'), title:'For Kabir’s 30th birthday', to:kabir.id, toName:'', from:'Anjali & Arjun Malhotra', message:'Thirty! Play us the tabla piece you recorded at the family reunion when you were twenty-two, and tell us who you have become.', photo:null, audio:null, audioType:'', sealedAt:ago(200), unlockAt:addYears(kabir.born, 30), opened:false } : null
     ].filter(Boolean);
   }
 }
@@ -2813,8 +2814,7 @@ function upcomingEvents(v, within = 45) {
     if (p.born) { const o = nextOccur(p.born); if (o && o.days <= within && o.years > 0) ev.push(isDeparted(p)
       ? { kind:'birth-anniv', pid, icon:'🌼', days:o.days, date:o.date, title:`${fn}’s ${ordinal(o.years)} birth anniversary`, sub:'Remember them with a story or a candle' }
       : { kind:'birthday', pid, icon:'🎂', days:o.days, date:o.date, title:`${fn} turns ${o.years}`, sub:'Send blessings from the whole family' }); }
-    if (p.died) { const o = nextOccur(p.died); if (o && o.days <= within && o.years > 0) ev.push({ kind:'death-anniv', pid, icon:'🕯️', days:o.days, date:o.date, title:`${fn}’s ${ordinal(o.years)} death anniversary · Barsi`, sub:'Light a candle on the memorial wall' }); }
-    if (p.tithi && p.tithiDate) { const d = parseDay(p.tithiDate); if (d && d >= t && (d - t) / DAY <= within) ev.push({ kind:'tithi', pid, icon:'🪔', days:Math.round((d - t) / DAY), date:d, title:hx(`${p.tithi} · ${fn}’s death anniversary (Hindu calendar)`, `${p.tithi} · ${fn} ki Shraddh tithi`), sub:hx('Lunar-calendar date recorded for this year', 'Is saal ki tithi date') }); }
+    if (p.died) { const o = nextOccur(p.died); if (o && o.days <= within && o.years > 0) ev.push({ kind:'death-anniv', pid, icon:'🕯️', days:o.days, date:o.date, title:`${fn}’s ${ordinal(o.years)} death anniversary`, sub:'Light a candle on the memorial wall' }); }
   });
   return ev.sort((a, b) => a.days - b.days);
 }
@@ -2823,8 +2823,7 @@ function tributeText(v, e) {
   const p = v.people[e.pid]; const fn = firstName(p.name); const line = firstSentence(p.bio);
   if (e.kind === 'birthday') return `🎂 Happy birthday, ${fn}! Wishing you health, joy and a wonderful year ahead — with love from all of us in the ${v.name}. 👑`;
   if (e.kind === 'birth-anniv') return `🌼 Today we remember ${p.name} on the ${e.title.split('’s ')[1]}.${line ? ' ' + line : ''} Their story, photos and voice live on in our family vault. 🕯️`;
-  if (e.kind === 'tithi') return `🪔 ${p.tithi} — the death anniversary (Hindu calendar) of ${p.name}. Let us remember them together and add a memory to their tribute wall in our ${v.name}. 🙏`;
-  return `🕯️ Remembering ${p.name}${p.born ? ` (${yearOf(p.born)}–${yearOf(p.died)})` : ''} on their barsi.${line ? ' ' + line : ''} Light a virtual candle and share a memory on their tribute wall in our ${v.name}. 🙏`;
+  return `🕯️ Remembering ${p.name}${p.born ? ` (${yearOf(p.born)}–${yearOf(p.died)})` : ''} on their death anniversary.${line ? ' ' + line : ''} Light a virtual candle and share a memory on their tribute wall in our ${v.name}. 🕯️`;
 }
 let annivHidden = null, notifShown = {};
 function renderAnniv() {
@@ -2874,8 +2873,7 @@ function memorialHTML(p, v) {
     <div class="memo-head">
       <div class="ring ring-lg memo-ring"><div class="ring-gap"><div class="ring-inner"><div class="photo">${p.avatar ? `<img src="${p.avatar}" alt="Portrait of ${esc(p.name)}">` : `<span>${esc(initials(p.name))}</span>`}</div></div></div></div>
       <div class="min-w-0"><div class="eyebrow">◆ In Loving Memory</div><h4 class="font-regal gold-text text-2xl sm:text-3xl font-bold mt-1 break-words">${esc(p.name)}</h4>
-        <div class="memo-years">${by || '—'} – ${dy}${age != null ? ` · aged ${age}` : ''}</div>
-        ${p.tithi ? `<div class="tiny muted mt-1">🪔 ${hx('Death anniversary (Hindu calendar)', 'Shraddh tithi')}: ${esc(p.tithi)}${p.tithiDate ? ` · ${fmtDay(p.tithiDate)}` : ''}</div>` : ''}</div>
+        <div class="memo-years">${by || '—'} – ${dy}${age != null ? ` · aged ${age}` : ''}</div></div>
     </div>
     <blockquote class="obit">${esc(obituary(p, v))}</blockquote>
     <div class="candle-zone">
@@ -3238,7 +3236,6 @@ function chronicleText(p, v, info) {
   const L = [p.name, '='.repeat(Math.min(60, p.name.length)), `Position : ${p.position || '—'}`, `Generation : ${ROMAN(info.depth + 1)}`];
   if (p.born) L.push(`Born : ${fmtDay(p.born, { day:'numeric', month:'long', year:'numeric' })}`);
   if (p.died) L.push(`Passed away : ${fmtDay(p.died, { day:'numeric', month:'long', year:'numeric' })}`);
-  if (p.tithi) L.push(`${hx('Death anniversary (Hindu calendar)', 'Shraddh tithi')} : ${p.tithi}${p.tithiDate ? ` (${fmtDay(p.tithiDate)})` : ''}`);
   L.push('', 'CHRONICLE', p.bio.trim() || '(not written yet)');
   Object.entries(p.tr || {}).forEach(([code, t]) => { if (t && t.text && LANG_BY[code]) L.push('', `TRANSLATION · ${LANG_BY[code].name} (${LANG_BY[code].native})`, t.text); });
   if (p.died) { L.push('', `MEMORIAL · ${p.memorial.candles} virtual candles lit`); p.memorial.wall.forEach(m => L.push(`— ${m.by} (${new Date(m.at).toLocaleDateString('en-IN')}): ${m.text}`)); }
@@ -4675,13 +4672,13 @@ function seedKapoorTrail(v) {
   const st = (city, year, title, story, people) => { const c = findCity(city); return { id:uid('t'), place:c[0], country:c[1], lat:c[2], lon:c[3], year, title, story, people:people.map(by).filter(Boolean), photos:[], audio:null }; };
   v.trail = [
     st('Lahore', 1938, 'Born in the old walled city', 'Raghunath Kapoor was born inside the walled city of Lahore, the youngest of five brothers. The family lived above a cloth shop near Shah Alami Bazaar.', ['Raghunath Kapoor']),
-    st('Amritsar', 1947, 'Partition — the brass trunk crosses the border', 'In the summer of 1947, nine-year-old Raghunath crossed the new border on foot with his mother and a single brass trunk. They found shelter with relatives near the Golden Temple. The trunk still sits in the family home.', ['Raghunath Kapoor', 'Savitri Kapoor']),
+    st('Amritsar', 1947, 'Partition — the brass trunk crosses the border', 'In the summer of 1947, nine-year-old Raghunath crossed the new border on foot with his mother and a single brass trunk. They found shelter with relatives in the old city. The trunk still sits in the family home.', ['Raghunath Kapoor', 'Savitri Kapoor']),
     st('Delhi', 1952, 'Apprentice in Chandni Chowk', 'Raghunath began as an apprentice to a textile merchant in Chandni Chowk, sleeping on the shop’s wooden platform and learning every weave by touch.', ['Raghunath Kapoor']),
     st('Kolkata', 1965, 'The Sen home in Ballygunge', 'On the maternal side, Subhash and Gita Sen made their home in Ballygunge, where Subhash taught mathematics for thirty-five years and Gita sang Rabindrasangeet on All India Radio.', ['Subhash Sen', 'Gita Sen']),
     st('New Delhi', 1998, 'The flagship in Connaught Place', 'Vikram opened the family’s first flagship store in Connaught Place, taking Kapoor Silk House sarees from a market stall to the heart of the capital.', ['Vikram Kapoor', 'Meera Kapoor']),
     st('London', 2008, 'Sarees reach Southall', 'Vikram’s export journeys brought Kapoor Silk House sarees to boutiques in London and Dubai — the first time the family name travelled abroad.', ['Vikram Kapoor']),
     st('Jaipur', 2016, 'Restoring the havelis', 'Aarav moved to Jaipur to restore heritage havelis, carrying his grandfather’s eye for craftsmanship into stone and lime plaster.', ['Aarav Kapoor']),
-    st('Toronto', 2020, 'Ragas across the ocean', 'Ishita performed at Toronto’s Diwali festival and now teaches students in nine countries over video calls — Dadi Savitri’s ragas, travelling further than ever.', ['Ishita Kapoor'])
+    st('Toronto', 2020, 'Ragas across the ocean', 'Ishita performed at a Toronto music festival and now teaches students in nine countries over video calls — Dadi Savitri’s ragas, travelling further than ever.', ['Ishita Kapoor'])
   ];
 }
 
@@ -4917,7 +4914,7 @@ function qrSVG(text, opts = {}) {
   return { svg:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${n + pad * 2} ${n + pad * 2}" shape-rendering="crispEdges"><rect width="100%" height="100%" fill="${opts.bg || '#F6E7B0'}"/><path d="${d}" fill="${fg}"/></svg>`, q };
 }
 async function memorialLink(p) {
-  const v = V(); const tok = await packToken({ t:'mem', n:p.name, b:p.born || '', d:p.died || '', ti:p.tithi || '', l:trunc(firstSentence(p.bio), 140), f:v.name, c:p.memorial ? p.memorial.candles : 0 });
+  const v = V(); const tok = await packToken({ t:'mem', n:p.name, b:p.born || '', d:p.died || '', l:trunc(firstSentence(p.bio), 140), f:v.name, c:p.memorial ? p.memorial.candles : 0 });
   const base = siteBase(); return base ? `${base}#mem-${tok}` : '';
 }
 const qrUI = { opts:null };
@@ -4965,7 +4962,6 @@ async function handleMemorialHash() {
         <div class="eyebrow">◆ ${d.d ? 'In Loving Memory' : 'Our Family Legacy'} · ${esc(String(d.f || '').slice(0, 60))}</div>
         <h3 class="font-regal gold-text text-3xl sm:text-4xl font-bold mt-3">${esc(String(d.n).slice(0, 80))}</h3>
         ${by || dy ? `<div class="memo-years">${by || '—'}${dy ? ` – ${dy}` : ''}</div>` : ''}
-        ${d.ti ? `<div class="tiny muted mt-1">🪔 ${hx('Death anniversary (Hindu calendar)', 'Shraddh tithi')}: ${esc(String(d.ti).slice(0, 80))}</div>` : ''}
         ${d.l ? `<blockquote class="obit text-left">${esc(String(d.l).slice(0, 200))}</blockquote>` : ''}
         <div class="candle-zone justify-center"><div class="candle" id="mvCandle" aria-hidden="true"><i class="glow"></i><i class="flame"></i><i class="wick"></i><i class="wax"></i></div>
           <div><div class="candle-count"><b id="mvCount">${(+d.c || 0).toLocaleString('en-IN')}</b> candles lit</div><button class="btn-gold mt-3" id="mvLight">🕯️ Light a virtual candle</button></div></div>
@@ -5023,8 +5019,8 @@ function openAsk(pid) {
 function askMessage() {
   const v = V(); const p = v.people[$('#askElder').value]; const q = $('#askText').value.trim(); const from = $('#askFrom').value.trim() || 'Your family';
   const fn = firstName(p.name); const base = siteBase();
-  if (isHn()) return `🎙️ Namaste ${fn} ji 🙏\n${from} hamare ${v.name} mein family ki kahaniyaan save kar rahe hain, aur hum ye aapki awaaz mein sunna chahte hain:\n\n💬 “${q}”\n\nBas WhatsApp mein 🎤 mic button daba ke rakhiye aur voice note bhej dijiye — ye pote-potiyon ke liye hamesha ke liye save rahega.${base ? `\n${base}` : ''}`;
-  return `🎙️ Namaste ${fn} ji 🙏\n${from} is saving our family’s stories in the ${v.name} on DynastyVault, and we want to hear this in your own voice:\n\n💬 “${q}”\n\nJust press and hold the 🎤 microphone in WhatsApp and reply with a voice note — it will be kept forever for the grandchildren.${base ? `\n${base}` : ''}`;
+  if (isHn()) return `🎙️ Hello ${fn} ji 👋\n${from} hamare ${v.name} mein family ki kahaniyaan save kar rahe hain, aur hum ye aapki awaaz mein sunna chahte hain:\n\n💬 “${q}”\n\nBas WhatsApp mein 🎤 mic button daba ke rakhiye aur voice note bhej dijiye — ye pote-potiyon ke liye hamesha ke liye save rahega.${base ? `\n${base}` : ''}`;
+  return `🎙️ Hello ${fn} 👋\n${from} is saving our family’s stories in the ${v.name} on DynastyVault, and we want to hear this in your own voice:\n\n💬 “${q}”\n\nJust press and hold the 🎤 microphone in WhatsApp and reply with a voice note — it will be kept forever for the grandchildren.${base ? `\n${base}` : ''}`;
 }
 function renderAskList() {
   const v = V(); const list = (v.asks || []).slice().reverse();
@@ -5399,10 +5395,9 @@ function tributeTextHn(v, e) {
   const p = v.people[e.pid]; const fn = firstName(p.name); const line = firstSentence(p.bio);
   if (e.kind === 'birthday') return `🎂 Happy birthday ${fn}! Dher saari khushiyan, achhi sehat aur ek shaandaar saal mubarak ho — ${v.name} ki poori family ki taraf se dher saara pyaar. 👑`;
   if (e.kind === 'birth-anniv') return `🌼 Aaj hum ${p.name} ko unki ${e.title.split('’s ')[1] || 'birth anniversary'} pe yaad kar rahe hain.${line ? ' ' + line : ''} Unki kahani, photos aur awaaz hamare family vault mein hamesha zinda hai. 🕯️`;
-  if (e.kind === 'tithi') return `🪔 ${p.tithi} — ${p.name} ki Shraddh tithi. Aaiye milke unhe yaad karein aur ${v.name} mein unki tribute wall pe ek yaad likhein. 🙏`;
-  return `🕯️ ${p.name}${p.born ? ` (${yearOf(p.born)}–${yearOf(p.died)})` : ''} ki barsi pe unhe yaad kar rahe hain.${line ? ' ' + line : ''} ${v.name} mein unki tribute wall pe ek virtual diya jalaiye aur koi yaad share kijiye. 🙏`;
+  return `🕯️ ${p.name}${p.born ? ` (${yearOf(p.born)}–${yearOf(p.died)})` : ''} ki death anniversary pe unhe yaad kar rahe hain.${line ? ' ' + line : ''} ${v.name} mein unki tribute wall pe ek virtual candle jalaiye aur koi yaad share kijiye. 🕯️`;
 }
-const hnMemorialMsg = (p, v) => `🕯️ ${p.name}${p.born ? ` (${yearOf(p.born)}–${yearOf(p.died)})` : ''} ki pyaari yaad mein. ${firstSentence(p.bio)} ${v.name} mein unki tribute wall pe ${p.memorial.candles} diye jal chuke hain — aap bhi ek jalaiye aur koi yaad share kijiye. 🙏`;
+const hnMemorialMsg = (p, v) => `🕯️ ${p.name}${p.born ? ` (${yearOf(p.born)}–${yearOf(p.died)})` : ''} ki pyaari yaad mein. ${firstSentence(p.bio)} ${v.name} mein unki tribute wall pe ${p.memorial.candles} candles jal chuki hain — aap bhi ek jalaiye aur koi yaad share kijiye. 🕯️`;
 
 /* ---------- 🗺️ global place search (OpenStreetMap) ---------- */
 const geo = { cache:new Map(), lastNom:0, seq:0 };
@@ -5599,7 +5594,6 @@ function renderVoiceHub() {
 }
 /* ---------- 🎙️ Clone Audio — record / upload a voice, write the story, convert it to that voice ---------- */
 const CA = { pid:null, rec:null, chunks:[], stream:null, t0:0, timer:0 };
-const LAPTOP_KIT = 'DynastyVault-Laptop.zip';
 function caPerson() {
   const v = V(); const ids = Object.keys(indexVault(v));
   if (!ids.includes(CA.pid)) CA.pid = ids.find(id => v.people[id].voice && v.people[id].voice.sample) || (ids.includes(v.self) ? v.self : ids[0]);
@@ -5611,21 +5605,10 @@ function caEngineHTML() {
   if (st === 'cloud') return `<div class="gm-say ok">☁️ ${hx(`Cloud voice is ON — about ${storiesLeft(i.left)} stories left.`, `Cloud awaaz ON hai — lagbhag ${storiesLeft(i.left)} kahaniyan baaki.`)}</div>`;
   if (st === 'idle' || st === 'checking') return `<div class="gm-say">⏳ ${hx('Looking for a voice engine…', 'Voice engine dhoondh rahe hain…')}</div>`;
   if (st === 'loading') return `<div class="gm-say">⏳ ${hx('The voice model is loading on your laptop (the first time downloads a few GB)…', 'Laptop pe voice model load ho raha hai (pehli baar kuch GB download hota hai)…')}</div>`;
-  const nomodel = st === 'nomodel' ? `<p class="tiny gm-warn mt-2">${hx('The laptop program is running, but the voice model is not installed yet. Close it and open the START file again — it installs the model.', 'Laptop program chal raha hai, par voice model install nahi hua. Band karke START file phir kholo — model install ho jayega.')}</p>` : '';
   const phone = HAS_CLOUD
     ? `<div class="flex flex-wrap gap-2 mt-3">${isRoyal() ? '' : `<button class="btn-gold sm" data-ca="royal">👑 Royal Dynasty</button>`}<button class="btn-ghost sm" data-ca="pack">🎙️ Voice Story Pack</button><button class="chip" data-unlock-code>🔑 ${hx('I have a code', 'Mere paas code hai')}</button></div>`
     : `<p class="tiny muted mt-2">${hx('Send us a 20-second voice note and the story — we send back the audio in their voice within 48 hours.', '20 second ka voice note aur kahani bhejo — hum 48 ghante mein unki awaaz mein audio bhejte hain.')}</p><button class="btn-gold sm mt-3" data-buy-service="voice">🎁 ${hx('Get it made for you', 'Humse banwao')} <span data-price="services.voice"></span></button>`;
-  return `<div class="gm-say warn">🔒 ${hx('No voice engine is on yet. Choose one way to make the voice:', 'Abhi koi voice engine chalu nahi hai. Awaaz banane ka ek tareeka chuno:')}</div>
-    <div class="ca-ways">
-      <div class="ca-way"><b>💻 ${hx('Free on a laptop', 'Laptop pe FREE')}</b>
-        <ol class="ca-ol"><li>${hx('On a Windows or Mac laptop, download the laptop kit and unzip it.', 'Windows ya Mac laptop pe laptop kit download karke unzip karo.')}</li>
-          <li>${hx('Double-click <b>START-WINDOWS.bat</b> (Mac: <b>START-MAC.command</b>). The first time it installs the voice model — 10 to 30 minutes.', '<b>START-WINDOWS.bat</b> pe double-click karo (Mac: <b>START-MAC.command</b>). Pehli baar voice model install hota hai — 10 se 30 minute.')}</li>
-          <li>${hx('Keep the black window open and open this website on the same laptop — the engine turns ON by itself.', 'Kaali window khuli rakho aur isi laptop pe yeh website kholo — engine apne aap ON ho jayega.')}</li></ol>
-        <div class="flex flex-wrap gap-2 mt-2"><a class="btn-ghost sm" href="${LAPTOP_KIT}" download>⬇ ${hx('Download laptop kit', 'Laptop kit download karo')}</a><button class="chip" data-ca="recheck">↻ ${hx('Check again', 'Phir check karo')}</button></div>
-        ${nomodel}
-        <details class="mt-2"><summary class="tiny muted">${hx('Laptop address (advanced)', 'Laptop address (advanced)')}</summary><div class="flex gap-2 mt-2"><input class="input" id="caURL" value="${esc((state.cloneURL || '').trim() || 'http://localhost:8765')}" aria-label="Voice engine address"><button type="button" class="btn-ghost sm" data-ca="url">${hx('Test', 'Test')}</button></div></details></div>
-      <div class="ca-way"><b>📱 ${hx('On any phone', 'Kisi bhi phone pe')}</b>${phone}</div>
-    </div>`;
+  return `<div class="gm-say warn">🔒 ${HAS_CLOUD ? hx('The cloned voice comes with Royal Dynasty or a Voice Story Pack.', 'Clone awaaz Royal Dynasty ya Voice Story Pack ke saath milti hai.') : hx('Instant cloned voice is coming soon. Until then we make it for you.', 'Turant clone awaaz jaldi aa rahi hai. Tab tak hum aapke liye bana dete hain.')}</div>${phone}`;
 }
 function caEngineRender() {
   const box = $('#caEngine'); if (box) { box.innerHTML = caEngineHTML(); updatePrices(false); }
@@ -5706,11 +5689,9 @@ function bindCloneAudio() {
     else if (k === 'studio') openStudio(p.id, false, 'profile');
     else if (k === 'listen') { if (!(p.bio || '').trim()) { toast(hx('Write their story first.', 'Pehle unki kahani likho.'), 'warn'); return; } playInVoice(p.id); }
     else if (k === 'go') {
-      if (!cloneReady()) { await checkClone(true); if (!cloneReady()) { const eg = $('#caEngine'); if (eg) eg.scrollIntoView({ block:'center', behavior:'smooth' }); toast(hx('Turn on a voice engine first — on a laptop for free, or Royal / Voice Story Pack on any phone.', 'Pehle voice engine chalu karo — laptop pe free, ya kisi bhi phone pe Royal / Voice Story Pack.'), 'warn', 6500); return; } }
+      if (!cloneReady()) { await checkClone(true); if (!cloneReady()) { const eg = $('#caEngine'); if (eg) eg.scrollIntoView({ block:'center', behavior:'smooth' }); toast(HAS_CLOUD ? hx('The cloned voice comes with Royal Dynasty or a Voice Story Pack.', 'Clone awaaz Royal Dynasty ya Voice Story Pack ke saath milti hai.') : hx('Instant cloned voice is coming soon — tap “Get it made for you” and we make the audio for you.', 'Turant clone awaaz jaldi aa rahi hai — “Humse banwao” dabao, hum audio bana denge.'), 'warn', 6500); return; } }
       b.dataset.busy = '1'; try { await cloneSaveAudio(p, b); } finally { delete b.dataset.busy; }
     }
-    else if (k === 'recheck') checkClone(true);
-    else if (k === 'url') { state.cloneURL = ($('#caURL') || {}).value ? $('#caURL').value.trim() : ''; save(); checkClone(true); }
     else if (k === 'royal') openCheckout('plan', 'royal');
     else if (k === 'pack') openCheckout('addon', 'voicepack');
   });
@@ -5725,7 +5706,7 @@ const social = { pid:'', bg:'gold', tpl:'invite' };
 function hnTemplates() {
   const v = V(); const me = myRefName() || (v.people[v.self] || {}).name || ''; const base = siteBase();
   return {
-    invite:[hx('Family invite', 'Family invite'), isHn() ? `👑 Namaste sab log! Maine ${v.name} ka digital family tree banaya hai — Dada-Dadi, Nana-Nani sab ki photos, kahaniyaan aur awaaz ek jagah. Link kholo aur apni photo, apni yaadein add karo 🙏\n${base}` : `👑 Hello everyone! I’ve started a digital family tree for the ${v.name} — photos, stories and voices of our paternal and maternal families in one place. Open the link and add your photo and memories 🙏\n${base}`],
+    invite:[hx('Family invite', 'Family invite'), isHn() ? `👑 Hello sab log! Maine ${v.name} ka digital family tree banaya hai — Dada-Dadi, Nana-Nani sab ki photos, kahaniyaan aur awaaz ek jagah. Link kholo aur apni photo, apni yaadein add karo 🙏\n${base}` : `👑 Hello everyone! I’ve started a digital family tree for the ${v.name} — photos, stories and voices of our paternal and maternal families in one place. Open the link and add your photo and memories 🙏\n${base}`],
     elder:[hx('Ask an elder', 'Buzurgon se poocho'), isHn() ? `🎙️ Dadi ji, ek kahani sunaiye na — aapka bachpan ka ghar kaisa tha? Bas WhatsApp mein 🎤 daba ke voice note bhej dijiye, hum use family vault mein hamesha ke liye save karenge ❤️` : `🎙️ Grandma, would you tell us a story — what was your childhood home like? Just hold the 🎤 in WhatsApp and send a voice note; we’ll keep it in the family vault forever ❤️`],
     reunion:[hx('Sunday reunion', 'Sunday reunion'), isHn() ? `🍲 Is Sunday family lunch pe sab apni purani photos le aana! Hum ${v.name} tree mein sabki photos aur kahaniyaan add karenge — sabse zyada yaadein laane wale ko trophy 🏆` : `🍲 Bring your old photos to Sunday lunch! We’ll add everyone’s photos and stories to the ${v.name} tree — a trophy for whoever brings the most memories 🏆`],
     duel:[hx('Friend challenge', 'Dost ko challenge'), isHn() ? `⚔️ Bhai, meri family ka DynastyVault score ${scoreParts(v).total.toLocaleString('en-IN')} hai. Dum hai toh apna family tree banake dikha — dekhte hain kiski legacy zyada strong hai 👑${me ? ' — ' + me : ''}` : `⚔️ My family’s DynastyVault score is ${scoreParts(v).total.toLocaleString('en-IN')}. Build your family tree and let’s see whose legacy is stronger 👑${me ? ' — ' + me : ''}`]
@@ -6064,7 +6045,7 @@ const JOURNEY = [
   { k:'ancestors', ico:'👑', en:'Add great-grandparents', hn:'Par-Dada tak jao', sub:['Paternal & maternal, many generations back', 'Par-Dada, Par-Nani jodo'], used:v => pedCount(v) > 0 || stats(v).gens >= 4, go:() => { showTab('canvas'); openAddAncestor(); } },
   { k:'trail', ico:'🗺️', en:'Map the migration trail', hn:'Migration trail banao', sub:['Ancestral village to today', 'Purane gaon se aaj tak'], used:v => (v.trail || []).length >= 2, go:() => { showTab('trail'); setTimeout(() => openStopForm(), 300); } },
   { k:'invite', ico:'💬', en:'Invite family on WhatsApp', hn:'Family ko WhatsApp pe bulao', sub:['Personal join links', 'Personal join links'], used:v => (v.invites || []).length > 0, go:() => openInvite() },
-  { k:'ask', ico:'🙏', en:'Ask an elder a question', hn:'Buzurgon se sawaal poocho', sub:['They reply with a voice note', 'Woh voice note se jawaab denge'], used:v => (v.asks || []).length > 0, go:() => openAsk() },
+  { k:'ask', ico:'💬', en:'Ask an elder a question', hn:'Buzurgon se sawaal poocho', sub:['They reply with a voice note', 'Woh voice note se jawaab denge'], used:v => (v.asks || []).length > 0, go:() => openAsk() },
   { k:'narrate', ico:'🔊', en:'Hear a story in a cloned voice', hn:'Cloned awaaz mein kahani suno', sub:['Hinglish + 15 languages', 'Hinglish + 15 bhashayein'], used:() => usedF('narrate'), go:() => showTab('voice') },
   { k:'translate', ico:'🌐', en:'Translate a chronicle', hn:'Kahani translate karo', sub:['Hinglish, Hindi and 14 more', 'Hinglish, Hindi aur 14 aur'], used:v => jrPeople(v).some(p => p.tr && Object.keys(p.tr).some(l => p.tr[l] && p.tr[l].text && p.tr[l].engine !== 'DynastyVault Hinglish')), go:() => jrStudio(V(), p => (p.bio || '').trim(), () => { const t = $('#stTrBody'); if (t) t.scrollIntoView({ block:'center', behavior:'smooth' }); }) },
   { k:'portrait', ico:'🖼️', en:'Create a reunion portrait', hn:'Reunion portrait banao', sub:['Every generation in one frame', 'Har peedhi ek frame mein'], used:() => usedF('portrait'), go:() => { const b = $('[data-open-portrait]'); if (b) b.click(); } },
@@ -6694,10 +6675,12 @@ function initRoute() {
    (falls back to the built-in SVG world map if the library or tiles can't load)
    ========================================================= */
 const LEAF_SRC = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js';
+// OpenStreetMap's own tiles — free, no API key, no account (CARTO now needs a key, so it is not used)
+const OSM_TILE = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
 const LEAF_TILES = {
-  political:{ url:'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', sub:'abcd', attr:'&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions" target="_blank" rel="noopener">CARTO</a>' },
-  dark:{ url:'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', sub:'abcd', attr:'&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions" target="_blank" rel="noopener">CARTO</a>' },
-  street:{ url:'https://tile.openstreetmap.org/{z}/{x}/{y}.png', sub:'', attr:'&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors' }
+  political:{ url:OSM_TILE, sub:'', attr:'&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors' },
+  dark:{ url:OSM_TILE, sub:'', attr:'&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors' },
+  street:{ url:OSM_TILE, sub:'', attr:'&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors' }
 };
 const LEAF = { st:'idle', map:null, tile:null, group:null, arcs:null, comet:null, cometPts:[], cometT:0, cometRaf:0, markers:{}, geoMark:null, ok:0, err:0, waiters:[], warned:false };
 const leafOn = () => LEAF.st === 'ready' && !!LEAF.map;
@@ -6728,8 +6711,8 @@ function leafSetTiles(style) {
   LEAF.tile.on('tileload', () => { LEAF.ok++; });
   LEAF.tile.on('tileerror', () => { LEAF.err++; });
   LEAF.tile.addTo(LEAF.map);
-  $('#leafMap').classList.toggle('lf-street', state.mapStyle2 !== 'dark');
-  const nx = { political:'dark', dark:'street', street:'political' }[state.mapStyle2]; const b = $('#mapStyle'); if (b) b.textContent = { political:hx('🌍 Political map', '🌍 Political map'), dark:hx('🌙 Dark map', '🌙 Dark map'), street:hx('🗺️ Street map', '🗺️ Street map') }[nx];
+  $('#leafMap').classList.toggle('lf-street', state.mapStyle2 !== 'dark'); $('#leafMap').classList.toggle('lf-dark', state.mapStyle2 === 'dark');
+  const nx = { political:'dark', dark:'political', street:'dark' }[state.mapStyle2]; const b = $('#mapStyle'); if (b) b.textContent = { political:hx('🌍 Political map', '🌍 Political map'), dark:hx('🌙 Dark map', '🌙 Dark map'), street:hx('🗺️ Street map', '🗺️ Street map') }[nx];
 }
 async function leafInit() {
   if (LEAF.st === 'ready' || LEAF.st === 'failed') return leafOn();
@@ -6940,21 +6923,20 @@ const storiesLeft = n => Math.max(0, Math.floor((n || 0) / 1000));
 function renderCloneChip() {
   const el = $('#stClone'); if (!el) return; const i = cloneSrv.info;
   const msg = {
-    idle:hx('🧬 Real voice clone · checking your laptop…', '🧬 Real voice clone · laptop check ho raha hai…'),
-    checking:hx('🧬 Real voice clone · checking your laptop…', '🧬 Real voice clone · laptop check ho raha hai…'),
+    idle:hx('🧬 Real voice clone · checking…', '🧬 Real voice clone · check ho raha hai…'),
+    checking:hx('🧬 Real voice clone · checking…', '🧬 Real voice clone · check ho raha hai…'),
     ready:hx(`🧬 Real voice clone ON · running free on your laptop (${(i && i.device || '').toUpperCase()}) — narration uses their own voice & accent`, `🧬 Real voice clone ON · aapke laptop pe free chal raha hai (${(i && i.device || '').toUpperCase()}) — narration unki apni awaaz aur accent mein`),
     loading:hx('🧬 Voice model is loading on your laptop… (first time downloads a few GB)', '🧬 Laptop pe voice model load ho raha hai… (pehli baar kuch GB download hota hai)'),
     nomodel:hx(`🧬 Laptop server found, but the voice model isn’t installed${i && i.error ? ` — ${i.error}` : ''}`, `🧬 Laptop server mila, par voice model install nahi hai${i && i.error ? ` — ${i.error}` : ''}`),
     cloud:hx(`🧬 Cloned voice ON · made in the cloud for this device — about ${storiesLeft(i && i.left)} stories left`, `🧬 Clone awaaz ON · cloud se is device ke liye — lagbhag ${storiesLeft(i && i.left)} kahaniyan baaki`),
-    buy:HAS_CLOUD ? hx('🧬 Hear their stories in their own cloned voice — free on a laptop, or on any phone with Royal Dynasty or a Voice Story Pack.', '🧬 Unki apni clone awaaz mein kahaniyan suno — laptop pe free, ya kisi bhi phone pe Royal Dynasty ya Voice Story Pack se.') : hx('🧬 Real voice clone OFF · turn it on for free on a laptop (Clone Audio tab → laptop kit). Until then the accent-locked voice is used.', '🧬 Real voice clone OFF · laptop pe free chalu karo (Clone Audio tab → laptop kit). Tab tak accent-lock wali awaaz chalegi.'),
-    off:hx('🧬 Real voice clone OFF · start DynastyVault on your laptop (START file) to narrate in their exact voice. Until then the accent-locked voice is used.', '🧬 Real voice clone OFF · laptop pe DynastyVault (START file) chalao toh bilkul unki awaaz mein sunoge. Tab tak accent-lock wali awaaz chalegi.')
+    buy:HAS_CLOUD ? hx('🧬 Hear their stories in their own cloned voice on any phone — included with Royal Dynasty, or get a Voice Story Pack.', '🧬 Kisi bhi phone pe unki apni clone awaaz mein kahaniyan suno — Royal Dynasty mein shaamil, ya Voice Story Pack lo.') : hx('🧬 Instant cloned voice is coming soon. Until then the accent-locked voice is used — or we make the audio for you.', '🧬 Turant clone awaaz jaldi aa rahi hai. Tab tak accent-lock wali awaaz chalegi — ya hum audio bana dete hain.'),
+    off:hx('🧬 Instant cloned voice is coming soon. Until then the accent-locked voice is used — or we make the audio for you.', '🧬 Turant clone awaaz jaldi aa rahi hai. Tab tak accent-lock wali awaaz chalegi — ya hum audio bana dete hain.')
   }[cloneSrv.st];
   el.className = 'clone-chip ' + (cloneSrv.st === 'cloud' ? 'ready' : cloneSrv.st === 'buy' ? 'loading' : cloneSrv.st);
   if (cloneSrv.st === 'cloud' || cloneSrv.st === 'buy') {
-    el.innerHTML = `<span>${esc(msg)}</span>${cloneSrv.st === 'buy' || storiesLeft(i && i.left) < 3 ? `<div class="flex flex-wrap gap-2 mt-2">${cloneSrv.st === 'buy' ? `<button class="chip" id="cloneLaptop">💻 ${hx('Free on a laptop', 'Laptop pe free')}</button><button class="chip" id="cloneRoyal">👑 Royal Dynasty</button>` : ''}${HAS_CLOUD ? `<button class="chip" id="cloneBuy">🎙️ Voice Story Pack</button>` : ''}<button class="chip" data-unlock-code>🔑 ${hx('I have a code', 'Mere paas code hai')}</button></div>` : ''}`;
+    el.innerHTML = `<span>${esc(msg)}</span>${cloneSrv.st === 'buy' || storiesLeft(i && i.left) < 3 ? `<div class="flex flex-wrap gap-2 mt-2">${cloneSrv.st === 'buy' && HAS_CLOUD ? `<button class="chip" id="cloneRoyal">👑 Royal Dynasty</button>` : ''}${cloneSrv.st === 'buy' && !HAS_CLOUD ? `<button class="chip" data-buy-service="voice">🎁 ${hx('Get it made for you', 'Humse banwao')}</button>` : ''}${HAS_CLOUD ? `<button class="chip" id="cloneBuy">🎙️ Voice Story Pack</button>` : ''}<button class="chip" data-unlock-code>🔑 ${hx('I have a code', 'Mere paas code hai')}</button></div>` : ''}`;
     const b1 = $('#cloneBuy'); if (b1) b1.addEventListener('click', () => openCheckout('addon', 'voicepack'));
     const b2 = $('#cloneRoyal'); if (b2) b2.addEventListener('click', () => openCheckout('plan', 'royal'));
-    const b3 = $('#cloneLaptop'); if (b3) b3.addEventListener('click', () => { closeModal('studioModal'); showTab('voice'); setTimeout(() => { const e = $('#caEngine'); if (e) e.scrollIntoView({ block:'center', behavior:'smooth' }); }, 400); });
     return;
   }
   el.innerHTML = `<span>${esc(msg)}</span><details class="mt-1"><summary>${hx('Server address', 'Server address')}</summary><div class="flex gap-2 mt-2"><input class="input" id="cloneURL" value="${esc((state.cloneURL || '').trim() || cloneBase())}" placeholder="http://localhost:8765" aria-label="Voice clone server address"><button type="button" class="btn-ghost sm" id="cloneTest">${hx('Test', 'Test')}</button></div></details>`;
@@ -7310,7 +7292,7 @@ async function cloneSaveAudio(p, btnEl) {
   if (!text) { toast(hx('Write their story first — the cloned voice reads the story.', 'Pehle unki kahani likho — clone awaaz wahi kahani padhti hai.'), 'warn', 6000); return; }
   const lang = cloneLangFor(text); if (!lang) { toast(hx('The voice clone cannot read this script yet — write the story in English, Hinglish or Hindi.', 'Clone awaaz yeh lipi nahi padh sakti — kahani English, Hinglish ya Hindi mein likho.'), 'warn', 6000); return; }
   await checkClone();
-  if (!cloneReady()) { toast(hx('Turn on the real voice clone first (the laptop program, or Royal / Voice Story Pack), then save the audio.', 'Pehle asli voice clone chalu karo (laptop program, ya Royal / Voice Story Pack), phir audio save karo.'), 'warn', 7000); return; }
+  if (!cloneReady()) { toast(hx('The cloned voice comes with Royal Dynasty or a Voice Story Pack — or tap “Get it made for you”.', 'Clone awaaz Royal Dynasty ya Voice Story Pack ke saath milti hai — ya “Humse banwao” dabao.'), 'warn', 7000); return; }
   const label = b ? b.innerHTML : ''; if (b) b.disabled = true;
   try {
     const OAC = window.OfflineAudioContext || window.webkitOfflineAudioContext; if (!OAC) throw new Error('no-audio');
@@ -7363,7 +7345,7 @@ function seed() {
             { m:['Ishita Kapoor','Scion · Generation III','Ishita is a classical vocalist, trained first by her grandmother Savitri. She now teaches students in nine countries over video calls.'] } ] },
       { m:['Anjali Kapoor','Daughter · Generation II','Anjali is the younger child of Raghunath and Savitri. A former national-level badminton player, she now coaches young athletes in Pune and is famous in the family for organising every wedding with military precision.'],
         s:['Arjun Malhotra','Spouse · Generation II','Arjun is an aeronautical engineer who spent twelve years designing landing gear before founding a drone company. He married Anjali in 1995 after a courtship conducted mostly through handwritten letters.'],
-        c:[ { m:['Kabir Malhotra','Scion · Generation III','Kabir is a medical student and a self-taught tabla player. Every Diwali he records the family singing together.'] } ] }
+        c:[ { m:['Kabir Malhotra','Scion · Generation III','Kabir is a medical student and a self-taught tabla player. Every New Year he records the family singing together.'] } ] }
     ]
   });
   const sharma = buildVault('Sharma Family Vault', '“Vidya, vinaya, vishwas — learning, humility, trust.”', {
@@ -8209,11 +8191,7 @@ function openStudio(pid, keepScroll, tab) {
           <label class="field"><span>Born</span><input class="input" type="date" id="stBorn" value="${esc(p.born)}" max="${isoDay(todayStart())}"></label>
           <label class="field"><span>Passed away</span><input class="input" type="date" id="stDied" value="${esc(p.died)}" max="${isoDay(todayStart())}"></label>
         </div>
-        <div class="st-dates">
-          <label class="field"><span>${hx('Death anniversary (Hindu calendar)', 'Shraddh tithi')}</span><input class="input" id="stTithi" value="${esc(p.tithi)}" maxlength="80" placeholder="${esc(hx('e.g. Kartik Krishna Ashtami', 'jaise Kartik Krishna Ashtami'))}"></label>
-          <label class="field"><span>${hx('Anniversary date this year', 'Tithi date this year')}</span><input class="input" type="date" id="stTithiDate" value="${esc(p.tithiDate)}"></label>
-        </div>
-        <p class="tiny muted -mt-2">${hx('Birthdays and death anniversaries appear in the family reminders. Hindu-calendar anniversaries move every year, so enter this year’s date.', 'Janamdin, barsi aur Shraddh tithi family reminders mein aate hain. Tithi har saal badalti hai, isliye is saal ki date daalo.')}</p>
+        <p class="tiny muted -mt-2">${hx('Birthdays and death anniversaries appear in the family reminders.', 'Janamdin aur death anniversary family reminders mein aate hain.')}</p>
       </div>
       <dl class="kin mt-6">
         <div><dt>Generation</dt><dd>${ROMAN(info.depth + 1)}</dd></div>
@@ -8328,9 +8306,6 @@ function bindStudio(p) {
   };
   $('#stBorn').addEventListener('change', e => onDate('born', e.target));
   $('#stDied').addEventListener('change', e => onDate('died', e.target));
-  $('#stTithiDate').addEventListener('change', e => onDate('tithiDate', e.target));
-  const tithiSoon = debounce(() => { save(); renderAnniv(); }, 500);
-  $('#stTithi').addEventListener('input', e => { p.tithi = e.target.value.trim(); tithiSoon(); });
   $$('#studioPanel [data-goto]').forEach(b => b.addEventListener('click', () => { if (b.dataset.goto !== studio.pid) openStudio(b.dataset.goto); }));
   $('#stFile').addEventListener('change', e => { const f = e.target.files && e.target.files[0]; e.target.value = ''; if (f) addPhoto(p, f); });
   const ring = $('#stRing');
