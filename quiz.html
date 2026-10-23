@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dynasty Type Quiz</title>
+<meta name="description" content="What kind of dynasty is your family — Wanderers, Builders, Storytellers? Answer 6 quick questions and get your family's Dynasty Type card. Free, 1 minute.">
+<meta property="og:title" content="What kind of dynasty is your family?">
+<meta property="og:description" content="6 quick questions, 1 minute. Get your family's Dynasty Type card and challenge your cousins.">
+<meta property="og:image" content="https://rawatnikhil921-debug.github.io/dynastyvault-site/og-quiz.png"><meta property="og:url" content="https://rawatnikhil921-debug.github.io/dynastyvault-site/quiz.html"><link rel="canonical" href="https://rawatnikhil921-debug.github.io/dynastyvault-site/quiz.html">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#07080B">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2307080B'/%3E%3Cpath d='M10 24 L22 34 L32 14 L42 34 L54 24 L49 46 H15 Z' fill='%23D4AF37'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#07080B; --panel:#0F1016; --panel2:#15161E;
+  --gold:#D4AF37; --gold-hi:#F3D774; --gold-deep:#8A6510;
+  --ink:#EFE8D6; --muted:#A49C88; --line:rgba(212,175,55,.2); --line-strong:rgba(212,175,55,.45);
+  --on-gold:#1A1405;
+  --f-display:'Cinzel', Georgia, serif; --f-body:'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;min-height:100vh;
+  background-image:radial-gradient(90% 60% at 50% -10%,rgba(212,175,55,.16),transparent 70%)}
+a{color:var(--gold-hi)}
+.wrap{max-width:640px;margin:0 auto;padding:0 max(16px,env(safe-area-inset-left,0px))}
+header{display:flex;align-items:center;gap:12px;min-height:64px;border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--gold-hi);font:800 .9rem var(--f-display);letter-spacing:.16em}
+.brand svg{width:28px;height:28px}
+.lang{margin-left:auto;display:flex;border:1px solid var(--line-strong);border-radius:999px;overflow:hidden}
+.lang button{font:700 .8rem var(--f-body);color:var(--muted);background:transparent;border:0;padding:8px 12px;cursor:pointer;min-height:38px}
+.lang button.on{background:rgba(212,175,55,.18);color:var(--gold-hi)}
+main{padding:clamp(28px,6vw,56px) 0 48px}
+.eyebrow{font-size:.76rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+h1,h2{font-family:var(--f-display);font-weight:700;line-height:1.15;margin:10px 0 0;text-wrap:balance}
+h1{font-size:clamp(1.9rem,6.5vw,2.8rem);background:linear-gradient(120deg,#C99A22,#F7E39A 45%,#D4AF37 70%);-webkit-background-clip:text;background-clip:text;color:transparent}
+h2{font-size:clamp(1.3rem,4.6vw,1.7rem);color:var(--ink)}
+p{margin:0}
+.muted{color:var(--muted)}
+.lede{margin-top:14px;font-size:1.08rem}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:50px;padding:0 22px;border-radius:999px;font:700 1rem var(--f-body);text-decoration:none;cursor:pointer;border:1px solid transparent;transition:transform .15s ease}
+.btn:active{transform:scale(.98)}
+.btn-gold{background:linear-gradient(135deg,#8A6510,#D4AF37 35%,#F7E39A 55%,#C99A22 80%);color:var(--on-gold);box-shadow:0 8px 28px rgba(212,175,55,.22)}
+.btn-ghost{border-color:var(--line-strong);color:var(--ink);background:transparent}
+.btn-wa{background:#1FAF5A;color:#fff}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.field{display:grid;gap:8px;margin-top:26px}
+.field span{font-size:.8rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
+.input{width:100%;min-height:54px;border-radius:14px;border:1px solid var(--line-strong);background:var(--panel);color:var(--ink);font:600 1.1rem var(--f-body);padding:0 16px}
+.input:focus{outline:2px solid var(--gold-hi);outline-offset:2px}
+.row{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.note{margin-top:18px;font-size:.88rem;color:var(--muted)}
+.prog{height:6px;border-radius:99px;background:var(--panel2);overflow:hidden;margin-top:6px}
+.prog i{display:block;height:100%;background:linear-gradient(90deg,#8A6510,#F3D774);transition:width .3s ease}
+.qhead{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.opts{display:grid;gap:10px;margin-top:22px}
+.opt{display:flex;align-items:center;gap:14px;text-align:left;width:100%;min-height:60px;padding:12px 16px;border-radius:16px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font:600 1rem var(--f-body);cursor:pointer}
+.opt:hover{border-color:var(--gold)}
+.opt .ic{flex:none;width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:rgba(212,175,55,.1);font-size:1.25rem}
+.opt.picked{border-color:var(--gold-hi);background:rgba(212,175,55,.14)}
+.result img{display:block;width:100%;height:auto;border-radius:18px;border:1px solid var(--line-strong);margin-top:18px;box-shadow:0 24px 60px rgba(0,0,0,.5)}
+.cta{margin-top:28px;padding:22px;border-radius:20px;border:1px solid var(--line-strong);background:linear-gradient(135deg,#14120a,#0d0e14)}
+.cta h2{margin-top:6px}
+.cta p{margin-top:8px;color:var(--muted)}
+.traits{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.traits span{border:1px solid var(--line-strong);border-radius:999px;padding:4px 12px;font-size:.88rem;color:var(--gold-hi)}
+footer{border-top:1px solid var(--line);padding:22px 0 36px;color:var(--muted);font-size:.86rem}
+footer .wrap{display:flex;flex-wrap:wrap;gap:8px 18px;justify-content:space-between}
+footer a{color:var(--ink);text-decoration:none}
+:focus-visible{outline:2px solid var(--gold-hi);outline-offset:3px;border-radius:8px}
+@media (prefers-reduced-motion:reduce){.btn,.prog i{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="brand" href="index.html"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#0F1016" stroke="#D4AF37" stroke-opacity=".5"/><path d="M10 24 L22 34 L32 14 L42 34 L54 24 L49 46 H15 Z" fill="#D4AF37"/></svg>DYNASTYVAULT</a>
+    <div class="lang" role="group" aria-label="Language"><button type="button" data-l="en">EN</button><button type="button" data-l="hn">Hinglish</button><button type="button" data-l="hi">हिंदी</button></div>
+  </header>
+  <main id="app" aria-live="polite"></main>
+</div>
+<footer><div class="wrap"><span>© DynastyVault</span><span><a href="index.html" data-t="home">Home</a> · <a href="app.html" data-t="open">Open the app</a> · <a href="privacy.html" data-t="privacy">Privacy</a></span></div></footer>
+<script>
+const QR = (() => {
+  const ECC_M = [-1, 10, 16, 26, 18, 24, 16, 18, 22, 22, 26, 30, 22, 22, 24, 24, 28, 28, 26, 26, 26, 26, 28, 28, 28, 28];
+  const BLOCKS_M = [-1, 1, 1, 1, 2, 2, 4, 4, 4, 5, 5, 5, 8, 9, 9, 10, 10, 11, 13, 14, 16, 17, 17, 18, 20, 21];
+  const rawModules = ver => { let r = (16 * ver + 128) * ver + 64; if (ver >= 2) { const n = Math.floor(ver / 7) + 2; r -= (25 * n - 10) * n - 55; if (ver >= 7) r -= 36; } return r; };
+  const dataCodewords = ver => Math.floor(rawModules(ver) / 8) - ECC_M[ver] * BLOCKS_M[ver];
+  const mul = (x, y) => { let z = 0; for (let i = 7; i >= 0; i--) { z = (z << 1) ^ ((z >>> 7) * 0x11D); z ^= ((y >>> i) & 1) * x; } return z & 0xFF; };
+  const divisor = deg => { const r = new Array(deg).fill(0); r[deg - 1] = 1; let root = 1; for (let i = 0; i < deg; i++) { for (let j = 0; j < r.length; j++) { r[j] = mul(r[j], root); if (j + 1 < r.length) r[j] ^= r[j + 1]; } root = mul(root, 0x02); } return r; };
+  const remainder = (data, div) => { const r = div.map(() => 0); for (const b of data) { const f = b ^ r.shift(); r.push(0); div.forEach((c, i) => { r[i] ^= mul(c, f); }); } return r; };
+  const alignPos = ver => { if (ver === 1) return []; const n = Math.floor(ver / 7) + 2; const step = ver === 32 ? 26 : Math.ceil((ver * 4 + 4) / (n * 2 - 2)) * 2; const out = [6]; for (let p = ver * 4 + 10; out.length < n; p -= step) out.splice(1, 0, p); return out; };
+  function encode(text) {
+    const bytes = Array.from(new TextEncoder().encode(text));
+    let ver = 1; for (; ver <= 25; ver++) { const cc = ver < 10 ? 8 : 16; if (4 + cc + bytes.length * 8 <= dataCodewords(ver) * 8) break; }
+    if (ver > 25) throw new Error('Text too long for a QR code');
+    const bits = []; const put = (v, n) => { for (let i = n - 1; i >= 0; i--) bits.push((v >>> i) & 1); };
+    put(4, 4); put(bytes.length, ver < 10 ? 8 : 16); bytes.forEach(b => put(b, 8));
+    const cap = dataCodewords(ver) * 8; put(0, Math.min(4, cap - bits.length)); put(0, (8 - bits.length % 8) % 8);
+    for (let pad = 0xEC; bits.length < cap; pad ^= 0xEC ^ 0x11) put(pad, 8);
+    const data = []; for (let i = 0; i < bits.length; i += 8) { let v = 0; for (let j = 0; j < 8; j++) v = (v << 1) | bits[i + j]; data.push(v); }
+    const nb = BLOCKS_M[ver], ecl = ECC_M[ver], raw = Math.floor(rawModules(ver) / 8), nShort = nb - raw % nb, shortLen = Math.floor(raw / nb);
+    const div = divisor(ecl); const blocks = [];
+    for (let i = 0, k = 0; i < nb; i++) { const dat = data.slice(k, k + shortLen - ecl + (i < nShort ? 0 : 1)); k += dat.length; const ecc = remainder(dat, div); if (i < nShort) dat.push(0); blocks.push(dat.concat(ecc)); }
+    const all = []; for (let i = 0; i < blocks[0].length; i++) blocks.forEach((b, j) => { if (i !== shortLen - ecl || j >= nShort) all.push(b[i]); });
+    const size = ver * 4 + 17; const M = Array.from({ length:size }, () => new Array(size).fill(false)); const F = Array.from({ length:size }, () => new Array(size).fill(false));
+    const set = (x, y, d) => { M[y][x] = d; F[y][x] = true; };
+    for (let i = 0; i < size; i++) { set(6, i, i % 2 === 0); set(i, 6, i % 2 === 0); }
+    const finder = (cx, cy) => { for (let dy = -4; dy <= 4; dy++) for (let dx = -4; dx <= 4; dx++) { const d = Math.max(Math.abs(dx), Math.abs(dy)); const x = cx + dx, y = cy + dy; if (x >= 0 && x < size && y >= 0 && y < size) set(x, y, d !== 2 && d !== 4); } };
+    finder(3, 3); finder(size - 4, 3); finder(3, size - 4);
+    const ap = alignPos(ver); ap.forEach((a, i) => ap.forEach((b, j) => { if ((i === 0 && j === 0) || (i === 0 && j === ap.length - 1) || (i === ap.length - 1 && j === 0)) return; for (let dy = -2; dy <= 2; dy++) for (let dx = -2; dx <= 2; dx++) set(a + dx, b + dy, Math.max(Math.abs(dx), Math.abs(dy)) !== 1); }));
+    const drawFormat = mask => {
+      const d = (0 << 3) | mask; let rem = d; for (let i = 0; i < 10; i++) rem = (rem << 1) ^ ((rem >>> 9) * 0x537); const b = ((d << 10) | rem) ^ 0x5412;
+      const bit = i => ((b >>> i) & 1) !== 0;
+      for (let i = 0; i <= 5; i++) set(8, i, bit(i)); set(8, 7, bit(6)); set(8, 8, bit(7)); set(7, 8, bit(8)); for (let i = 9; i < 15; i++) set(14 - i, 8, bit(i));
+      for (let i = 0; i < 8; i++) set(size - 1 - i, 8, bit(i)); for (let i = 8; i < 15; i++) set(8, size - 15 + i, bit(i)); set(8, size - 8, true);
+    };
+    drawFormat(0);
+    if (ver >= 7) { let rem = ver; for (let i = 0; i < 12; i++) rem = (rem << 1) ^ ((rem >>> 11) * 0x1F25); const b = (ver << 12) | rem; for (let i = 0; i < 18; i++) { const v = ((b >>> i) & 1) !== 0; const a = size - 11 + i % 3, c = Math.floor(i / 3); set(a, c, v); set(c, a, v); } }
+    let i = 0;
+    for (let right = size - 1; right >= 1; right -= 2) { if (right === 6) right = 5; for (let vert = 0; vert < size; vert++) for (let j = 0; j < 2; j++) { const x = right - j; const up = ((right + 1) & 2) === 0; const y = up ? size - 1 - vert : vert; if (!F[y][x] && i < all.length * 8) { M[y][x] = ((all[i >>> 3] >>> (7 - (i & 7))) & 1) !== 0; i++; } } }
+    const maskFn = [(x, y) => (x + y) % 2 === 0, (x, y) => y % 2 === 0, (x) => x % 3 === 0, (x, y) => (x + y) % 3 === 0, (x, y) => (Math.floor(x / 3) + Math.floor(y / 2)) % 2 === 0, (x, y) => x * y % 2 + x * y % 3 === 0, (x, y) => (x * y % 2 + x * y % 3) % 2 === 0, (x, y) => ((x + y) % 2 + x * y % 3) % 2 === 0];
+    const applyMask = m => { for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) if (!F[y][x] && maskFn[m](x, y)) M[y][x] = !M[y][x]; };
+    const penalty = () => {
+      let p = 0;
+      const runs = line => { let s = 0, run = 1; for (let k = 1; k <= line.length; k++) { if (k < line.length && line[k] === line[k - 1]) run++; else { if (run >= 5) s += run - 2; run = 1; } } return s; };
+      for (let y = 0; y < size; y++) p += runs(M[y]); for (let x = 0; x < size; x++) p += runs(M.map(r => r[x]));
+      for (let y = 0; y < size - 1; y++) for (let x = 0; x < size - 1; x++) { const c = M[y][x]; if (c === M[y][x + 1] && c === M[y + 1][x] && c === M[y + 1][x + 1]) p += 3; }
+      const pat = [true, false, true, true, true, false, true];
+      const finderLike = (get) => { let s = 0; for (let a = 0; a < size; a++) for (let b = 0; b + 7 <= size; b++) { if (pat.every((v, k) => get(a, b + k) === v)) { const before = b >= 4 && [1, 2, 3, 4].every(k => !get(a, b - k)); const after = b + 11 <= size && [7, 8, 9, 10].every(k => !get(a, b + k)); if (before || after) s += 40; } } return s; };
+      p += finderLike((r, c) => M[r][c]) + finderLike((r, c) => M[c][r]);
+      let dark = 0; M.forEach(r => r.forEach(v => { if (v) dark++; })); const total = size * size; p += Math.floor(Math.abs(dark * 20 - total * 10) / total) * 10;
+      return p;
+    };
+    let best = 0, bestP = Infinity;
+    for (let m = 0; m < 8; m++) { applyMask(m); drawFormat(m); const pp = penalty(); if (pp < bestP) { bestP = pp; best = m; } applyMask(m); }
+    applyMask(best); drawFormat(best);
+    return { size, modules:M, version:ver };
+  }
+  return { encode };
+})();
+(() => {
+const TYPES = {
+  wander:{ ic:'🧭', en:['The Wanderers', 'Your family has always been on the move — new cities, new countries, new beginnings. Home is not one place for you; it is the people who travel together.', ['Brave', 'Curious', 'Adaptable']],
+    hn:['The Wanderers', 'Aapki family hamesha safar mein rahi hai — naye shehar, naye desh, nayi shuruaat. Aapke liye ghar ek jagah nahi, woh log hain jo saath chalte hain.', ['Bahadur', 'Curious', 'Har jagah adjust']],
+    hi:['घुमक्कड़ वंश', 'आपका परिवार हमेशा सफ़र में रहा है — नए शहर, नए देश, नई शुरुआत। आपके लिए घर कोई एक जगह नहीं, वो लोग हैं जो साथ चलते हैं।', ['बहादुर', 'जिज्ञासु', 'हर जगह ढल जाने वाले']] },
+  build:{ ic:'🏛️', en:['The Builders', 'Your elders started with very little and built something that lasts — a shop, a home, a name. Hard work is the family heirloom.', ['Hard-working', 'Ambitious', 'Self-made']],
+    hn:['The Builders', 'Aapke buzurgon ne bahut kam se shuru karke kuch aisa banaya jo tikta hai — dukaan, ghar, naam. Mehnat hi aapki family ki virasat hai.', ['Mehnati', 'Ambitious', 'Khud ke dam pe']],
+    hi:['निर्माता वंश', 'आपके बुज़ुर्गों ने बहुत कम से शुरू करके कुछ ऐसा बनाया जो टिका रहे — दुकान, घर, नाम। मेहनत ही आपके परिवार की विरासत है।', ['मेहनती', 'महत्वाकांक्षी', 'अपने दम पर']] },
+  story:{ ic:'📜', en:['The Storytellers', 'In your family, nothing is forgotten as long as someone tells it. Old photos, songs and “when I was young…” stories are your real treasure.', ['Warm', 'Nostalgic', 'Great memory']],
+    hn:['The Storytellers', 'Aapki family mein kuch bhi bhoola nahi jaata, jab tak koi use sunata rahe. Purani photos, gaane aur “jab hum chhote the…” wali kahaniyan hi asli khazana hain.', ['Pyaar bhare', 'Purani yaadon wale', 'Tez yaaddasht']],
+    hi:['कथाकार वंश', 'आपके परिवार में कुछ भी भुलाया नहीं जाता, जब तक कोई उसे सुनाता रहे। पुरानी तस्वीरें, गीत और “जब हम छोटे थे…” वाली कहानियाँ ही असली ख़ज़ाना हैं।', ['स्नेही', 'यादों से भरे', 'तेज़ याददाश्त']] },
+  guard:{ ic:'🛡️', en:['The Guardians', 'Your family holds together through everything. Someone always organises, someone always calls, and nobody is left out. Family comes first.', ['Loyal', 'Protective', 'Close-knit']],
+    hn:['The Guardians', 'Aapki family har haal mein saath rehti hai. Koi na koi sab organise karta hai, koi na koi phone karta hai, aur koi peeche nahi chhoota. Family sabse pehle.', ['Wafadaar', 'Sabka khayal rakhne wale', 'Ek-dusre se jude']],
+    hi:['रक्षक वंश', 'आपका परिवार हर हाल में साथ रहता है। कोई न कोई सब संभालता है, कोई न कोई फ़ोन करता है, और कोई पीछे नहीं छूटता। परिवार सबसे पहले।', ['वफ़ादार', 'सबका ख़याल रखने वाले', 'एक-दूसरे से जुड़े']] },
+  scholar:{ ic:'📚', en:['The Scholars', 'Books, degrees and big dinner-table debates — your family believes knowledge is the one thing nobody can take away from you.', ['Wise', 'Thoughtful', 'Always learning']],
+    hn:['The Scholars', 'Kitaabein, degrees aur dinner table pe lambi behas — aapki family maanti hai ki gyaan hi woh cheez hai jo koi chheen nahi sakta.', ['Samajhdaar', 'Soch-samajh wale', 'Hamesha seekhne wale']],
+    hi:['विद्वान वंश', 'किताबें, डिग्रियाँ और खाने की मेज़ पर लंबी बहस — आपका परिवार मानता है कि ज्ञान ही वो चीज़ है जो कोई छीन नहीं सकता।', ['समझदार', 'विचारशील', 'हमेशा सीखने वाले']] },
+  hearth:{ ic:'🍲', en:['The Hearth Keepers', 'Your family speaks the language of food and get-togethers. Every visit ends with “eat something before you go”, and every recipe has a story.', ['Generous', 'Fun-loving', 'Big-hearted']],
+    hn:['The Hearth Keepers', 'Aapki family khane aur milne-julne ki bhasha bolti hai. Har visit “kuch kha ke jaana” pe khatam hoti hai, aur har recipe ki ek kahani hai.', ['Dildaar', 'Masti wale', 'Bade dil wale']],
+    hi:['रसोई-रक्षक वंश', 'आपका परिवार खाने और मेल-मिलाप की भाषा बोलता है। हर मुलाक़ात “कुछ खाकर जाना” पर ख़त्म होती है, और हर नुस्ख़े की एक कहानी है।', ['उदार', 'मस्तमौला', 'बड़े दिल वाले']] }
+};
+const QS = [
+  { en:'Where did your grandparents grow up?', hn:'Aapke Dada-Dadi / Nana-Nani kahan bade hue?', hi:'आपके दादा-दादी / नाना-नानी कहाँ बड़े हुए?', o:[
+    ['🏠', 'guard', 'In the same city we live in now', 'Usi shehar mein jahan hum aaj rehte hain', 'उसी शहर में जहाँ हम आज रहते हैं'],
+    ['✈️', 'wander', 'In another state or another country', 'Kisi aur state ya desh mein', 'किसी और राज्य या देश में'],
+    ['🌾', 'build', 'In a village — the family moved to a city', 'Gaon mein — family baad mein shehar aayi', 'गाँव में — परिवार बाद में शहर आया'],
+    ['🤔', 'story', 'Not sure — nobody ever wrote it down', 'Pakka nahi pata — kisi ne likha hi nahi', 'पक्का नहीं पता — किसी ने लिखा ही नहीं']] },
+  { en:'At a family function, your family is the one that…', hn:'Kisi family function mein aapki family woh hai jo…', hi:'किसी पारिवारिक समारोह में आपका परिवार वो है जो…', o:[
+    ['🍛', 'hearth', 'brings the most food', 'sabse zyada khana laati hai', 'सबसे ज़्यादा खाना लाता है'],
+    ['🗣️', 'story', 'tells all the old stories', 'saari purani kahaniyan sunati hai', 'सारी पुरानी कहानियाँ सुनाता है'],
+    ['💼', 'build', 'talks about work and big plans', 'kaam aur bade plans ki baat karti hai', 'काम और बड़ी योजनाओं की बात करता है'],
+    ['📋', 'guard', 'organises everything', 'sab kuch organise karti hai', 'सब कुछ संभालता है']] },
+  { en:'What did your elders value the most?', hn:'Aapke buzurg sabse zyada kis cheez ko maante the?', hi:'आपके बुज़ुर्ग सबसे ज़्यादा किस चीज़ को अहमियत देते थे?', o:[
+    ['🎓', 'scholar', 'Education', 'Padhai', 'पढ़ाई'],
+    ['🔨', 'build', 'Hard work and having your own business', 'Mehnat aur apna kaam-dhandha', 'मेहनत और अपना काम-धंधा'],
+    ['🤝', 'guard', 'Staying together as a family', 'Family ka saath rehna', 'परिवार का साथ रहना'],
+    ['🗺️', 'wander', 'Seeing the world', 'Duniya dekhna', 'दुनिया देखना']] },
+  { en:'Your family WhatsApp group is mostly…', hn:'Aapka family WhatsApp group zyada tar…', hi:'आपका परिवार का WhatsApp ग्रुप ज़्यादातर…', o:[
+    ['☀️', 'hearth', 'good-morning messages and food photos', 'good morning messages aur khane ki photos', 'गुड मॉर्निंग मैसेज और खाने की तस्वीरें'],
+    ['🖼️', 'story', 'old photos and memories', 'purani photos aur yaadein', 'पुरानी तस्वीरें और यादें'],
+    ['📰', 'scholar', 'news, debates and advice', 'news, behas aur salah', 'ख़बरें, बहस और सलाह'],
+    ['🧳', 'wander', 'plans for the next trip or reunion', 'agli trip ya milne ke plans', 'अगली यात्रा या मिलने की योजनाएँ']] },
+  { en:'What would you most want to save for your grandchildren?', hn:'Aap apne pote-potiyon ke liye sabse pehle kya save karna chahoge?', hi:'आप अपने पोते-पोतियों के लिए सबसे पहले क्या सहेजना चाहेंगे?', o:[
+    ['🎙️', 'story', 'Grandma’s voice telling a story', 'Dadi-Nani ki awaaz mein ek kahani', 'दादी-नानी की आवाज़ में एक कहानी'],
+    ['🥘', 'hearth', 'The family recipes', 'Family ki recipes', 'परिवार के नुस्ख़े'],
+    ['📍', 'wander', 'Where we came from', 'Hum kahan se aaye', 'हम कहाँ से आए'],
+    ['✉️', 'scholar', 'Old letters, diaries and certificates', 'Purani chitthiyan, diary aur certificates', 'पुरानी चिट्ठियाँ, डायरी और प्रमाणपत्र']] },
+  { en:'Which line sounds most like your home?', hn:'Kaunsi line aapke ghar jaisi lagti hai?', hi:'कौन-सी बात आपके घर जैसी लगती है?', o:[
+    ['📖', 'scholar', '“Studies come first.”', '“Pehle padhai.”', '“पहले पढ़ाई।”'],
+    ['🍽️', 'hearth', '“Eat something before you go.”', '“Kuch kha ke jaana.”', '“कुछ खाकर जाना।”'],
+    ['🏗️', 'build', '“Make your own way.”', '“Apna kaam, apni pehchaan.”', '“अपना काम, अपनी पहचान।”'],
+    ['❤️', 'guard', '“Family before everything.”', '“Family sabse pehle.”', '“परिवार सबसे पहले।”']] }
+];
+const T = {
+  en:{ eyebrow:'1-minute family quiz', title:'What kind of dynasty is your family?', lede:'Six quick questions about your family. Get your Dynasty Type card and see if your cousins agree.', surname:'Your family name (surname)', ph:'e.g. Rawat', start:'Start the quiz', fun:'Just for fun — based only on your answers, not on any records. Nothing you type leaves this phone.', q:'Question', of:'of', back:'← Back', the:'The', family:'Family', are:'are', resultEyebrow:'Your Dynasty Type', share:'📲 Share my card', wa:'💬 Challenge family on WhatsApp', dl:'⬇ Download card', again:'↺ Take it again', ctaEy:'Now make it real', ctaH:'Build the {s} family tree — free', ctaP:'Add both sides of the family, save your elders’ voices, and get a Family Card with everyone in it.', ctaB:'👑 Start our family tree', cardEy:'WHAT KIND OF DYNASTY ARE WE?', cardFoot:'Find your family’s type — 1 minute', scan:'Scan or open the link', waMsg:'👑 Our family is {t} {i} — what kind of dynasty is yours? Take the 1-minute quiz:', home:'Home', open:'Open the app', privacy:'Privacy', needName:'Type your family name first.' },
+  hn:{ eyebrow:'1 minute ka family quiz', title:'Aapki family kis tarah ki dynasty hai?', lede:'Family ke baare mein 6 chhote sawaal. Apna Dynasty Type card pao aur dekho cousins maante hain ya nahi.', surname:'Aapka family naam (surname)', ph:'jaise Rawat', start:'Quiz shuru karo', fun:'Sirf mazaak ke liye — sirf aapke jawabon pe, kisi record pe nahi. Jo aap likhte ho woh is phone se bahar nahi jaata.', q:'Sawaal', of:'/', back:'← Peeche', the:'', family:'Family', are:'hai', resultEyebrow:'Aapka Dynasty Type', share:'📲 Card share karo', wa:'💬 Family ko WhatsApp pe challenge karo', dl:'⬇ Card download karo', again:'↺ Dobara khelo', ctaEy:'Ab asli banao', ctaH:'{s} family ka tree banao — free', ctaP:'Papa aur Mummy dono ki family jodo, buzurgon ki awaaz save karo, aur sabke saath ek Family Card pao.', ctaB:'👑 Family tree shuru karo', cardEy:'HAM KIS TARAH KI DYNASTY HAIN?', cardFoot:'Apni family ka type jaano — 1 minute', scan:'Scan karo ya link kholo', waMsg:'👑 Hamari family {t} {i} hai — aapki kaunsi dynasty hai? 1 minute ka quiz khelo:', home:'Home', open:'App kholo', privacy:'Privacy', needName:'Pehle apna family naam likho.' },
+  hi:{ eyebrow:'1 मिनट की पारिवारिक क्विज़', title:'आपका परिवार किस तरह का वंश है?', lede:'परिवार के बारे में 6 छोटे सवाल। अपना वंश-प्रकार कार्ड पाइए और देखिए कि आपके भाई-बहन सहमत हैं या नहीं।', surname:'आपका पारिवारिक नाम (उपनाम)', ph:'जैसे रावत', start:'क्विज़ शुरू करें', fun:'सिर्फ़ मनोरंजन के लिए — सिर्फ़ आपके जवाबों पर आधारित, किसी रिकॉर्ड पर नहीं। आप जो लिखते हैं वो इस फ़ोन से बाहर नहीं जाता।', q:'सवाल', of:'/', back:'← पीछे', the:'', family:'परिवार', are:'है', resultEyebrow:'आपका वंश-प्रकार', share:'📲 कार्ड शेयर करें', wa:'💬 परिवार को WhatsApp पर चुनौती दें', dl:'⬇ कार्ड डाउनलोड करें', again:'↺ फिर से खेलें', ctaEy:'अब असली बनाइए', ctaH:'{s} परिवार का वंश-वृक्ष बनाइए — मुफ़्त', ctaP:'पिता और माता दोनों का परिवार जोड़िए, बुज़ुर्गों की आवाज़ सहेजिए, और सबके साथ एक फ़ैमिली कार्ड पाइए।', ctaB:'👑 वंश-वृक्ष शुरू करें', cardEy:'हम किस तरह का वंश हैं?', cardFoot:'अपने परिवार का प्रकार जानिए — 1 मिनट', scan:'स्कैन करें या लिंक खोलें', waMsg:'👑 हमारा परिवार {t} {i} है — आपका कौन-सा वंश है? 1 मिनट की क्विज़ खेलिए:', home:'होम', open:'ऐप खोलें', privacy:'प्राइवेसी', needName:'पहले अपना पारिवारिक नाम लिखिए।' }
+};
+const $ = s => document.querySelector(s);
+const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
+let lang = 'en';
+try { const q = new URLSearchParams(location.search).get('lang'); const s0 = localStorage.getItem('dv.lang'); const pick = q || s0 || ''; if (pick === 'hn' || pick === 'hi') lang = pick; } catch (e) { /* storage blocked */ }
+const t = k => (T[lang] || T.en)[k] != null ? (T[lang] || T.en)[k] : T.en[k];
+const st = { step:0, name:'', ans:[], img:null, blob:null };
+const LI = { en:0, hn:1, hi:2 };
+const pageURL = () => location.href.split('#')[0].split('?')[0];
+const appURL = () => pageURL().replace(/[^/]*$/, '') + 'app.html?lang=' + lang + '#card';
+function hash(s) { let h = 2166136261; for (const ch of String(s).toLowerCase()) { h ^= ch.codePointAt(0); h = Math.imul(h, 16777619); } return h >>> 0; }
+function result() {
+  const score = {}; Object.keys(TYPES).forEach(k => { score[k] = 0; });
+  st.ans.forEach((a, i) => { if (a != null) score[QS[i].o[a][1]] += 1; });
+  const max = Math.max(...Object.values(score)); const top = Object.keys(score).filter(k => score[k] === max);
+  return top[hash(st.name) % top.length];
+}
+function tName(k) { return TYPES[k][lang][0]; }
+function surname() { const n = st.name.trim().replace(/\s+/g, ' '); return n ? n.charAt(0).toUpperCase() + n.slice(1) : ''; }
+function famLine() { const s = surname(); return lang === 'en' ? `${t('the')} ${s} ${t('family')}` : `${s} ${t('family')}`; }
+function render() {
+  const app = $('#app'); document.documentElement.lang = lang === 'hn' ? 'hi-Latn' : lang;
+  document.querySelectorAll('.lang button').forEach(b => b.classList.toggle('on', b.dataset.l === lang));
+  document.querySelectorAll('[data-t]').forEach(el => { el.textContent = t(el.dataset.t); });
+  if (st.step === 0) {
+    app.innerHTML = `<div class="eyebrow">◆ ${esc(t('eyebrow'))}</div><h1>${esc(t('title'))}</h1><p class="lede">${esc(t('lede'))}</p>
+      <form id="startForm"><label class="field"><span>${esc(t('surname'))}</span><input class="input" id="nm" maxlength="30" autocomplete="family-name" placeholder="${esc(t('ph'))}" value="${esc(st.name)}"></label>
+      <p class="note" id="err" role="alert"></p><div class="row"><button class="btn btn-gold" type="submit">${esc(t('start'))} →</button></div></form>
+      <p class="note">${esc(t('fun'))}</p>`;
+    $('#startForm').addEventListener('submit', e => { e.preventDefault(); const v = $('#nm').value.trim(); if (!v) { $('#err').textContent = t('needName'); $('#nm').focus(); return; } st.name = v; st.step = 1; st.ans = []; render(); });
+    return;
+  }
+  if (st.step <= QS.length) {
+    const i = st.step - 1; const q = QS[i];
+    app.innerHTML = `<div class="qhead"><div class="eyebrow">${esc(t('q'))} ${i + 1} ${esc(t('of'))} ${QS.length}</div><span class="muted" style="font-size:.9rem">${esc(famLine())}</span></div>
+      <div class="prog" aria-hidden="true"><i style="width:${(i / QS.length) * 100}%"></i></div>
+      <h2 style="margin-top:22px">${esc(q[lang])}</h2>
+      <div class="opts">${q.o.map((o, k) => `<button class="opt${st.ans[i] === k ? ' picked' : ''}" type="button" data-a="${k}"><span class="ic" aria-hidden="true">${o[0]}</span><span>${esc(o[2 + LI[lang]])}</span></button>`).join('')}</div>
+      <div class="row"><button class="btn btn-ghost" type="button" id="back">${esc(t('back'))}</button></div>`;
+    app.querySelectorAll('[data-a]').forEach(b => b.addEventListener('click', () => { st.ans[i] = +b.dataset.a; b.classList.add('picked'); setTimeout(() => { st.step++; render(); }, 180); }));
+    $('#back').addEventListener('click', () => { st.step--; render(); });
+    const first = app.querySelector('.opt'); if (first) first.focus({ preventScroll:true });
+    return;
+  }
+  const k = result(); const ty = TYPES[k][lang];
+  app.innerHTML = `<div class="result"><div class="eyebrow">◆ ${esc(t('resultEyebrow'))}</div><h1>${esc(famLine())} ${lang === 'en' ? esc(t('are')) + ' ' : ''}${esc(ty[0])} ${TYPES[k].ic}${lang !== 'en' ? ' ' + esc(t('are')) : ''}</h1>
+    <p class="lede">${esc(ty[1])}</p><div class="traits">${ty[2].map(x => `<span>${esc(x)}</span>`).join('')}</div>
+    <div id="cardBox"><p class="note">…</p></div>
+    <div class="row"><button class="btn btn-gold" type="button" id="shareBtn">${esc(t('share'))}</button><button class="btn btn-wa" type="button" id="waBtn">${esc(t('wa'))}</button><button class="btn btn-ghost" type="button" id="dlBtn">${esc(t('dl'))}</button></div>
+    <div class="cta"><div class="eyebrow">◆ ${esc(t('ctaEy'))}</div><h2>${esc(t('ctaH').replace('{s}', surname()))}</h2><p>${esc(t('ctaP'))}</p><div class="row" style="margin-top:16px"><a class="btn btn-gold" href="${esc(appURL())}">${esc(t('ctaB'))}</a></div></div>
+    <div class="row"><button class="btn btn-ghost" type="button" id="again">${esc(t('again'))}</button></div></div>`;
+  $('#again').addEventListener('click', () => { st.step = 0; st.ans = []; render(); });
+  $('#waBtn').addEventListener('click', () => { const msg = t('waMsg').replace('{t}', ty[0]).replace('{i}', TYPES[k].ic) + '\n' + pageURL() + (lang !== 'en' ? '?lang=' + lang : ''); window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank', 'noopener'); });
+  $('#dlBtn').addEventListener('click', () => { if (!st.blob) return; const a = document.createElement('a'); const u = URL.createObjectURL(st.blob); a.href = u; a.download = `${surname().toLowerCase().replace(/[^a-z0-9]+/g, '-') || 'family'}-dynasty-type.jpg`; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(u), 8000); });
+  $('#shareBtn').addEventListener('click', async () => {
+    if (!st.blob) return; const file = new File([st.blob], 'dynasty-type.jpg', { type:'image/jpeg' });
+    const text = t('waMsg').replace('{t}', ty[0]).replace('{i}', TYPES[k].ic) + ' ' + pageURL();
+    try { if (navigator.canShare && navigator.canShare({ files:[file] })) { await navigator.share({ files:[file], text }); return; } } catch (e) { if (e && e.name === 'AbortError') return; }
+    $('#dlBtn').click();
+  });
+  drawCard(k).then(r => { st.blob = r.blob; $('#cardBox').innerHTML = `<img src="${r.url}" alt="${esc(famLine() + ' — ' + ty[0])}">`; });
+}
+function rr(g, x, y, w, h, r) { g.beginPath(); g.moveTo(x + r, y); g.arcTo(x + w, y, x + w, y + h, r); g.arcTo(x + w, y + h, x, y + h, r); g.arcTo(x, y + h, x, y, r); g.arcTo(x, y, x + w, y, r); g.closePath(); }
+function wrap(g, text, maxW, maxLines) { const words = String(text).split(/\s+/); const out = []; let line = ''; for (const w of words) { const tt = line ? line + ' ' + w : w; if (g.measureText(tt).width > maxW && line) { out.push(line); line = w; if (out.length === maxLines) break; } else line = tt; } if (out.length < maxLines && line) out.push(line); return out; }
+async function drawCard(k) {
+  const W = 1080, H = 1350; const c = document.createElement('canvas'); c.width = W; c.height = H; const g = c.getContext('2d');
+  try { await document.fonts.load('700 60px Cinzel'); await document.fonts.load('600 40px "Plus Jakarta Sans"'); } catch (e) { /* fallback */ }
+  const SANS = '"Plus Jakarta Sans", Arial, sans-serif', SERIF = 'Cinzel, Georgia, serif'; const ty = TYPES[k][lang];
+  const bg = g.createLinearGradient(0, 0, W, H); bg.addColorStop(0, '#07080B'); bg.addColorStop(.6, '#0E0F14'); bg.addColorStop(1, '#1a1406'); g.fillStyle = bg; g.fillRect(0, 0, W, H);
+  const au = g.createRadialGradient(W / 2, 480, 10, W / 2, 480, 620); au.addColorStop(0, 'rgba(255,223,0,.22)'); au.addColorStop(1, 'rgba(255,223,0,0)'); g.fillStyle = au; g.fillRect(0, 0, W, H);
+  let seed = hash(st.name + k); const R = () => { seed = (seed * 1664525 + 1013904223) >>> 0; return seed / 4294967296; };
+  for (let i = 0; i < 70; i++) { g.globalAlpha = .12 + R() * .5; g.fillStyle = R() > .5 ? '#FFDF00' : '#FFF1A8'; g.beginPath(); g.arc(R() * W, R() * H, .8 + R() * 2.4, 0, Math.PI * 2); g.fill(); } g.globalAlpha = 1;
+  const gold = g.createLinearGradient(0, 0, W, H); [[0, '#7A5A0C'], [.2, '#D4AF37'], [.35, '#FFF1A8'], [.5, '#FFDF00'], [.7, '#AA7C11'], [1, '#E9CF7A']].forEach(([s, col]) => gold.addColorStop(s, col));
+  g.strokeStyle = gold; g.lineWidth = 10; g.strokeRect(36, 36, W - 72, H - 72); g.lineWidth = 2; g.strokeRect(58, 58, W - 116, H - 116);
+  const fit = (txt, weight, size, min, fam, maxW) => { let s = size; g.font = `${weight} ${s}px ${fam}`; while (s > min && g.measureText(txt).width > maxW) { s -= 2; g.font = `${weight} ${s}px ${fam}`; } return txt; };
+  g.textAlign = 'center';
+  g.fillStyle = '#E9CF7A'; g.font = `800 26px ${SANS}`; g.fillText(lang === 'en' ? t('cardEy').split('').join(String.fromCharCode(8202)) : t('cardEy'), W / 2, 150);
+  g.fillStyle = '#EFE3BF'; g.fillText(fit(famLine(), 600, 48, 28, SANS, W - 220), W / 2, 232);
+  g.beginPath(); g.arc(W / 2, 450, 150, 0, Math.PI * 2); g.fillStyle = gold; g.fill(); g.beginPath(); g.arc(W / 2, 450, 138, 0, Math.PI * 2); g.fillStyle = '#121319'; g.fill();
+  g.font = `150px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif`; g.textBaseline = 'middle'; g.fillText(TYPES[k].ic, W / 2, 458); g.textBaseline = 'alphabetic';
+  g.fillStyle = gold; g.fillText(fit(ty[0], 700, 86, 44, lang === 'hi' ? SANS : SERIF, W - 180), W / 2, 712);
+  g.fillStyle = '#D8CDAE'; g.font = `500 36px ${SANS}`; wrap(g, ty[1], W - 240, 4).forEach((ln, i) => g.fillText(ln, W / 2, 800 + i * 50));
+  g.font = `700 28px ${SANS}`; const chips = ty[2]; const pw = chips.map(x => g.measureText(x).width + 44); const tot = pw.reduce((a, b) => a + b, 0) + (chips.length - 1) * 16; let cx = (W - tot) / 2;
+  chips.forEach((x, i) => { g.strokeStyle = 'rgba(212,175,55,.6)'; g.lineWidth = 2; rr(g, cx, 1018, pw[i], 54, 27); g.stroke(); g.fillStyle = '#F3D774'; g.fillText(x, cx + pw[i] / 2, 1055); cx += pw[i] + 16; });
+  // footer QR
+  const link = pageURL(); const q = QR.encode(link); const n = q.size, pad = 3, size = 160; const m = size / (n + pad * 2); const qx = 120, qy = 1092;
+  g.fillStyle = '#F6E7B0'; rr(g, qx, qy, size, size, 16); g.fill(); g.fillStyle = '#1A1405'; q.modules.forEach((row, yy) => row.forEach((on, xx) => { if (on) g.fillRect(qx + (xx + pad) * m, qy + (yy + pad) * m, Math.ceil(m), Math.ceil(m)); }));
+  g.textAlign = 'left'; const tx = qx + size + 36; const tm = W - tx - 120;
+  g.fillStyle = gold; g.fillText(fit(t('cardFoot'), 700, 36, 22, lang === 'hi' ? SANS : SERIF, tm), tx, qy + 58);
+  g.fillStyle = '#EFE3BF'; g.fillText(fit(t('scan'), 500, 26, 18, SANS, tm), tx, qy + 100);
+  g.fillStyle = '#C9B77C'; g.fillText(fit(link.replace(/^https?:\/\//, ''), 600, 22, 14, SANS, tm), tx, qy + 138);
+  g.textAlign = 'center'; g.fillStyle = gold; g.font = `700 32px ${SERIF}`; g.fillText('DYNASTYVAULT', W / 2, H - 66);
+  return new Promise(res => c.toBlob(b => res({ blob:b, url:c.toDataURL('image/jpeg', .9) }), 'image/jpeg', .9));
+}
+document.querySelectorAll('.lang button').forEach(b => b.addEventListener('click', () => { lang = b.dataset.l; try { localStorage.setItem('dv.lang', lang); } catch (e) { /* ignore */ } render(); }));
+render();
+})();
+</script>
+</body>
+</html>

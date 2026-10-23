@@ -7,6 +7,15 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="Build both sides of your family tree, save your grandparents' voices, and hear their life stories in their own voice. Free to start.">
 <meta name="theme-color" content="#07080B">
+<link rel="canonical" href="https://rawatnikhil921-debug.github.io/dynastyvault-site/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="DynastyVault">
+<meta property="og:title" content="DynastyVault — every family is a dynasty">
+<meta property="og:description" content="Build both sides of your family tree, save your grandparents’ voices and share your Family Card. Free to start.">
+<meta property="og:url" content="https://rawatnikhil921-debug.github.io/dynastyvault-site/">
+<meta property="og:image" content="https://rawatnikhil921-debug.github.io/dynastyvault-site/og.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2307080B'/%3E%3Cpath d='M10 24 L22 34 L32 14 L42 34 L54 24 L49 46 H15 Z' fill='%23D4AF37'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -158,9 +167,59 @@ footer a{color:var(--ink);text-decoration:none}footer a:hover{color:var(--gold-h
 [data-script=complex] .eyebrow,[data-script=complex] .launch,[data-script=complex] .heirloom .label small,[data-script=complex] .field span,[data-script=complex] .brand-t{letter-spacing:0!important}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 @media (max-width:560px){.top .wrap{flex-wrap:wrap;row-gap:6px;padding-block:8px}.top-cta{width:100%;justify-content:flex-end}.lang-pick{margin-right:auto}}
+
+/* launch bar */
+.offer{background:linear-gradient(90deg,#2a1f06,#4a3608 50%,#2a1f06);color:var(--gold-hi);font-size:.86rem;font-weight:700;text-align:center;padding:8px 16px;border-bottom:1px solid var(--line-strong)}
+.offer a{color:var(--ink);margin-left:6px;white-space:nowrap}
+.hero-quiz{display:inline-flex;align-items:center;gap:8px;margin-top:16px;font-weight:700;font-size:.95rem;color:var(--gold-hi);text-decoration:none;border-bottom:1px dashed var(--line-strong);padding-bottom:2px}
+/* see it in 20 seconds */
+.see{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:clamp(28px,5vw,64px);align-items:center}
+@media (max-width:820px){.see{grid-template-columns:1fr}.phone{justify-self:center}}
+.see-steps{list-style:none;padding:0;margin:26px 0 0;display:grid;gap:8px;counter-reset:ss}
+.see-steps button{display:flex;gap:12px;align-items:center;width:100%;text-align:left;background:transparent;border:1px solid var(--line);border-radius:14px;padding:12px 14px;color:var(--muted);font:600 .98rem var(--f-body);cursor:pointer}
+.see-steps button::before{counter-increment:ss;content:counter(ss);flex:none;display:grid;place-items:center;width:28px;height:28px;border-radius:50%;border:1px solid var(--line-strong);color:var(--gold);font:700 .9rem var(--f-display)}
+.see-steps button.on{color:var(--ink);border-color:var(--gold);background:rgba(212,175,55,.08)}
+.phone{width:min(300px,82vw);aspect-ratio:9/18.5;border-radius:40px;padding:12px;background:#1b1c22;border:1px solid var(--line-strong);box-shadow:0 30px 80px rgba(0,0,0,.6),inset 0 0 0 2px #2a2b33}
+.screen{position:relative;width:100%;height:100%;border-radius:30px;overflow:hidden;background:radial-gradient(120% 70% at 50% 0%,#1d1a10,#0b0c10 60%)}
+.scene{position:absolute;inset:0;padding:26px 18px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;opacity:0;transform:translateY(10px);transition:opacity .5s ease,transform .5s ease}
+.scene.on{opacity:1;transform:none}
+.scene .t{font:700 1.05rem var(--f-display);color:var(--gold-hi)}
+.scene small{color:var(--muted);font-size:.8rem}
+.mtree{width:100%;height:auto}
+.mtree circle{fill:#0F1016;stroke:#D4AF37;stroke-width:3}
+.mtree .n{opacity:0;transform-box:fill-box;transform-origin:center}
+.scene.on .mtree .n{animation:pop .5s ease forwards}
+@keyframes pop{0%{opacity:0;transform:scale(.4)}100%{opacity:1;transform:none}}
+.mic{width:96px;height:96px;border-radius:50%;display:grid;place-items:center;font-size:40px;background:linear-gradient(135deg,#8A6510,#F3D774);color:var(--on-gold);box-shadow:0 0 0 0 rgba(243,215,116,.5)}
+.scene.on .mic{animation:ring 1.4s ease-out infinite}
+@keyframes ring{100%{box-shadow:0 0 0 26px rgba(243,215,116,0)}}
+.mwave{display:flex;gap:3px;align-items:center;height:34px}
+.mwave i{width:4px;border-radius:2px;background:var(--gold);animation:pulse 1.2s ease-in-out infinite}
+.mplay{width:100%;border-radius:16px;border:1px solid var(--line);background:rgba(212,175,55,.07);padding:14px;text-align:left}
+.mplay p{font-size:.86rem;line-height:1.5;color:var(--ink);min-height:5.2em}
+.mbar{height:5px;border-radius:9px;background:#2a2b33;margin-top:10px;overflow:hidden}.mbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#8A6510,#F3D774)}
+.scene.on .mbar i{animation:fill 3.4s linear forwards}@keyframes fill{to{width:100%}}
+.mcard{width:88%;border-radius:14px;border:2px solid var(--gold);padding:16px 12px;background:linear-gradient(180deg,#14130d,#0b0c10)}
+.mcard b{display:block;font:700 1.15rem var(--f-display);color:var(--gold-hi);margin-top:4px}
+.mcard .st{display:flex;justify-content:center;gap:10px;margin-top:10px;font-size:.72rem;color:var(--muted)}.mcard .st span b{font-size:1rem;display:block}
+.mqr{width:44px;height:44px;margin:10px auto 0;border-radius:6px;background:repeating-linear-gradient(90deg,#1A1405 0 4px,#F6E7B0 4px 8px),#F6E7B0;background-blend-mode:multiply;outline:3px solid #F6E7B0}
+.mshare{display:flex;gap:6px;justify-content:center;flex-wrap:wrap}.mshare span{font-size:.72rem;font-weight:700;border-radius:999px;padding:6px 10px;background:#1FAF5A;color:#fff}.mshare span+span{background:#2a2b33;color:var(--ink)}
+.see-note{margin-top:14px;font-size:.8rem;color:var(--muted);text-align:center}
+/* promo bands */
+.promo{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:center;padding:clamp(22px,4vw,34px);border-radius:22px;border:1px solid var(--line-strong);background:linear-gradient(135deg,#14120a,#0d0e14)}
+.promo p{margin-top:10px;color:var(--muted);max-width:56ch}
+.promo .btns{display:flex;flex-wrap:wrap;gap:10px}
+.promo ul{list-style:none;padding:0;margin:14px 0 0;display:grid;gap:6px;font-size:.95rem}.promo li::before{content:"✓";color:var(--ok);font-weight:800;margin-right:8px}
+@media (max-width:760px){.promo{grid-template-columns:1fr}}
+.promo-art{font-size:64px;line-height:1}
+.reviews{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:32px}
+.review{padding:20px;border-radius:18px;border:1px solid var(--line);background:var(--panel)}
+.review p{color:var(--ink)}.review small{display:block;margin-top:12px;color:var(--muted)}
+.guides{display:flex;flex-wrap:wrap;gap:6px 18px}
 </style>
 </head>
 <body>
+<div class="offer" id="offerBar"><span data-t="offer_bar">🎉 Launch price: Royal Lifetime</span> <b><span data-inr="₹999" data-usd="$19">₹999</span></b> <s style="opacity:.7"><span data-inr="₹1,999" data-usd="$39">₹1,999</span></s> · <a href="#gift" data-t="offer_gift">🎁 Give it as a gift</a></div>
 <header class="top">
   <div class="wrap">
     <a class="brand" href="index.html" aria-label="DynastyVault home">
@@ -188,6 +247,7 @@ footer a{color:var(--ink);text-decoration:none}footer a:hover{color:var(--gold-h
           <a class="btn btn-gold" href="app.html" data-t="cta_start">Start your family tree — free</a>
           <a class="btn btn-ghost" href="app.html#demo" data-t="cta_demo">See a demo family</a>
         </div>
+        <a class="hero-quiz" href="quiz.html" data-t="hero_quiz">🧭 What kind of dynasty is your family? Take the 1-minute quiz →</a>
         <div class="trust"><span data-t="trust1">Free to start, no card</span><span data-t="trust2">Your data stays on your device</span><span data-t="trust3">Available in 16 languages</span></div>
       </div>
 
@@ -216,6 +276,50 @@ footer a{color:var(--ink);text-decoration:none}footer a:hover{color:var(--gold-h
     </div>
   </section>
 
+
+  <section class="band" id="see">
+    <div class="wrap see">
+      <div class="sec-head"><div class="eyebrow" data-t="see_eyebrow">See it in 20 seconds</div><h2 style="margin-top:10px" data-t="see_h2">From names to voices to a card your whole family shares</h2>
+        <ol class="see-steps" id="seeSteps">
+          <li><button type="button" data-s="0" class="on" data-t="see_s1">Add both sides of the family</button></li>
+          <li><button type="button" data-s="1" data-t="see_s2">Record Grandma’s voice for 15 seconds</button></li>
+          <li><button type="button" data-s="2" data-t="see_s3">Hear her story told in her own voice</button></li>
+          <li><button type="button" data-s="3" data-t="see_s4">Share your Family Card on WhatsApp</button></li>
+        </ol>
+        <div class="cta-row"><a class="btn btn-gold" href="app.html#card" data-t="card_btn">Make our Family Card — free</a></div>
+      </div>
+      <div>
+        <div class="phone" aria-hidden="true"><div class="screen">
+          <div class="scene on" data-s="0"><div class="t" data-t="see_t1">Rawat Dynasty</div>
+            <svg class="mtree" viewBox="0 0 260 230"><g stroke="#D4AF37" stroke-opacity=".55" stroke-width="2" fill="none"><path d="M40 40H100M160 40H220M70 40V95H105M190 40V95H155M130 110V165"/><path d="M105 110H155"/></g>
+              <g class="n" style="animation-delay:.1s"><circle cx="40" cy="40" r="18"/></g><g class="n" style="animation-delay:.3s"><circle cx="100" cy="40" r="18"/></g><g class="n" style="animation-delay:.5s"><circle cx="160" cy="40" r="18"/></g><g class="n" style="animation-delay:.7s"><circle cx="220" cy="40" r="18"/></g>
+              <g class="n" style="animation-delay:1s"><circle cx="105" cy="110" r="18"/></g><g class="n" style="animation-delay:1.2s"><circle cx="155" cy="110" r="18"/></g><g class="n" style="animation-delay:1.6s"><circle cx="130" cy="185" r="22" stroke="#F3D774"/></g>
+              <g fill="#E9CF7A" font-size="10" font-weight="700" text-anchor="middle" font-family="Cinzel, Georgia, serif"><text x="40" y="44" class="n" style="animation-delay:.1s">GPA</text><text x="100" y="44" class="n" style="animation-delay:.3s">GMA</text><text x="160" y="44" class="n" style="animation-delay:.5s">GPA</text><text x="220" y="44" class="n" style="animation-delay:.7s">GMA</text><text x="105" y="114" class="n" style="animation-delay:1s">DAD</text><text x="155" y="114" class="n" style="animation-delay:1.2s">MOM</text><text x="130" y="189" class="n" style="animation-delay:1.6s" fill="#F3D774">YOU</text></g></svg>
+            <small data-t="see_c1">Papa’s side and Mummy’s side, together</small></div>
+          <div class="scene" data-s="1"><div class="mic">🎙️</div><div class="t" data-t="see_t2">Recording Dadi · 0:12</div><div class="mwave" id="seeWave"></div><small data-t="see_c2">15 seconds is enough</small></div>
+          <div class="scene" data-s="2"><div class="mplay"><small data-t="see_t3">▶ Dadi · in her own voice</small><p data-t="see_c3">“We came to Delhi in 1962 with one trunk and two children. Your grandfather opened a tiny shop near the station…”</p><div class="mbar"><i></i></div></div></div>
+          <div class="scene" data-s="3"><div class="mcard"><small style="letter-spacing:.14em" data-t="see_t4">OUR FAMILY DYNASTY</small><b>Rawat Dynasty</b><div class="st"><span><b>18</b><span data-t="see_m">members</span></span><span><b>4</b><span data-t="see_g">generations</span></span><span><b>3</b><span data-t="see_p">places</span></span></div><div class="mqr"></div></div><div class="mshare"><span>WhatsApp</span><span>Instagram</span><span>⬇</span></div></div>
+        </div></div>
+        <p class="see-note" data-t="see_note">An illustration of the app. Your own family appears in the real thing.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="card">
+    <div class="wrap">
+      <div class="promo"><div><div class="eyebrow" data-t="card_eyebrow">New · Family Card</div><h2 style="margin-top:10px" data-t="card_h2">Your whole family on one golden card</h2>
+        <p data-t="card_p">Type a few names and get a share-ready card with your family tree, generations and the places your family came from. Post it on your WhatsApp status or Instagram story — your cousins will want one too.</p></div>
+        <div class="btns"><a class="btn btn-gold" href="app.html#card" data-t="card_btn">Make our Family Card — free</a></div></div>
+    </div>
+  </section>
+
+  <section class="band" id="quiz">
+    <div class="wrap">
+      <div class="promo"><div><div class="eyebrow" data-t="quiz_eyebrow">1-minute quiz</div><h2 style="margin-top:10px" data-t="quiz_h2">Wanderers, Builders or Storytellers?</h2>
+        <p data-t="quiz_p">Six fun questions tell you what kind of dynasty your family is. Get your Dynasty Type card and challenge your family group to take it too.</p></div>
+        <div class="btns"><a class="btn btn-gold" href="quiz.html" data-t="quiz_btn">Take the quiz</a></div></div>
+    </div>
+  </section>
   <section class="band" id="features">
     <div class="wrap">
       <div class="sec-head"><div class="eyebrow" data-t="f_eyebrow">What you can do</div><h2 style="margin-top:10px" data-t="f_h2">One home for your family’s names, faces and voices</h2>
@@ -269,6 +373,22 @@ footer a{color:var(--ink);text-decoration:none}footer a:hover{color:var(--gold-h
     </div>
   </section>
 
+
+  <section class="band" id="gift">
+    <div class="wrap">
+      <div class="promo"><div><div class="eyebrow" data-t="gift_eyebrow">The gift parents remember</div><h2 style="margin-top:10px" data-t="gift_h2">Give your family’s story as a gift</h2>
+        <p data-t="gift_p">Perfect for birthdays, anniversaries, Mother’s Day and Father’s Day.</p>
+        <ul><li data-t="gift_li1">100% digital — nothing is shipped, no address needed</li><li data-t="gift_li2">You pay, we send you a gift code on WhatsApp — you forward it</li><li data-t="gift_li3">It unlocks on their own phone, with your message</li></ul></div>
+        <div class="btns"><a class="btn btn-gold" href="app.html#gift-royal" data-t="gift_btn1">🎁 Gift Royal Lifetime</a><a class="btn btn-ghost" href="app.html#buy-gift" data-t="gift_btn2">Heritage Gift Box</a></div></div>
+    </div>
+  </section>
+
+  <section class="band" id="reviews" hidden>
+    <div class="wrap">
+      <div class="sec-head"><div class="eyebrow" data-t="rev_eyebrow">Families on DynastyVault</div><h2 style="margin-top:10px" data-t="rev_h2">What families say</h2></div>
+      <div class="reviews" id="reviewList"></div>
+    </div>
+  </section>
   <section class="band" id="faq">
     <div class="wrap">
       <div class="sec-head"><div class="eyebrow" data-t="faq_eyebrow">Questions</div><h2 style="margin-top:10px" data-t="faq_h2">Things families ask us</h2></div>
@@ -280,6 +400,7 @@ footer a{color:var(--ink);text-decoration:none}footer a:hover{color:var(--gold-h
         <details><summary data-t="q5"></summary><p data-t="a5"></p></details>
         <details><summary data-t="q6"></summary><p data-t="a6"></p></details>
         <details><summary data-t="q7"></summary><p data-t="a7"></p></details>
+        <details><summary data-t="q8"></summary><p data-t="a8"></p></details>
       </div>
     </div>
   </section>
@@ -300,6 +421,7 @@ footer a{color:var(--ink);text-decoration:none}footer a:hover{color:var(--gold-h
   <div class="wrap">
     <span>© <span id="yr">2026</span> DynastyVault<span id="ownerLine"></span></span>
     <nav aria-label="Legal"><a href="terms.html" data-t="foot_terms">Terms</a><a href="privacy.html" data-t="foot_privacy">Privacy</a><a href="refund.html" data-t="foot_refunds">Refunds</a><a href="#contact" data-t="nav_contact">Contact</a><a href="app.html" data-t="open_app">Open the app</a></nav>
+    <nav class="guides" aria-label="Guides"><a href="quiz.html" data-t="foot_quiz">Dynasty quiz</a><a href="how-to-make-a-family-tree.html">How to make a family tree</a><a href="family-tree-kaise-banaye.html">Family tree kaise banayein</a><a href="save-grandparents-voice.html">Save your grandparents’ voice</a></nav>
   </div>
 </footer>
 
@@ -368,6 +490,17 @@ footer a{color:var(--ink);text-decoration:none}footer a:hover{color:var(--gold-h
     const sel2 = () => { const r = document.createRange(); r.selectNodeContents($('#waNum')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); };
     try { navigator.clipboard.writeText(t).then(done, sel2); } catch (e) { sel2(); }
   });
+  // ---- "see it in 20 seconds" demo: cycles the scenes; tapping a step jumps to it
+  const scenes = [...document.querySelectorAll('.scene')], stepsB = [...document.querySelectorAll('#seeSteps button')];
+  const sw = $('#seeWave'); if (sw) sw.innerHTML = [10,18,26,14,30,20,12,24,32,16,9,22,28,13,19].map((h, i) => `<i style="height:${h}px;animation-delay:${(i % 6) * 0.1}s"></i>`).join('');
+  let si = 0, sTimer = 0; const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const showScene = i => { si = i; scenes.forEach(x => x.classList.toggle('on', +x.dataset.s === i)); stepsB.forEach(x => x.classList.toggle('on', +x.dataset.s === i)); };
+  const loop = () => { clearTimeout(sTimer); if (still) return; sTimer = setTimeout(() => { showScene((si + 1) % scenes.length); loop(); }, 3800); };
+  stepsB.forEach(b => b.addEventListener('click', () => { showScene(+b.dataset.s); loop(); }));
+  if ('IntersectionObserver' in window) { const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) loop(); else clearTimeout(sTimer); })); const sec = $('#see'); if (sec) io.observe(sec); } else loop();
+  // ---- real reviews only: add them in config.js → testimonials: [{ name:'Priya S.', place:'Pune', text:'…' }]
+  const revs = Array.isArray(C.testimonials) ? C.testimonials.filter(r => r && r.text) : [];
+  if (revs.length) { const e2 = s => String(s || '').replace(/[&<>"]/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c])); $('#reviewList').innerHTML = revs.slice(0, 6).map(r => `<figure class="review" style="margin:0"><p>“${e2(r.text)}”</p><small>— ${e2(r.name)}${r.place ? ', ' + e2(r.place) : ''}</small></figure>`).join(''); $('#reviews').hidden = false; }
   apply();
 })();
 </script>

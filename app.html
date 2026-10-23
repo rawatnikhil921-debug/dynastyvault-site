@@ -1869,10 +1869,11 @@ svg.leaflet-zoom-animated{will-change:transform}
       </div>
     </div>
     <div class="flex flex-wrap gap-3 lg:justify-end">
+      <button class="btn-gold" id="btnFamCard">🪪 <span data-hn="Family Card banao">Family Card</span></button>
       <button class="btn-ghost" id="btnFounder">👑 <span data-i18n="founder">Founder Profile</span></button>
       <button class="btn-ghost" data-open-map>🗺️ Migration Map</button>
       <button class="btn-ghost" id="btnInvite2"><svg class="ico" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="8" r="3"/><circle cx="16.5" cy="9" r="2.4"/><path d="M2.8 19c.6-3.3 2.6-5 5.2-5s4.6 1.7 5.2 5M13.6 14.4c.9-.6 1.8-.9 2.9-.9 2.2 0 3.8 1.4 4.3 4"/><path d="M19.5 2.5v4M17.5 4.5h4" stroke="var(--gold-hi)"/></svg> <span data-i18n="invite">Invite Family</span></button>
-      <button class="btn-gold" data-open-portrait="photo">🖼️ <span data-i18n="portrait">Reunion Portrait</span></button>
+      <button class="btn-ghost" data-open-portrait="photo">🖼️ <span data-i18n="portrait">Reunion Portrait</span></button>
       <button class="btn-ghost" id="btnNewVault">＋ <span data-i18n="newVault">Create New Dynasty</span></button>
     </div>
   </section>
@@ -2144,7 +2145,7 @@ svg.leaflet-zoom-animated{will-change:transform}
     <div class="ref-plan-banner" id="refPlanBanner" hidden></div>
     <div id="planGrid" class="grid md:grid-cols-2 gap-6 mt-12 max-w-4xl mx-auto items-stretch"></div>
     <div class="cmp-wrap max-w-4xl mx-auto" id="planCompare"></div>
-    <p class="pay-note max-w-4xl mx-auto mt-6 text-center">🔒 India: pay by <b>UPI</b> (Google Pay, PhonePe, Paytm, any bank app). Other countries: scan the QR and pay by <b>card or PayPal in your own currency</b>. After paying you get an <b>unlock code on WhatsApp</b>, usually within a few hours. <button class="chip ml-1" data-unlock-code>🔑 I have an unlock code</button></p>
+    <p class="pay-note max-w-4xl mx-auto mt-6 text-center">🔒 India: pay by <b>UPI</b> (Google Pay, PhonePe, Paytm, any bank app). Other countries: scan the QR and pay by <b>card or PayPal in your own currency</b>. After paying you get an <b>unlock code on WhatsApp</b>, usually within a few hours. <button class="chip ml-1" data-unlock-code>🔑 I have an unlock code</button> <button class="chip ml-1" data-gift-royal>🎁 <span data-hn="Royal kisi ko gift karo">Gift Royal to someone</span></button></p>
     <p class="tiny muted max-w-4xl mx-auto mt-3 text-center">* Want a story in their voice right away? Order “Story in their own voice” below and we make it for you.</p>
     <p class="tiny muted text-center mt-8">USD prices are set for buyers outside India; your card or PayPal converts them to your own currency automatically.</p>
   </section>
@@ -2532,6 +2533,7 @@ svg.leaflet-zoom-animated{will-change:transform}
           <button class="share-btn sb-wa" data-share="whatsapp">💬 WhatsApp</button>
           <button class="share-btn sb-dl" data-share="download">⬇ Download card</button>
           <button class="share-btn sb-dl" data-share="copy">📋 Copy caption</button>
+          <button class="share-btn sb-wa" id="shareInvite" hidden>👪 <span data-hn="Family ko bulao — woh apni taraf ke naam jodenge">Invite family to add their side</span></button>
           <button class="share-btn sb-dl" id="shareQR">🔲 Gold QR plate for frames &amp; albums</button>
         </div>
         <p class="tiny muted mt-3">On phones the card goes straight to Instagram, Snapchat or WhatsApp through the share sheet. On computers it downloads with the caption copied, ready to post.</p>
@@ -2627,7 +2629,7 @@ const PAY = Object.assign({
 const SERVICES = {
   photo:{ id:'photo', icon:'📸', name:'Real Reunion Photo — made for you', unit:'per photo', desc:'Send everyone’s photos on WhatsApp. We make one real-looking family group photo, check every face by hand, and send it back within 48 hours.' },
   voice:{ id:'voice', icon:'🎙️', name:'Story in Their Own Voice — made for you', unit:'per story', desc:'Send a 20-second voice note and the story. We send back an MP3 of the story read in that voice (up to 2 minutes) within 48 hours.' },
-  gift:{ id:'gift', icon:'🎁', name:'Heritage Gift Box', unit:'one-time', desc:'Royal Dynasty Lifetime + one real reunion photo + three stories in an elder’s voice. The perfect birthday or anniversary gift for parents.' }
+  gift:{ id:'gift', icon:'🎁', name:'Heritage Gift Box', unit:'one-time', desc:'Royal Dynasty Lifetime + one real reunion photo + three stories in an elder’s voice. A digital gift — nothing is shipped: you get a gift code on WhatsApp and forward it. The perfect birthday or anniversary gift for parents.' }
 };
 
 const HAS_SERVER = !!String((window.DV_CONFIG || {}).server || '').trim();   // server = safe unlock codes (works with no paid keys)
@@ -2825,16 +2827,57 @@ function tributeText(v, e) {
   if (e.kind === 'birth-anniv') return `🌼 Today we remember ${p.name} on the ${e.title.split('’s ')[1]}.${line ? ' ' + line : ''} Their story, photos and voice live on in our family vault. 🕯️`;
   return `🕯️ Remembering ${p.name}${p.born ? ` (${yearOf(p.born)}–${yearOf(p.died)})` : ''} on their death anniversary.${line ? ' ' + line : ''} Light a virtual candle and share a memory on their tribute wall in our ${v.name}. 🕯️`;
 }
+
+/* 📅 every birthday & anniversary as yearly events in the phone's own calendar — real reminders, no server needed */
+function calendarEvents(v) {
+  const idx = indexVault(v); const out = [];
+  Object.keys(idx).forEach(pid => {
+    const p = v.people[pid]; if (!p) return; const fn = p.name || firstName(p.name);
+    if (parseDay(p.born)) out.push({ pid, date:p.born, title:isDeparted(p) ? hx(`🌼 ${fn} — birth anniversary`, `🌼 ${fn} — janam din ki yaad`) : hx(`🎂 ${fn}’s birthday`, `🎂 ${fn} ka birthday`) });
+    if (parseDay(p.died)) out.push({ pid, date:p.died, title:hx(`🕯️ ${fn} — death anniversary`, `🕯️ ${fn} — death anniversary`) });
+  });
+  return out;
+}
+function buildICS(v) {
+  const esc2 = t => String(t).replace(/\\/g, '\\\\').replace(/[,;]/g, m => '\\' + m).replace(/\n/g, '\\n');
+  const stamp = new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d+Z$/, 'Z'); const link = siteBase();
+  const lines = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//DynastyVault//Family dates//EN', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH', 'X-WR-CALNAME:' + esc2(v.name)];
+  calendarEvents(v).forEach((e, i) => {
+    const d = parseDay(e.date); const ymd = isoDay(d).replace(/-/g, ''); const nd = new Date(d.getFullYear(), d.getMonth(), d.getDate() + 1); const leap = d.getMonth() === 1 && d.getDate() === 29;
+    lines.push('BEGIN:VEVENT', `UID:dv-${hashStr(v.id + e.pid + e.date + i)}@dynastyvault`, 'DTSTAMP:' + stamp, 'DTSTART;VALUE=DATE:' + ymd, 'DTEND;VALUE=DATE:' + isoDay(nd).replace(/-/g, ''),
+      leap ? 'RRULE:FREQ=YEARLY;BYMONTH=2;BYMONTHDAY=-1' : 'RRULE:FREQ=YEARLY', 'SUMMARY:' + esc2(e.title), 'DESCRIPTION:' + esc2(hx(`From the ${v.name} on DynastyVault.`, `${v.name} se — DynastyVault.`) + (link ? ' ' + link : '')), 'TRANSP:TRANSPARENT',
+      'BEGIN:VALARM', 'ACTION:DISPLAY', 'DESCRIPTION:' + esc2(e.title), 'TRIGGER:-PT6H', 'END:VALARM', 'END:VEVENT');
+  });
+  lines.push('END:VCALENDAR');
+  return lines.map(l => { const out = []; let t = l; while (t.length > 74) { out.push(t.slice(0, 74)); t = ' ' + t.slice(74); } out.push(t); return out.join('\r\n'); }).join('\r\n') + '\r\n';
+}
+async function addDatesToCalendar() {
+  const v = V(); const n = calendarEvents(v).length;
+  if (!n) { toast(hx('Add birth dates in the profiles first — then every birthday and anniversary goes into your phone calendar.', 'Pehle profiles mein janam ki tareekh daalo — phir har birthday aur anniversary phone calendar mein chali jayegi.'), 'warn', 6500); return; }
+  const blob = new Blob([buildICS(v)], { type:'text/calendar' }); const name = `${slug(v.name)}-family-dates.ics`;
+  const file = new File([blob], name, { type:'text/calendar' });
+  try { if (navigator.canShare && navigator.share && navigator.canShare({ files:[file] })) { await navigator.share({ files:[file], title:v.name }); markUsed('calendar'); return; } } catch (e) { if (e && e.name === 'AbortError') return; }
+  await saveFile(name, blob); markUsed('calendar');
+  toast(hx(`${n} dates saved. Open the downloaded file and tap “Add” — your phone will remind you every year, the evening before.`, `${n} tareekhein save ho gayi. Download hui file kholo aur “Add” dabao — phone har saal ek din pehle shaam ko yaad dilayega.`), 'info', 8000);
+}
 let annivHidden = null, notifShown = {};
 function renderAnniv() {
   const box = $('#anniv'); if (!box) return; const v = V(); const ev = upcomingEvents(v);
-  if (!ev.length || annivHidden === v.id) { box.hidden = true; box.innerHTML = ''; return; }
+  if (annivHidden === v.id) { box.hidden = true; box.innerHTML = ''; return; }
+  if (!ev.length) {
+    const n = calendarEvents(v).length; if (!n || state.calHide === v.id) { box.hidden = true; box.innerHTML = ''; return; }
+    box.hidden = false;
+    box.innerHTML = `<div class="anniv-head"><span class="bell" aria-hidden="true">📅</span><div class="min-w-0"><div class="eyebrow">◆ ${hx('Never miss a family date', 'Koi family date mat bhoolo')}</div><b class="anniv-title">${hx(`Put all ${n} birthdays & anniversaries in your phone calendar`, `Saare ${n} birthdays aur anniversaries phone calendar mein daalo`)}</b></div><button class="auto-chip ml-auto on" id="calAdd">📅 ${hx('Add to my calendar', 'Calendar mein daalo')}</button><button class="icon-btn sm" id="calHide" aria-label="Hide">✕</button></div>`;
+    $('#calAdd').addEventListener('click', addDatesToCalendar);
+    $('#calHide').addEventListener('click', () => { state.calHide = v.id; save(); renderAnniv(); });
+    return;
+  }
   box.hidden = false;
-  box.innerHTML = `<div class="anniv-head"><span class="bell" aria-hidden="true">🔔</span><div class="min-w-0"><div class="eyebrow">◆ Ancestral Anniversary &amp; Memory Trigger</div><b class="anniv-title">Coming up in the ${esc(v.name)}</b></div><button class="auto-chip ml-auto${state.autoRemind ? ' on' : ''}" id="autoRemind" title="Automated WhatsApp reminder simulator">🤖 Auto WhatsApp reminders · ${state.autoRemind ? 'On' : 'Off'}</button><button class="icon-btn sm" id="annivClose" aria-label="Hide reminders">✕</button></div>
-    <div class="anniv-list">${ev.slice(0, 4).map((e, i) => `<div class="anniv-item ${e.kind}" style="animation-delay:${(i * 0.08).toFixed(2)}s"><span class="ai" aria-hidden="true">${e.icon}</span><div class="min-w-0 flex-1"><b>${esc(e.title)}</b><small>${whenLabel(e.days)} · ${fmtDay(e.date, { day:'numeric', month:'long' })} · ${esc(e.sub)}</small>${autoRemindLine(e)}</div>
+  box.innerHTML = `<div class="anniv-head"><span class="bell" aria-hidden="true">🔔</span><div class="min-w-0"><div class="eyebrow">◆ Ancestral Anniversary &amp; Memory Trigger</div><b class="anniv-title">Coming up in the ${esc(v.name)}</b></div><button class="auto-chip ml-auto on" id="autoRemind" title="${esc(hx('Every birthday and anniversary, every year, in your phone calendar', 'Har birthday aur anniversary, har saal, phone calendar mein'))}">📅 ${hx('Add all to my calendar', 'Sab calendar mein daalo')}</button><button class="icon-btn sm" id="annivClose" aria-label="Hide reminders">✕</button></div>
+    <div class="anniv-list">${ev.slice(0, 4).map((e, i) => `<div class="anniv-item ${e.kind}" style="animation-delay:${(i * 0.08).toFixed(2)}s"><span class="ai" aria-hidden="true">${e.icon}</span><div class="min-w-0 flex-1"><b>${esc(e.title)}</b><small>${whenLabel(e.days)} · ${fmtDay(e.date, { day:'numeric', month:'long' })} · ${esc(e.sub)}</small></div>
       <div class="anniv-act"><button class="btn-wa sm" data-trib="${i}">💬 ${e.kind === 'birthday' ? 'Send wishes' : 'Send tribute'}</button>${e.kind === 'birthday' ? '' : `<button class="btn-ghost sm" data-memo="${e.pid}" aria-label="Open the memorial of ${esc(v.people[e.pid].name)}">🕯️ Memorial</button>`}</div></div>`).join('')}</div>`;
   $('#annivClose').addEventListener('click', () => { annivHidden = v.id; renderAnniv(); });
-  $('#autoRemind').addEventListener('click', () => { state.autoRemind = !state.autoRemind; save(); renderAnniv(); toast(state.autoRemind ? '🤖 Auto-reminders on — each message is prepared at 8:00 AM on the day for your family WhatsApp group (simulated: a live service sends them through WhatsApp Business).' : 'Auto-reminders off.', 'info', 6000); });
+  $('#autoRemind').addEventListener('click', addDatesToCalendar);
   $$('#anniv [data-trib]').forEach(b => b.addEventListener('click', () => shareWhatsApp(tributeText(v, ev[+b.dataset.trib]))));
   $$('#anniv [data-memo]').forEach(b => b.addEventListener('click', () => openStudio(b.dataset.memo, false, 'memorial')));
 }
@@ -3788,6 +3831,7 @@ function createFromWizard() {
   renderVaultSelect(); renderHero(); renderViewTabs(); renderAddons(); renderGpt(); renderPromo(); tickPresence(true);
   requestAnimationFrame(() => { renderTree({ animate:true, fit:true }); document.getElementById('vault').scrollIntoView({ behavior:'smooth' }); });
   toast(`👑 The ${v.name} is born — ${Object.keys(v.people).length} members. Tap any portrait to add photos, stories and voices.`, 'info', 6000);
+  if (!state.cardShown) { state.cardShown = 1; save(); setTimeout(() => { if (!modalStack.length) openFamilyCard(true); }, 3200); }
   if (hasDual(v) && !isRoyal()) setTimeout(() => toast(hx('Your maternal side is saved too — Royal Dynasty shows both sides fused.', 'Aapki Nana–Nani side bhi save hai — Royal Dynasty dono taraf ek saath dikhata hai.'), 'info', 5000), 2600);
 }
 function startDemo() {
@@ -3902,16 +3946,20 @@ async function drawMemoryCard(o, fmt) {
   g.fillStyle = '#C9B77C'; g.font = '600 28px "Plus Jakarta Sans", Arial, sans-serif'; g.fillText(siteBase() ? siteBase().replace(/^https?:\/\//, '').slice(0, 48) : 'Build your family tree · voices · stories', W / 2, H - 100);
   return new Promise(res => c.toBlob(b => res({ blob:b, url:c.toDataURL('image/jpeg', .9) }), 'image/jpeg', .92));
 }
-function shareCaption(o) { const v = Object.assign({}, V(), o.fam ? { name:o.fam } : {}); if (isHn()) return `👑 ${o.text ? `“${trunc(o.text, 180)}” — ` : ''}${o.by}, ${v.name}. DynastyVault pe hamare family tree se judo${siteBase() ? ': ' + siteBase() : ''}`; return `👑 ${o.text ? `“${trunc(o.text, 180)}” — ` : ''}${o.by}, ${v.name}. Join our family tree on DynastyVault${siteBase() ? ': ' + siteBase() : ''}`; }
+function shareCaption(o) { if (o.kind === 'family') return familyCaption(); const v = Object.assign({}, V(), o.fam ? { name:o.fam } : {}); if (isHn()) return `👑 ${o.text ? `“${trunc(o.text, 180)}” — ` : ''}${o.by}, ${v.name}. DynastyVault pe hamare family tree se judo${siteBase() ? ': ' + siteBase() : ''}`; return `👑 ${o.text ? `“${trunc(o.text, 180)}” — ` : ''}${o.by}, ${v.name}. Join our family tree on DynastyVault${siteBase() ? ': ' + siteBase() : ''}`; }
 async function openShare(o) {
   markUsed('share');
   share.opts = o; share.fmt = o.kind === 'story' ? 'story' : 'post';
+  const fam = o.kind === 'family'; const hd = $('#shareModal h3'); const eb = $('#shareModal .eyebrow');
+  if (hd) hd.textContent = fam ? (o.first ? hx('🎉 Your Family Card is ready', '🎉 Aapka Family Card taiyaar hai') : hx('🪪 Your Family Card', '🪪 Aapka Family Card')) : '⚡ Share a memory card';
+  if (eb) eb.textContent = fam ? hx('◆ Share it — every card carries your link', '◆ Share karo — har card pe aapka link hai') : '◆ Social Cross-Posting';
+  const si = $('#shareInvite'); if (si) si.hidden = !fam; const sq = $('#shareQR'); if (sq) sq.hidden = fam;
   openModal('shareModal'); await renderShare();
 }
 async function renderShare() {
   const box = $('#sharePrev'); box.innerHTML = '<div class="spinner"></div>';
   $$('#shareFmt [data-fmt]').forEach(b => b.classList.toggle('on', b.dataset.fmt === share.fmt));
-  const r = await drawMemoryCard(share.opts, share.fmt); share.blob = r.blob;
+  const r = share.opts.kind === 'family' ? await drawFamilyCard(share.fmt) : await drawMemoryCard(share.opts, share.fmt); share.blob = r.blob;
   box.innerHTML = `<img src="${r.url}" alt="Memory card preview" class="share-img ${share.fmt}">`;
   $('#shareNative').hidden = !(navigator.canShare && navigator.share);
 }
@@ -3920,6 +3968,7 @@ async function shareTo(target) {
   const tryNative = async () => { if (file && navigator.canShare && navigator.share && navigator.canShare({ files:[file] })) { try { await navigator.share({ files:[file], text:cap, title:'DynastyVault memory' }); return true; } catch (e) { if (e && e.name === 'AbortError') return true; } } return false; };
   const copyCap = async () => { try { await navigator.clipboard.writeText(cap); return true; } catch (e) { return false; } };
   if (target === 'native') { if (!(await tryNative())) toast('This browser cannot open the share sheet — use Download card instead.', 'warn'); return; }
+  if (target === 'whatsapp' && o.kind === 'family') { if (await tryNative()) return; waOpen(cap); return; }
   if (target === 'whatsapp') { if (await tryNative()) return; shareWhatsApp(cap.replace(/ (Join our family tree|DynastyVault pe hamare family tree se judo).*$/, isHn() ? ' DynastyVault pe hamare family tree se judo 👑' : ' Join our family tree on DynastyVault 👑')); return; }
   if (target === 'facebook') {
     const base = siteBase(); if (base) { window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(base)}&quote=${encodeURIComponent(cap)}`, '_blank', 'noopener'); return; }
@@ -3932,6 +3981,100 @@ async function shareTo(target) {
   }
   if (target === 'download') { await saveFile(file.name, share.blob); return; }
   if (target === 'copy') { toast(await copyCap() ? 'Caption copied ✦' : 'This browser blocked copying.', 'info'); }
+}
+
+/* ---------- 🪪 Family Card — one tap makes a share-ready image of the whole family (QR + link on every copy) ---------- */
+const famCard = { link:'' };
+function fcRR(g, x, y, w, h, r) { g.beginPath(); g.moveTo(x + r, y); g.lineTo(x + w - r, y); g.quadraticCurveTo(x + w, y, x + w, y + r); g.lineTo(x + w, y + h - r); g.quadraticCurveTo(x + w, y + h, x + w - r, y + h); g.lineTo(x + r, y + h); g.quadraticCurveTo(x, y + h, x, y + h - r); g.lineTo(x, y + r); g.quadraticCurveTo(x, y, x + r, y); g.closePath(); }
+function familyCardData(v) {
+  const idx = indexVault(v); const ids = Object.keys(idx); const st = stats(v);
+  const years = ids.map(id => yearOf(v.people[id] && v.people[id].born)).filter(y => y && y > 1000);
+  const trail = (v.trail || []).slice().sort((a, b) => (a.year || 0) - (b.year || 0));
+  const places = []; trail.forEach(s => { const n = String(s.place || '').split(',')[0].trim(); if (n && !places.includes(n)) places.push(n); });
+  const rows = {}; ids.forEach(id => { const p = v.people[id]; if (!p) return; const d = idx[id].depth; (rows[d] = rows[d] || []).push(p); });
+  const depths = Object.keys(rows).map(Number).sort((a, b) => a - b);
+  return { st, since:years.length ? Math.min(...years) : 0, places, rows:depths.map(d => rows[d]) };
+}
+async function famCardLink() {
+  let link = '';
+  try { if (siteBase()) link = await ensureRefLink(); } catch (e) { link = ''; }
+  if (!link || link.length > 160) link = siteBase() || '';
+  famCard.link = link; return link;
+}
+function fcDrawQR(g, text, x, y, size) {
+  const q = QR.encode(text); const n = q.size, pad = 3; const m = size / (n + pad * 2);
+  g.fillStyle = '#F6E7B0'; fcRR(g, x, y, size, size, 18); g.fill();
+  g.fillStyle = '#1A1405'; q.modules.forEach((row, yy) => row.forEach((on, xx) => { if (on) g.fillRect(x + (xx + pad) * m, y + (yy + pad) * m, Math.ceil(m), Math.ceil(m)); }));
+}
+async function drawFamilyCard(fmt) {
+  const tall = fmt === 'story'; const W = 1080, H = tall ? 1920 : 1350;
+  const c = document.createElement('canvas'); c.width = W; c.height = H; const g = c.getContext('2d');
+  try { await document.fonts.load('700 60px Cinzel'); await document.fonts.load('600 40px "Plus Jakarta Sans"'); } catch (e) { /* fallback fonts */ }
+  const v = V(); const d = familyCardData(v); const link = famCard.link || await famCardLink();
+  const SANS = '"Plus Jakarta Sans", Arial, sans-serif', SERIF = 'Cinzel, Georgia, serif';
+  const bg = g.createLinearGradient(0, 0, W, H); bg.addColorStop(0, '#07080B'); bg.addColorStop(.6, '#0E0F14'); bg.addColorStop(1, '#1a1406'); g.fillStyle = bg; g.fillRect(0, 0, W, H);
+  const aura = g.createRadialGradient(W / 2, H * .22, 10, W / 2, H * .22, W * .75); aura.addColorStop(0, 'rgba(255,223,0,.20)'); aura.addColorStop(1, 'rgba(255,223,0,0)'); g.fillStyle = aura; g.fillRect(0, 0, W, H);
+  const R = rngFrom(hashStr(v.name)); for (let i = 0; i < 80; i++) { g.globalAlpha = .12 + R() * .5; g.fillStyle = R() > .5 ? '#FFDF00' : '#FFF1A8'; g.beginPath(); g.arc(R() * W, R() * H, .8 + R() * 2.4, 0, Math.PI * 2); g.fill(); } g.globalAlpha = 1;
+  const gold = g.createLinearGradient(0, 0, W, H); [[0, '#7A5A0C'], [.2, '#D4AF37'], [.35, '#FFF1A8'], [.5, '#FFDF00'], [.7, '#AA7C11'], [1, '#E9CF7A']].forEach(([k, col]) => gold.addColorStop(k, col));
+  g.strokeStyle = gold; g.lineWidth = 10; g.strokeRect(36, 36, W - 72, H - 72); g.lineWidth = 2; g.strokeRect(58, 58, W - 116, H - 116);
+  const fit = (txt, weight, size, min, fam, maxW) => { let s = size; g.font = `${weight} ${s}px ${fam}`; while (s > min && g.measureText(txt).width > maxW) { s -= 2; g.font = `${weight} ${s}px ${fam}`; } let t = String(txt); while (t.length > 4 && g.measureText(t).width > maxW) t = t.slice(0, -2); return t === txt ? t : t + '…'; };
+  g.textAlign = 'center'; g.textBaseline = 'alphabetic';
+  let y = tall ? 190 : 128;
+  // crown
+  g.save(); g.translate(W / 2 - 46, y - 52); g.scale(92 / 64, 92 / 64); g.beginPath(); g.moveTo(10, 24); g.lineTo(22, 34); g.lineTo(32, 14); g.lineTo(42, 34); g.lineTo(54, 24); g.lineTo(49, 46); g.lineTo(15, 46); g.closePath(); g.fillStyle = '#E9C46A'; g.fill(); g.restore();
+  y += 46;
+  g.fillStyle = '#E9CF7A'; g.font = `800 26px ${SANS}`; g.fillText(hx('OUR FAMILY DYNASTY', 'HAMARA FAMILY DYNASTY').split('').join(String.fromCharCode(8202)), W / 2, y);
+  y += tall ? 100 : 88;
+  g.fillStyle = gold; g.fillText(fit(v.name, 700, tall ? 92 : 84, 44, SERIF, W - 190), W / 2, y);
+  if (v.motto) { y += 54; g.fillStyle = '#B9AE90'; g.font = `italic 500 30px ${SANS}`; wrapLines(g, v.motto, W - 240, 2).forEach((ln, i) => g.fillText(ln, W / 2, y + i * 40)); y += v.motto.length > 50 ? 40 : 0; }
+  // mini tree — one row per generation
+  const rows = d.rows.slice(0, tall ? 5 : 4); const rad = tall ? 58 : 44; const gapY = tall ? 180 : (rows.length > 3 ? 126 : 136); const top = y + (tall ? 110 : 84);
+  const centers = rows.map((row, ri) => { const shown = row.slice(0, 5); const extra = row.length - shown.length; const n = shown.length + (extra > 0 ? 1 : 0); const step = Math.min(190, (W - 330) / Math.max(1, n - 1 || 1)); const x0 = W / 2 - step * (n - 1) / 2; return { shown, extra, xs:Array.from({ length:n }, (_, k) => x0 + k * step), y:top + ri * gapY }; });
+  g.strokeStyle = 'rgba(212,175,55,.55)'; g.lineWidth = 3;
+  centers.forEach((r, ri) => { if (r.xs.length > 1) { g.beginPath(); g.moveTo(r.xs[0], r.y); g.lineTo(r.xs[r.xs.length - 1], r.y); g.stroke(); } if (ri + 1 < centers.length) { g.beginPath(); g.moveTo(W / 2, r.y + rad); g.lineTo(W / 2, centers[ri + 1].y - rad); g.stroke(); } });
+  for (const r of centers) {
+    for (let k = 0; k < r.xs.length; k++) {
+      const x = r.xs[k]; const p = r.shown[k];
+      g.save(); g.beginPath(); g.arc(x, r.y, rad + 6, 0, Math.PI * 2); g.fillStyle = gold; g.fill(); g.beginPath(); g.arc(x, r.y, rad, 0, Math.PI * 2); g.fillStyle = '#14151c'; g.fill(); g.clip();
+      let drew = false; if (p && p.avatar) { try { const im = await loadImg(p.avatar); const sc = Math.max(rad * 2 / im.width, rad * 2 / im.height); g.drawImage(im, x - im.width * sc / 2, r.y - im.height * sc / 2, im.width * sc, im.height * sc); drew = true; } catch (e) { /* initials */ } }
+      if (!drew) { g.fillStyle = gold; g.font = `700 ${Math.round(rad * .72)}px ${SERIF}`; g.textBaseline = 'middle'; g.fillText(p ? initials(p.name) : '+' + r.extra, x, r.y + 3); g.textBaseline = 'alphabetic'; }
+      g.restore();
+      if (p) { g.fillStyle = '#EFE3BF'; g.fillText(fit(firstName(p.name), 600, 22, 16, SANS, 150), x, r.y + rad + 34); }
+    }
+  }
+  y = top + (centers.length - 1) * gapY + rad + (tall ? 120 : 92);
+  // stats tiles
+  const pool = [[d.st.members, hx('members', 'log')], [d.st.gens, hx('generations', 'peedhiyan')], [d.places.length, hx('places', 'shehar')], [d.st.voices, hx('voices saved', 'awaazein')], [d.st.chron, hx('stories', 'kahaniyan')], [d.st.couples, hx('marriages', 'shaadiyan')]];
+  const tiles = pool.filter((t, i) => i < 2 || t[0] > 0).slice(0, 4); if (tiles.length < 4 && d.since) tiles.push([d.since, hx('since', 'se')]); if (tiles.length < 4 && hasDual(v)) tiles.push([2, hx('family sides', 'family sides')]);
+  const nt = tiles.length; const tw = Math.min(250, (W - 200 - (nt - 1) * 22) / nt); const tx0 = (W - (nt * tw + (nt - 1) * 22)) / 2; const th = tall ? 150 : 122;
+  tiles.forEach(([n, l], i) => { const x = tx0 + i * (tw + 22); g.fillStyle = 'rgba(212,175,55,.08)'; fcRR(g, x, y, tw, th, 22); g.fill(); g.strokeStyle = 'rgba(212,175,55,.4)'; g.lineWidth = 2; g.stroke(); g.fillStyle = gold; g.font = `700 ${tall ? 64 : 58}px ${SERIF}`; g.fillText(String(n), x + tw / 2, y + th * .55); g.fillStyle = '#B9AE90'; g.fillText(fit(l, 600, 22, 15, SANS, tw - 16), x + tw / 2, y + th * .84); });
+  y += th + (tall ? 90 : 62);
+  if (tall) { g.fillStyle = '#B9AE90'; g.font = `italic 500 34px ${SANS}`; g.fillText(hx('Every family is a dynasty.', 'Har family ek dynasty hai.'), W / 2, y + 150); }
+  const route = d.places.slice(0, 4).join('  →  ');
+  const since = d.since ? hx(`Since ${d.since}`, `${d.since} se`) : '';
+  const line = [since, route].filter(Boolean).join('  ·  ');
+  if (line) { g.fillStyle = '#E9CF7A'; g.fillText(fit(line, 600, 32, 20, SANS, W - 200), W / 2, y); }
+  // footer: QR + call to action
+  const qs = tall ? 250 : 210; const fy = H - qs - (tall ? 150 : 110);
+  if (link) {
+    fcDrawQR(g, link, 110, fy, qs);
+    g.textAlign = 'left'; const tx = 110 + qs + 40; const tmax = W - tx - 110;
+    g.fillStyle = gold; g.fillText(fit(hx('Make your family’s card — free', 'Apni family ka card banao — free'), 700, 40, 26, SERIF, tmax), tx, fy + qs * .30);
+    g.fillStyle = '#EFE3BF'; g.fillText(fit(hx('Scan the code or open the link', 'Code scan karo ya link kholo'), 500, 28, 18, SANS, tmax), tx, fy + qs * .55);
+    g.fillStyle = '#C9B77C'; g.fillText(fit(link.replace(/^https?:\/\//, '').replace(/[#?].*$/, ''), 600, 24, 15, SANS, tmax), tx, fy + qs * .78);
+    g.textAlign = 'center';
+  }
+  g.fillStyle = gold; g.font = `700 40px ${SERIF}`; g.fillText('DYNASTYVAULT', W / 2, H - (tall ? 82 : 66));
+  return new Promise(res => c.toBlob(b => res({ blob:b, url:c.toDataURL('image/jpeg', .9) }), 'image/jpeg', .92));
+}
+function familyCaption() {
+  const v = V(); const st = stats(v); const link = famCard.link || siteBase();
+  return hx(`👑 This is the ${v.name} — ${st.members} family members across ${st.gens} generations, all in one place on DynastyVault. Make your own family card for free 👇\n${link}`,
+    `👑 Yeh hai hamara ${v.name} — ${st.gens} peedhiyon ke ${st.members} log, sab ek jagah DynastyVault pe. Apni family ka card bhi free mein banao 👇\n${link}`);
+}
+async function openFamilyCard(first) {
+  markUsed('card'); famCard.link = ''; await famCardLink();
+  await openShare({ kind:'family', by:V().name, fam:V().name, first:!!first });
 }
 
 /* ---------- 🌍 public global arena (sample families + your public posts) ---------- */
@@ -7309,9 +7452,23 @@ async function cloneSaveAudio(p, btnEl) {
     const wav = pcmToWavBlob(out, sr); let blob = wav, ext = 'wav';
     if (b) b.textContent = hx('⏳ Packing the file…', '⏳ File ban rahi hai…');
     try { const a = await audioForArchive(await blobToDataURL(wav), { mp3:0, wav:0, orig:0 }); if (a && a.ext === 'mp3') { blob = new Blob([a.data], { type:'audio/mpeg' }); ext = 'mp3'; } } catch (e) { /* keep WAV */ }
-    await saveFile(`${slug(p.name)}-story-in-their-voice.${ext}`, blob);
+    const fname = `${slug(p.name)}-story-in-their-voice.${ext}`; const file = new File([blob], fname, { type:blob.type });
+    if (navigator.canShare && navigator.share && navigator.canShare({ files:[file] })) {
+      voiceShare.ready = { pid:p.id, file };
+      try { await voiceShareNow(p); } catch (e) { /* the button now says “Share the audio” — one more tap shares it */ }
+    } else await saveFile(fname, blob);
   } catch (e) { toast(hx(`The audio file could not be made (${e.message || e}).`, `Audio file nahi ban payi (${e.message || e}).`), 'warn', 6500); }
-  finally { if (b) { b.disabled = false; b.innerHTML = label; } }
+  finally { if (b) { b.disabled = false; b.innerHTML = voiceShare.ready && voiceShare.ready.pid === p.id ? `📤 ${hx('Share the audio', 'Audio share karo')}` : label; } }
+}
+// 📤 the made audio goes straight to WhatsApp / Instagram from the phone's share sheet (a fresh tap is needed if making it took long)
+const voiceShare = { ready:null };
+async function voiceShareNow(p) {
+  const r = voiceShare.ready; if (!r || r.pid !== p.id) return false;
+  const v = V(); const link = siteBase();
+  try {
+    await navigator.share({ files:[r.file], title:p.name, text:hx(`🎙️ ${p.name}’s story, told in their own voice — saved in the ${v.name} on DynastyVault.${link ? ' Save your family’s voices too: ' + link : ''}`, `🎙️ ${p.name} ki kahani, unki apni awaaz mein — ${v.name} mein DynastyVault pe save.${link ? ' Apni family ki awaaz bhi save karo: ' + link : ''}`) });
+    voiceShare.ready = null; markUsed('voiceshare'); return true;
+  } catch (e) { if (e && e.name === 'AbortError') { voiceShare.ready = null; return true; } throw e; }
 }
 
 /* =========================================================
@@ -8262,7 +8419,7 @@ function openStudio(pid, keepScroll, tab) {
         <div class="speak-row mt-6">
           <button class="btn-gold flex-1 sm:flex-none btn-wrap" id="stSpeak"></button>
           <button class="btn-ghost" id="stStop" disabled>⏹ Stop</button>
-          <button class="btn-ghost" id="stSaveVoice" title="${esc(hx('Save the whole story in their cloned voice as one audio file — to send on WhatsApp', 'Poori kahani unki clone awaaz mein ek audio file — WhatsApp pe bhejne ke liye'))}">⬇ ${hx('Save audio', 'Audio save karo')}</button>
+          <button class="btn-ghost" id="stSaveVoice" title="${esc(hx('Save the whole story in their cloned voice as one audio file — to send on WhatsApp', 'Poori kahani unki clone awaaz mein ek audio file — WhatsApp pe bhejne ke liye'))}">⬇ ${hx('Save / share audio', 'Audio save / share karo')}</button>
           <span class="eq" id="stEq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
         </div>
         <div class="progress mt-4"><i id="stProg"></i></div>
@@ -8364,7 +8521,7 @@ function bindStudio(p) {
     if (on) apply(); else { p.voice.clean = false; save(); const n = $('#stCleanNote'); n.textContent = 'Removes hiss, mains hum and room noise from old ancestor recordings while they play.'; n.classList.remove('on'); if (sampleAudio) { stopSample(); playSample(p); } }
   });
   $('#stStop').addEventListener('click', stopSpeaking);
-  $('#stSaveVoice').addEventListener('click', () => cloneSaveAudio(p));
+  $('#stSaveVoice').addEventListener('click', async e => { const btn = e.currentTarget; if (voiceShare.ready && voiceShare.ready.pid === p.id) { try { await voiceShareNow(p); } catch (err) { await saveFile(voiceShare.ready.file.name, voiceShare.ready.file); voiceShare.ready = null; } if (btn) btn.innerHTML = `⬇ ${hx('Save / share audio', 'Audio save / share karo')}`; return; } cloneSaveAudio(p); });
 }
 
 function updateBioMeta() {
@@ -11033,9 +11190,10 @@ function checkSub(raw) {
   if (SUB_TAKEN.has(name) || mine) return { ok:false, msg:`${name}.dynastyvault.app is already taken.`, alts:[`${name}-family`, `${name}-vault`, `the-${name}s`].filter(a => a.length <= 30 && !SUB_TAKEN.has(a)) };
   return { ok:true, msg:`${name}.dynastyvault.app is available ✓` };
 }
-function openCheckout(kind, id) {
-  if (kind === 'plan' && isRoyal() && !state.planDemo) { toast('Royal Dynasty Lifetime is already yours.', 'info'); return; }
-  ck = { kind, id, step:0, sub:null, pay:{ utr:'', name:'', phone:'', code:'' }, processing:false, order:null };
+function openCheckout(kind, id, opts = {}) {
+  const giftOnly = kind === 'plan' && isRoyal() && !state.planDemo;
+  if (giftOnly && !opts.gift) toast(hx('Royal Dynasty Lifetime is already yours — you can gift it to someone you love.', 'Royal Dynasty Lifetime aapke paas pehle se hai — aap ise kisi apne ko gift kar sakte ho.'), 'info', 5000);
+  ck = { kind, id, step:0, sub:null, pay:{ utr:'', name:'', phone:'', code:'' }, processing:false, order:null, gift:{ on:!!opts.gift || giftOnly || (kind === 'service' && id === 'gift'), to:'', note:'' }, giftOnly };
   if (kind === 'unlock') { const pend = (state.orders || []).filter(o => o.status === 'pending').slice(-1)[0]; ck.order = pend || null; ck.pay.orderId = pend ? pend.id : ''; }
   renderPreview(); renderCheckout(); openModal('checkoutModal');
 }
@@ -11066,7 +11224,15 @@ function renderPreview() {
       <p class="muted text-sm mt-4 max-w-xs">${esc(it.blurb)}</p></div>`;
   updatePrices(false);
 }
-function ckReviewHTML() {
+function ckGiftable() { return ck.kind === 'plan' || (ck.kind === 'service' && ck.id === 'gift') || (ck.kind === 'addon' && ck.id === 'voicepack'); }
+function ckGiftHTML() {
+  if (!ckGiftable()) return ''; const g = ck.gift;
+  return `<div class="card gift-box"><label class="flex items-center gap-2 text-sm font-bold"><input type="checkbox" id="ckGiftOn" ${g.on ? 'checked' : ''}${ck.giftOnly ? ' disabled' : ''}> 🎁 ${hx('This is a gift for someone', 'Yeh kisi ko gift hai')}</label>
+    ${g.on ? `<div class="grid sm:grid-cols-2 gap-3 mt-3"><label class="field"><span>${hx('Who is it for?', 'Kiske liye?')}</span><input class="input" id="ckGiftTo" value="${esc(g.to)}" maxlength="60" placeholder="${esc(hx('e.g. Mummy & Papa', 'jaise Mummy & Papa'))}"></label><label class="field"><span>${hx('Your message (optional)', 'Aapka message (optional)')}</span><input class="input" id="ckGiftNote" value="${esc(g.note)}" maxlength="140" placeholder="${esc(hx('Happy anniversary! ❤️', 'Happy anniversary! ❤️'))}"></label></div>` : ''}
+    <p class="tiny muted mt-2">✓ ${hx('Digital gift — nothing is shipped. After you pay, we send the gift code to you on WhatsApp (usually within a few hours). Forward it to them and it unlocks on their own phone.', 'Digital gift — kuch ship nahi hota. Pay karne ke baad hum gift code aapko WhatsApp pe bhejte hain (aam taur pe kuch ghanton mein). Aap use forward karo, aur unke phone pe khul jayega.')}</p></div>`;
+}
+function ckReviewHTML() { const b = ckReviewBase(); const g = ckGiftHTML(); return g ? `<div class="grid gap-4">${b}${g}</div>` : b; }
+function ckReviewBase() {
   if (ck.kind === 'service') {
     const sv = SERVICES[ck.id]; const what = { photo:[hx('Everyone’s clear, front-facing photos', 'Sabki saaf, saamne se li gayi photos'), hx('Where and in what clothes (optional)', 'Kahan aur kaise kapdon mein (optional)')], voice:[hx('A 15–30 second voice note of the person (one voice, no music)', 'Us insaan ki 15–30 second ki voice note (ek hi awaaz, bina music)'), hx('The story text, or tell us and we write it', 'Kahani ka text, ya batao toh hum likh denge')], gift:[hx('Everyone’s photos for the reunion photo', 'Reunion photo ke liye sabki photos'), hx('Voice note + 3 stories (or tell us and we write them)', 'Voice note + 3 kahaniyan (ya batao, hum likh denge)')] }[sv.id];
     return `<div class="grid gap-4"><div class="card"><p class="text-sm">${esc(sv.desc)}</p>
@@ -11172,6 +11338,7 @@ function ckPaymentHTML() {
 }
 function ckUnlockHTML() {
   const o = ck.order || {}; const pend = (state.orders || []).filter(x => x.status === 'pending');
+  if (ck.kind !== 'unlock' && o.gift) return `<div class="grid gap-4"><div class="pay-sent">🎁 ${hx(`Your payment details were sent to us on WhatsApp. We check the payment and send you a ready-to-forward gift message with the code — usually within a few hours. Forward it to ${esc(o.gift.to || 'them')}: they open DynastyVault → Plans → “I have an unlock code”. You do not need to type the code here.`, `Aapki payment details WhatsApp pe hum tak pahunch gayi. Hum payment check karke code ke saath ek ready gift message bhejenge (aam taur pe kuch ghanton mein). Use ${esc(o.gift.to || 'unhe')} ko forward karo: woh DynastyVault → Plans → “I have an unlock code” kholenge. Aapko yahan code daalne ki zaroorat nahi.`)}</div><div><button class="btn-ghost w-full" data-close>${hx('Done', 'Ho gaya')}</button></div></div>`;
   return `<div class="grid gap-4">
     ${ck.kind !== 'unlock' ? `<div class="pay-sent">✓ ${hx('Your payment details were sent to us on WhatsApp. We check the payment and send you an unlock code — usually within a few hours.', 'Aapki payment details WhatsApp pe hum tak pahunch gayi. Hum payment check karke unlock code bhejenge — aam taur pe kuch ghanton mein.')}${PAY.whatsapp && o.wa ? ` <a href="${esc(o.wa)}" target="_blank" rel="noopener">${hx('WhatsApp did not open? Tap here.', 'WhatsApp nahi khula? Yahan dabao.')}</a>` : ''}</div>` : ''}
     ${ck.kind === 'unlock' ? `<label class="field"><span>${hx('Order ID', 'Order ID')}</span>${pend.length > 1 ? `<select class="input" data-ck="pay.orderId">${pend.map(x => `<option value="${esc(x.id)}"${x.id === ck.pay.orderId ? ' selected' : ''}>${esc(x.id)} · ${esc(x.item)}</option>`).join('')}</select>` : `<input class="input font-mono" data-ck="pay.orderId" value="${esc(ck.pay.orderId || '')}" placeholder="DV-XXXXXXX">`}</label>` : `<div class="tiny muted">${hx('Order', 'Order')} <b class="font-mono">${esc(o.id || '')}</b> · ${esc(o.item || '')}</div>`}
@@ -11179,6 +11346,19 @@ function ckUnlockHTML() {
     <button class="btn-gold w-full" id="ckUnlock">🔓 ${hx('Unlock', 'Unlock karo')}</button>
     <p class="tiny muted">${hx('No code yet? You can close this — open Plans → “I have an unlock code” any time.', 'Abhi code nahi mila? Isse band kar do — kabhi bhi Plans → “I have an unlock code” kholo.')}</p>
     <div class="err" id="ckErr"></div></div>`;
+}
+function adminGiftHTML() {
+  return `<label class="flex items-center gap-2 tiny"><input type="checkbox" id="admGift" ${ck.pay.gift ? 'checked' : ''}> 🎁 Gift order (the customer's WhatsApp says “GIFT for …”)</label>
+    ${ck.pay.gift ? `<div class="grid sm:grid-cols-2 gap-3"><label class="field"><span>Gift from (buyer's name)</span><input class="input" data-ck="pay.gFrom" value="${esc(ck.pay.gFrom || '')}" maxlength="60"></label><label class="field"><span>Gift for</span><input class="input" data-ck="pay.gTo" value="${esc(ck.pay.gTo || '')}" maxlength="60"></label><label class="field sm:col-span-2"><span>Gift message (copy it from their order, optional)</span><input class="input" data-ck="pay.gNote" value="${esc(ck.pay.gNote || '')}" maxlength="140"></label></div>` : ''}`;
+}
+function adminMsgBtns() { return `<div class="flex flex-wrap gap-2 mt-3 justify-center"><button class="chip" data-adm-msg="copy">📋 Copy ready message${ck.pay.gift ? ' (gift)' : ''}</button><button class="chip" data-adm-msg="wa">💬 Send on WhatsApp</button></div><p class="tiny muted mt-2">${ck.pay.gift ? 'Send it to the buyer — they forward it to the person they are gifting.' : 'Send it to the customer.'}</p>`; }
+function adminCustomerMsg() {
+  const code = DV_API ? ck.adminCode : payCode(ck.pay.orderId, ck.pay.item || 'royal'); const id = String(ck.pay.orderId || '').trim().toUpperCase();
+  const names = { royal:'Royal Dynasty Lifetime', gift:'the Heritage Gift Box (Royal Dynasty Lifetime)', voicepack:'a Voice Story Pack', export:'the 4K Printable Vector PDF export', portrait4k:'a 4K portrait PDF' };
+  const what = names[ck.pay.item || 'royal'] || 'DynastyVault'; const site = siteBase();
+  const steps = `1) Open ${site}\n2) Make your family tree (free, about a minute)\n3) Tap Plans → “I have an unlock code”\n4) Order ID: ${id}\n    Code: ${code}`;
+  if (ck.pay.gift) return `🎁 ${(ck.pay.gTo || '').trim() ? (ck.pay.gTo || '').trim() + ', ' : ''}${(ck.pay.gFrom || '').trim() ? (ck.pay.gFrom || '').trim() + ' has' : 'someone who loves you has'} gifted you ${what} on DynastyVault — a golden home for your family’s names, photos, stories and voices.${(ck.pay.gNote || '').trim() ? `\n\n“${ck.pay.gNote.trim()}”` : ''}\n\nHow to open your gift:\n${steps}\n\n👑 Any questions? Just reply here.`;
+  return `✅ Payment received — thank you! Here is your DynastyVault unlock code.\n\n${steps}\n\n👑 Any questions? Just reply here.`;
 }
 function ckAdminHTML() {
   if (DV_API) {
@@ -11190,8 +11370,9 @@ function ckAdminHTML() {
       <label class="field"><span>Order ID (from the customer’s WhatsApp)</span><input class="input font-mono" data-ck="pay.orderId" value="${esc(ck.pay.orderId || '')}" placeholder="DV-XXXXXXX"></label>
       <label class="field"><span>What they bought</span><select class="input" data-ck="pay.item">${items.map(([k, l]) => `<option value="${k}"${(ck.pay.item || 'royal') === k ? ' selected' : ''}>${l}</option>`).join('')}</select></label>
       <label class="flex items-center gap-2 tiny"><input type="checkbox" data-ck="pay.topup" ${ck.pay.topup ? 'checked' : ''}> ${hx('Top-up: add 25,000 characters (~20 stories) to this order', 'Top-up: is order mein 25,000 akshar (~20 kahaniyan) jodo')}</label>
+      ${adminGiftHTML()}
       <button class="btn-gold" id="ckAdminGo">✓ Approve &amp; make code</button>
-      <div class="pay-codeout" id="ckAdminCode">${ck.adminCode ? `<b class="font-mono">${esc(ck.adminCode)}</b> <button class="chip" id="ckAdminCopy">📋 Copy</button><div class="tiny muted mt-2">${esc(ck.adminNote || '')}</div>` : '—'}</div>
+      <div class="pay-codeout" id="ckAdminCode">${ck.adminCode ? `<b class="font-mono">${esc(ck.adminCode)}</b> <button class="chip" id="ckAdminCopy">📋 Copy</button><div class="tiny muted mt-2">${esc(ck.adminNote || '')}</div>${adminMsgBtns()}` : '—'}</div>
       <div class="err" id="ckErr"></div>
     </div>`;
   }
@@ -11202,7 +11383,8 @@ function ckAdminHTML() {
     <p class="tiny muted">1) Check the money arrived in your UPI / bank app (match the UTR). 2) Type the customer’s order ID. 3) Send them the code on WhatsApp.</p>
     <label class="field"><span>Order ID (from the customer’s WhatsApp)</span><input class="input font-mono" data-ck="pay.orderId" value="${esc(ck.pay.orderId || '')}" placeholder="DV-XXXXXXX"></label>
     <label class="field"><span>What they bought</span><select class="input" data-ck="pay.item">${items.map(([k, l]) => `<option value="${k}"${(ck.pay.item || 'royal') === k ? ' selected' : ''}>${l}</option>`).join('')}</select></label>
-    <div class="pay-codeout" id="ckAdminCode">${code ? `<b class="font-mono">${code}</b> <button class="chip" id="ckAdminCopy">📋 Copy</button>` : '—'}</div>
+    ${adminGiftHTML()}
+    <div class="pay-codeout" id="ckAdminCode">${code ? `<b class="font-mono">${code}</b> <button class="chip" id="ckAdminCopy">📋 Copy</button>${adminMsgBtns()}` : '—'}</div>
     ${!PAY.upi || !PAY.whatsapp ? '<p class="tiny" style="color:#f6d79b">⚠️ PAY.upi / PAY.whatsapp are still empty in index.html — customers cannot pay you yet.</p>' : ''}
   </div>`;
 }
@@ -11266,6 +11448,11 @@ function bindCheckout() {
     };
     el.addEventListener(el.tagName === 'SELECT' ? 'change' : 'input', handler);
   });
+  const ag0 = $('#admGift', root); if (ag0) ag0.addEventListener('change', () => { ck.pay.gift = ag0.checked; renderCheckout(); });
+  const gOn = $('#ckGiftOn', root); if (gOn) gOn.addEventListener('change', () => { ck.gift.on = gOn.checked; renderCheckout(); });
+  const gTo = $('#ckGiftTo', root); if (gTo) gTo.addEventListener('input', () => { ck.gift.to = gTo.value; });
+  const gNo = $('#ckGiftNote', root); if (gNo) gNo.addEventListener('input', () => { ck.gift.note = gNo.value; });
+  $$('[data-adm-msg]', root).forEach(b => b.addEventListener('click', async () => { const t = adminCustomerMsg(); if (b.dataset.admMsg === 'wa') waOpen(t); else toast(await copyText(t) ? 'Message copied — paste it in their WhatsApp chat' : 'Copy failed', 'info'); }));
   const back = $('#ckBack', root); if (back) back.addEventListener('click', () => { ck.step = Math.max(0, ck.step - 1); renderCheckout(); });
   const next = $('#ckNext', root); if (next) next.addEventListener('click', ckNext);
   const use4k = $('#ckUse4k', root); if (use4k) use4k.addEventListener('click', download4k);
@@ -11343,9 +11530,11 @@ function ckNext() {
     if (!validatePayment()) return;
     const t = ckTotals(); const v = V(); const it = ckItem(); const oid = ckOrderId();
     const rb = state.referredBy && t.off ? `\nReferral code: ${state.referredBy.c}${state.referredBy.n ? ' (' + state.referredBy.n + ')' : ''}` : '';
-    const msg = `🧾 DynastyVault order ${oid}\nItem: ${it.name}\nAmount: ${fmt(t.total)}\nUTR / payment ID: ${String(ck.pay.utr).trim()}\nName: ${String(ck.pay.name).trim()}\nWhatsApp: ${String(ck.pay.phone).trim()}\nFamily: ${v.name}${rb}`;
+    const gf = ck.gift && ck.gift.on && ckGiftable() ? { to:String(ck.gift.to || '').trim().slice(0, 60), note:String(ck.gift.note || '').trim().slice(0, 140) } : null;
+    const gl = gf ? `\n🎁 GIFT for: ${gf.to || '(not said)'}${gf.note ? '\nGift message: ' + gf.note : ''}` : '';
+    const msg = `🧾 DynastyVault order ${oid}\nItem: ${it.name}\nAmount: ${fmt(t.total)}\nUTR / payment ID: ${String(ck.pay.utr).trim()}\nName: ${String(ck.pay.name).trim()}\nWhatsApp: ${String(ck.pay.phone).trim()}\nFamily: ${v.name}${rb}${gl}`;
     const wa = payWa(msg);
-    ck.order = { id:oid, item:it.name, key:it.key, total:t.total, cur:state.currency, utr:String(ck.pay.utr).trim(), name:String(ck.pay.name).trim(), phone:String(ck.pay.phone).trim(), vault:v.name, date:Date.now(), status:'pending', wa };
+    ck.order = { id:oid, item:it.name, key:it.key, total:t.total, cur:state.currency, utr:String(ck.pay.utr).trim(), name:String(ck.pay.name).trim(), phone:String(ck.pay.phone).trim(), vault:v.name, date:Date.now(), status:gf ? 'gift' : 'pending', wa, gift:gf };
     state.orders.push(ck.order); save();
     if (wa) { try { window.open(wa, '_blank', 'noopener'); } catch (e) { /* the link is shown too */ } }
     ck.step++; renderCheckout(); $('#checkoutModal .modal-panel').scrollTop = 0;
@@ -11829,6 +12018,7 @@ function wire() {
   $('#mapWorld').addEventListener('click', () => { if (leafOn()) { LEAF.map.flyTo([24, 30], 2, { duration:1 }); return; } const r = $('#mapSvg').getBoundingClientRect(); const ar = r.width / r.height; const h = Math.max(MAP_H, MAP_W / ar); const w = h * ar; animateVB([(MAP_W - w) / 2, (MAP_H - h) / 2, w, h], 900); });
   $('#stopSave').addEventListener('click', saveStop);
   $('#stopModal').addEventListener('keydown', e => { if (e.key === 'Enter' && e.target.tagName === 'INPUT') { e.preventDefault(); saveStop(); } });
+  $('#shareInvite').addEventListener('click', () => { closeModal('shareModal'); openInvite(); });
   $('#shareQR').addEventListener('click', () => { const o = share.opts || {}; openQR({ title:o.by || V().name, years:'', line:trunc(o.text || '', 120), url:siteBase(), eyebrow:'A FAMILY MEMORY', file:slug(o.by || 'memory') }); });
   $('#qrDlPlate').addEventListener('click', () => { if (qrUI.blob) saveFile(`${qrUI.opts.file || 'dynastyvault'}-gold-qr-plate.png`, qrUI.blob); });
   $('#qrDlSvg').addEventListener('click', () => saveFile(`${qrUI.opts.file || 'dynastyvault'}-qr.svg`, new Blob([qrSVG(qrUI.content).svg], { type:'image/svg+xml' })));
@@ -11868,6 +12058,7 @@ function wire() {
   $('#btnInvite').addEventListener('click', openInvite);
   $('#btnInvite2').addEventListener('click', openInvite);
   $('#btnNewVault').addEventListener('click', openNewVault);
+  $('#btnFamCard').addEventListener('click', () => openFamilyCard());
   $('#btnFounder').addEventListener('click', () => { const v = V(); openStudio(v.units[v.rootUnit].member); });
 
   // tree interaction
@@ -11936,6 +12127,7 @@ function wire() {
   document.addEventListener('click', e => {
     const sb = e.target.closest('[data-buy-service]'); if (sb && !sb.closest('#addonGrid')) { openCheckout('service', sb.dataset.buyService); return; }
     if (e.target.closest('[data-unlock-code]')) openCheckout('unlock');
+    if (e.target.closest('[data-gift-royal]')) openCheckout('plan', 'royal', { gift:true });
   });
   const goDashTab = (tab, open) => { const go = () => { showTab(tab); if (open) setTimeout(() => openPortrait(open), 400); }; if (document.body.classList.contains('welcome-mode')) { startDemo(); setTimeout(go, 1300); } else go(); };
   document.addEventListener('click', e => { const w = e.target.closest('[data-wl-see]'); if (w) goDashTab(w.dataset.wlSee); });
@@ -11949,6 +12141,9 @@ function wire() {
     else if (/^buy-(photo|voice|gift)$/.test(h)) { clear(); openCheckout('service', h.slice(4)); }
     else if (h === 'portrait' || h === 'collage') { clear(); goDashTab(h === 'portrait' ? 'reunion' : 'photo'); }
     else if (/^(signin|login|signup)$/.test(h)) { clear(); acctOpen(h === 'signup' ? 'signup' : 'login'); }
+    else if (h === 'gift-royal') { clear(); openCheckout('plan', 'royal', { gift:true }); }
+    else if (h === 'card') { clear(); if (document.body.classList.contains('welcome-mode')) openWizard('form'); else openFamilyCard(); }
+    else if (h === 'invite') { clear(); if (!document.body.classList.contains('welcome-mode')) openInvite(); }
     else if (h === 'demo') { clear(); const d = $('#wlDemo') && !$('#wlDemo').closest('[hidden]') && document.body.classList.contains('welcome-mode') ? $('#wlDemo') : $('#btnDemo'); if (d) d.click(); }
   };
   window.addEventListener('hashchange', adminRoute); setTimeout(adminRoute, 600);
