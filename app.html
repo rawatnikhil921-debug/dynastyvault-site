@@ -1899,6 +1899,145 @@ body.dash-on #addons,body.dash-on #services{padding-bottom:40px}
   .swipe-hint{display:block;text-align:center;font-size:11.5px;color:var(--muted);margin-top:2px}
 }
 .swipe-hint{display:none}
+/* ---------- ▶ v62: "How it works" walkthrough player ---------- */
+.wl-tut{width:min(400px,100%);margin:34px auto 0}
+.wl-tut-h{display:flex;align-items:center;justify-content:center;gap:8px;margin:30px 0 -18px;font-size:12px;font-weight:800;letter-spacing:.08em;color:var(--gold-soft)}
+.wl-tut-h i{width:8px;height:8px;border-radius:50%;background:#e5484d;box-shadow:0 0 0 0 rgba(229,72,77,.6);animation:tuLive 1.8s infinite}
+@keyframes tuLive{70%{box-shadow:0 0 0 8px rgba(229,72,77,0)}100%{box-shadow:0 0 0 0 rgba(229,72,77,0)}}
+.tu{position:relative;border-radius:26px;padding:12px 12px 10px;background:linear-gradient(180deg,rgba(var(--bg2-rgb),.96),rgba(var(--bg-rgb),.98));border:1px solid var(--line-strong);box-shadow:0 30px 70px -30px #000,0 0 50px -24px rgba(var(--hi-rgb),.55);text-align:left}
+.tu-bars{display:flex;gap:4px;margin:0 2px 10px}
+.tu-bars i{flex:1;height:3px;border-radius:3px;background:rgba(var(--g-rgb),.18);overflow:hidden}
+.tu-bars b{display:block;height:100%;width:0;background:var(--metal)}
+.tu-stage{position:relative;aspect-ratio:1/1.02;border-radius:18px;overflow:hidden;background:radial-gradient(120% 90% at 50% 0%,rgba(var(--g-rgb),.12),transparent 60%),#07080b;border:1px solid var(--line);cursor:pointer}
+.tu-scene{position:absolute;inset:0;padding:16px;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transform:translateX(18px);transition:opacity .35s,transform .45s cubic-bezier(.2,.9,.2,1),visibility 0s .45s}
+.tu-scene.on{opacity:1;visibility:visible;transform:none;transition:opacity .35s,transform .45s cubic-bezier(.2,.9,.2,1)}
+.tu-app{width:100%;max-width:300px;display:flex;flex-direction:column;gap:9px}
+.tu-ah{font:800 13px/1.2 'Plus Jakarta Sans',sans-serif;color:var(--gold-pale);text-align:center;margin-bottom:2px}
+.tu-f{display:flex;flex-direction:column;gap:4px}
+.tu-f small{font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:var(--gold-soft)}
+.tu-in{display:block;min-height:36px;padding:9px 12px;border-radius:11px;border:1px solid var(--line-strong);background:rgba(var(--bg2-rgb),.9);color:var(--ink);font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden}
+.tu-in.typing{border-color:rgba(var(--hi-rgb),.7);box-shadow:0 0 0 3px rgba(var(--hi-rgb),.12)}
+.tu-in.typing::after{content:"";display:inline-block;width:2px;height:15px;margin-left:2px;vertical-align:-2px;background:var(--gold-hi);animation:tuCaret .7s steps(1) infinite}
+@keyframes tuCaret{50%{opacity:0}}
+.tu-btn{margin-top:4px;text-align:center;padding:11px;border-radius:999px;background:var(--metal);color:var(--on-gold);font-weight:800;font-size:13.5px}
+.tu-scene.on .tu-btn{animation:tuPress .5s var(--d) both}
+@keyframes tuPress{40%{transform:scale(.94);filter:brightness(1.25)}100%{transform:none}}
+.tu-tap{position:absolute;width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:50%;background:rgba(255,255,255,.28);border:2px solid rgba(255,255,255,.75);opacity:0;pointer-events:none}
+.tu-scene.on .tu-tap{animation:tuTap .9s var(--d) both}
+@keyframes tuTap{0%{opacity:0;transform:scale(1.5)}25%{opacity:1;transform:scale(.8)}60%{opacity:.9;transform:scale(.9)}100%{opacity:0;transform:scale(1.6)}}
+/* tree scenes */
+.tu-tree svg,.tu-both svg{width:100%;height:auto;overflow:visible}
+.tu-ln{fill:none;stroke:rgba(var(--g-rgb),.85);stroke-width:2.5;stroke-linecap:round;stroke-dasharray:400;stroke-dashoffset:400}
+.tu-ln.gold{stroke:var(--gold-hi);filter:drop-shadow(0 0 4px rgba(var(--hi-rgb),.8))}
+.tu-scene.on .tu-ln{animation:tuDraw 1.1s var(--d) cubic-bezier(.6,.1,.2,1) forwards}
+@keyframes tuDraw{to{stroke-dashoffset:0}}
+.tu-n{transform-box:fill-box;transform-origin:center;opacity:0}
+.tu-scene.on .tu-n{animation:tuPop .6s var(--d) cubic-bezier(.2,1.4,.4,1) forwards}
+@keyframes tuPop{from{opacity:0;transform:scale(.3)}to{opacity:1;transform:none}}
+.tu-n circle{fill:#0d0e13;stroke:var(--gold);stroke-width:3}
+.tu-n.you circle{stroke:var(--gold-hi);stroke-width:3.5;filter:drop-shadow(0 0 6px rgba(var(--hi-rgb),.7))}
+.tu-n.add circle{stroke-dasharray:4 3}
+.tu-scene.on .tu-n.add circle{animation:tuSolid .01s calc(var(--d) + .7s) forwards}
+@keyframes tuSolid{to{stroke-dasharray:none}}
+.tu-n.royal circle{stroke:var(--gold-hi);filter:drop-shadow(0 0 7px rgba(var(--hi-rgb),.85))}
+.tu-ini{fill:var(--gold-pale);font:700 12px 'Cinzel',serif;text-anchor:middle}
+.tu-lb{fill:var(--muted);font:700 10.5px 'Plus Jakarta Sans',sans-serif;text-anchor:middle}
+.tu-chip{align-self:center;padding:7px 14px;border-radius:999px;border:1px dashed rgba(var(--hi-rgb),.6);color:var(--gold-pale);font-size:12.5px;font-weight:800;opacity:0}
+.tu-scene.on .tu-chip{animation:tuChip 1.2s var(--d) both}
+@keyframes tuChip{0%{opacity:0;transform:translateY(8px)}20%,70%{opacity:1;transform:none}100%{opacity:.35}}
+/* profile + voice */
+.tu-prof{align-items:center;text-align:center}
+.tu-av{position:relative;width:96px;height:96px;border-radius:50%;display:grid;place-items:center;border:3px solid var(--gold);background:#0d0e13;overflow:hidden;font:700 26px 'Cinzel',serif;color:var(--gold-pale)}
+.tu-photo{position:absolute;inset:0;border-radius:50%;opacity:0;background:radial-gradient(circle at 50% 36%,#e7c9a5 0 17%,transparent 18%),radial-gradient(ellipse at 50% 30%,#d9d9d9 0 25%,transparent 26%),radial-gradient(ellipse at 50% 100%,#6b4a2f 0 46%,transparent 47%),linear-gradient(160deg,#3d3328,#17130f)}
+.tu-scene.on .tu-photo{animation:tuFade .6s var(--d) forwards}
+@keyframes tuFade{to{opacity:1}}
+.tu-pn{font-weight:800;font-size:13.5px;color:var(--gold-pale)}
+.tu-ok{font-size:11.5px;font-weight:800;color:#7ee2a8;opacity:0}
+.tu-scene.on .tu-ok{animation:tuFade .4s var(--d) forwards}
+.tu-wave{display:flex;align-items:center;justify-content:center;gap:3px;height:38px;width:100%}
+.tu-wave i{width:4px;height:12%;border-radius:3px;background:var(--gold)}
+.tu-scene.on .tu-wave i{animation:tuBar .55s calc(1.7s + var(--d)) ease-in-out infinite alternate}
+@keyframes tuBar{from{height:12%}to{height:var(--h)}}
+.tu-rec{display:flex;align-items:center;gap:12px}
+.tu-mic{display:grid;place-items:center;width:52px;height:52px;border-radius:50%;background:#2a1215;border:2px solid #e5484d;font-size:22px}
+.tu-scene.on .tu-mic{animation:tuRec 1.2s var(--d) infinite}
+@keyframes tuRec{0%{box-shadow:0 0 0 0 rgba(229,72,77,.6)}70%{box-shadow:0 0 0 14px rgba(229,72,77,0)}100%{box-shadow:0 0 0 0 rgba(229,72,77,0)}}
+.tu-time{font:800 16px 'Plus Jakarta Sans',sans-serif;color:var(--ink);font-variant-numeric:tabular-nums}
+/* story */
+.tu-words{margin:6px 0 4px;font:600 17px/1.55 'Plus Jakarta Sans',sans-serif;color:rgba(255,255,255,.28)}
+.tu-words span{transition:color .2s}
+.tu-scene.on .tu-words span{animation:tuWord .3s var(--d) forwards}
+@keyframes tuWord{to{color:#F6EBC8;text-shadow:0 0 12px rgba(var(--hi-rgb),.35)}}
+.tu-play{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.tu-pb{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--metal);color:var(--on-gold);font-size:14px}
+.tu-sw{display:flex;align-items:center;gap:3px}
+.tu-sw i{width:3px;height:8px;border-radius:2px;background:var(--gold-hi)}
+.tu-scene.on .tu-sw i{animation:tuBar .45s ease-in-out infinite alternate;--h:20px}
+.tu-sw i:nth-child(2){animation-delay:.15s!important}.tu-sw i:nth-child(3){animation-delay:.3s!important}
+.tu-play small{font-size:12px;font-weight:700;color:var(--gold-soft)}
+.tu-play em{font-style:normal;font-size:10.5px;font-weight:800;padding:3px 8px;border-radius:999px;color:var(--on-gold);background:var(--metal)}
+/* share */
+.tu-share{align-items:center}
+.tu-card{position:relative;width:180px;padding:14px 12px 12px;border-radius:16px;text-align:center;background:linear-gradient(170deg,#191710,#0a0a0d);border:1px solid rgba(var(--hi-rgb),.5);box-shadow:0 18px 40px -14px #000,0 0 30px -10px rgba(var(--hi-rgb),.45);opacity:0}
+.tu-scene.on .tu-card{animation:tuCard .8s .15s cubic-bezier(.2,.9,.2,1) forwards}
+@keyframes tuCard{from{opacity:0;transform:translateY(30px) rotate(-6deg) scale(.9)}to{opacity:1;transform:rotate(-2deg)}}
+.tu-cr{font-size:22px}
+.tu-card b{display:block;font:700 13px 'Cinzel',serif;color:var(--gold-pale);margin-top:2px}
+.tu-card small{display:block;font-size:9.5px;color:var(--muted);margin-top:3px}
+.tu-mini{margin:8px 0 4px;line-height:10px}
+.tu-mini i{display:inline-block;width:12px;height:12px;margin:2px 6px;border-radius:50%;border:2px solid var(--gold)}
+.tu-mini i.me{border-color:var(--gold-hi);box-shadow:0 0 6px rgba(var(--hi-rgb),.8)}
+.tu-qr{position:absolute;right:9px;bottom:9px;display:grid;grid-template-columns:repeat(7,4px);gap:1px;padding:3px;background:#f6ebc8;border-radius:3px}
+.tu-qr i{width:4px;height:4px}.tu-qr i.on{background:#111}
+.tu-wa{margin-top:6px;padding:10px 22px;border-radius:999px;background:#25D366;color:#06210f;font-weight:800;font-size:13.5px;opacity:0}
+.tu-scene.on .tu-wa{animation:tuWa .9s var(--d) both}
+@keyframes tuWa{0%{opacity:0;transform:translateY(8px)}30%{opacity:1;transform:none}55%{transform:scale(.93)}75%{transform:none}100%{opacity:1}}
+.tu-sent{font-size:12px;font-weight:800;color:#7ee2a8;opacity:0}
+.tu-scene.on .tu-sent{animation:tuFade .4s var(--d) forwards}
+/* both sides */
+.tu-sides{display:flex;justify-content:space-between;gap:8px;font-size:10.5px;font-weight:800}
+.tu-sides span{padding:5px 9px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.tu-sides .r{border-color:rgba(var(--hi-rgb),.6);color:var(--gold-pale);opacity:0}
+.tu-scene.on .tu-sides .r{animation:tuFade .5s var(--d) forwards}
+/* caption + controls */
+.tu-cap{display:grid;grid-template-columns:auto 1fr;column-gap:10px;align-items:baseline;padding:12px 4px 4px;min-height:64px}
+.tu-step{grid-row:1/3;font:800 11px 'Plus Jakarta Sans',sans-serif;color:var(--on-gold);background:var(--metal);padding:4px 7px;border-radius:8px;align-self:start;margin-top:2px}
+.tu-t{font:700 16px/1.25 'Cinzel',serif;color:var(--gold-pale)}
+.tu-s{font-size:13px;line-height:1.45;color:var(--muted);margin-top:3px}
+.tu-ctl{display:flex;align-items:center;gap:10px;padding:6px 2px 0}
+.tu-pp{display:grid;place-items:center;width:36px;height:36px;border-radius:50%;border:1px solid var(--line-strong);background:rgba(var(--bg2-rgb),.9);color:var(--gold-pale);font-size:11px;cursor:pointer;flex:none}
+.tu-pp:focus-visible,.tu-dots button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.tu .tu-ico-play{display:none}.tu.paused .tu-ico-play{display:inline}.tu.paused .tu-ico-pause{display:none}
+.tu-dots{display:flex;gap:6px;flex:1}
+.tu-dots button{width:9px;height:9px;padding:0;border-radius:50%;border:0;background:rgba(var(--g-rgb),.3);cursor:pointer;transition:width .25s,background .25s}
+.tu-dots button.on{width:22px;border-radius:5px;background:var(--gold-hi)}
+.tu-len{font-size:11px;font-weight:800;color:var(--muted)}
+.tu.paused .tu-stage *{animation-play-state:paused!important}
+.tu.paused .tu-stage::after{content:"▶";position:absolute;left:50%;top:50%;width:62px;height:62px;margin:-31px 0 0 -31px;display:grid;place-items:center;border-radius:50%;background:rgba(0,0,0,.55);border:2px solid rgba(var(--hi-rgb),.7);color:var(--gold-hi);font-size:22px;padding-left:4px;box-sizing:border-box}
+.tu.ended .tu-stage::after{content:"↻";padding-left:0}
+.tu.rm .tu-stage::after{display:none}
+.tu.rm *{animation-duration:.001s!important;animation-delay:0s!important;animation-iteration-count:1!important;transition:none!important}
+.tu.rm .tu-pp .tu-ico-pause{display:none}.tu.rm .tu-pp::after{content:"›";font-size:20px}
+/* modal */
+.tut-panel{max-width:440px;padding:16px;position:relative}
+.tut-panel .tu{border:0;box-shadow:none;background:transparent;padding:0}
+.tut-panel .tu-stage{margin-top:2px;aspect-ratio:auto;height:min(50vh,390px)}
+.tut-panel{max-height:calc(100vh - 20px);overflow:auto}
+.tut-panel>h3{font:700 18px 'Cinzel',serif;margin:2px 44px 12px 4px}
+.hm-tut{width:100%;justify-content:center}
+@media (max-width:640px){.wl-tut{margin-top:28px}.tu{border-radius:22px;padding:10px 10px 8px}.tu-t{font-size:15px}.tu-s{font-size:12.5px}}
+@media (prefers-reduced-motion:reduce){.wl-tut-h i{animation:none}}
+
+.tu-lang{position:relative;display:inline-flex;align-items:center;gap:4px;margin-left:auto;padding:0 8px 0 10px;height:34px;border-radius:999px;border:1px solid var(--line-strong);background:rgba(var(--bg2-rgb),.9);color:var(--gold-pale);font-size:12px;font-weight:800;max-width:150px}
+.tu-lang select{appearance:none;-webkit-appearance:none;background:transparent;border:0;color:inherit;font:inherit;padding:0 14px 0 2px;cursor:pointer;max-width:118px;text-overflow:ellipsis}
+.tu-lang::after{content:"";position:absolute;right:10px;top:50%;width:6px;height:6px;margin-top:-5px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);pointer-events:none}
+.tu-lang select option{background:#111;color:#f6ebc8}
+.tu-lang:focus-within{outline:2px solid var(--gold);outline-offset:2px}
+.tu-ctl{flex-wrap:wrap}
+.tu-ctl .tu-cta{flex:1 1 100%;margin-top:6px}
+.tu-dots{flex:0 1 auto}
+.tu-sides{flex-wrap:wrap}
+.tu-lb.sm{font-size:8.5px}
 </style>
 </head>
 <body>
@@ -1929,6 +2068,7 @@ body.dash-on #addons,body.dash-on #services{padding-bottom:40px}
     <button id="hdrMenuBtn" class="icon-btn hdr-menu-btn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="hdrMenu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
     <div id="hdrMenu" class="hdr-menu">
       <div class="hm-links"><a class="navlink" href="index.html">🏠 Home</a><a class="navlink" href="#pricing" data-hm-plans>👑 Plans</a></div>
+      <button type="button" class="btn-ghost sm hm-tut" id="hmTut">▶ <span id="hmTutL">How it works</span></button>
     <button class="refer-btn" id="btnRefer" data-open-refer aria-label="Refer friends and earn Royal"><span class="rb-gift" aria-hidden="true">🎁</span><span class="rb-long" data-wl="hd_refer_long">Refer friends &amp; earn Royal</span><span class="rb-short" data-wl="hd_refer_short">Refer</span></button>
     <button id="btnInvite" class="btn-ghost sm" aria-label="Open WhatsApp Dynasty Co-Op invites">
       <svg class="ico" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="8" r="3"/><circle cx="16.5" cy="9" r="2.4"/><path d="M2.8 19c.6-3.3 2.6-5 5.2-5s4.6 1.7 5.2 5M13.6 14.4c.9-.6 1.8-.9 2.9-.9 2.2 0 3.8 1.4 4.3 4"/><path d="M19.5 2.5v4M17.5 4.5h4" stroke="var(--gold-hi)"/></svg>
@@ -1965,16 +2105,8 @@ body.dash-on #addons,body.dash-on #services{padding-bottom:40px}
       <button class="btn-gold wl-cta" id="wlCreate" data-wl="wl_create">👑 Create Your Dynasty Tree</button>
       <button class="btn-ghost mt-3 wl-login" id="wlLogin" type="button" data-wl="wl_login">👤 Already have an account? Log in</button>
       <div class="wl-see mt-3"><button class="chip" type="button" data-wl-see="photo" data-wl="wl_collage">🧩 Family Collage</button><button class="chip" type="button" data-wl-see="reunion" data-wl="wl_portrait">✨ Reunion Portrait</button></div>
-      <button class="btn-ghost mt-4" id="wlDemo"><svg class="ico" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="5" r="2.6"/><circle cx="18" cy="5" r="2.6"/><circle cx="12" cy="19" r="2.8"/><path d="M8.6 5h6.8M12 5v11.2" stroke-linecap="round"/><path d="M10.9 17.6l2.6 1.4-2.6 1.4z" fill="var(--gold-hi)" stroke="none"/></svg> <span data-wl="wl_demo">Explore a demo family first</span></button>
-      <svg class="wl-mini" viewBox="0 0 560 200" aria-hidden="true">
-        <defs><linearGradient id="wlGold" x1="0" x2="1"><stop offset="0" stop-color="#AA7C11"/><stop offset=".5" stop-color="#FFDF00"/><stop offset="1" stop-color="#D4AF37"/></linearGradient></defs>
-        <path d="M140 40H220M340 40H420M180 40V100H380V40M280 100V160"/>
-        <g class="mn" style="animation-delay:.1s"><circle cx="120" cy="40" r="22" fill="#0c0d12" stroke="url(#wlGold)" stroke-width="4"/><text x="120" y="46" text-anchor="middle" font-family="Cinzel" font-size="14" fill="#E9CF7A" data-wl="wl_t_gf1" class="wl-tl">DA</text></g>
-        <g class="mn" style="animation-delay:.25s"><circle cx="240" cy="40" r="22" fill="#0c0d12" stroke="url(#wlGold)" stroke-width="4"/><text x="240" y="46" text-anchor="middle" font-family="Cinzel" font-size="14" fill="#E9CF7A" data-wl="wl_t_gm1" class="wl-tl">DI</text></g>
-        <g class="mn" style="animation-delay:.4s"><circle cx="320" cy="40" r="22" fill="#0c0d12" stroke="url(#wlGold)" stroke-width="4"/><text x="320" y="46" text-anchor="middle" font-family="Cinzel" font-size="14" fill="#E9CF7A" data-wl="wl_t_gf2" class="wl-tl">NA</text></g>
-        <g class="mn" style="animation-delay:.55s"><circle cx="440" cy="40" r="22" fill="#0c0d12" stroke="url(#wlGold)" stroke-width="4"/><text x="440" y="46" text-anchor="middle" font-family="Cinzel" font-size="14" fill="#E9CF7A" data-wl="wl_t_gm2" class="wl-tl">NI</text></g>
-        <g class="mn" style="animation-delay:1.4s"><circle cx="280" cy="168" r="28" fill="#0c0d12" stroke="url(#wlGold)" stroke-width="5"/><text x="280" y="175" text-anchor="middle" font-family="Cinzel" font-size="16" fill="#FFDF00" data-wl="wl_t_you" class="wl-tl">YOU</text></g>
-      </svg>
+      <div class="wl-tut-h" aria-hidden="true"><i></i><span id="wlTutH">How it works</span></div>
+      <div class="wl-tut" id="wlTut"></div>
       <div class="wl-feats">
         <div class="wl-feat" style="animation-delay:.2s"><span class="wl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4v6a6 6 0 0 0 6 6 6 6 0 0 0 6-6V4"/><path d="M12 16v4"/><circle cx="6" cy="4" r="1.6"/><circle cx="18" cy="4" r="1.6"/><circle cx="12" cy="21" r="1.6"/></svg></span><b data-wl="wl_f1_b"></b><small data-wl="wl_f1_s"></small></div>
         <div class="wl-feat" style="animation-delay:.35s"><span class="wl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3M8 21h8"/></svg></span><b data-wl="wl_f2_b"></b><small data-wl="wl_f2_s"></small></div>
@@ -2050,7 +2182,7 @@ body.dash-on #addons,body.dash-on #services{padding-bottom:40px}
           <div class="eyebrow">◆ Your Migration Trail</div>
           <h4 class="font-regal gold-text text-2xl font-bold mt-2">Where did your family’s journey begin?</h4>
           <p class="muted text-sm mt-2">Add the village or city where your grandparents were born, where your parents moved, and where you live today — golden arcs connect them year by year.</p>
-          <div class="flex flex-wrap gap-2 justify-center mt-4"><button class="btn-gold" id="mapEmptyAdd">＋ Add your first place</button><button class="btn-ghost" id="mapEmptyDemo">👁️ See a sample trail</button></div>
+          <div class="flex flex-wrap gap-2 justify-center mt-4"><button class="btn-gold" id="mapEmptyAdd">＋ Add your first place</button></div>
         </div>
         <aside class="pin-panel" id="pinPanel" hidden></aside>
         <div class="geo-card" id="geoCard" hidden></div>
@@ -2500,7 +2632,7 @@ body.dash-on #addons,body.dash-on #services{padding-bottom:40px}
     </div>
     <div id="wizChoice" class="p-5 sm:p-7 grid gap-4">
       <button class="wiz-opt primary" id="wzStart"><span>✨</span><div><b data-hn="Apna Family Tree shuru karo">Start Your Family Tree (1-Minute Wizard)</b><small data-hn="1 minute · aapka naam, mummy-papa, Dada-Dadi, Nana-Nani aur aapki bhasha">1-minute wizard · you, your parents, both sets of grandparents and your language</small></div></button>
-      <button class="wiz-opt" id="wzDemo"><span><svg class="ico" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="5" r="2.6"/><circle cx="18" cy="5" r="2.6"/><circle cx="12" cy="19" r="2.8"/><path d="M8.6 5h6.8M12 5v11.2" stroke-linecap="round"/><path d="M10.9 17.6l2.6 1.4-2.6 1.4z" fill="var(--gold-hi)" stroke="none"/></svg></span><div><b data-hn="Demo Tree dekho">Explore Interactive Demo Tree</b><small data-hn="Kapoor Dynasty sample — har feature on">Explore the Kapoor Dynasty sample with every feature switched on</small></div></button>
+      <button class="wiz-opt" id="wzDemo"><span><svg class="ico" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="5" r="2.6"/><circle cx="18" cy="5" r="2.6"/><circle cx="12" cy="19" r="2.8"/><path d="M8.6 5h6.8M12 5v11.2" stroke-linecap="round"/><path d="M10.9 17.6l2.6 1.4-2.6 1.4z" fill="var(--gold-hi)" stroke="none"/></svg></span><div><b data-hn="Dekho kaise kaam karta hai">Watch how it works</b><small data-hn="30 second ka chhota video jaisa guide">A 30-second, video-style walkthrough</small></div></button>
     </div>
     <div id="wizForm" class="p-5 sm:p-7 grid gap-4" hidden>
       <label class="field"><span data-hn="Bhasha / Language">Preferred language</span><select class="input" id="wzLang"></select></label>
@@ -2540,6 +2672,9 @@ body.dash-on #addons,body.dash-on #services{padding-bottom:40px}
 </div>
 <div class="modal" id="rewardModal" role="dialog" aria-modal="true" aria-label="Reward unlocked">
   <div class="modal-panel rw-panel"><div class="rw-wrap" id="rewardBody"></div></div>
+</div>
+<div class="modal" id="tutModal" role="dialog" aria-modal="true" aria-label="How DynastyVault works">
+  <div class="modal-panel tut-panel"><button class="icon-btn" data-close aria-label="Close" style="position:absolute;top:14px;right:14px;z-index:2">✕</button><h3 class="gold-text" id="tutModalH">How it works</h3><div id="tutModalBody"></div></div>
 </div>
 <div class="modal" id="refWelcome" role="dialog" aria-modal="true" aria-label="You have been invited">
   <div class="modal-panel rw-panel"><button class="icon-btn" data-close aria-label="Close" style="position:absolute;top:14px;right:14px;z-index:2">✕</button><div class="rw-wrap" id="refWelcomeBody"></div></div>
@@ -3938,6 +4073,7 @@ function openWizard(step) {
   openModal('wizModal');
   if (step === 'form') setTimeout(() => $('#wzYou').focus(), 120);
 }
+let wizAfter = null;   // a tool picked on the welcome screen opens right after the tree is created
 function lastName(n) { const parts = String(n || '').trim().split(/\s+/); return parts.length > 1 ? parts[parts.length - 1] : ''; }
 function createFromWizard() {
   const val = id => $('#' + id).value.trim();
@@ -3970,9 +4106,190 @@ function createFromWizard() {
   renderVaultSelect(); renderHero(); renderViewTabs(); renderAddons(); renderGpt(); renderPromo(); tickPresence(true);
   requestAnimationFrame(() => { renderTree({ animate:true, fit:true }); document.getElementById('vault').scrollIntoView({ behavior:'smooth' }); });
   goldBurst();
+  if (wizAfter) { const t = wizAfter; wizAfter = null; state.cardShown = state.cardShown || 1; setTimeout(() => showTab(t), 1400); }
   toast(`👑 The ${v.name} is born — ${Object.keys(v.people).length} members. Tap any portrait to add photos, stories and voices.`, 'info', 6000);
   if (!state.cardShown) { state.cardShown = 1; save(); setTimeout(() => { if (!modalStack.length) openFamilyCard(true); }, 3200); }
   if (hasDual(v) && !isRoyal()) setTimeout(() => toast(hx('Your maternal side is saved too — Royal Dynasty shows both sides fused.', 'Aapki Nana–Nani side bhi save hai — Royal Dynasty dono taraf ek saath dikhata hai.'), 'info', 5000), 2600);
+}
+/* ---------- ▶ "How it works" — a short, video-like walkthrough (replaces the separate demo mode) ---------- */
+const TUT_I18N = {"en":{"t0":"Type just 3 names","s0":"Your name, Papa and Mummy — that’s it.","t1":"Your family tree builds itself","s1":"Add Dada-Dadi with one tap, generation by generation.","t2":"Save their photo and real voice","s2":"Tap a portrait, add a photo, press record.","t3":"Hear stories in their own voice","s3":"Write a story once — Royal reads it in their cloned voice.","t4":"Share your Family Card","s4":"One tap to the family WhatsApp group.","t5":"Both sides, together","s5":"Free keeps Papa’s side. Royal adds Mummy’s side — Nana-Nani too.","you":"You","papa":"Papa","mummy":"Mummy","dada":"Dada","dadi":"Dadi","nana":"Nana","nani":"Nani","story":"In 1962 I walked from Almora to Delhi with one tin trunk and big dreams.","create":"Create your tree","yourName":"Your name","fatherName":"Father’s name","motherName":"Mother’s name","createMine":"Create my tree","family":"Sharma Family","addDD":"Add Dada-Dadi","dadaji":"Dadaji · Ram Prasad Sharma","photoAdded":"Photo added","storyH":"Dadaji’s story","inVoice":"in Dadaji’s voice","cardFamily":"The Sharma Family","members":"members","generations":"generations","sent":"Sent to Family Group","papaSide":"Papa’s side · Free","mummySide":"Mummy’s side · Royal","aria":"How DynastyVault works","steps":"Steps","sec30":"30 sec","pause":"Pause","play":"Play","next":"Next step","gotIt":"Got it","how":"How it works","guide":"Guide","n1":"Aarav Sharma","n2":"Rakesh Sharma","n3":"Sunita Sharma","lang":"Language"},"hn":{"t0":"Bas 3 naam likho","s0":"Aapka naam, Papa aur Mummy — bas.","t1":"Family tree khud ban jaata hai","s1":"Ek tap mein Dada-Dadi jodo, peedhi dar peedhi.","t2":"Unki photo aur asli awaaz save karo","s2":"Portrait pe tap karo, photo daalo, record dabao.","t3":"Kahaniyaan unki apni awaaz mein suno","s3":"Kahani ek baar likho — Royal use unki clone awaaz mein sunata hai.","t4":"Apna Family Card share karo","s4":"Ek tap mein family WhatsApp group mein.","t5":"Dono taraf, ek saath","s5":"Free mein Papa ki taraf. Royal mein Mummy ki taraf bhi — Nana-Nani bhi.","you":"Aap","papa":"Papa","mummy":"Mummy","dada":"Dada","dadi":"Dadi","nana":"Nana","nani":"Nani","story":"1962 mein main ek tin ke trunk aur bade sapno ke saath Almora se Dilli aaya tha.","create":"Apna tree banao","yourName":"Aapka naam","fatherName":"Papa ka naam","motherName":"Mummy ka naam","createMine":"Mera tree banao","family":"Sharma Family","addDD":"Dada-Dadi jodo","dadaji":"Dadaji · Ram Prasad Sharma","photoAdded":"Photo jud gayi","storyH":"Dadaji ki kahani","inVoice":"Dadaji ki awaaz mein","cardFamily":"Sharma Family","members":"log","generations":"peedhiyaan","sent":"Family Group mein bhej diya","papaSide":"Papa ki taraf · Free","mummySide":"Mummy ki taraf · Royal","aria":"DynastyVault kaise kaam karta hai","steps":"Steps","sec30":"30 sec","pause":"Rokein","play":"Chalayein","next":"Agla step","gotIt":"Samajh gaya","how":"Kaise kaam karta hai","guide":"Guide","n1":"Aarav Sharma","n2":"Rakesh Sharma","n3":"Sunita Sharma","lang":"Bhasha"},"hi":{"t0":"बस 3 नाम लिखो","s0":"आपका नाम, पापा और मम्मी — बस।","t1":"फ़ैमिली ट्री अपने आप बन जाता है","s1":"एक टैप में दादा-दादी जोड़ो, पीढ़ी दर पीढ़ी।","t2":"उनकी फ़ोटो और असली आवाज़ सहेजो","s2":"पोर्ट्रेट पर टैप करो, फ़ोटो डालो, रिकॉर्ड दबाओ।","t3":"कहानियाँ उनकी अपनी आवाज़ में सुनो","s3":"कहानी एक बार लिखो — Royal उसे उनकी क्लोन आवाज़ में सुनाता है।","t4":"अपना फ़ैमिली कार्ड शेयर करो","s4":"एक टैप में फ़ैमिली WhatsApp ग्रुप में।","t5":"दोनों तरफ़, एक साथ","s5":"फ़्री में पापा की तरफ़। Royal में मम्मी की तरफ़ भी — नाना-नानी भी।","you":"आप","papa":"पापा","mummy":"मम्मी","dada":"दादा","dadi":"दादी","nana":"नाना","nani":"नानी","story":"1962 में मैं एक टीन के ट्रंक और बड़े सपनों के साथ अल्मोड़ा से दिल्ली आया था।","create":"अपना ट्री बनाओ","yourName":"आपका नाम","fatherName":"पापा का नाम","motherName":"मम्मी का नाम","createMine":"मेरा ट्री बनाओ","family":"शर्मा परिवार","addDD":"दादा-दादी जोड़ो","dadaji":"दादाजी · राम प्रसाद शर्मा","photoAdded":"फ़ोटो जुड़ गई","storyH":"दादाजी की कहानी","inVoice":"दादाजी की आवाज़ में","cardFamily":"शर्मा परिवार","members":"सदस्य","generations":"पीढ़ियाँ","sent":"फ़ैमिली ग्रुप में भेज दिया","papaSide":"पापा की तरफ़ · फ़्री","mummySide":"मम्मी की तरफ़ · Royal","aria":"DynastyVault कैसे काम करता है","steps":"चरण","sec30":"30 सेकंड","pause":"रोकें","play":"चलाएँ","next":"अगला चरण","gotIt":"समझ गया","how":"कैसे काम करता है","guide":"गाइड","n1":"आरव शर्मा","n2":"राकेश शर्मा","n3":"सुनीता शर्मा","lang":"भाषा"},"gu":{"t0":"બસ 3 નામ લખો","s0":"તમારું નામ, પપ્પા અને મમ્મી — બસ.","t1":"ફેમિલી ટ્રી જાતે બની જાય છે","s1":"એક ટેપમાં દાદા-દાદી ઉમેરો, પેઢી દર પેઢી.","t2":"તેમનો ફોટો અને સાચો અવાજ સાચવો","s2":"પોર્ટ્રેટ પર ટેપ કરો, ફોટો ઉમેરો, રેકોર્ડ દબાવો.","t3":"વાર્તાઓ તેમના જ અવાજમાં સાંભળો","s3":"વાર્તા એક વાર લખો — Royal તેને તેમના ક્લોન અવાજમાં સંભળાવે છે.","t4":"તમારું ફેમિલી કાર્ડ શેર કરો","s4":"એક ટેપમાં ફેમિલી WhatsApp ગ્રુપમાં.","t5":"બંને બાજુ, એક સાથે","s5":"Freeમાં પપ્પાની બાજુ. Royalમાં મમ્મીની બાજુ પણ — નાના-નાની પણ.","you":"તમે","papa":"પપ્પા","mummy":"મમ્મી","dada":"દાદા","dadi":"દાદી","nana":"નાના","nani":"નાની","create":"તમારું ટ્રી બનાવો","yourName":"તમારું નામ","fatherName":"પપ્પાનું નામ","motherName":"મમ્મીનું નામ","createMine":"મારું ટ્રી બનાવો","family":"શર્મા પરિવાર","addDD":"દાદા-દાદી ઉમેરો","dadaji":"દાદાજી · રામ પ્રસાદ શર્મા","photoAdded":"ફોટો ઉમેરાયો","storyH":"દાદાજીની વાર્તા","story":"1962માં હું એક પતરાની પેટી અને મોટાં સપનાં સાથે અલ્મોડાથી દિલ્હી આવ્યો હતો.","inVoice":"દાદાજીના અવાજમાં","cardFamily":"શર્મા પરિવાર","members":"સભ્યો","generations":"પેઢીઓ","sent":"ફેમિલી ગ્રુપમાં મોકલ્યું","papaSide":"પપ્પાની બાજુ · Free","mummySide":"મમ્મીની બાજુ · Royal","how":"કેવી રીતે કામ કરે છે","sec30":"30 સેકન્ડ","gotIt":"સમજાઈ ગયું","guide":"ગાઇડ","pause":"રોકો","play":"ચલાવો","next":"આગળ","steps":"પગલાં","lang":"ભાષા","n1":"આરવ શર્મા","n2":"રાકેશ શર્મા","n3":"સુનિતા શર્મા","aria":"DynastyVault · કેવી રીતે કામ કરે છે"},"mr":{"t0":"फक्त 3 नावं लिहा","s0":"तुमचं नाव, बाबा आणि आई — बस्स.","t1":"फॅमिली ट्री आपोआप तयार होतो","s1":"एका टॅपमध्ये आजोबा-आजी जोडा, पिढी दर पिढी.","t2":"त्यांचा फोटो आणि खरा आवाज जपा","s2":"पोर्ट्रेटवर टॅप करा, फोटो जोडा, रेकॉर्ड दाबा.","t3":"गोष्टी त्यांच्याच आवाजात ऐका","s3":"गोष्ट एकदा लिहा — Royal ती त्यांच्या क्लोन आवाजात ऐकवतो.","t4":"तुमचं फॅमिली कार्ड शेअर करा","s4":"एका टॅपमध्ये फॅमिली WhatsApp ग्रुपमध्ये.","t5":"दोन्ही बाजू, एकत्र","s5":"Free मध्ये बाबांची बाजू. Royal मध्ये आईची बाजूही — आजोळचे आजोबा-आजीही.","you":"तुम्ही","papa":"बाबा","mummy":"आई","dada":"आजोबा","dadi":"आजी","nana":"आजोबा","nani":"आजी","create":"तुमचा ट्री बनवा","yourName":"तुमचं नाव","fatherName":"वडिलांचं नाव","motherName":"आईचं नाव","createMine":"माझा ट्री बनवा","family":"शर्मा कुटुंब","addDD":"आजोबा-आजी जोडा","dadaji":"आजोबा · राम प्रसाद शर्मा","photoAdded":"फोटो जोडला","storyH":"आजोबांची गोष्ट","story":"1962 मध्ये मी एक पत्र्याची ट्रंक आणि मोठी स्वप्नं घेऊन अल्मोड्याहून दिल्लीला आलो.","inVoice":"आजोबांच्या आवाजात","cardFamily":"शर्मा कुटुंब","members":"सदस्य","generations":"पिढ्या","sent":"फॅमिली ग्रुपला पाठवलं","papaSide":"बाबांची बाजू · Free","mummySide":"आईची बाजू · Royal","how":"हे कसं काम करतं","sec30":"30 सेकंद","gotIt":"समजलं","guide":"गाइड","pause":"थांबवा","play":"चालू करा","next":"पुढे","steps":"पायऱ्या","lang":"भाषा","n1":"आरव शर्मा","n2":"राकेश शर्मा","n3":"सुनीता शर्मा","aria":"DynastyVault · हे कसं काम करतं"},"pa":{"t0":"ਬੱਸ 3 ਨਾਮ ਲਿਖੋ","s0":"ਤੁਹਾਡਾ ਨਾਮ, ਪਾਪਾ ਅਤੇ ਮੰਮੀ — ਬੱਸ।","t1":"ਫੈਮਿਲੀ ਟ੍ਰੀ ਆਪਣੇ ਆਪ ਬਣ ਜਾਂਦਾ ਹੈ","s1":"ਇੱਕ ਟੈਪ ਨਾਲ ਦਾਦਾ-ਦਾਦੀ ਜੋੜੋ, ਪੀੜ੍ਹੀ ਦਰ ਪੀੜ੍ਹੀ।","t2":"ਉਨ੍ਹਾਂ ਦੀ ਫੋਟੋ ਅਤੇ ਅਸਲੀ ਆਵਾਜ਼ ਸੰਭਾਲੋ","s2":"ਪੋਰਟਰੇਟ ਤੇ ਟੈਪ ਕਰੋ, ਫੋਟੋ ਪਾਓ, ਰਿਕਾਰਡ ਦਬਾਓ।","t3":"ਕਹਾਣੀਆਂ ਉਨ੍ਹਾਂ ਦੀ ਆਪਣੀ ਆਵਾਜ਼ ਵਿੱਚ ਸੁਣੋ","s3":"ਕਹਾਣੀ ਇੱਕ ਵਾਰ ਲਿਖੋ — Royal ਉਸਨੂੰ ਉਨ੍ਹਾਂ ਦੀ ਕਲੋਨ ਆਵਾਜ਼ ਵਿੱਚ ਸੁਣਾਉਂਦਾ ਹੈ।","t4":"ਆਪਣਾ ਫੈਮਿਲੀ ਕਾਰਡ ਸ਼ੇਅਰ ਕਰੋ","s4":"ਇੱਕ ਟੈਪ ਨਾਲ ਫੈਮਿਲੀ WhatsApp ਗਰੁੱਪ ਵਿੱਚ।","t5":"ਦੋਵੇਂ ਪਾਸੇ, ਇਕੱਠੇ","s5":"Free ਵਿੱਚ ਪਾਪਾ ਵਾਲਾ ਪਾਸਾ। Royal ਵਿੱਚ ਮੰਮੀ ਵਾਲਾ ਪਾਸਾ ਵੀ — ਨਾਨਾ-ਨਾਨੀ ਵੀ।","you":"ਤੁਸੀਂ","papa":"ਪਾਪਾ","mummy":"ਮੰਮੀ","dada":"ਦਾਦਾ","dadi":"ਦਾਦੀ","nana":"ਨਾਨਾ","nani":"ਨਾਨੀ","create":"ਆਪਣਾ ਟ੍ਰੀ ਬਣਾਓ","yourName":"ਤੁਹਾਡਾ ਨਾਮ","fatherName":"ਪਾਪਾ ਦਾ ਨਾਮ","motherName":"ਮੰਮੀ ਦਾ ਨਾਮ","createMine":"ਮੇਰਾ ਟ੍ਰੀ ਬਣਾਓ","family":"ਸ਼ਰਮਾ ਪਰਿਵਾਰ","addDD":"ਦਾਦਾ-ਦਾਦੀ ਜੋੜੋ","dadaji":"ਦਾਦਾ ਜੀ · ਰਾਮ ਪ੍ਰਸਾਦ ਸ਼ਰਮਾ","photoAdded":"ਫੋਟੋ ਜੁੜ ਗਈ","storyH":"ਦਾਦਾ ਜੀ ਦੀ ਕਹਾਣੀ","story":"1962 ਵਿੱਚ ਮੈਂ ਇੱਕ ਟੀਨ ਦੇ ਟਰੰਕ ਅਤੇ ਵੱਡੇ ਸੁਪਨਿਆਂ ਨਾਲ ਅਲਮੋੜਾ ਤੋਂ ਦਿੱਲੀ ਆਇਆ ਸੀ।","inVoice":"ਦਾਦਾ ਜੀ ਦੀ ਆਵਾਜ਼ ਵਿੱਚ","cardFamily":"ਸ਼ਰਮਾ ਪਰਿਵਾਰ","members":"ਮੈਂਬਰ","generations":"ਪੀੜ੍ਹੀਆਂ","sent":"ਫੈਮਿਲੀ ਗਰੁੱਪ ਵਿੱਚ ਭੇਜ ਦਿੱਤਾ","papaSide":"ਪਾਪਾ ਵਾਲਾ ਪਾਸਾ · Free","mummySide":"ਮੰਮੀ ਵਾਲਾ ਪਾਸਾ · Royal","how":"ਇਹ ਕਿਵੇਂ ਕੰਮ ਕਰਦਾ ਹੈ","sec30":"30 ਸਕਿੰਟ","gotIt":"ਸਮਝ ਗਿਆ","guide":"ਗਾਈਡ","pause":"ਰੋਕੋ","play":"ਚਲਾਓ","next":"ਅੱਗੇ","steps":"ਕਦਮ","lang":"ਭਾਸ਼ਾ","n1":"ਆਰਵ ਸ਼ਰਮਾ","n2":"ਰਾਕੇਸ਼ ਸ਼ਰਮਾ","n3":"ਸੁਨੀਤਾ ਸ਼ਰਮਾ","aria":"DynastyVault · ਇਹ ਕਿਵੇਂ ਕੰਮ ਕਰਦਾ ਹੈ"},"bn":{"t0":"শুধু ৩টি নাম লিখুন","s0":"আপনার নাম, বাবা আর মা — ব্যস।","t1":"ফ্যামিলি ট্রি নিজেই তৈরি হয়ে যায়","s1":"এক ট্যাপে ঠাকুরদা-ঠাকুমা যোগ করুন, প্রজন্মের পর প্রজন্ম।","t2":"ওঁদের ছবি আর আসল কণ্ঠ রেখে দিন","s2":"প্রতিকৃতিতে ট্যাপ করুন, ছবি দিন, রেকর্ড চাপুন।","t3":"গল্প শুনুন ওঁদের নিজের কণ্ঠে","s3":"একবার গল্প লিখুন — Royal সেটি ওঁদের ক্লোন কণ্ঠে শোনায়।","t4":"আপনার ফ্যামিলি কার্ড শেয়ার করুন","s4":"এক ট্যাপে ফ্যামিলি WhatsApp গ্রুপে।","t5":"দুই দিক, একসঙ্গে","s5":"Free-তে বাবার দিক। Royal-এ মায়ের দিকও — দাদু-দিদিমাও।","you":"আপনি","papa":"বাবা","mummy":"মা","dada":"ঠাকুরদা","dadi":"ঠাকুমা","nana":"দাদু","nani":"দিদিমা","create":"আপনার ট্রি বানান","yourName":"আপনার নাম","fatherName":"বাবার নাম","motherName":"মায়ের নাম","createMine":"আমার ট্রি বানাও","family":"শর্মা পরিবার","addDD":"ঠাকুরদা-ঠাকুমা যোগ করুন","dadaji":"ঠাকুরদা · রাম প্রসাদ শর্মা","photoAdded":"ছবি যোগ হয়েছে","storyH":"ঠাকুরদার গল্প","story":"১৯৬২ সালে আমি একটা টিনের ট্রাঙ্ক আর বড় স্বপ্ন নিয়ে আলমোড়া থেকে দিল্লি এসেছিলাম।","inVoice":"ঠাকুরদার কণ্ঠে","cardFamily":"শর্মা পরিবার","members":"সদস্য","generations":"প্রজন্ম","sent":"ফ্যামিলি গ্রুপে পাঠানো হয়েছে","papaSide":"বাবার দিক · Free","mummySide":"মায়ের দিক · Royal","how":"কীভাবে কাজ করে","sec30":"৩০ সেকেন্ড","gotIt":"বুঝেছি","guide":"গাইড","pause":"থামান","play":"চালান","next":"পরের ধাপ","steps":"ধাপ","lang":"ভাষা","n1":"আরভ শর্মা","n2":"রাকেশ শর্মা","n3":"সুনীতা শর্মা","aria":"DynastyVault · কীভাবে কাজ করে"},"ta":{"t0":"வெறும் 3 பெயர்களை எழுதுங்கள்","s0":"உங்கள் பெயர், அப்பா, அம்மா — அவ்வளவுதான்.","t1":"குடும்ப மரம் தானாகவே உருவாகும்","s1":"ஒரே தட்டலில் தாத்தா-பாட்டியைச் சேர்க்கலாம், தலைமுறை தலைமுறையாக.","t2":"அவர்களின் புகைப்படத்தையும் உண்மையான குரலையும் சேமியுங்கள்","s2":"படத்தைத் தட்டுங்கள், புகைப்படம் சேருங்கள், பதிவை அழுத்துங்கள்.","t3":"கதைகளை அவர்களின் சொந்தக் குரலிலேயே கேளுங்கள்","s3":"கதையை ஒருமுறை எழுதுங்கள் — Royal அதை அவர்களின் குளோன் குரலில் வாசிக்கும்.","t4":"உங்கள் குடும்ப அட்டையைப் பகிருங்கள்","s4":"ஒரே தட்டலில் குடும்ப WhatsApp குழுவுக்கு.","t5":"இரு பக்கங்களும், ஒன்றாக","s5":"Free-இல் அப்பாவின் பக்கம். Royal-இல் அம்மாவின் பக்கமும் — தாத்தா-பாட்டியும்.","you":"நீங்கள்","papa":"அப்பா","mummy":"அம்மா","dada":"தாத்தா","dadi":"பாட்டி","nana":"தாத்தா","nani":"பாட்டி","create":"உங்கள் மரத்தை உருவாக்குங்கள்","yourName":"உங்கள் பெயர்","fatherName":"அப்பாவின் பெயர்","motherName":"அம்மாவின் பெயர்","createMine":"என் மரத்தை உருவாக்கு","family":"சர்மா குடும்பம்","addDD":"தாத்தா-பாட்டியைச் சேர்","dadaji":"தாத்தா · ராம் பிரசாத் சர்மா","photoAdded":"புகைப்படம் சேர்க்கப்பட்டது","storyH":"தாத்தாவின் கதை","story":"1962-இல் ஒரு தகரப் பெட்டியுடனும் பெரிய கனவுகளுடனும் அல்மோராவிலிருந்து டெல்லிக்கு வந்தேன்.","inVoice":"தாத்தாவின் குரலில்","cardFamily":"சர்மா குடும்பம்","members":"உறுப்பினர்கள்","generations":"தலைமுறைகள்","sent":"குடும்பக் குழுவுக்கு அனுப்பப்பட்டது","papaSide":"அப்பாவின் பக்கம் · Free","mummySide":"அம்மாவின் பக்கம் · Royal","how":"இது எப்படி வேலை செய்கிறது","sec30":"30 வினாடி","gotIt":"புரிந்தது","guide":"வழிகாட்டி","pause":"நிறுத்து","play":"இயக்கு","next":"அடுத்து","steps":"படிகள்","lang":"மொழி","n1":"ஆரவ் சர்மா","n2":"ராகேஷ் சர்மா","n3":"சுனிதா சர்மா","aria":"DynastyVault · இது எப்படி வேலை செய்கிறது"},"te":{"t0":"కేవలం 3 పేర్లు రాయండి","s0":"మీ పేరు, నాన్న, అమ్మ — అంతే.","t1":"ఫ్యామిలీ ట్రీ తనంతట తానే తయారవుతుంది","s1":"ఒక్క ట్యాప్‌తో తాతయ్య-నాన్నమ్మలను చేర్చండి, తరం తరంగా.","t2":"వారి ఫోటో, అసలు గొంతు దాచుకోండి","s2":"చిత్రంపై ట్యాప్ చేయండి, ఫోటో జోడించండి, రికార్డ్ నొక్కండి.","t3":"కథలు వారి సొంత గొంతులోనే వినండి","s3":"కథ ఒకసారి రాయండి — Royal దాన్ని వారి క్లోన్ గొంతులో వినిపిస్తుంది.","t4":"మీ ఫ్యామిలీ కార్డ్ షేర్ చేయండి","s4":"ఒక్క ట్యాప్‌తో ఫ్యామిలీ WhatsApp గ్రూప్‌కి.","t5":"రెండు వైపులా, కలిసి","s5":"Freeలో నాన్న వైపు. Royalలో అమ్మ వైపు కూడా — తాతయ్య-అమ్మమ్మ కూడా.","you":"మీరు","papa":"నాన్న","mummy":"అమ్మ","dada":"తాతయ్య","dadi":"నాన్నమ్మ","nana":"తాతయ్య","nani":"అమ్మమ్మ","create":"మీ ట్రీ తయారు చేయండి","yourName":"మీ పేరు","fatherName":"నాన్న పేరు","motherName":"అమ్మ పేరు","createMine":"నా ట్రీ తయారు చేయి","family":"శర్మ కుటుంబం","addDD":"తాతయ్య-నాన్నమ్మలను చేర్చండి","dadaji":"తాతయ్య · రామ్ ప్రసాద్ శర్మ","photoAdded":"ఫోటో జోడించబడింది","storyH":"తాతయ్య కథ","story":"1962లో ఒక తగరపు పెట్టె, పెద్ద కలలతో అల్మోరా నుంచి ఢిల్లీకి వచ్చాను.","inVoice":"తాతయ్య గొంతులో","cardFamily":"శర్మ కుటుంబం","members":"సభ్యులు","generations":"తరాలు","sent":"ఫ్యామిలీ గ్రూప్‌కి పంపబడింది","papaSide":"నాన్న వైపు · Free","mummySide":"అమ్మ వైపు · Royal","how":"ఇది ఎలా పనిచేస్తుంది","sec30":"30 సెకన్లు","gotIt":"అర్థమైంది","guide":"గైడ్","pause":"ఆపు","play":"ప్లే","next":"తర్వాత","steps":"దశలు","lang":"భాష","n1":"ఆరవ్ శర్మ","n2":"రాకేష్ శర్మ","n3":"సునీత శర్మ","aria":"DynastyVault · ఇది ఎలా పనిచేస్తుంది"},"kn":{"t0":"ಕೇವಲ 3 ಹೆಸರು ಬರೆಯಿರಿ","s0":"ನಿಮ್ಮ ಹೆಸರು, ಅಪ್ಪ ಮತ್ತು ಅಮ್ಮ — ಅಷ್ಟೇ.","t1":"ಫ್ಯಾಮಿಲಿ ಟ್ರೀ ತಾನಾಗಿಯೇ ಬೆಳೆಯುತ್ತದೆ","s1":"ಒಂದೇ ಟ್ಯಾಪ್‌ನಲ್ಲಿ ಅಜ್ಜ-ಅಜ್ಜಿಯನ್ನು ಸೇರಿಸಿ, ತಲೆಮಾರಿನಿಂದ ತಲೆಮಾರಿಗೆ.","t2":"ಅವರ ಫೋಟೋ ಮತ್ತು ನಿಜವಾದ ಧ್ವನಿಯನ್ನು ಉಳಿಸಿ","s2":"ಚಿತ್ರದ ಮೇಲೆ ಟ್ಯಾಪ್ ಮಾಡಿ, ಫೋಟೋ ಸೇರಿಸಿ, ರೆಕಾರ್ಡ್ ಒತ್ತಿ.","t3":"ಕಥೆಗಳನ್ನು ಅವರದೇ ಧ್ವನಿಯಲ್ಲಿ ಕೇಳಿ","s3":"ಕಥೆಯನ್ನು ಒಮ್ಮೆ ಬರೆಯಿರಿ — Royal ಅದನ್ನು ಅವರ ಕ್ಲೋನ್ ಧ್ವನಿಯಲ್ಲಿ ಓದುತ್ತದೆ.","t4":"ನಿಮ್ಮ ಫ್ಯಾಮಿಲಿ ಕಾರ್ಡ್ ಹಂಚಿಕೊಳ್ಳಿ","s4":"ಒಂದೇ ಟ್ಯಾಪ್‌ನಲ್ಲಿ ಫ್ಯಾಮಿಲಿ WhatsApp ಗುಂಪಿಗೆ.","t5":"ಎರಡೂ ಕಡೆ, ಒಟ್ಟಿಗೆ","s5":"Free ನಲ್ಲಿ ಅಪ್ಪನ ಕಡೆ. Royal ನಲ್ಲಿ ಅಮ್ಮನ ಕಡೆಯೂ — ಅಜ್ಜ-ಅಜ್ಜಿಯೂ.","you":"ನೀವು","papa":"ಅಪ್ಪ","mummy":"ಅಮ್ಮ","dada":"ಅಜ್ಜ","dadi":"ಅಜ್ಜಿ","nana":"ಅಜ್ಜ","nani":"ಅಜ್ಜಿ","create":"ನಿಮ್ಮ ಟ್ರೀ ರಚಿಸಿ","yourName":"ನಿಮ್ಮ ಹೆಸರು","fatherName":"ಅಪ್ಪನ ಹೆಸರು","motherName":"ಅಮ್ಮನ ಹೆಸರು","createMine":"ನನ್ನ ಟ್ರೀ ರಚಿಸಿ","family":"ಶರ್ಮಾ ಕುಟುಂಬ","addDD":"ಅಜ್ಜ-ಅಜ್ಜಿ ಸೇರಿಸಿ","dadaji":"ಅಜ್ಜ · ರಾಮ್ ಪ್ರಸಾದ್ ಶರ್ಮಾ","photoAdded":"ಫೋಟೋ ಸೇರಿಸಲಾಗಿದೆ","storyH":"ಅಜ್ಜನ ಕಥೆ","story":"1962ರಲ್ಲಿ ನಾನು ಒಂದು ತಗಡಿನ ಪೆಟ್ಟಿಗೆ ಮತ್ತು ದೊಡ್ಡ ಕನಸುಗಳೊಂದಿಗೆ ಅಲ್ಮೋರಾದಿಂದ ದೆಹಲಿಗೆ ಬಂದೆ.","inVoice":"ಅಜ್ಜನ ಧ್ವನಿಯಲ್ಲಿ","cardFamily":"ಶರ್ಮಾ ಕುಟುಂಬ","members":"ಸದಸ್ಯರು","generations":"ತಲೆಮಾರುಗಳು","sent":"ಫ್ಯಾಮಿಲಿ ಗುಂಪಿಗೆ ಕಳುಹಿಸಲಾಗಿದೆ","papaSide":"ಅಪ್ಪನ ಕಡೆ · Free","mummySide":"ಅಮ್ಮನ ಕಡೆ · Royal","how":"ಇದು ಹೇಗೆ ಕೆಲಸ ಮಾಡುತ್ತದೆ","sec30":"30 ಸೆಕೆಂಡ್","gotIt":"ಅರ್ಥವಾಯಿತು","guide":"ಮಾರ್ಗದರ್ಶಿ","pause":"ನಿಲ್ಲಿಸಿ","play":"ಪ್ಲೇ","next":"ಮುಂದೆ","steps":"ಹಂತಗಳು","lang":"ಭಾಷೆ","n1":"ಆರವ್ ಶರ್ಮಾ","n2":"ರಾಕೇಶ್ ಶರ್ಮಾ","n3":"ಸುನೀತಾ ಶರ್ಮಾ","aria":"DynastyVault · ಇದು ಹೇಗೆ ಕೆಲಸ ಮಾಡುತ್ತದೆ"},"ml":{"t0":"3 പേരുകൾ മാത്രം എഴുതൂ","s0":"നിങ്ങളുടെ പേര്, അച്ഛൻ, അമ്മ — അത്രമാത്രം.","t1":"ഫാമിലി ട്രീ സ്വയം രൂപപ്പെടുന്നു","s1":"ഒറ്റ ടാപ്പിൽ അപ്പൂപ്പനെയും അമ്മൂമ്മയെയും ചേർക്കൂ, തലമുറകളായി.","t2":"അവരുടെ ഫോട്ടോയും യഥാർത്ഥ ശബ്ദവും സൂക്ഷിക്കൂ","s2":"ചിത്രത്തിൽ ടാപ്പ് ചെയ്യൂ, ഫോട്ടോ ചേർക്കൂ, റെക്കോർഡ് അമർത്തൂ.","t3":"കഥകൾ അവരുടെ സ്വന്തം ശബ്ദത്തിൽ കേൾക്കൂ","s3":"കഥ ഒരിക്കൽ എഴുതൂ — Royal അത് അവരുടെ ക്ലോൺ ശബ്ദത്തിൽ വായിക്കും.","t4":"നിങ്ങളുടെ ഫാമിലി കാർഡ് ഷെയർ ചെയ്യൂ","s4":"ഒറ്റ ടാപ്പിൽ ഫാമിലി WhatsApp ഗ്രൂപ്പിലേക്ക്.","t5":"ഇരുവശവും, ഒരുമിച്ച്","s5":"Free-ൽ അച്ഛന്റെ വശം. Royal-ൽ അമ്മയുടെ വശവും — അമ്മയുടെ അച്ഛനമ്മമാരും.","you":"നിങ്ങൾ","papa":"അച്ഛൻ","mummy":"അമ്മ","dada":"അപ്പൂപ്പൻ","dadi":"അമ്മൂമ്മ","nana":"അപ്പൂപ്പൻ","nani":"അമ്മൂമ്മ","create":"നിങ്ങളുടെ ട്രീ ഉണ്ടാക്കൂ","yourName":"നിങ്ങളുടെ പേര്","fatherName":"അച്ഛന്റെ പേര്","motherName":"അമ്മയുടെ പേര്","createMine":"എന്റെ ട്രീ ഉണ്ടാക്കൂ","family":"ശർമ്മ കുടുംബം","addDD":"അപ്പൂപ്പൻ-അമ്മൂമ്മയെ ചേർക്കൂ","dadaji":"അപ്പൂപ്പൻ · രാം പ്രസാദ് ശർമ്മ","photoAdded":"ഫോട്ടോ ചേർത്തു","storyH":"അപ്പൂപ്പന്റെ കഥ","story":"1962-ൽ ഒരു തകരപ്പെട്ടിയും വലിയ സ്വപ്നങ്ങളുമായി ഞാൻ അൽമോറയിൽ നിന്ന് ഡൽഹിയിലെത്തി.","inVoice":"അപ്പൂപ്പന്റെ ശബ്ദത്തിൽ","cardFamily":"ശർമ്മ കുടുംബം","members":"അംഗങ്ങൾ","generations":"തലമുറകൾ","sent":"ഫാമിലി ഗ്രൂപ്പിലേക്ക് അയച്ചു","papaSide":"അച്ഛന്റെ വശം · Free","mummySide":"അമ്മയുടെ വശം · Royal","how":"ഇത് എങ്ങനെ പ്രവർത്തിക്കുന്നു","sec30":"30 സെക്കൻഡ്","gotIt":"മനസ്സിലായി","guide":"ഗൈഡ്","pause":"നിർത്തൂ","play":"പ്ലേ","next":"അടുത്തത്","steps":"ഘട്ടങ്ങൾ","lang":"ഭാഷ","n1":"ആരവ് ശർമ്മ","n2":"രാകേഷ് ശർമ്മ","n3":"സുനിത ശർമ്മ","aria":"DynastyVault · ഇത് എങ്ങനെ പ്രവർത്തിക്കുന്നു"},"es":{"t0":"Escribe solo 3 nombres","s0":"Tu nombre, el de papá y el de mamá. Nada más.","t1":"Tu árbol familiar se crea solo","s1":"Añade a los abuelos con un toque, generación tras generación.","t2":"Guarda su foto y su voz real","s2":"Toca un retrato, añade una foto y pulsa grabar.","t3":"Escucha historias con su propia voz","s3":"Escribe la historia una vez: Royal la lee con su voz clonada.","t4":"Comparte tu Tarjeta Familiar","s4":"Un toque y llega al grupo familiar de WhatsApp.","t5":"Las dos ramas, juntas","s5":"Free muestra la rama de papá. Royal añade la de mamá, abuelos incluidos.","you":"Tú","papa":"Papá","mummy":"Mamá","dada":"Abuelo","dadi":"Abuela","nana":"Abuelo","nani":"Abuela","create":"Crea tu árbol","yourName":"Tu nombre","fatherName":"Nombre del padre","motherName":"Nombre de la madre","createMine":"Crear mi árbol","family":"Familia Sharma","addDD":"Añadir abuelos","dadaji":"Abuelo · Ram Prasad Sharma","photoAdded":"Foto añadida","storyH":"La historia del abuelo","story":"En 1962 fui de Almora a Delhi con un baúl de lata y grandes sueños.","inVoice":"con la voz del abuelo","cardFamily":"La familia Sharma","members":"miembros","generations":"generaciones","sent":"Enviado al grupo familiar","papaSide":"Rama de papá · Free","mummySide":"Rama de mamá · Royal","how":"Cómo funciona","sec30":"30 s","gotIt":"Entendido","guide":"Guía","pause":"Pausa","play":"Reproducir","next":"Siguiente","steps":"Pasos","lang":"Idioma","n1":"Aarav Sharma","n2":"Rakesh Sharma","n3":"Sunita Sharma","aria":"DynastyVault · Cómo funciona"},"fr":{"t0":"Écrivez juste 3 prénoms","s0":"Le vôtre, celui de papa et celui de maman. C’est tout.","t1":"Votre arbre se construit tout seul","s1":"Ajoutez les grands-parents d’un geste, génération après génération.","t2":"Gardez leur photo et leur vraie voix","s2":"Touchez un portrait, ajoutez une photo, lancez l’enregistrement.","t3":"Écoutez des histoires avec leur propre voix","s3":"Écrivez l’histoire une fois : Royal la lit avec leur voix clonée.","t4":"Partagez votre Carte de famille","s4":"Un geste et c’est envoyé au groupe WhatsApp de la famille.","t5":"Les deux côtés, réunis","s5":"Free garde le côté de papa. Royal ajoute celui de maman, grands-parents compris.","you":"Vous","papa":"Papa","mummy":"Maman","dada":"Papi","dadi":"Mamie","nana":"Papi","nani":"Mamie","create":"Créez votre arbre","yourName":"Votre nom","fatherName":"Nom du père","motherName":"Nom de la mère","createMine":"Créer mon arbre","family":"Famille Sharma","addDD":"Ajouter les grands-parents","dadaji":"Grand-père · Ram Prasad Sharma","photoAdded":"Photo ajoutée","storyH":"L’histoire de grand-père","story":"En 1962, je suis parti d’Almora pour Delhi avec une malle en fer et de grands rêves.","inVoice":"avec la voix de grand-père","cardFamily":"La famille Sharma","members":"membres","generations":"générations","sent":"Envoyé au groupe familial","papaSide":"Côté papa · Free","mummySide":"Côté maman · Royal","how":"Comment ça marche","sec30":"30 s","gotIt":"Compris","guide":"Guide","pause":"Pause","play":"Lecture","next":"Suivant","steps":"Étapes","lang":"Langue","n1":"Aarav Sharma","n2":"Rakesh Sharma","n3":"Sunita Sharma","aria":"DynastyVault · Comment ça marche"},"pt":{"t0":"Escreva só 3 nomes","s0":"Seu nome, o do pai e o da mãe. Só isso.","t1":"Sua árvore genealógica se monta sozinha","s1":"Adicione os avós com um toque, geração após geração.","t2":"Guarde a foto e a voz verdadeira deles","s2":"Toque num retrato, adicione uma foto e aperte gravar.","t3":"Ouça histórias na própria voz deles","s3":"Escreva a história uma vez: o Royal a lê com a voz clonada deles.","t4":"Compartilhe seu Cartão da Família","s4":"Um toque e vai para o grupo da família no WhatsApp.","t5":"Os dois lados, juntos","s5":"O Free mostra o lado do pai. O Royal adiciona o lado da mãe, avós incluídos.","you":"Você","papa":"Pai","mummy":"Mãe","dada":"Avô","dadi":"Avó","nana":"Avô","nani":"Avó","create":"Crie sua árvore","yourName":"Seu nome","fatherName":"Nome do pai","motherName":"Nome da mãe","createMine":"Criar minha árvore","family":"Família Sharma","addDD":"Adicionar avós","dadaji":"Avô · Ram Prasad Sharma","photoAdded":"Foto adicionada","storyH":"A história do avô","story":"Em 1962 fui de Almora para Delhi com um baú de lata e grandes sonhos.","inVoice":"na voz do avô","cardFamily":"A família Sharma","members":"membros","generations":"gerações","sent":"Enviado ao grupo da família","papaSide":"Lado do pai · Free","mummySide":"Lado da mãe · Royal","how":"Como funciona","sec30":"30 s","gotIt":"Entendi","guide":"Guia","pause":"Pausar","play":"Reproduzir","next":"Próximo","steps":"Etapas","lang":"Idioma","n1":"Aarav Sharma","n2":"Rakesh Sharma","n3":"Sunita Sharma","aria":"DynastyVault · Como funciona"},"ru":{"t0":"Впишите всего 3 имени","s0":"Ваше имя, имя папы и мамы — и всё.","t1":"Семейное древо строится само","s1":"Добавляйте бабушек и дедушек одним касанием, поколение за поколением.","t2":"Сохраните их фото и настоящий голос","s2":"Нажмите на портрет, добавьте фото, включите запись.","t3":"Слушайте истории их собственным голосом","s3":"Напишите историю один раз — Royal прочитает её их клонированным голосом.","t4":"Поделитесь Семейной карточкой","s4":"Одно касание — и она в семейной группе WhatsApp.","t5":"Обе стороны вместе","s5":"Free показывает сторону папы. Royal добавляет сторону мамы — с бабушкой и дедушкой.","you":"Вы","papa":"Папа","mummy":"Мама","dada":"Дедушка","dadi":"Бабушка","nana":"Дедушка","nani":"Бабушка","create":"Создайте древо","yourName":"Ваше имя","fatherName":"Имя отца","motherName":"Имя матери","createMine":"Создать моё древо","family":"Семья Шарма","addDD":"Добавить бабушку и дедушку","dadaji":"Дедушка · Рам Прасад Шарма","photoAdded":"Фото добавлено","storyH":"История дедушки","story":"В 1962 году я пришёл из Алморы в Дели с жестяным сундуком и большими мечтами.","inVoice":"голосом дедушки","cardFamily":"Семья Шарма","members":"чел.","generations":"поколения","sent":"Отправлено в семейную группу","papaSide":"Сторона папы · Free","mummySide":"Сторона мамы · Royal","how":"Как это работает","sec30":"30 сек","gotIt":"Понятно","guide":"Гид","pause":"Пауза","play":"Смотреть","next":"Далее","steps":"Шаги","lang":"Язык","n1":"Аарав Шарма","n2":"Ракеш Шарма","n3":"Сунита Шарма","aria":"DynastyVault · Как это работает"},"ja":{"t0":"名前を3つ入れるだけ","s0":"あなた、お父さん、お母さんの名前。それだけです。","t1":"家系図が自動でできあがる","s1":"ワンタップで祖父母を追加。世代から世代へ。","t2":"写真と本物の声を残す","s2":"肖像をタップして写真を追加、録音ボタンを押すだけ。","t3":"物語を本人の声で聞く","s3":"物語は一度書くだけ。Royalならクローン音声で読み上げます。","t4":"ファミリーカードをシェア","s4":"ワンタップで家族のWhatsAppグループへ。","t5":"父方も母方も、いっしょに","s5":"Freeは父方のみ。Royalなら母方の祖父母も加わります。","you":"あなた","papa":"父","mummy":"母","dada":"祖父","dadi":"祖母","nana":"祖父","nani":"祖母","create":"家系図をつくる","yourName":"あなたの名前","fatherName":"父の名前","motherName":"母の名前","createMine":"家系図をつくる","family":"シャルマ家","addDD":"祖父母を追加","dadaji":"祖父 · ラム・プラサド・シャルマ","photoAdded":"写真を追加しました","storyH":"祖父の物語","story":"1962年、ブリキのトランクひとつと大きな夢を抱えて、アルモラからデリーへやって来た。","inVoice":"祖父の声で","cardFamily":"シャルマ家","members":"人","generations":"世代","sent":"家族グループに送信しました","papaSide":"父方 · Free","mummySide":"母方 · Royal","how":"使い方","sec30":"30秒","gotIt":"わかった","guide":"ガイド","pause":"一時停止","play":"再生","next":"次へ","steps":"ステップ","lang":"言語","n1":"アーラヴ・シャルマ","n2":"ラケシュ・シャルマ","n3":"スニタ・シャルマ","aria":"DynastyVault · 使い方"}};
+const T = k => ((TUT_I18N[state.lang] || {})[k] ?? TUT_I18N.en[k] ?? k);
+const tutSeg = typeof Intl !== 'undefined' && Intl.Segmenter ? new Intl.Segmenter(undefined, { granularity:'grapheme' }) : null;
+const tutGraphemes = t => (tutSeg ? Array.from(tutSeg.segment(t), x => x.segment) : Array.from(t));   // keeps Indic letters whole while typing
+function tutWords(t) { if (/\s/.test(t.trim())) return { parts:t.split(' '), sep:' ' }; const g = tutGraphemes(t), out = []; for (let i = 0; i < g.length; i += 2) out.push(g.slice(i, i + 2).join('')); return { parts:out, sep:'' }; }
+const TUT_SCENES = [
+  { ms:4800, t:() => T('t0'), s:() => T('s0') },
+  { ms:4400, t:() => T('t1'), s:() => T('s1') },
+  { ms:4600, t:() => T('t2'), s:() => T('s2') },
+  { ms:5200, t:() => T('t3'), s:() => T('s3') },
+  { ms:4400, t:() => T('t4'), s:() => T('s4') },
+  { ms:4800, t:() => T('t5'), s:() => T('s5') }
+];
+function tutNode(x, y, r, label, ini, cls, d) {
+  return `<g class="tu-n ${cls || ''}" style="--d:${d}s"><circle cx="${x}" cy="${y}" r="${r}"/><text x="${x}" y="${y + 5}" class="tu-ini">${esc(ini)}</text><text x="${x}" y="${y + r + 16}" class="tu-lb${label.length > 7 ? ' sm' : ''}">${esc(label)}</text></g>`;
+}
+function tutStageHTML() {
+  const L = { you:T('you'), papa:T('papa'), mummy:T('mummy'), dada:T('dada'), dadi:T('dadi'), nana:T('nana'), nani:T('nani') };
+  const story = T('story');
+  const tw = tutWords(story); const step = Math.min(0.24, 3.4 / Math.max(1, tw.parts.length));
+  const words = tw.parts.map((w, i) => `<span style="--d:${(0.7 + i * step).toFixed(2)}s">${esc(w)}</span>`).join(tw.sep);
+  const bars = Array.from({ length:26 }, (_, i) => `<i style="--d:${(i * 0.07 % 0.9).toFixed(2)}s;--h:${20 + ((i * 37) % 70)}%"></i>`).join('');
+  const qr = Array.from({ length:49 }, (_, i) => `<i class="${(i * 7 + (i % 5) * 3) % 3 === 0 || [0, 1, 7, 8, 5, 6, 12, 13, 35, 36, 42, 43].includes(i) ? 'on' : ''}"></i>`).join('');
+  const tap = (x, y, d) => `<span class="tu-tap" style="left:${x}%;top:${y}%;--d:${d}s" aria-hidden="true"></span>`;
+  return `
+  <div class="tu-scene" data-s="0"><div class="tu-app">
+    <div class="tu-ah">✨ ${esc(T('create'))}</div>
+    <div class="tu-f"><small>${esc(T('yourName'))}</small><span class="tu-in" data-type="${esc(T('n1'))}"></span></div>
+    <div class="tu-f"><small>${esc(T('fatherName'))}</small><span class="tu-in" data-type="${esc(T('n2'))}"></span></div>
+    <div class="tu-f"><small>${esc(T('motherName'))}</small><span class="tu-in" data-type="${esc(T('n3'))}"></span></div>
+    <div class="tu-btn" style="--d:3.6s">👑 ${esc(T('createMine'))}</div>
+  </div>${tap(50, 86, 3.5)}</div>
+
+  <div class="tu-scene" data-s="1"><div class="tu-app tu-tree">
+    <div class="tu-ah">🌳 ${esc(T('family'))}</div>
+    <svg viewBox="0 0 300 250" aria-hidden="true">
+      <path class="tu-ln" style="--d:1.9s" d="M110 46H190M150 46V92"/>
+      <path class="tu-ln" style="--d:.5s" d="M110 128H190M150 128V184"/>
+      ${tutNode(90, 128, 22, L.papa, 'RS', '', 0.1)}${tutNode(210, 128, 22, L.mummy, 'SS', '', 0.25)}${tutNode(150, 202, 25, L.you, 'AS', 'you', 0.4)}
+      ${tutNode(90, 46, 20, L.dada, 'DJ', 'add', 1.9)}${tutNode(210, 46, 20, L.dadi, 'DM', 'add', 2.1)}
+    </svg>
+    <div class="tu-chip" style="--d:1.4s">＋ ${esc(T('addDD'))}</div>
+  </div>${tap(50, 87, 1.6)}</div>
+
+  <div class="tu-scene" data-s="2"><div class="tu-app tu-prof">
+    <div class="tu-av"><span>DJ</span><b class="tu-photo" style="--d:.6s"></b></div>
+    <div class="tu-pn">${esc(T('dadaji'))}</div>
+    <div class="tu-ok" style="--d:1s">📷 ${esc(T('photoAdded'))} ✓</div>
+    <div class="tu-wave">${bars}</div>
+    <div class="tu-rec"><span class="tu-mic" style="--d:1.6s">🎙️</span><b class="tu-time">0:00</b></div>
+  </div>${tap(50, 79, 1.5)}</div>
+
+  <div class="tu-scene" data-s="3"><div class="tu-app tu-story">
+    <div class="tu-ah">📜 ${esc(T('storyH'))}</div>
+    <p class="tu-words">${words}</p>
+    <div class="tu-play"><span class="tu-pb">▶</span><span class="tu-sw"><i></i><i></i><i></i></span><small>${esc(T('inVoice'))}</small><em>👑 Royal</em></div>
+  </div>${tap(22, 80, 0.4)}</div>
+
+  <div class="tu-scene" data-s="4"><div class="tu-app tu-share">
+    <div class="tu-card"><div class="tu-cr">👑</div><b>${esc(T('cardFamily'))}</b><small>5 ${esc(T('members'))} · 3 ${esc(T('generations'))}</small>
+      <div class="tu-mini"><i></i><i></i><br><i></i><i></i><br><i class="me"></i></div><div class="tu-qr">${qr}</div></div>
+    <div class="tu-wa" style="--d:1.9s">💬 WhatsApp</div>
+    <div class="tu-sent" style="--d:2.6s">✓ ${esc(T('sent'))}</div>
+  </div>${tap(50, 74, 1.8)}</div>
+
+  <div class="tu-scene" data-s="5"><div class="tu-app tu-both">
+    <svg viewBox="0 0 300 230" aria-hidden="true">
+      <path class="tu-ln" style="--d:.2s" d="M54 40H96M75 40V82"/>
+      <path class="tu-ln gold" style="--d:1.5s" d="M204 40H246M225 40V82"/>
+      <path class="tu-ln" style="--d:.5s" d="M75 142V152H150"/>
+      <path class="tu-ln gold" style="--d:1.9s" d="M225 142V152H150"/>
+      <path class="tu-ln" style="--d:.6s" d="M150 152V164"/>
+      ${tutNode(38, 40, 16, L.dada, 'DJ', '', 0)}${tutNode(112, 40, 16, L.dadi, 'DM', '', 0.1)}${tutNode(75, 100, 18, L.papa, 'RS', '', 0.2)}
+      ${tutNode(188, 40, 16, L.nana, 'NJ', 'royal', 1.3)}${tutNode(262, 40, 16, L.nani, 'NM', 'royal', 1.4)}${tutNode(225, 100, 18, L.mummy, 'SS', 'royal', 1.5)}
+      ${tutNode(150, 186, 22, L.you, 'AS', 'you', 0.3)}
+    </svg>
+    <div class="tu-sides"><span>${esc(T('papaSide'))}</span><span class="r" style="--d:1.6s">✨ ${esc(T('mummySide'))}</span></div>
+  </div></div>`;
+}
+function tutLangOptions() { return LANG_GROUPS.map(([g, codes]) => codes.map(c => `<option value="${c}"${c === state.lang ? ' selected' : ''}>${esc(LANG_BY[c].native)}</option>`).join('')).join(''); }
+function mountTutorial(host, opts = {}) {
+  if (!host) return null;
+  if (host._tut) host._tut.destroy();
+  const rm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  host.innerHTML = `<div class="tu${rm ? ' rm' : ''}" role="region" aria-roledescription="walkthrough" aria-label="${esc(T('aria'))}">
+    <div class="tu-bars">${TUT_SCENES.map((_, i) => `<i><b data-bar="${i}"></b></i>`).join('')}</div>
+    <div class="tu-stage"></div>
+    <div class="tu-cap" aria-live="polite"><span class="tu-step"></span><b class="tu-t"></b><small class="tu-s"></small></div>
+    <div class="tu-ctl">
+      <button type="button" class="tu-pp" aria-label="Pause"><span class="tu-ico-pause" aria-hidden="true">❚❚</span><span class="tu-ico-play" aria-hidden="true">▶</span></button>
+      <div class="tu-dots" role="group" aria-label="${esc(T('steps'))}">${TUT_SCENES.map((_, i) => `<button type="button" data-go="${i}" aria-label="${i + 1}"></button>`).join('')}</div>
+      <label class="tu-lang"><span aria-hidden="true">🌐</span><span class="sr-only tu-lang-l">${esc(T('lang'))}</span><select class="tu-lsel">${tutLangOptions()}</select></label>
+      ${opts.cta ? `<button type="button" class="btn-gold sm tu-cta">${esc(typeof opts.cta === 'function' ? opts.cta() : opts.cta)}</button>` : ''}
+    </div></div>`;
+  const root = host.firstElementChild, stage = root.querySelector('.tu-stage');
+  const st = { i:0, t0:0, el:0, playing:false, raf:0, timers:[], lang:null, seen:false };
+  const render = () => { stage.innerHTML = tutStageHTML(); st.lang = state.lang; };
+  const clear = () => { st.timers.forEach(clearTimeout); st.timers = []; };
+  const later = (fn, ms) => { st.timers.push(setTimeout(() => { if (st.playing || rm) fn(); }, rm ? 0 : ms)); };
+  function enterScene(i, fresh) {
+    clear(); st.i = i; st.el = 0;
+    if (i === 0 && st.lang !== state.lang) render();
+    root.querySelectorAll('.tu-scene').forEach(s => s.classList.remove('on')); void root.offsetWidth;   // restart the CSS animations
+    root.querySelector(`.tu-scene[data-s="${i}"]`).classList.add('on');
+    root.querySelectorAll('[data-go]').forEach(b => { const on = +b.dataset.go === i; b.classList.toggle('on', on); b.setAttribute('aria-current', on ? 'step' : 'false'); });
+    root.querySelectorAll('[data-bar]').forEach(b => { const n = +b.dataset.bar; b.style.width = n < i ? '100%' : '0%'; });
+    const sc = TUT_SCENES[i];
+    root.querySelector('.tu-step').textContent = `${i + 1}/${TUT_SCENES.length}`;
+    root.querySelector('.tu-t').textContent = sc.t(); root.querySelector('.tu-s').textContent = sc.s();
+    const scene = root.querySelector(`.tu-scene[data-s="${i}"]`);
+    // typing on the form scene
+    scene.querySelectorAll('.tu-in').forEach(el => { el.textContent = ''; el.classList.remove('typing'); });
+    let at = 350;
+    scene.querySelectorAll('.tu-in').forEach(el => {
+      const txt = el.dataset.type || '';
+      if (rm) { el.textContent = txt; return; }
+      later(() => el.classList.add('typing'), at);
+      const gs = tutGraphemes(txt);
+      gs.forEach((g, k) => later(() => { el.textContent = gs.slice(0, k + 1).join(''); }, at + 40 + k * 55));
+      later(() => el.classList.remove('typing'), at + 80 + gs.length * 55); at += 160 + gs.length * 55;
+    });
+    // record timer on the voice scene
+    const tm = scene.querySelector('.tu-time');
+    if (tm) { tm.textContent = rm ? '0:12' : '0:00'; if (!rm) for (let k = 1; k <= 12; k++) later(() => { tm.textContent = '0:' + String(k).padStart(2, '0'); }, 1700 + k * 220); }
+    st.t0 = performance.now();
+    if (fresh !== false) root.classList.remove('ended');
+  }
+  function tick(now) {
+    if (!st.playing) return;
+    st.el = now - st.t0; const d = TUT_SCENES[st.i].ms; const p = Math.min(1, st.el / d);
+    const bar = root.querySelector(`[data-bar="${st.i}"]`); if (bar) bar.style.width = (p * 100).toFixed(1) + '%';
+    if (p >= 1) {
+      if (st.i < TUT_SCENES.length - 1) enterScene(st.i + 1);
+      else if (opts.loop !== false) enterScene(0);
+      else { pause(); root.classList.add('ended'); return; }
+    }
+    st.raf = requestAnimationFrame(tick);
+  }
+  function play() {
+    if (st.playing || rm) return;
+    st.playing = true; root.classList.remove('paused'); st.seen = true;
+    enterScene(root.classList.contains('ended') ? 0 : st.i);   // a paused scene starts over — it is only a few seconds long
+    root.querySelector('.tu-pp').setAttribute('aria-label', T('pause'));
+    cancelAnimationFrame(st.raf); st.raf = requestAnimationFrame(tick);
+  }
+  function pause() {
+    st.playing = false; root.classList.add('paused'); cancelAnimationFrame(st.raf); clear();
+    root.querySelector('.tu-pp').setAttribute('aria-label', T('play'));
+  }
+  function go(i) { if (rm) { enterScene(i); return; } st.i = i; st.playing = false; root.classList.remove('ended'); play(); }
+  root.querySelector('.tu-pp').addEventListener('click', () => { if (rm) { go((st.i + 1) % TUT_SCENES.length); return; } (st.playing ? pause : play)(); st.user = true; });
+  root.querySelector('.tu-dots').addEventListener('click', e => { const b = e.target.closest('[data-go]'); if (b) { st.user = false; go(+b.dataset.go); } });
+  stage.addEventListener('click', () => { if (rm) go((st.i + 1) % TUT_SCENES.length); else { (st.playing ? pause : play)(); st.user = true; } });
+  root.querySelector('.tu-lsel').addEventListener('change', e => { st.user = false; setLang(e.target.value); });   // switches the whole site, the guide follows
+  const cta = root.querySelector('.tu-cta'); if (cta && opts.onCta) cta.addEventListener('click', opts.onCta);
+  if (rm) root.querySelector('.tu-pp').setAttribute('aria-label', T('next'));
+  render(); enterScene(0); root.classList.add('paused');
+  let io = null;
+  if (opts.autoplay === 'visible' && 'IntersectionObserver' in window) {
+    io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting && en.intersectionRatio >= 0.45) { if (!st.user) play(); } else if (st.playing) { pause(); st.user = false; } }), { threshold:[0, 0.45, 0.8] });
+    io.observe(root);
+  } else if (opts.autoplay) play();
+  const api = { play, pause, restart:() => { st.i = 0; st.playing = false; root.classList.remove('ended'); play(); }, destroy:() => { pause(); clear(); if (io) io.disconnect(); host._tut = null; }, refresh:() => { const was = st.playing; root.setAttribute('aria-label', T('aria')); const ls = root.querySelector('.tu-lsel'); if (ls) ls.value = state.lang; const ll = root.querySelector('.tu-lang-l'); if (ll) ll.textContent = T('lang'); const dg = root.querySelector('.tu-dots'); if (dg) dg.setAttribute('aria-label', T('steps')); const cb = root.querySelector('.tu-cta'); if (cb && typeof opts.cta === 'function') cb.textContent = opts.cta(); root.querySelector('.tu-pp').setAttribute('aria-label', rm ? T('next') : T(st.playing ? 'pause' : 'play')); render(); if (was) { st.playing = false; play(); } else enterScene(st.i); } };
+  host._tut = api; return api;
+}
+function openTutorial() {
+  const host = $('#tutModalBody'); if (!host) return;
+  openModal('tutModal');
+  const onb = state.onboarded && ownVault && ownVault();
+  mountTutorial(host, { autoplay:true, loop:false, cta:() => (onb ? T('gotIt') : '👑 ' + T('createMine')),
+    onCta:() => { closeModal('tutModal'); if (!onb) openWizard('form'); } });
+}
+
+function tutLabels() {
+  const L = T('how');
+  ['#wlTutH', '#hmTutL', '#tutModalH'].forEach(q => { const e = $(q); if (e) e.textContent = q === '#wlTutH' ? L + ' · ' + T('sec30') : L; });
+  const w = $('#wlTut'); if (w && w._tut) w._tut.refresh();
+  const m = $('#tutModalBody'); if (m && m._tut && isOpen('tutModal')) m._tut.refresh();
 }
 function startDemo() {
   if (state.onboarded && !isDemo(V())) state.lastOwn = state.active;
@@ -4315,9 +4632,12 @@ function renderDemoBtn() {
   const b = $('#btnDemo'); if (!b) return; const v = V();
   const own = state.order.map(id => state.vaults[id]).find(x => x && !x.demo);
   const inDemo = state.onboarded && isDemo(v);
-  b.innerHTML = inDemo ? (own ? '↩ <span>' + esc(wt('hd_mytree')) + '</span>' : '👑 <span>' + esc(wt('hd_create')) + '</span>') : DEMO_ICO + ' <span>' + esc(wt('hd_demo')) + '</span>';
-  b.title = inDemo ? 'Leave the demo and return to your own tree' : 'Explore the fully populated interactive demo tree';
-  b.classList.toggle('on', inDemo);
+  const welcome = !state.onboarded || !own;
+  // the separate demo mode is gone: before a tree exists this is "Create"; afterwards it opens the walkthrough
+  b.innerHTML = inDemo ? (own ? '↩ <span>' + esc(wt('hd_mytree')) + '</span>' : '👑 <span>' + esc(wt('hd_create')) + '</span>') : welcome ? '👑 <span>' + esc(wt('hd_create')) + '</span>' : '▶ <span>' + esc(T('guide')) + '</span>';
+  b.title = inDemo ? 'Leave the sample and return to your own tree' : welcome ? 'Create your family tree' : 'Watch how DynastyVault works';
+  b.setAttribute('aria-label', b.title);
+  b.classList.toggle('on', inDemo || welcome);
 }
 function toggleDemo() {
   const v = V();
@@ -6215,6 +6535,7 @@ function initV10() {
   document.addEventListener('click', e => { if (!tb.classList.contains('menu-open')) return; if (!e.target.closest('#hdrMenu')) return hmSet(false); if (e.target.closest('button,a') && !e.target.closest('#curToggle')) setTimeout(() => hmSet(false), 0); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && tb.classList.contains('menu-open')) { hmSet(false); hb.focus(); } });
   $$('#hdrMenu select').forEach(sel => sel.addEventListener('change', () => setTimeout(() => hmSet(false), 150)));
+  $('#hmTut').addEventListener('click', () => openTutorial());
   const hp = $('[data-hm-plans]'); if (hp) hp.addEventListener('click', e => { if (!dashOn()) return; e.preventDefault(); e.stopPropagation(); hmSet(false); showTab('plans'); });
   bindCloneAudio();
   // referral
@@ -8117,7 +8438,7 @@ function focusNode(pid) {
    HEADER / HERO / VAULTS
    ========================================================= */
 function renderVaultSelect() {
-  $('#vaultSelect').innerHTML = state.order.filter(id => state.vaults[id]).map(id => `<option value="${id}"${id === state.active ? ' selected' : ''}>${esc(state.vaults[id].name)}${state.vaults[id].demo ? ' · demo' : ''}</option>`).join('') +
+  $('#vaultSelect').innerHTML = state.order.filter(id => state.vaults[id] && (!state.vaults[id].demo || id === state.active)).map(id => `<option value="${id}"${id === state.active ? ' selected' : ''}>${esc(state.vaults[id].name)}${state.vaults[id].demo ? ' · demo' : ''}</option>`).join('') +
     `<option value="__new">＋ ${hx('Create New Dynasty…', 'Nayi Dynasty banao…')}</option>`;
 }
 function renderHero() {
@@ -8310,7 +8631,7 @@ function applyLang() {
   document.documentElement.dataset.script = ['hi','gu','mr','pa','bn','ta','te','kn','ml','ja'].includes(state.lang) ? 'complex' : 'latin';
   $$('[data-i18n]').forEach(el => { el.textContent = tl(el.dataset.i18n); });
   const sel = $('#langSelect'); if (sel) sel.value = state.lang;
-  applyHn(); applyWelcome(); if (typeof renderDemoBtn === 'function') renderDemoBtn();
+  applyHn(); applyWelcome(); if (typeof renderDemoBtn === 'function') renderDemoBtn(); if (typeof tutLabels === 'function') tutLabels();
   if (dash.inited) { renderDashTabs(); refreshPanel(dash.tab, true); renderRefBanners(); }
 }
 function setLang(code, quiet) {
@@ -11926,6 +12247,7 @@ const onClose = {
   storyModal: () => { cancelAnimationFrame(story.timer); renderStoryBar(); renderTree(); },
   shareModal: () => { story.paused = false; },
   wizModal: () => {},
+  tutModal: () => { const h = $('#tutModalBody'); if (h && h._tut) h._tut.destroy(); },
   capModal: () => { capStopAudio(); if (cap.rec) { cap.draft = null; capStopRec(); } cap.draft = null; },
   checkoutModal: () => { ck = null; },
   portraitModal: () => { PS.token++; PS.busy = false; },
@@ -12170,7 +12492,7 @@ setTimeout(async () => {
     if (live !== HAS_CLOUD) { HAS_CLOUD = live; setRoyalFeatures(); try { renderPlans(); renderAddons(); updatePrices(true); } catch (e) { /* views refresh later */ } }
   } catch (e) { /* server asleep or offline — keep the last known state */ }
 }, 900);
-if (/[?&]dvtest=1/.test(location.search)) window.__dv = { get state() { return state; }, save, saveNow };   // test hook, only with ?dvtest=1
+if (/[?&]dvtest=1/.test(location.search)) window.__dv = { get state() { return state; }, save, saveNow, startDemo, openTutorial };   // test hook, only with ?dvtest=1
 
 
 function toast(msg, type = 'info', ms = 3200) {
@@ -12192,13 +12514,17 @@ function wire() {
   $('#restoreFile').addEventListener('change', e => { const f = e.target.files && e.target.files[0]; e.target.value = ''; if (f) restoreArchive(f); });
   $('#capNew').addEventListener('click', () => openCapsule(''));
   $('#wlCrest').innerHTML = CROWN;
-  $('#btnDemo').addEventListener('click', toggleDemo);
+  $('#btnDemo').addEventListener('click', () => {
+    const own = state.order.map(id => state.vaults[id]).find(x => x && !x.demo);
+    if (state.onboarded && isDemo(V())) return toggleDemo();
+    if (!state.onboarded || !own) return openWizard('form');
+    openTutorial();
+  });
   $('#cityList').innerHTML = CITIES.map(c => `<option value="${esc(cityLabel(c))}"></option>`).join('');
   $$('#canvasTabs [data-ct]').forEach(b => b.addEventListener('click', () => setCanvasTab(b.dataset.ct)));
   $$('[data-open-map]').forEach(b => b.addEventListener('click', e => { e.preventDefault(); openMapTab(); }));
   if (state.seenMap) $('#mapNew').hidden = true;
   $('#mapEmptyAdd').addEventListener('click', () => { setPinMode(false); openRouteBuilder(); });
-  $('#mapEmptyDemo').addEventListener('click', () => { toggleDemo(); setTimeout(() => { setCanvasTab('map'); }, 350); });
   bindMap();
   $('#mapPlay').addEventListener('click', playJourney);
   $('#mapAdd').addEventListener('click', () => { setPinMode(false); openStopForm(null); });
@@ -12223,10 +12549,10 @@ function wire() {
   $$('#prFrames [data-pf]').forEach(b => b.addEventListener('click', () => { printUI.frame = b.dataset.pf; renderPrintUI(); }));
   $$('#prSizes [data-ps]').forEach(b => b.addEventListener('click', () => { printUI.size = b.dataset.ps; renderPrintUI(); }));
   $('#wlCreate').addEventListener('click', () => openWizard('form'));   // straight into the form — the demo has its own button
-  $('#wlDemo').addEventListener('click', startDemo);
   $('#demoCreate').addEventListener('click', () => openWizard('form'));
   $('#wzStart').addEventListener('click', () => openWizard('form'));
-  $('#wzDemo').addEventListener('click', startDemo);
+  mountTutorial($('#wlTut'), { autoplay:'visible' }); tutLabels();
+  $('#wzDemo').addEventListener('click', () => { closeModal('wizModal'); openTutorial(); });
   $('#wzBack').addEventListener('click', () => openWizard('choice'));
   $('#wzCreate').addEventListener('click', createFromWizard);
   $('#wizForm').addEventListener('keydown', e => { if (e.key === 'Enter' && e.target.tagName === 'INPUT') { e.preventDefault(); createFromWizard(); } });
@@ -12320,7 +12646,7 @@ function wire() {
     if (e.target.closest('[data-unlock-code]')) openCheckout('unlock');
     if (e.target.closest('[data-gift-royal]')) openCheckout('plan', 'royal', { gift:true });
   });
-  const goDashTab = (tab, open) => { const go = () => { showTab(tab); if (open) setTimeout(() => openPortrait(open), 400); }; if (document.body.classList.contains('welcome-mode')) { startDemo(); setTimeout(go, 1300); } else go(); };
+  const goDashTab = (tab, open) => { const go = () => { showTab(tab); if (open) setTimeout(() => openPortrait(open), 400); }; if (document.body.classList.contains('welcome-mode')) { wizAfter = tab; openWizard('form'); } else go(); };
   document.addEventListener('click', e => { const w = e.target.closest('[data-wl-see]'); if (w) goDashTab(w.dataset.wlSee); });
   const adminRoute = () => {
     const h = location.hash.slice(1); if (!h) return;
@@ -12335,7 +12661,7 @@ function wire() {
     else if (h === 'gift-royal') { clear(); openCheckout('plan', 'royal', { gift:true }); }
     else if (h === 'card') { clear(); if (document.body.classList.contains('welcome-mode')) openWizard('form'); else openFamilyCard(); }
     else if (h === 'invite') { clear(); if (!document.body.classList.contains('welcome-mode')) openInvite(); }
-    else if (h === 'demo') { clear(); const d = $('#wlDemo') && !$('#wlDemo').closest('[hidden]') && document.body.classList.contains('welcome-mode') ? $('#wlDemo') : $('#btnDemo'); if (d) d.click(); }
+    else if (h === 'demo') { clear(); if (document.body.classList.contains('welcome-mode') && $('#wlTut')) { $('#wlTut').scrollIntoView({ behavior:'smooth', block:'center' }); const t = $('#wlTut')._tut; if (t) setTimeout(() => t.restart(), 500); } else openTutorial(); }
   };
   window.addEventListener('hashchange', adminRoute); setTimeout(adminRoute, 600);
   $('#lockBuy').addEventListener('click', () => { lockCb = null; closeModal('lockModal'); openCheckout('plan', 'royal'); });
