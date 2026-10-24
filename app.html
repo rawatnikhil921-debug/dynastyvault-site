@@ -1769,6 +1769,22 @@ svg.leaflet-zoom-animated{will-change:transform}
 .ca-ol{margin:8px 0 0;padding-left:18px;font-size:12.5px;line-height:1.55;color:rgba(255,241,200,.78)}
 .ca-ol li{margin:3px 0}
 .btn-gold.ca-off{filter:saturate(.35) brightness(.8)}
+
+/* polish: welcome icons, gold sweep, card preview entrance, celebration burst */
+.wl-ico{display:grid;place-items:center;width:44px;height:44px;border-radius:14px;color:var(--gold-hi);border:1px solid rgba(var(--hi-rgb),.4);background:radial-gradient(circle at 30% 25%,rgba(var(--hi-rgb),.22),rgba(var(--g-rgb),.05) 70%)}
+.wl-ico svg{width:22px;height:22px}
+.wl-feat b{margin-top:10px}
+.wl-feat{transition:border-color .3s ease,transform .3s ease}.wl-feat:hover{border-color:rgba(var(--hi-rgb),.45);transform:translateY(-3px)}
+html .btn-gold{position:relative;overflow:hidden;isolation:isolate}
+html .btn-gold::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(105deg,transparent 30%,rgba(255,255,255,.5) 48%,transparent 66%);transform:translateX(-120%);transition:transform .75s ease}
+html .btn-gold:hover::after,html .btn-gold:focus-visible::after{transform:translateX(120%)}
+.share-img{animation:cardIn .7s cubic-bezier(.2,.8,.2,1) both}
+@keyframes cardIn{from{opacity:0;transform:translateY(16px) rotateX(10deg) scale(.95)}to{opacity:1;transform:none}}
+#goldBurst{position:fixed;inset:0;width:100vw;height:100vh;pointer-events:none;z-index:9999}
+@media (prefers-reduced-motion:reduce){html .btn-gold::after,.share-img,.wl-feat{animation:none!important;transition:none!important}}
+
+.share-up{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px;padding:12px 14px;border-radius:14px;border:1px dashed rgba(var(--hi-rgb),.55);background:rgba(var(--g-rgb),.08);font-size:13px;color:var(--gold-pale)}
+.share-up span{flex:1 1 200px;min-width:0}
 </style>
 </head>
 <body>
@@ -1842,10 +1858,10 @@ svg.leaflet-zoom-animated{will-change:transform}
         <g class="mn" style="animation-delay:1.4s"><circle cx="280" cy="168" r="28" fill="#0c0d12" stroke="url(#wlGold)" stroke-width="5"/><text x="280" y="175" text-anchor="middle" font-family="Cinzel" font-size="16" fill="#FFDF00" data-wl="wl_t_you" class="wl-tl">YOU</text></g>
       </svg>
       <div class="wl-feats">
-        <div class="wl-feat" style="animation-delay:.2s"><span>⚭</span><b data-wl="wl_f1_b"></b><small data-wl="wl_f1_s"></small></div>
-        <div class="wl-feat" style="animation-delay:.35s"><span>🎙️</span><b data-wl="wl_f2_b"></b><small data-wl="wl_f2_s"></small></div>
-        <div class="wl-feat" style="animation-delay:.5s"><span>🖼️</span><b data-wl="wl_f3_b"></b><small data-wl="wl_f3_s"></small></div>
-        <div class="wl-feat" style="animation-delay:.65s"><span>🔒</span><b data-wl="wl_f4_b"></b><small data-wl="wl_f4_s"></small></div>
+        <div class="wl-feat" style="animation-delay:.2s"><span class="wl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4v6a6 6 0 0 0 6 6 6 6 0 0 0 6-6V4"/><path d="M12 16v4"/><circle cx="6" cy="4" r="1.6"/><circle cx="18" cy="4" r="1.6"/><circle cx="12" cy="21" r="1.6"/></svg></span><b data-wl="wl_f1_b"></b><small data-wl="wl_f1_s"></small></div>
+        <div class="wl-feat" style="animation-delay:.35s"><span class="wl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3M8 21h8"/></svg></span><b data-wl="wl_f2_b"></b><small data-wl="wl_f2_s"></small></div>
+        <div class="wl-feat" style="animation-delay:.5s"><span class="wl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="11" r="2"/><circle cx="15.5" cy="11" r="2"/><path d="M5 18c.8-2.2 2-3.3 3.5-3.3S11.2 15.8 12 18M12 18c.8-2.2 2-3.3 3.5-3.3S18.2 15.8 19 18"/></svg></span><b data-wl="wl_f3_b"></b><small data-wl="wl_f3_s"></small></div>
+        <div class="wl-feat" style="animation-delay:.65s"><span class="wl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6z"/><rect x="9" y="11" width="6" height="5" rx="1"/><path d="M10 11V9.5a2 2 0 0 1 4 0V11"/></svg></span><b data-wl="wl_f4_b"></b><small data-wl="wl_f4_s"></small></div>
       </div>
     </div>
   </section>
@@ -2524,6 +2540,7 @@ svg.leaflet-zoom-animated{will-change:transform}
     <div class="p-5 sm:p-7 share-grid">
       <div id="sharePrev"></div>
       <div>
+        <div class="share-up" id="shareUpsell" hidden></div>
         <div class="seg" id="shareFmt"><button data-fmt="post" class="on">Post · 4:5</button><button data-fmt="story">Story · 9:16</button></div>
         <div class="share-btns mt-4">
           <button class="share-btn sb-nat" id="shareNative" data-share="native">📲 Share from this phone…</button>
@@ -3830,6 +3847,7 @@ function createFromWizard() {
   saveNow(); applyMode();
   renderVaultSelect(); renderHero(); renderViewTabs(); renderAddons(); renderGpt(); renderPromo(); tickPresence(true);
   requestAnimationFrame(() => { renderTree({ animate:true, fit:true }); document.getElementById('vault').scrollIntoView({ behavior:'smooth' }); });
+  goldBurst();
   toast(`👑 The ${v.name} is born — ${Object.keys(v.people).length} members. Tap any portrait to add photos, stories and voices.`, 'info', 6000);
   if (!state.cardShown) { state.cardShown = 1; save(); setTimeout(() => { if (!modalStack.length) openFamilyCard(true); }, 3200); }
   if (hasDual(v) && !isRoyal()) setTimeout(() => toast(hx('Your maternal side is saved too — Royal Dynasty shows both sides fused.', 'Aapki Nana–Nani side bhi save hai — Royal Dynasty dono taraf ek saath dikhata hai.'), 'info', 5000), 2600);
@@ -3953,7 +3971,8 @@ async function openShare(o) {
   const fam = o.kind === 'family'; const hd = $('#shareModal h3'); const eb = $('#shareModal .eyebrow');
   if (hd) hd.textContent = fam ? (o.first ? hx('🎉 Your Family Card is ready', '🎉 Aapka Family Card taiyaar hai') : hx('🪪 Your Family Card', '🪪 Aapka Family Card')) : '⚡ Share a memory card';
   if (eb) eb.textContent = fam ? hx('◆ Share it — every card carries your link', '◆ Share karo — har card pe aapka link hai') : '◆ Social Cross-Posting';
-  const si = $('#shareInvite'); if (si) si.hidden = !fam; const sq = $('#shareQR'); if (sq) sq.hidden = fam;
+  const si = $('#shareInvite'); if (si) si.hidden = !fam;
+  const up = $('#shareUpsell'); if (up) { const show = fam && hasDual(V()) && !isRoyal(); up.hidden = !show; if (show) up.innerHTML = `<span>👑 ${hx('This free card shows Papa’s side. Royal adds Mummy’s side (Nana–Nani) to the card too.', 'Free card mein Papa ki taraf dikhti hai. Royal se card pe Mummy ki taraf (Nana–Nani) bhi aa jaati hai.')}</span><button class="btn-gold sm" id="shareUpRoyal">${hx('Get Royal', 'Royal lo')}</button>`; const ub = $('#shareUpRoyal'); if (ub) ub.addEventListener('click', () => { closeModal('shareModal'); openCheckout('plan', 'royal'); }); } const sq = $('#shareQR'); if (sq) sq.hidden = fam;
   openModal('shareModal'); await renderShare();
 }
 async function renderShare() {
@@ -3983,11 +4002,30 @@ async function shareTo(target) {
   if (target === 'copy') { toast(await copyCap() ? 'Caption copied ✦' : 'This browser blocked copying.', 'info'); }
 }
 
+/* ---------- 🎉 gold burst — for the moments that matter (a family is born, Royal unlocks) ---------- */
+function goldBurst() {
+  try { if (matchMedia('(prefers-reduced-motion: reduce)').matches) return; } catch (e) { /* ignore */ }
+  const old = document.getElementById('goldBurst'); if (old) old.remove();
+  const c = document.createElement('canvas'); c.id = 'goldBurst'; c.setAttribute('aria-hidden', 'true'); document.body.appendChild(c);
+  const dpr = Math.min(2, devicePixelRatio || 1); const W = innerWidth, H = innerHeight; c.width = W * dpr; c.height = H * dpr; const g = c.getContext('2d'); g.scale(dpr, dpr);
+  const cols = ['#FFDF00', '#F3D774', '#D4AF37', '#FFF1A8', '#AA7C11'];
+  const P = Array.from({ length:innerWidth < 600 ? 90 : 150 }, () => { const a = -Math.PI / 2 + (Math.random() - .5) * 2.2; const v = 7 + Math.random() * 9; return { x:W / 2, y:H * .62, vx:Math.cos(a) * v, vy:Math.sin(a) * v, r:2 + Math.random() * 4, rot:Math.random() * 6, vr:(Math.random() - .5) * .3, c:cols[Math.random() * cols.length | 0], sq:Math.random() < .5 }; });
+  const t0 = performance.now();
+  const tick = t => { const k = (t - t0) / 1700; g.clearRect(0, 0, W, H); if (k >= 1) { c.remove(); return; }
+    for (const p of P) { p.vy += .32; p.vx *= .99; p.x += p.vx; p.y += p.vy; p.rot += p.vr; g.globalAlpha = Math.max(0, 1 - k * k); g.fillStyle = p.c; g.save(); g.translate(p.x, p.y); g.rotate(p.rot); if (p.sq) g.fillRect(-p.r, -p.r * .5, p.r * 2, p.r); else { g.beginPath(); g.arc(0, 0, p.r * .7, 0, 6.283); g.fill(); } g.restore(); }
+    requestAnimationFrame(tick); };
+  requestAnimationFrame(tick);
+}
 /* ---------- 🪪 Family Card — one tap makes a share-ready image of the whole family (QR + link on every copy) ---------- */
 const famCard = { link:'' };
 function fcRR(g, x, y, w, h, r) { g.beginPath(); g.moveTo(x + r, y); g.lineTo(x + w - r, y); g.quadraticCurveTo(x + w, y, x + w, y + r); g.lineTo(x + w, y + h - r); g.quadraticCurveTo(x + w, y + h, x + w - r, y + h); g.lineTo(x + r, y + h); g.quadraticCurveTo(x, y + h, x, y + h - r); g.lineTo(x, y + r); g.quadraticCurveTo(x, y, x + r, y); g.closePath(); }
+// free plan: the card shows the father's side (Dada–Dadi, Papa, Mummy, you) — both sides together is a Royal feature
+function famCardBoth(v) { return hasDual(v) && isRoyal(); }
 function familyCardData(v) {
-  const idx = indexVault(v); const ids = Object.keys(idx); const st = stats(v);
+  const idx = indexVault(v); let ids = Object.keys(idx);
+  if (hasDual(v) && !isRoyal()) { const pat = new Set(); reach(v, v.rootUnit).forEach(id => { const u = v.units[id]; if (u) { pat.add(u.member); if (u.spouse) pat.add(u.spouse); } }); ids = ids.filter(id => pat.has(id) || idx[id].ped); }
+  const ds = ids.map(id => idx[id].depth); const st = { members:ids.length, gens:ds.length ? Math.max(...ds) - Math.min(...ds) + 1 : 0, couples:ids.filter(id => idx[id].role === 'spouse').length,
+    chron:ids.filter(id => v.people[id] && (v.people[id].bio || '').trim()).length, voices:ids.filter(id => { const p = v.people[id]; return p && p.voice && (p.voice.sample || p.voice.f0 || p.voice.simulated); }).length };
   const years = ids.map(id => yearOf(v.people[id] && v.people[id].born)).filter(y => y && y > 1000);
   const trail = (v.trail || []).slice().sort((a, b) => (a.year || 0) - (b.year || 0));
   const places = []; trail.forEach(s => { const n = String(s.place || '').split(',')[0].trim(); if (n && !places.includes(n)) places.push(n); });
@@ -4045,7 +4083,7 @@ async function drawFamilyCard(fmt) {
   y = top + (centers.length - 1) * gapY + rad + (tall ? 120 : 92);
   // stats tiles
   const pool = [[d.st.members, hx('members', 'log')], [d.st.gens, hx('generations', 'peedhiyan')], [d.places.length, hx('places', 'shehar')], [d.st.voices, hx('voices saved', 'awaazein')], [d.st.chron, hx('stories', 'kahaniyan')], [d.st.couples, hx('marriages', 'shaadiyan')]];
-  const tiles = pool.filter((t, i) => i < 2 || t[0] > 0).slice(0, 4); if (tiles.length < 4 && d.since) tiles.push([d.since, hx('since', 'se')]); if (tiles.length < 4 && hasDual(v)) tiles.push([2, hx('family sides', 'family sides')]);
+  const tiles = pool.filter((t, i) => i < 2 || t[0] > 0).slice(0, 4); if (tiles.length < 4 && d.since) tiles.push([d.since, hx('since', 'se')]); if (tiles.length < 4 && famCardBoth(v)) tiles.push([2, hx('family sides', 'family sides')]);
   const nt = tiles.length; const tw = Math.min(250, (W - 200 - (nt - 1) * 22) / nt); const tx0 = (W - (nt * tw + (nt - 1) * 22)) / 2; const th = tall ? 150 : 122;
   tiles.forEach(([n, l], i) => { const x = tx0 + i * (tw + 22); g.fillStyle = 'rgba(212,175,55,.08)'; fcRR(g, x, y, tw, th, 22); g.fill(); g.strokeStyle = 'rgba(212,175,55,.4)'; g.lineWidth = 2; g.stroke(); g.fillStyle = gold; g.font = `700 ${tall ? 64 : 58}px ${SERIF}`; g.fillText(String(n), x + tw / 2, y + th * .55); g.fillStyle = '#B9AE90'; g.fillText(fit(l, 600, 22, 15, SANS, tw - 16), x + tw / 2, y + th * .84); });
   y += th + (tall ? 90 : 62);
@@ -4068,7 +4106,7 @@ async function drawFamilyCard(fmt) {
   return new Promise(res => c.toBlob(b => res({ blob:b, url:c.toDataURL('image/jpeg', .9) }), 'image/jpeg', .92));
 }
 function familyCaption() {
-  const v = V(); const st = stats(v); const link = famCard.link || siteBase();
+  const v = V(); const st = familyCardData(v).st; const link = famCard.link || siteBase();
   return hx(`👑 This is the ${v.name} — ${st.members} family members across ${st.gens} generations, all in one place on DynastyVault. Make your own family card for free 👇\n${link}`,
     `👑 Yeh hai hamara ${v.name} — ${st.gens} peedhiyon ke ${st.members} log, sab ek jagah DynastyVault pe. Apni family ka card bhi free mein banao 👇\n${link}`);
 }
@@ -11497,7 +11535,7 @@ async function ckTryUnlockServer() {
   const hit = j.item; let o = (state.orders || []).find(x => x.id === id); if (!o) { o = { id, key:hit, item:hit }; state.orders.push(o); }
   o.key = hit; o.status = 'paid'; o.paidAt = Date.now();
   if (['royal', 'gift', 'voicepack'].includes(hit)) { state.cloud = { orderId:id, code, left:j.left }; cloudBalance.at = 0; }
-  ck.order = o; const was = ck.kind; ck.kind = hit === 'royal' ? 'plan' : hit === 'gift' ? 'service' : 'addon'; ck.id = hit; fulfill(); ck.kind = was; ck.done = true; save();
+  ck.order = o; const was = ck.kind; ck.kind = hit === 'royal' ? 'plan' : hit === 'gift' ? 'service' : 'addon'; ck.id = hit; fulfill(); ck.kind = was; ck.done = true; save(); setTimeout(goldBurst, 250);
   renderCheckout(); renderAddons(); if (isOpen('studioModal')) checkClone(true);
   toast(hit === 'royal' || hit === 'gift' ? '👑 Royal Dynasty Lifetime unlocked' : hit === 'voicepack' ? hx(`🎙️ Voice Story Pack ready — about ${storiesLeft(j.left)} stories`, `🎙️ Voice Story Pack taiyaar — lagbhag ${storiesLeft(j.left)} kahaniyan`) : '✦ Unlocked');
 }
@@ -11511,7 +11549,7 @@ function ckTryUnlock() {
   const hit = keys.find(k => payCode(o.id, k) === code);
   if (!hit) { fail(hx('That code does not match this order. Check it on WhatsApp, or message us.', 'Yeh code is order se match nahi karta. WhatsApp pe check karo, ya humein message karo.'), ['pay.code']); return; }
   o.key = hit; o.status = 'paid'; o.paidAt = Date.now(); if (!(state.orders || []).includes(o)) state.orders.push(o);
-  ck.order = o; const was = ck.kind; ck.kind = hit === 'royal' ? 'plan' : hit === 'gift' ? 'service' : 'addon'; ck.id = hit; fulfill(); ck.kind = was; ck.done = true; save();
+  ck.order = o; const was = ck.kind; ck.kind = hit === 'royal' ? 'plan' : hit === 'gift' ? 'service' : 'addon'; ck.id = hit; fulfill(); ck.kind = was; ck.done = true; save(); setTimeout(goldBurst, 250);
   renderCheckout(); toast(hit === 'royal' || hit === 'gift' ? '👑 Royal Dynasty Lifetime unlocked' : '✦ Unlocked');
 }
 function fulfill() {

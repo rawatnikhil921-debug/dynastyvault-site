@@ -32,3 +32,6 @@ window.DV_I18N = {"langs":[{"code":"en","native":"English"},{"code":"hn","native
     q8:'क्या हेरिटेज गिफ़्ट बॉक्स डाक से आता है?', a8:'नहीं। सब कुछ डिजिटल है — कुछ भी भेजा नहीं जाता और पता नहीं चाहिए। भुगतान के बाद हम WhatsApp पर गिफ़्ट कोड भेजते हैं (आम तौर पर कुछ घंटों में)। आप उसे अपने संदेश के साथ आगे भेजें, और उनके फ़ोन पर रॉयल खुल जाता है। मिलन तस्वीर और आवाज़ वाली कहानियाँ WhatsApp पर फ़ाइल के रूप में आती हैं।',
     svc4_s:'हमेशा के लिए रॉयल, एक मिलन तस्वीर और बुज़ुर्ग की आवाज़ में तीन कहानियाँ। डिजिटल — कुछ भी भेजा नहीं जाता; गिफ़्ट कोड WhatsApp पर मिलता है।' });
 })(window.DV_I18N && window.DV_I18N.home);
+(function (H) { if (!H) return; const a = (c, o) => { H[c] = Object.assign(H[c] || {}, o); };
+  a('en', { card_foot:'Scan to make your family’s card — free' }); a('hn', { card_foot:'Scan karke apni family ka card banao — free' }); a('hi', { card_foot:'स्कैन करके अपने परिवार का कार्ड बनाइए — मुफ़्त' });
+})(window.DV_I18N && window.DV_I18N.home);
