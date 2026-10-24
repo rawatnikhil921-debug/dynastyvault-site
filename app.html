@@ -618,6 +618,14 @@ html .btn-wa.sm{padding:.45rem .85rem;font-size:12.5px}
 @keyframes notifOut{to{opacity:0;transform:translateX(30px)}}
 @media (max-width:640px){.notif{top:auto;bottom:16px;right:16px;left:16px;max-width:none}}
 
+@media (max-width:640px){
+  #toasts{bottom:calc(12px + env(safe-area-inset-bottom,0px));width:calc(100vw - 24px)}
+  .toast{padding:9px 13px;font-size:12.5px;border-radius:14px;line-height:1.4;cursor:pointer}
+  body:has(.notif) #toasts{bottom:calc(96px + env(safe-area-inset-bottom,0px))}
+  .notif{padding:10px 10px 10px 12px;border-radius:16px}
+  .notif b{font-size:13px}
+}
+
 /* ---------- Backup guarantee ---------- */
 .guard{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:16px;padding:12px 14px;border-radius:18px;border:1px solid var(--line);background:rgba(var(--bg-rgb),.5);max-width:760px}
 .guard-badge{display:grid;place-items:center;width:42px;height:42px;border-radius:14px;flex:none;font-size:20px;background:linear-gradient(135deg,rgba(var(--pale-rgb),.18),rgba(var(--lo-rgb),.18));border:1px solid var(--line-strong);box-shadow:0 0 22px -6px rgba(var(--hi-rgb),.5)}
@@ -1147,7 +1155,7 @@ body.dash-on .pan-off{display:none!important}
 .dt-gift .dt-ico{animation:giftWiggle 3.2s ease-in-out infinite}
 @keyframes giftWiggle{0%,82%,100%{transform:none}86%{transform:rotate(-14deg) scale(1.15)}90%{transform:rotate(12deg) scale(1.15)}94%{transform:rotate(-6deg)}}
 .dash-tabs .dt-plans{margin-left:auto;color:var(--gold-soft);border:1px dashed var(--line-strong)}
-@media (min-width:1024px){.dash-tabs{gap:2px}.dash-tabs button[role="tab"]{flex:1 1 0;justify-content:center;min-width:0;padding:.55rem .6rem}.dt-l{white-space:normal;max-width:124px;line-height:1.15;text-align:left}.dash-tabs .dt-plans{display:none}}
+@media (min-width:1024px){.dash-tabs{gap:2px}.dash-tabs button[role="tab"]{flex:1 1 0;justify-content:center;min-width:0;padding:.55rem .6rem}.dt-l{white-space:normal;max-width:124px;line-height:1.15;text-align:left}}
 #planBadge{cursor:pointer}
 .dt-ink{position:absolute;left:0;bottom:3px;height:2px;border-radius:2px;background:var(--metal);box-shadow:0 0 12px rgba(var(--hi-rgb),.8);transition:transform .38s cubic-bezier(.2,.9,.2,1),width .38s cubic-bezier(.2,.9,.2,1),opacity .2s;pointer-events:none}
 @keyframes dashIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
@@ -1785,6 +1793,112 @@ html .btn-gold:hover::after,html .btn-gold:focus-visible::after{transform:transl
 
 .share-up{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px;padding:12px 14px;border-radius:14px;border:1px dashed rgba(var(--hi-rgb),.55);background:rgba(var(--g-rgb),.08);font-size:13px;color:var(--gold-pale)}
 .share-up span{flex:1 1 200px;min-width:0}
+/* ---------- v61: compact phone header (logo · Demo/Create · menu) ---------- */
+html .hdr-menu-btn{display:none}
+.hm-links{display:none}
+@media (min-width:900px){.hdr-menu{display:contents}}
+@media (max-width:899px){
+  #topbar>div{flex-wrap:nowrap;padding-top:8px;padding-bottom:8px;gap:8px}
+  #topbar .crest{width:36px;height:36px;border-radius:11px}
+  #topbar .hdr-sub{display:none}
+  #topbar a[aria-label="DynastyVault home"] .font-regal{font-size:15px;letter-spacing:.1em}
+  #topbar .demo-toggle{flex:none}
+  html .hdr-menu-btn{display:inline-grid;place-items:center;flex:none;width:40px;height:40px;border-radius:12px}
+  #topbar.menu-open .hdr-menu-btn{background:rgba(var(--g-rgb),.14);color:var(--gold-pale)}
+  .hdr-menu{display:none;position:absolute;top:calc(100% + 6px);left:12px;right:12px;z-index:60;flex-direction:column;align-items:stretch;gap:10px;padding:14px;border-radius:20px;
+    background:rgba(var(--bg2-rgb),.98);border:1px solid var(--line-strong);box-shadow:0 30px 60px -20px #000,0 0 40px -18px rgba(var(--hi-rgb),.55);max-height:calc(100vh - 90px);overflow:auto}
+  #topbar.menu-open .hdr-menu{display:flex;animation:hmIn .22s cubic-bezier(.2,.9,.2,1)}
+  .hdr-menu .hm-links{display:flex;gap:8px}
+  .hdr-menu .hm-links .navlink{flex:1;text-align:center;padding:.6rem .5rem;border-radius:12px;border:1px solid var(--line);font-size:13px;font-weight:700}
+  .hdr-menu .refer-btn,.hdr-menu #btnInvite,.hdr-menu #acctBtn{width:100%;justify-content:center}
+  .hdr-menu .refer-btn .rb-long{display:inline}.hdr-menu .refer-btn .rb-short{display:none}
+  .hdr-menu #btnInvite span{display:inline!important}
+  .hdr-menu #planBadge{display:inline-flex!important;align-self:center}
+  .hdr-menu #planBadge:empty{display:none!important}
+  .hdr-menu>div.flex{flex-wrap:wrap;width:100%}
+  .hdr-menu{max-width:440px;left:auto}
+  .hdr-menu .vault-select{flex:1 1 100%}
+  .hdr-menu .lang-select{flex:1 1 0}
+}
+/* ---------- v61: tree first — compact family heading, actions below the tree ---------- */
+.vault-hero #vaultMotto{margin-top:6px}
+.vault-hero #vaultStats{margin-top:14px}
+.vault-acts{margin-top:18px;display:flex;flex-direction:column;gap:4px}
+.va-btns{display:flex;flex-wrap:wrap;gap:10px}
+.vault-acts .guard{max-width:none}
+.vault-acts+.anniv,.vault-acts~#journey{margin-top:18px}
+@media (max-width:640px){
+  .vault-hero{padding-top:14px;padding-bottom:10px}
+  .vault-hero #vaultMotto{font-size:13.5px}
+  .vault-hero #vaultStats{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin:12px -16px 0;padding:0 16px 2px;gap:8px}
+  .vault-hero #vaultStats::-webkit-scrollbar{display:none}
+  .vault-hero .stat{flex:none;padding:.45rem .75rem;border-radius:12px}
+  .vault-hero .stat b{font-size:17px}.vault-hero .stat span{font-size:9.5px;letter-spacing:.12em}
+  .va-btns{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .va-btns>button{justify-content:center;padding-left:.6rem;padding-right:.6rem;font-size:13px}
+  .va-btns>#btnFamCard{grid-column:1/-1}
+  .vault-hero .demo-banner{padding:10px 12px;gap:10px;font-size:13.5px;margin-bottom:12px}
+}
+.vault-hero #vaultTitle{font-size:clamp(1.9rem,1.2rem + 3vw,4.2rem);line-height:1.05;margin-top:2px}
+@media (max-width:640px){
+  .lineage-sec{display:flex;flex-direction:column;padding:8px}
+  .lineage-sec>div:first-child{order:1;padding:2px 2px 8px;gap:8px}
+  .lineage-sec>#treeWrap,.lineage-sec>#mapView{order:2}
+  .lineage-sec>.tree-extras{order:3;margin-top:10px}
+  .lineage-sec>p{order:4}
+  .lineage-sec h2[data-i18n="lineage"],.lineage-sec #canvasTabs,.lineage-sec #presenceBar{display:none}
+  .lineage-sec .view-tabs{width:100%}
+  .lineage-sec .view-tabs button{flex:1 1 0}
+  .lineage-sec>div:first-child>.ml-auto{margin-left:0;width:100%;justify-content:space-between}
+  .lineage-sec #addAncestor{flex:1 1 auto;justify-content:center}
+}
+/* ---------- v61: 3 main tabs + More ---------- */
+.dash-tabs .dt-more{color:var(--muted)}
+.dash-tabs .dt-more.on{color:var(--gold-pale);background:linear-gradient(180deg,rgba(var(--g-rgb),.16),rgba(var(--g-rgb),.04));box-shadow:inset 0 0 0 1px rgba(var(--hi-rgb),.28)}
+.dash-tabs .dt-more[aria-expanded="true"] svg{transform:rotate(180deg)}
+.dash-tabs .dt-more svg{transition:transform .2s}
+.dt-menu{position:fixed;z-index:70;display:flex;flex-direction:column;gap:2px;padding:6px;border-radius:16px;background:rgba(var(--bg2-rgb),.98);border:1px solid var(--line-strong);box-shadow:0 26px 60px -20px #000,0 0 36px -16px rgba(var(--hi-rgb),.5);animation:hmIn .2s cubic-bezier(.2,.9,.2,1)}
+.dt-menu button{display:flex;align-items:center;gap:10px;padding:.7rem .8rem;border-radius:11px;border:0;background:transparent;color:var(--ink);font:700 13.5px/1.2 'Plus Jakarta Sans',sans-serif;text-align:left;cursor:pointer}
+.dt-menu button span{width:22px;text-align:center;font-size:16px}
+.dt-menu button:hover,.dt-menu button:focus-visible{background:rgba(var(--g-rgb),.1);color:var(--gold-pale);outline:none}
+.dt-menu button.on{color:var(--gold-pale);box-shadow:inset 0 0 0 1px rgba(var(--hi-rgb),.3)}
+@media (min-width:1024px){.dash-tabs button[role="tab"],.dash-tabs .dt-more{flex:1 1 0;justify-content:center;min-width:0}.dash-tabs .dt-plans{margin-left:0}}
+@media (max-width:640px){
+  .dash-tabs{gap:2px}
+  .dash-tabs button[role="tab"],.dash-tabs .dt-more,.dash-tabs .dt-plans{flex:1 1 auto;justify-content:center;padding:.55rem .5rem;gap:5px;font-size:12px}
+  .dash-tabs .dt-plans{margin-left:0}
+  .dash-tabs .dt-ico{font-size:14px}
+}
+.dt-sh{display:none}
+@media (max-width:380px){.dash-tabs button[role="tab"],.dash-tabs .dt-more,.dash-tabs .dt-plans{padding:.5rem .32rem;gap:3px;font-size:11.5px}.dash-tabs .dt-more svg{display:none}}
+@media (max-width:640px){.dash-tabs .dt-full{display:none}.dash-tabs .dt-sh{display:inline}.dash-tabs .dt-badge{padding:1px 5px;font-size:9px}
+  .lineage-sec>div:first-child>div.ml-auto.tree-only{flex-wrap:nowrap!important;gap:6px}.lineage-sec #addAncestor{flex:1 1 0;min-width:0;white-space:nowrap}.lineage-sec #zoomLabel{display:none}}
+@media (prefers-reduced-motion:reduce){.dt-menu{animation:none}}
+@media (max-width:380px){#topbar a[aria-label="DynastyVault home"] .font-regal{font-size:13px;letter-spacing:.05em}#topbar a[aria-label="DynastyVault home"]{gap:8px}}
+@keyframes hmIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){#topbar.menu-open .hdr-menu{animation:none}}
+/* ---------- v61: shorter Plans page ---------- */
+.cmp-details{margin-top:22px;border:1px solid var(--line);border-radius:18px;background:rgba(var(--bg2-rgb),.55)}
+.cmp-details>summary{list-style:none;display:flex;align-items:center;justify-content:center;gap:10px;padding:14px 16px;cursor:pointer;font-weight:800;font-size:14px;color:var(--gold-soft)}
+.cmp-details>summary::-webkit-details-marker{display:none}
+.cmp-details>summary svg{transition:transform .2s}
+.cmp-details[open]>summary svg{transform:rotate(180deg)}
+.cmp-details[open]>summary{border-bottom:1px solid var(--line)}
+.cmp-details .cmp-wrap{margin:0;padding:6px}
+.cmp-details>summary:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:18px}
+body.dash-on #pricing{padding-top:36px;padding-bottom:40px}
+body.dash-on #addons,body.dash-on #services{padding-bottom:40px}
+@media (max-width:767px){
+  #planGrid{margin-top:24px}
+  #planGrid>.plan-royal{order:-1}
+  #pricing h2,#addons h2,#services h2{font-size:1.75rem;line-height:1.15}
+  #addons .text-center p.muted,#services .text-center p.muted{font-size:13.5px;margin-top:8px}
+  #addonGrid,#serviceGrid{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;margin:20px -16px 0;padding:4px 16px 10px;scrollbar-width:none}
+  #addonGrid::-webkit-scrollbar,#serviceGrid::-webkit-scrollbar{display:none}
+  #addonGrid>*,#serviceGrid>*{flex:0 0 84%;scroll-snap-align:center}
+  .swipe-hint{display:block;text-align:center;font-size:11.5px;color:var(--muted);margin-top:2px}
+}
+.swipe-hint{display:none}
 </style>
 </head>
 <body>
@@ -1804,15 +1918,18 @@ html .btn-gold:hover::after,html .btn-gold:focus-visible::after{transform:transl
       <span class="crest" id="logoCrest"></span>
       <span class="min-w-0">
         <span class="block font-regal gold-text text-lg sm:text-xl font-extrabold tracking-[.14em] leading-none">DYNASTYVAULT</span>
-        <span class="block text-[9.5px] sm:text-[10px] tracking-[.3em] uppercase muted mt-1.5 truncate" data-wl="hd_sub">Your family, voices and photos</span>
+        <span class="hdr-sub block text-[9.5px] sm:text-[10px] tracking-[.3em] uppercase muted mt-1.5 truncate" data-wl="hd_sub">Your family, voices and photos</span>
       </span>
     </a>
     <nav class="nav-wide items-center gap-1 text-sm" aria-label="Primary">
       <a class="navlink" href="index.html">Home</a>
       <a class="navlink" href="#pricing" data-i18n="navPlans">Membership</a>
     </nav>
-    <button class="refer-btn" id="btnRefer" data-open-refer aria-label="Refer friends and earn Royal"><span class="rb-gift" aria-hidden="true">🎁</span><span class="rb-long" data-wl="hd_refer_long">Refer friends &amp; earn Royal</span><span class="rb-short" data-wl="hd_refer_short">Refer</span></button>
     <button id="btnDemo" class="btn-ghost sm demo-toggle" aria-label="Explore the interactive demo tree"><svg class="ico" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="5" r="2.6"/><circle cx="18" cy="5" r="2.6"/><circle cx="12" cy="19" r="2.8"/><path d="M8.6 5h6.8M12 5v11.2" stroke-linecap="round"/><path d="M10.9 17.6l2.6 1.4-2.6 1.4z" fill="var(--gold-hi)" stroke="none"/></svg> <span>Demo</span></button>
+    <button id="hdrMenuBtn" class="icon-btn hdr-menu-btn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="hdrMenu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <div id="hdrMenu" class="hdr-menu">
+      <div class="hm-links"><a class="navlink" href="index.html">🏠 Home</a><a class="navlink" href="#pricing" data-hm-plans>👑 Plans</a></div>
+    <button class="refer-btn" id="btnRefer" data-open-refer aria-label="Refer friends and earn Royal"><span class="rb-gift" aria-hidden="true">🎁</span><span class="rb-long" data-wl="hd_refer_long">Refer friends &amp; earn Royal</span><span class="rb-short" data-wl="hd_refer_short">Refer</span></button>
     <button id="btnInvite" class="btn-ghost sm" aria-label="Open WhatsApp Dynasty Co-Op invites">
       <svg class="ico" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="8" r="3"/><circle cx="16.5" cy="9" r="2.4"/><path d="M2.8 19c.6-3.3 2.6-5 5.2-5s4.6 1.7 5.2 5M13.6 14.4c.9-.6 1.8-.9 2.9-.9 2.2 0 3.8 1.4 4.3 4"/><path d="M19.5 2.5v4M17.5 4.5h4" stroke="var(--gold-hi)"/></svg>
       <span class="hidden sm:inline" data-wl="hd_coop">Invite family</span>
@@ -1831,6 +1948,7 @@ html .btn-gold:hover::after,html .btn-gold:focus-visible::after{transform:transl
         <button data-cur="INR">₹ INR</button>
         <button data-cur="USD">$ USD</button>
       </div>
+    </div>
     </div>
   </div>
 </header>
@@ -1869,37 +1987,19 @@ html .btn-gold:hover::after,html .btn-gold:focus-visible::after{transform:transl
   <nav id="dashTabs" class="dash-tabs" role="tablist" aria-label="Dashboard"></nav>
   <div class="ref-ribbon" id="refRibbon" hidden></div>
   <!-- HERO -->
-  <section id="vault" data-panel="canvas" class="pt-8 sm:pt-12 pb-7 grid lg:grid-cols-[1fr_auto] gap-6 lg:gap-10 items-end">
+  <section id="vault" data-panel="canvas" class="vault-hero pt-5 sm:pt-9 pb-4">
     <div class="min-w-0">
       <div class="demo-banner" id="demoBanner" hidden><span data-hn="Aap <b>interactive demo tree</b> dekh rahe ho. Apna banana hai?">You’re exploring the <b>interactive demo tree</b>. Ready for your own?</span><button class="btn-gold sm" id="demoCreate" data-hn="👑 Apna Dynasty Tree banao">👑 Create Your Dynasty Tree</button></div>
-      <div class="eyebrow">◆ Active Vault Workspace</div>
-      <h1 id="vaultTitle" class="font-regal gold-text text-[2.4rem] leading-[1.05] sm:text-6xl xl:text-7xl font-bold mt-3 break-words"></h1>
+      <h1 id="vaultTitle" class="font-regal gold-text font-bold break-words"></h1>
       <p id="vaultMotto" class="muted italic mt-3 max-w-2xl text-[15px] sm:text-base"></p>
       <div id="vaultSub" class="mt-3"></div>
       <div id="vaultStats" class="flex flex-wrap gap-2 sm:gap-3 mt-6"></div>
-      <div class="guard">
-        <span class="guard-badge" aria-hidden="true">🔐</span>
-        <div class="gtxt"><b>Vault Backup Guarantee</b><small id="guardNote"></small></div>
-        <button class="btn-gold sm" id="btnArchive">⬇ 1-Click Family Archive (.zip)</button>
-        <label class="btn-ghost sm cursor-pointer" title="Restore a vault from a DynastyVault archive">↺ Restore<input type="file" id="restoreFile" accept=".zip,.json,application/zip,application/json" class="hidden"></label>
-      </div>
-    </div>
-    <div class="flex flex-wrap gap-3 lg:justify-end">
-      <button class="btn-gold" id="btnFamCard">🪪 <span data-hn="Family Card banao">Family Card</span></button>
-      <button class="btn-ghost" id="btnFounder">👑 <span data-i18n="founder">Founder Profile</span></button>
-      <button class="btn-ghost" data-open-map>🗺️ Migration Map</button>
-      <button class="btn-ghost" id="btnInvite2"><svg class="ico" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="8" r="3"/><circle cx="16.5" cy="9" r="2.4"/><path d="M2.8 19c.6-3.3 2.6-5 5.2-5s4.6 1.7 5.2 5M13.6 14.4c.9-.6 1.8-.9 2.9-.9 2.2 0 3.8 1.4 4.3 4"/><path d="M19.5 2.5v4M17.5 4.5h4" stroke="var(--gold-hi)"/></svg> <span data-i18n="invite">Invite Family</span></button>
-      <button class="btn-ghost" data-open-portrait="photo">🖼️ <span data-i18n="portrait">Reunion Portrait</span></button>
-      <button class="btn-ghost" id="btnNewVault">＋ <span data-i18n="newVault">Create New Dynasty</span></button>
     </div>
   </section>
 
-  <div class="anniv" id="anniv" data-panel="canvas" hidden aria-live="polite"></div>
-  <section id="journey" data-panel="canvas" class="journey glass gborder" aria-label="Your dynasty journey"></section>
-  <section id="migCta" data-panel="canvas" class="mig-cta glass gborder" aria-label="Migration places"></section>
 
   <!-- TREE -->
-  <section class="glass gborder p-2.5 sm:p-4" data-panel="canvas trail" aria-label="Family lineage tree">
+  <section class="lineage-sec glass gborder p-2.5 sm:p-4" data-panel="canvas trail" aria-label="Family lineage tree">
     <div class="flex flex-wrap items-center gap-x-5 gap-y-3 px-2 pt-1 pb-3">
       <h2 class="font-regal text-xl sm:text-2xl gold-text font-bold tracking-wider" data-i18n="lineage">The Lineage</h2>
       <div class="seg" id="canvasTabs" role="tablist" aria-label="Canvas"><button data-ct="tree" class="on">🌳 Family Tree</button><button data-ct="map">🗺️ Migration Trail <i class="new-dot" id="mapNew" aria-label="New"></i></button></div>
@@ -1917,7 +2017,7 @@ html .btn-gold:hover::after,html .btn-gold:focus-visible::after{transform:transl
         <button class="btn-ghost sm" id="treePrint" title="Download 4K printable vector PDF">🖨️ <span class="hidden sm:inline">4K Print</span></button>
       </div>
     </div>
-    <div class="tree-only"><div class="tree-banner" id="treeBanner" hidden></div>
+    <div class="tree-only tree-extras"><div class="tree-banner" id="treeBanner" hidden></div>
     <div class="grow" id="grow" hidden></div></div>
     <div id="mapView" class="map-view" hidden>
       <div class="map-top">
@@ -1970,6 +2070,26 @@ html .btn-gold:hover::after,html .btn-gold:focus-visible::after{transform:transl
     </div>
     <p class="tiny muted px-2 pt-3 tree-only" data-hn="⚭ Fused view mein papa ki family (Dada–Dadi side) left mein aur mummy ki family (Nana–Nani side) right mein hoti hai, jo mummy-papa aur bachchon pe milti hai. Kisi bhi portrait pe tap karke uska <span class=&quot;text-[color:var(--gold-soft)] font-bold&quot;>Profile &amp; Voice Studio</span> kholo. Drag karke ghumao · Ctrl/⌘ + scroll se zoom · kisi bhi member pe ＋ Child / 💍 Spouse se dynasty badhao.">⚭ In the fused view the paternal side (father’s family) sits on the left and the maternal side (mother’s family) on the right, meeting at the parents and their children. Tap any portrait to open its <span class="text-[color:var(--gold-soft)] font-bold">Profile &amp; Voice Studio</span>. Drag to pan · Ctrl/⌘ + scroll to zoom · use ＋ Child / 💍 Spouse on any member to grow the dynasty.</p>
   </section>
+
+  <section id="vaultActs" data-panel="canvas" class="vault-acts" aria-label="Family actions">
+    <div class="va-btns">
+    <button class="btn-gold" id="btnFamCard">🪪 <span data-hn="Family Card banao">Family Card</span></button>
+    <button class="btn-ghost" id="btnFounder">👑 <span data-i18n="founder">Founder Profile</span></button>
+    <button class="btn-ghost" data-open-map>🗺️ Migration Map</button>
+    <button class="btn-ghost" id="btnInvite2"><svg class="ico" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="8" r="3"/><circle cx="16.5" cy="9" r="2.4"/><path d="M2.8 19c.6-3.3 2.6-5 5.2-5s4.6 1.7 5.2 5M13.6 14.4c.9-.6 1.8-.9 2.9-.9 2.2 0 3.8 1.4 4.3 4"/><path d="M19.5 2.5v4M17.5 4.5h4" stroke="var(--gold-hi)"/></svg> <span data-i18n="invite">Invite Family</span></button>
+    <button class="btn-ghost" data-open-portrait="photo">🖼️ <span data-i18n="portrait">Reunion Portrait</span></button>
+    <button class="btn-ghost" id="btnNewVault">＋ <span data-i18n="newVault">Create New Dynasty</span></button>
+    </div>
+    <div class="guard">
+        <span class="guard-badge" aria-hidden="true">🔐</span>
+        <div class="gtxt"><b>Vault Backup Guarantee</b><small id="guardNote"></small></div>
+        <button class="btn-gold sm" id="btnArchive">⬇ 1-Click Family Archive (.zip)</button>
+        <label class="btn-ghost sm cursor-pointer" title="Restore a vault from a DynastyVault archive">↺ Restore<input type="file" id="restoreFile" accept=".zip,.json,application/zip,application/json" class="hidden"></label>
+      </div>
+  </section>
+  <div class="anniv" id="anniv" data-panel="canvas" hidden aria-live="polite"></div>
+  <section id="journey" data-panel="canvas" class="journey glass gborder" aria-label="Your dynasty journey"></section>
+  <section id="migCta" data-panel="canvas" class="mig-cta glass gborder" aria-label="Migration places"></section>
 
   <!-- VIRAL SOCIAL HUB -->
   <section id="socialHub" data-panel="removed" class="hub" hidden>
@@ -2160,7 +2280,7 @@ html .btn-gold:hover::after,html .btn-gold:focus-visible::after{transform:transl
     </div>
     <div class="ref-plan-banner" id="refPlanBanner" hidden></div>
     <div id="planGrid" class="grid md:grid-cols-2 gap-6 mt-12 max-w-4xl mx-auto items-stretch"></div>
-    <div class="cmp-wrap max-w-4xl mx-auto" id="planCompare"></div>
+    <details class="cmp-details max-w-4xl mx-auto"><summary><span>Compare Free and Royal, feature by feature</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary><div class="cmp-wrap" id="planCompare"></div></details>
     <p class="pay-note max-w-4xl mx-auto mt-6 text-center">🔒 India: pay by <b>UPI</b> (Google Pay, PhonePe, Paytm, any bank app). Other countries: scan the QR and pay by <b>card or PayPal in your own currency</b>. After paying you get an <b>unlock code on WhatsApp</b>, usually within a few hours. <button class="chip ml-1" data-unlock-code>🔑 I have an unlock code</button> <button class="chip ml-1" data-gift-royal>🎁 <span data-hn="Royal kisi ko gift karo">Gift Royal to someone</span></button></p>
     <p class="tiny muted max-w-4xl mx-auto mt-3 text-center">* Want a story in their voice right away? Order “Story in their own voice” below and we make it for you.</p>
     <p class="tiny muted text-center mt-8">USD prices are set for buyers outside India; your card or PayPal converts them to your own currency automatically.</p>
@@ -2174,6 +2294,7 @@ html .btn-gold:hover::after,html .btn-gold:focus-visible::after{transform:transl
       <p class="muted mt-4">Pay only for what you need — 4K renders, print-ready exports and your own family address.</p>
     </div>
     <div id="addonGrid" class="grid md:grid-cols-3 gap-6 mt-12 max-w-6xl mx-auto"></div>
+    <p class="swipe-hint" aria-hidden="true">← swipe for more →</p>
   </section>
 
   <!-- DONE-FOR-YOU SERVICES -->
@@ -2184,6 +2305,7 @@ html .btn-gold:hover::after,html .btn-gold:focus-visible::after{transform:transl
       <p class="muted mt-4">No laptop, no setup — send us the photos or a voice note on WhatsApp and our team makes it by hand.</p>
     </div>
     <div id="serviceGrid" class="grid md:grid-cols-3 gap-6 mt-12 max-w-6xl mx-auto"></div>
+    <p class="swipe-hint" aria-hidden="true">← swipe for more →</p>
   </section>
 </main>
 
@@ -2658,7 +2780,7 @@ const PLANS = [
   { id:'royal', name:'Royal Dynasty Lifetime', icon:'👑', blurb:'One payment. Both lineages, every feature, for every generation.', period:'lifetime', cta:'Claim Royal Dynasty', badge:'Launch price',
     features:['Dual-lineage fusion — maternal + paternal', 'Unlimited members & generations', '15 global & regional languages with audio narration', 'AI voice cloning studio', 'AI voice restoration & noise removal', 'Migration map — unlimited places, photos & voices', 'Premium themes & custom portrait frames', 'Future Time Capsule Lockers', 'Royal badge on global & friends’ leaderboards', 'VaultGPT lineage search', 'Unlimited 4K vector PDF / SVG exports and portrait PDFs'] }
 ];
-PLANS[0].features = [`Up to ${FREE_NODE_LIMIT} family members`, 'Father’s side of the family', 'Family collage with real photos', 'AI story writer (free Google key)', 'Record voices & hear stories in their cloned voice*', 'Migration map with unlimited places', 'English, Hinglish & Hindi', '1-click family backup'];
+PLANS[0].features = [`Up to ${FREE_NODE_LIMIT} family members`, 'Father’s side of the family', 'Family collage with real photos', 'AI story writer (free Google key)', 'Record and keep their real voices', 'Migration map with unlimited places', 'English, Hinglish & Hindi', '1-click family backup'];
 function setRoyalFeatures() { PLANS[1].features = ['Both sides — father’s and mother’s families, fused', 'Unlimited members & generations', 'Stories in 15 languages with audio', HAS_CLOUD ? '~100 stories in their cloned voice on any phone' : 'Cloned-voice narration in every language*', 'Unlimited 4K print-ready collage & tree exports', 'All premium themes & frames', 'VaultGPT family search & Royal badge', 'Every future feature, for life']; }
 setRoyalFeatures();
 const PLAN_BY = Object.fromEntries(PLANS.map(p => [p.id, p]));
@@ -3861,7 +3983,7 @@ function startDemo() {
   renderVaultSelect(); renderHero(); renderViewTabs(); renderAddons(); renderGpt(); renderPromo(); tickPresence(true);
   requestAnimationFrame(() => { renderTree({ animate:true, fit:true }); document.getElementById('vault').scrollIntoView({ behavior:'smooth' }); });
   setTimeout(showReminderPop, 1600);
-  toast('👁️ Exploring the interactive demo tree — create your own any time from the banner.', 'info', 4500);
+  // the demo banner at the top already says this — no extra toast covering the page
 }
 
 /* ---------- ⏱️ 24-hour family stories ---------- */
@@ -5152,7 +5274,7 @@ async function handleMemorialHash() {
     openModal('memModal');
     $('#mvLight').addEventListener('click', e => { $('#mvCandle').classList.add('lit'); countUp($('#mvCount'), +d.c || 0, (+d.c || 0) + 1, 600); e.target.disabled = true; e.target.textContent = '🕯️ Your candle is lit'; });
     $('#mvShare').addEventListener('click', () => shareWhatsApp(`🕯️ Remembering ${d.n}${by ? ` (${by}${dy ? '–' + dy : ''})` : ''}. ${d.l || ''} 🙏`));
-    $('#mvCreate').addEventListener('click', () => { closeModal('memModal'); if (!state.onboarded) openWizard('choice'); else openWizard('form'); });
+    $('#mvCreate').addEventListener('click', () => { closeModal('memModal'); openWizard('form'); });
     return true;
   } catch (e) { toast('That memorial link could not be read.', 'warn'); return false; }
 }
@@ -5309,24 +5431,39 @@ function themeLockArt() {
 
 /* ---------- 🎛️ modular dashboard (8 tabs, no long scrolling) ---------- */
 const DASH_TABS = [
-  { id:'canvas', ico:'👑', en:'Dynasty Canvas', hn:'Dynasty Canvas' },
-  { id:'trail', ico:'🗺️', en:'Migration Trail', hn:'Migration Trail' },
-  { id:'arena', ico:'⚔️', en:'Dynasty vs Dynasty', hn:'Dynasty vs Dynasty' },
-  { id:'voice', ico:'🎙️', en:'Clone Audio', hn:'Clone Awaaz' },
-  { id:'themes', ico:'🎨', en:'Theme Studio', hn:'Theme Studio' },
+  { id:'canvas', ico:'🌳', en:'Family Tree', hn:'Family Tree', sen:'Tree', shn:'Tree', main:true },
+  { id:'voice', ico:'🎙️', en:'Voices', hn:'Awaaz', sen:'Voices', shn:'Awaaz', main:true },
+  { id:'refer', ico:'🎁', en:'Share & Earn', hn:'Share & Kamao', sen:'Share', shn:'Share', main:true },
   { id:'photo', ico:'🧩', en:'Family Collage', hn:'Family Collage' },
   { id:'reunion', ico:'✨', en:'Reunion Portrait', hn:'Reunion Portrait' },
-  { id:'refer', ico:'🎁', en:'Referral & Rewards', hn:'Refer & Rewards' }
+  { id:'trail', ico:'🗺️', en:'Migration Trail', hn:'Migration Trail' },
+  { id:'arena', ico:'⚔️', en:'Dynasty vs Dynasty', hn:'Dynasty vs Dynasty' },
+  { id:'themes', ico:'🎨', en:'Theme Studio', hn:'Theme Studio' }
 ];
 const dash = { tab:null, syncing:false, inited:false };
+const MAIN_TABS = () => DASH_TABS.filter(t => t.main);
 function renderDashTabs() {
   const bar = $('#dashTabs'); if (!bar) return; const r = refState(); const n = r.joins.length;
-  bar.innerHTML = DASH_TABS.map(t => `<button role="tab" data-tab="${t.id}" id="dt-${t.id}" aria-selected="${t.id === dash.tab}" tabindex="${t.id === dash.tab ? 0 : -1}" class="${t.id === dash.tab ? 'on' : ''}${t.id === 'refer' ? ' dt-gift' : ''}"><span class="dt-ico" aria-hidden="true">${t.ico}</span><span class="dt-l">${esc(hx(t.en, t.hn))}</span>${t.id === 'refer' && n ? `<span class="dt-badge">${n}</span>` : ''}</button>`).join('') +
+  const extra = DASH_TABS.find(t => !t.main && t.id === dash.tab);
+  bar.innerHTML = MAIN_TABS().map(t => `<button role="tab" data-tab="${t.id}" id="dt-${t.id}" aria-selected="${t.id === dash.tab}" tabindex="${t.id === dash.tab ? 0 : -1}" class="${t.id === dash.tab ? 'on' : ''}${t.id === 'refer' ? ' dt-gift' : ''}"><span class="dt-ico" aria-hidden="true">${t.ico}</span><span class="dt-l"><span class="dt-full">${esc(hx(t.en, t.hn))}</span><span class="dt-sh">${esc(hx(t.sen, t.shn))}</span></span>${t.id === 'refer' && n ? `<span class="dt-badge">${n}</span>` : ''}</button>`).join('') +
+    `<button type="button" class="dt-more${extra ? ' on' : ''}" id="dtMore" data-tab-more="${extra ? extra.id : ''}" aria-haspopup="menu" aria-expanded="false"><span class="dt-ico" aria-hidden="true">${extra ? extra.ico : '✦'}</span><span class="dt-l"><span class="dt-full">${esc(extra ? hx(extra.en, extra.hn) : hx('More', 'Aur'))}</span><span class="dt-sh">${esc(hx('More', 'Aur'))}</span></span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>` +
     `<button class="dt-plans${dash.tab === 'plans' ? ' on' : ''}" data-tab="plans">👑 ${hx('Plans', 'Plans')}</button><span class="dt-ink" aria-hidden="true"></span>`;
   moveInk();
 }
+function closeTabMore() { const m = $('#dtMoreMenu'); if (m) m.remove(); const b = $('#dtMore'); if (b) b.setAttribute('aria-expanded', 'false'); }
+function openTabMore() {
+  const b = $('#dtMore'); if (!b) return; if ($('#dtMoreMenu')) return closeTabMore();
+  const m = document.createElement('div'); m.id = 'dtMoreMenu'; m.className = 'dt-menu'; m.setAttribute('role', 'menu');
+  m.innerHTML = DASH_TABS.filter(t => !t.main).map(t => `<button role="menuitem" type="button" data-tab="${t.id}" class="${t.id === dash.tab ? 'on' : ''}"><span aria-hidden="true">${t.ico}</span>${esc(hx(t.en, t.hn))}</button>`).join('');
+  document.body.appendChild(m);
+  const r = b.getBoundingClientRect(); const w = Math.min(260, innerWidth - 24);
+  m.style.width = w + 'px'; m.style.top = Math.round(r.bottom + 8) + 'px'; m.style.left = Math.round(Math.max(12, Math.min(r.right - w, innerWidth - w - 12))) + 'px';
+  b.setAttribute('aria-expanded', 'true');
+  m.addEventListener('click', e => { const t = e.target.closest('[data-tab]'); if (!t) return; closeTabMore(); showTab(t.dataset.tab); });
+  const f = m.querySelector('button'); if (f) f.focus({ preventScroll:true });
+}
 function moveInk() {
-  const bar = $('#dashTabs'); if (!bar) return; const ink = bar.querySelector('.dt-ink'); const b = bar.querySelector(`[data-tab="${dash.tab}"]`);
+  const bar = $('#dashTabs'); if (!bar) return; const ink = bar.querySelector('.dt-ink'); const b = bar.querySelector(`[data-tab="${dash.tab}"]`) || (DASH_TABS.some(t => !t.main && t.id === dash.tab) ? bar.querySelector('#dtMore') : null);
   if (!ink) return; if (!b) { ink.style.opacity = 0; return; }
   ink.style.opacity = 1; ink.style.width = b.offsetWidth - 20 + 'px'; ink.style.transform = `translateX(${b.offsetLeft + 10}px)`;
 }
@@ -5338,6 +5475,7 @@ function showTab(id, opts = {}) {
     const on = el.dataset.panel.split(' ').includes(id); el.classList.toggle('pan-off', !on);
     if (on && prev !== id) { el.classList.add('in'); el.classList.remove('pan-in'); void el.offsetWidth; el.classList.add('pan-in'); }
   });
+  closeTabMore(); if (DASH_TABS.some(t => !t.main && (t.id === id || t.id === prev)) || !$('#dtMore')) renderDashTabs();
   $$('#dashTabs [data-tab]').forEach(b => { const on = b.dataset.tab === id; b.classList.toggle('on', on); b.setAttribute('aria-selected', String(on)); if (b.getAttribute('role')) b.tabIndex = on ? 0 : -1; });
   moveInk();
   if (id === 'trail' || id === 'canvas') {
@@ -6059,14 +6197,25 @@ function initV10() {
     if (el !== p) requestAnimationFrame(() => el.scrollIntoView({ behavior:'smooth', block:'start' }));
   });
   const bar = $('#dashTabs');
-  bar.addEventListener('click', e => { const b = e.target.closest('[data-tab]'); if (b) showTab(b.dataset.tab); });
+  bar.addEventListener('click', e => { if (e.target.closest('#dtMore')) { e.stopPropagation(); openTabMore(); return; } const b = e.target.closest('[data-tab]'); if (b) showTab(b.dataset.tab); });
+  document.addEventListener('click', e => { if ($('#dtMoreMenu') && !e.target.closest('#dtMoreMenu,#dtMore')) closeTabMore(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && $('#dtMoreMenu')) { closeTabMore(); const b = $('#dtMore'); if (b) b.focus(); } });
+  window.addEventListener('scroll', () => { if ($('#dtMoreMenu')) closeTabMore(); }, { passive:true });
   bar.addEventListener('keydown', e => {
     if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
-    const i = DASH_TABS.findIndex(t => t.id === dash.tab); const n = DASH_TABS[(i + (e.key === 'ArrowRight' ? 1 : -1) + DASH_TABS.length) % DASH_TABS.length];
+    const L = MAIN_TABS(); const i = Math.max(0, L.findIndex(t => t.id === dash.tab)); const n = L[(i + (e.key === 'ArrowRight' ? 1 : -1) + L.length) % L.length];
     e.preventDefault(); showTab(n.id, { noScroll:true }); const b = bar.querySelector(`[data-tab="${n.id}"]`); if (b) b.focus();
   });
   window.addEventListener('resize', debounce(syncTopbarH, 120));
   if ('ResizeObserver' in window) new ResizeObserver(syncTopbarH).observe($('#topbar')); syncTopbarH();
+  // phone header menu
+  const hb = $('#hdrMenuBtn'), tb = $('#topbar');
+  const hmSet = open => { tb.classList.toggle('menu-open', open); hb.setAttribute('aria-expanded', String(open)); };
+  hb.addEventListener('click', e => { e.stopPropagation(); hmSet(!tb.classList.contains('menu-open')); });
+  document.addEventListener('click', e => { if (!tb.classList.contains('menu-open')) return; if (!e.target.closest('#hdrMenu')) return hmSet(false); if (e.target.closest('button,a') && !e.target.closest('#curToggle')) setTimeout(() => hmSet(false), 0); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && tb.classList.contains('menu-open')) { hmSet(false); hb.focus(); } });
+  $$('#hdrMenu select').forEach(sel => sel.addEventListener('change', () => setTimeout(() => hmSet(false), 150)));
+  const hp = $('[data-hm-plans]'); if (hp) hp.addEventListener('click', e => { if (!dashOn()) return; e.preventDefault(); e.stopPropagation(); hmSet(false); showTab('plans'); });
   bindCloneAudio();
   // referral
   $$('[data-open-refer]').forEach(b => b.addEventListener('click', openRefer));
@@ -7975,9 +8124,10 @@ function renderHero() {
   const v = V(); const st = stats(v);
   $('#vaultTitle').textContent = v.name;
   $('#vaultMotto').textContent = v.motto || 'A living archive of names, faces, voices and stories.';
-  $('#vaultSub').innerHTML = v.subdomain ? `<span class="sub-chip">🌐 ${esc(v.subdomain)}.dynastyvault.app</span>` : '';
+  $('#vaultSub').innerHTML = '';   // the old *.dynastyvault.app chip pointed at a domain that does not exist
   const mem = isRoyal() ? `${st.members}` : `${paternalCount(v)}<small> / ${FREE_NODE_LIMIT}</small>`;
   $('#vaultStats').innerHTML = [[mem, tl('members')], [st.gens, tl('generations')], [st.couples, tl('unions') + ' 💍'], [st.chron, tl('chronicles')], [st.voices, tl('voices')]]
+    .filter(([n], i) => i === 0 || +n > 0)   // hide empty counters ("0 voice profiles") — they only make a new tree look bare
     .map(([n, l]) => `<div class="stat"><b class="font-regal gold-text">${n}</b><span>${esc(l)}</span></div>`).join('');
   document.title = `${v.name} · DynastyVault`;
   renderAnniv(); renderGrow(); renderGuard(); renderCapsules(); renderFeed(); renderArena(); renderGame(); applyMode();
@@ -12026,9 +12176,12 @@ if (/[?&]dvtest=1/.test(location.search)) window.__dv = { get state() { return s
 function toast(msg, type = 'info', ms = 3200) {
   const el = document.createElement('div'); el.className = 'toast' + (type === 'warn' ? ' warn' : '');
   el.innerHTML = `<span aria-hidden="true">${type === 'warn' ? '⚠️' : '✦'}</span><span>${esc(msg)}</span>`;
-  $('#toasts').appendChild(el);
-  while ($('#toasts').children.length > 3) $('#toasts').firstElementChild.remove();
-  setTimeout(() => { el.classList.add('out'); setTimeout(() => el.remove(), 360); }, ms);
+  const box = $('#toasts'); box.appendChild(el);
+  const max = matchMedia('(max-width:640px)').matches ? 1 : 3;   // phones: only the newest toast, so nothing piles up over the page
+  while (box.children.length > max) box.firstElementChild.remove();
+  const kill = () => { if (el.classList.contains('out')) return; el.classList.add('out'); setTimeout(() => el.remove(), 360); };
+  el.addEventListener('click', kill);
+  setTimeout(kill, ms);
 }
 
 /* =========================================================
@@ -12069,7 +12222,7 @@ function wire() {
   $('#treePrint').addEventListener('click', openPrintUpsell);
   $$('#prFrames [data-pf]').forEach(b => b.addEventListener('click', () => { printUI.frame = b.dataset.pf; renderPrintUI(); }));
   $$('#prSizes [data-ps]').forEach(b => b.addEventListener('click', () => { printUI.size = b.dataset.ps; renderPrintUI(); }));
-  $('#wlCreate').addEventListener('click', () => openWizard('choice'));
+  $('#wlCreate').addEventListener('click', () => openWizard('form'));   // straight into the form — the demo has its own button
   $('#wlDemo').addEventListener('click', startDemo);
   $('#demoCreate').addEventListener('click', () => openWizard('form'));
   $('#wzStart').addEventListener('click', () => openWizard('form'));
