@@ -11,6 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
 <script src="config.js"></script>
+<script src="dv-track.js" defer></script>
 <style>
 /* ---------- Base reset ---------- */
 *,::before,::after{box-sizing:border-box;border:0 solid var(--line)}
@@ -2038,6 +2039,96 @@ body.dash-on #addons,body.dash-on #services{padding-bottom:40px}
 .tu-dots{flex:0 1 auto}
 .tu-sides{flex-wrap:wrap}
 .tu-lb.sm{font-size:8.5px}
+/* ===== v65: online family profiles ===== */
+.net-box{margin-top:18px;padding:16px;border-radius:18px;border:1px dashed var(--line-strong);background:rgba(var(--g-rgb),.05)}
+.net-box.on{border-style:solid;background:linear-gradient(160deg,rgba(var(--g-rgb),.09),rgba(var(--bg-rgb),.4))}
+.net-h{font-weight:800;color:var(--gold-soft);margin-bottom:4px}
+.net-claim{display:flex;align-items:center;gap:8px;margin-top:12px;padding:5px 5px 5px 14px;border-radius:999px;border:1px solid var(--line-strong);background:rgba(var(--bg-rgb),.7)}
+.net-claim:focus-within{border-color:var(--gold);box-shadow:0 0 0 3px rgba(var(--g-rgb),.18)}
+.net-at{color:var(--gold);font-weight:800}
+.net-claim input{flex:1;min-width:0;background:transparent;border:0;outline:0;color:var(--ink);font-size:15px;font-weight:600}
+.net-hint{margin-top:6px;color:var(--gold-soft);min-height:1.2em}
+.net-vis-pick{margin-top:6px;font-size:12px;color:var(--muted)}
+.net-top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.net-handle{font-size:18px;font-weight:800;color:var(--ink);display:flex;align-items:center;gap:8px;flex-wrap:wrap;word-break:break-all}
+.net-pill{font-size:11px;font-weight:800;padding:.2rem .6rem;border-radius:999px;border:1px solid var(--line);color:var(--gold-soft);background:rgba(var(--g-rgb),.08);white-space:nowrap}
+.net-pill.pub{border-color:rgba(var(--hi-rgb),.5)}
+.net-nums{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);margin-top:4px}
+.net-nums b{color:var(--ink);font-size:14px}
+.net-req-n b{color:var(--gold-hi)}
+.net-reqs{margin-top:14px;display:grid;gap:8px}
+.net-req{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:14px;background:rgba(var(--bg-rgb),.6);border:1px solid var(--line)}
+.net-req b{display:block;font-size:13.5px}.net-req small{display:block;font-size:11.5px}
+.net-opt{display:flex;align-items:center;gap:8px;margin-top:14px;font-size:13px;color:var(--ink);cursor:pointer}
+.net-opt input{accent-color:var(--gold);width:18px;height:18px}
+.net-search{display:flex;gap:8px;margin-top:12px}
+.net-search input{flex:1;min-width:0;padding:.7rem 1rem;border-radius:999px;border:1px solid var(--line-strong);background:rgba(var(--bg-rgb),.7);color:var(--ink);font-size:14px}
+.net-search input:focus{outline:0;border-color:var(--gold);box-shadow:0 0 0 3px rgba(var(--g-rgb),.18)}
+.net-card .dc-art img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.net-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:12px 0 4px;padding:10px 12px;border-radius:16px;border:1px solid var(--line);background:rgba(var(--g-rgb),.05)}
+.net-bar .net-nums{margin-top:0}
+.dv-cover{width:64px;height:64px;border-radius:50%;object-fit:cover;border:2px solid var(--gold);margin-left:auto;flex:none}
+.net-lock{text-align:center;padding:30px 16px;border-radius:18px;border:1px dashed var(--line-strong);background:rgba(var(--bg-rgb),.5)}
+.net-lock-ico{font-size:40px;margin-bottom:8px}
+.net-lock b{display:block;font-size:16px;color:var(--gold-soft);margin-bottom:6px}
+
+/* ===== v65: AI family documentary ===== */
+.film-people{display:flex;gap:10px;overflow-x:auto;padding:4px 2px 10px;scrollbar-width:thin;scroll-snap-type:x proximity}
+.film-pp{position:relative;flex:none;display:flex;flex-direction:column;align-items:center;gap:5px;width:66px;background:none;border:0;color:var(--muted);cursor:pointer;scroll-snap-align:start}
+.film-pp small{font-size:11px;font-weight:700;max-width:66px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.film-pp i{position:absolute;top:-2px;right:2px;font-style:normal;font-size:13px}
+.film-av{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;overflow:hidden;border:2px solid var(--line);background:rgba(var(--g-rgb),.08);font-weight:800;color:var(--gold-soft);font-family:Cinzel,serif;transition:border-color .2s,transform .2s}
+.film-av img{width:100%;height:100%;object-fit:cover}
+.film-pp.on{color:var(--ink)}.film-pp.on .film-av{border-color:var(--gold);box-shadow:0 0 0 3px rgba(var(--g-rgb),.22);transform:scale(1.05)}
+.film-grid{display:grid;grid-template-columns:minmax(0,320px) minmax(0,1fr);gap:24px;align-items:start;margin-top:10px}
+@media (max-width:760px){.film-grid{grid-template-columns:minmax(0,1fr);gap:18px}}
+.film-card{display:flex;flex-direction:column;align-items:center}
+.film-poster,.film-stage{position:relative;width:100%;border-radius:20px;overflow:hidden;background:#000;border:1px solid var(--line-strong);box-shadow:0 18px 50px rgba(0,0,0,.55),inset 0 0 0 1px rgba(var(--g-rgb),.15)}
+.film-poster.tall,.film-stage.tall{aspect-ratio:9/16;max-width:min(300px,64vw)}
+.film-poster.wide,.film-stage.wide{aspect-ratio:16/9}
+.film-poster img{width:100%;height:100%;object-fit:cover;filter:sepia(.35) contrast(1.05);animation:filmKen 14s ease-in-out infinite alternate}
+@keyframes filmKen{from{transform:scale(1)}to{transform:scale(1.12) translateY(-2%)}}
+@media (prefers-reduced-motion:reduce){.film-poster img{animation:none}}
+.film-ini{position:absolute;inset:0;display:grid;place-items:center;font:700 54px Cinzel,serif;color:var(--gold-soft);background:radial-gradient(circle at 50% 35%,rgba(var(--g-rgb),.25),#000 70%)}
+.film-stage video{width:100%;height:100%;object-fit:cover;display:block}
+.film-title{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:16px;background:linear-gradient(180deg,rgba(0,0,0,.15),rgba(0,0,0,.65));opacity:0;transition:opacity .8s;pointer-events:none}
+.film-title.on{opacity:1}
+.film-poster .film-title.on{justify-content:flex-start;padding-top:22%;background:linear-gradient(180deg,rgba(0,0,0,.55),transparent 45%,transparent 60%,rgba(0,0,0,.7))}
+.film-title b{font-size:22px;color:var(--gold-pale);text-shadow:0 2px 12px rgba(0,0,0,.8);line-height:1.15}
+.film-title small{color:#f3ead2;font-size:13px;margin-top:4px;letter-spacing:.04em}
+.film-cap{position:absolute;left:8%;right:8%;bottom:9%;text-align:center;color:#fff;font-size:14px;font-weight:600;line-height:1.35;padding:.45rem .7rem;border-radius:10px;background:rgba(0,0,0,.55);opacity:0;transition:opacity .4s;pointer-events:none}
+.film-cap.on{opacity:1}
+.film-end{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;background:radial-gradient(circle at 50% 45%,rgba(var(--g-rgb),.2),rgba(0,0,0,.92) 70%);text-align:center}
+.film-end span{font-size:34px}.film-end b{font-size:20px;color:var(--gold-pale)}.film-end small{color:var(--gold-soft);font-size:12px}
+.film-big{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:68px;height:68px;border-radius:50%;border:0;background:var(--metal);color:var(--on-gold);font-size:26px;font-weight:900;cursor:pointer;box-shadow:0 8px 30px rgba(0,0,0,.6),0 0 0 6px rgba(var(--g-rgb),.18)}
+.film-big:focus-visible{outline:3px solid var(--gold-pale);outline-offset:3px}
+.film-checks{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.film-checks li{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:14px;color:var(--muted)}
+.film-checks li.ok{color:var(--ink)}.film-checks li.ok::marker{content:none}
+.film-opts{display:grid;gap:12px;margin-top:16px}
+.film-opts .chip.on{background:var(--metal);color:var(--on-gold);border-color:transparent}
+.film-run{display:flex;gap:12px;align-items:center;padding:14px;border-radius:16px;border:1px solid var(--line-strong);background:rgba(var(--g-rgb),.06)}
+.film-run b{display:block}.film-run small{display:block;font-size:12px;margin-top:2px}
+.film-spin{flex:none;width:34px;height:34px;border-radius:50%;border:3px solid rgba(var(--g-rgb),.2);border-top-color:var(--gold);animation:filmSpin 1s linear infinite}
+@keyframes filmSpin{to{transform:rotate(360deg)}}
+.film-msg{margin-top:12px;font-size:13px;color:var(--gold-soft);padding:10px 12px;border-radius:12px;background:rgba(var(--g-rgb),.07);border:1px solid var(--line)}
+
+/* v65: 5 main tabs on phones — icon above a short label so all fit without sideways scrolling */
+@media (max-width:640px){
+  html .dash-tabs{gap:0;padding:4px}
+  html .dash-tabs button[role="tab"],html .dash-tabs .dt-more,html .dash-tabs .dt-plans{flex:1 1 0;min-width:0;flex-direction:column;gap:3px;padding:.45rem .1rem .4rem;font-size:10.5px;line-height:1;border-radius:12px}
+  html .dash-tabs .dt-ico{font-size:17px;line-height:1}
+  html .dash-tabs .dt-more svg{display:none}
+  html .dash-tabs .dt-plans{border:0;box-shadow:inset 0 0 0 1px var(--line-strong)}
+  html .dash-tabs .dt-l{max-width:100%;overflow:hidden;text-overflow:ellipsis}
+  html .dash-tabs .dt-badge{position:absolute;top:2px;right:4px}
+}
+@media (min-width:641px) and (max-width:1023px){html .dash-tabs .dt-full{display:none}html .dash-tabs .dt-sh{display:inline}html .dash-tabs button[role="tab"],html .dash-tabs .dt-more,html .dash-tabs .dt-plans{flex:1 1 0;min-width:0;justify-content:center;padding:.6rem .4rem}html .dash-tabs .dt-plans{margin-left:0}}
+
+/* v65 polish: headline gold reads bright across the whole line (was a left-to-right metal sweep that started dark on short phone lines) */
+html .gold-text{background:linear-gradient(180deg,var(--gold-pale) 0%,var(--gold-hi) 34%,var(--gold) 70%,var(--gold-lo) 108%);background-size:100% 100%;-webkit-background-clip:text;background-clip:text}
+/* v65 polish: the reminder card takes less of the phone screen */
+@media (max-width:640px){html .notif{padding:8px 8px 8px 12px;gap:8px;bottom:12px;left:12px;right:12px;border-radius:14px}html .notif small{font-size:9.5px;letter-spacing:.1em}html .notif b{font-size:13px}html .notif .notif-ic{font-size:20px}}
 </style>
 </head>
 <body>
@@ -2254,10 +2345,12 @@ body.dash-on #addons,body.dash-on #services{padding-bottom:40px}
   <!-- DYNASTY vs DYNASTY -->
   <section id="arena" data-panel="arena" class="pt-6 reveal">
     <div class="glass gborder p-5 sm:p-8">
-      <div class="min-w-0"><div class="eyebrow">◆ Dynasty vs Dynasty</div><h2 class="font-regal gold-text text-2xl sm:text-3xl font-bold mt-2">⚔️ Dynasty vs Dynasty</h2>
+      <div class="min-w-0"><div class="eyebrow">◆ <span data-hn="Family profiles · Dynasty vs Dynasty">Family profiles · Dynasty vs Dynasty</span></div><h2 class="font-regal gold-text text-2xl sm:text-3xl font-bold mt-2" data-hn="🌍 Families">🌍 Families</h2>
         <p class="muted text-sm mt-2 max-w-2xl" id="dynIntro">Make your dynasty public to show other families your tree, descriptions, posts, memories, voice notes and 24-hour stories — or keep it private for family only.</p></div>
       <div id="dynMine" class="dyn-mine mt-6"></div>
-      <div class="dyn-head mt-8"><div class="eyebrow" data-hn="◆ Public Dynasties">◆ Public Dynasties</div><span class="tiny muted" id="dynCount"></span></div>
+      <div class="dyn-head mt-8" id="netHead"><div class="eyebrow" data-hn="◆ Families on DynastyVault">◆ Families on DynastyVault</div></div>
+      <div id="netExplore" class="net-explore" hidden></div>
+      <div class="dyn-head mt-8"><div class="eyebrow" data-hn="◆ Sample & shared dynasties">◆ Sample &amp; shared dynasties</div><span class="tiny muted" id="dynCount"></span></div>
       <div id="dynGrid" class="dyn-grid mt-3"></div>
       <div class="eyebrow mt-10" data-hn="◆ Global Heritage Feed — public posts">◆ Global Heritage Feed — public posts</div>
       <div class="arena-wrap mt-3">
@@ -2357,6 +2450,15 @@ body.dash-on #addons,body.dash-on #services{padding-bottom:40px}
         <div id="vlSamples"></div>
         <p class="tiny muted" data-hn="Demo signal aapke browser mein hi banta hai. Yahi filter chain (hum notch, voice lift, hiss roll-off, compression) asli recordings pe Voice Studio mein chalti hai.">The demo signal is generated in your browser. The same filter chain — hum notches, voice-band lift, hiss roll-off and compression — runs on real recordings in the Voice Studio.</p>
       </aside>
+    </div>
+  </section>
+
+  <!-- 🎬 AI FAMILY DOCUMENTARY -->
+  <section id="filmHub" data-panel="film" class="hub">
+    <div class="glass gborder p-5 sm:p-8 film-hub">
+      <div class="hub-head"><div class="min-w-0"><div class="eyebrow">◆ <span data-hn="Family Documentary">Family Documentary</span></div><h2 class="font-regal gold-text text-2xl sm:text-3xl font-bold mt-2" data-hn="Unki photo ko zinda karo">Bring Their Photo to Life</h2>
+        <p class="muted text-sm mt-2 max-w-2xl" data-hn="Ek insaan chuno. Hum unki asli photo aur unki kahani se ek chhoti si animated film banate hain — WhatsApp status aur Reels ke liye ready.">Pick one person. We turn their real photo and their life story into a short animated film — ready for WhatsApp Status and Reels.</p></div></div>
+      <div id="filmBody" class="mt-5"></div>
     </div>
   </section>
 
@@ -2579,7 +2681,7 @@ body.dash-on #addons,body.dash-on #services{padding-bottom:40px}
 <div class="modal top dyn-modal" id="dynModal" role="dialog" aria-modal="true" aria-label="Dynasty profile">
   <div class="modal-panel">
     <div class="p-5 sm:p-7">
-      <div class="flex items-center justify-between gap-4 mb-4"><div class="eyebrow">◆ Dynasty vs Dynasty</div><button class="icon-btn" data-close aria-label="Close dynasty profile">✕</button></div>
+      <div class="flex items-center justify-between gap-4 mb-4"><div class="eyebrow" data-hn="◆ Family profile">◆ Family profile</div><button class="icon-btn" data-close aria-label="Close family profile">✕</button></div>
       <div id="dynBody"></div>
     </div>
   </div>
@@ -2885,11 +2987,11 @@ const FREE_TEXT_LANGS = ['en', 'hi', 'hn'];
 const PRICES = {   // launch prices — raise towards PRICES_WAS later
   plans:      { free:{INR:0,USD:0}, royal:{INR:999,USD:19} },
   addons:     { portrait4k:{INR:149,USD:3.99}, export:{INR:99,USD:2.99}, voicepack:{INR:99,USD:2.99} },
-  services:   { photo:{INR:199,USD:4.99}, voice:{INR:199,USD:4.99}, gift:{INR:1499,USD:29} }
+  services:   { photo:{INR:199,USD:4.99}, voice:{INR:199,USD:4.99}, film:{INR:499,USD:9.99}, gift:{INR:1499,USD:29} }
 };
 const PRICES_WAS = {   // regular price, shown struck through next to the launch price
   plans:{ royal:{INR:1999,USD:39} }, addons:{ portrait4k:{INR:299,USD:6.99}, export:{INR:199,USD:4.99}, voicepack:{INR:199,USD:4.99} },
-  services:{ photo:{INR:349,USD:7.99}, voice:{INR:299,USD:6.99}, gift:{INR:2999,USD:59} }
+  services:{ photo:{INR:349,USD:7.99}, voice:{INR:299,USD:6.99}, film:{INR:799,USD:14.99}, gift:{INR:2999,USD:59} }
 };
 
 /* =========================================================
@@ -2903,6 +3005,7 @@ const PAY = Object.assign({
 const SERVICES = {
   photo:{ id:'photo', icon:'📸', name:'Real Reunion Photo — made for you', unit:'per photo', desc:'Send everyone’s photos on WhatsApp. We make one real-looking family group photo, check every face by hand, and send it back within 48 hours.' },
   voice:{ id:'voice', icon:'🎙️', name:'Story in Their Own Voice — made for you', unit:'per story', desc:'Send a 20-second voice note and the story. We send back an MP3 of the story read in that voice (up to 2 minutes) within 48 hours.' },
+  film:{ id:'film', icon:'🎬', name:'Family Documentary — made for you', unit:'per film', desc:'Send one photo and their life story on WhatsApp. We animate the photo into a short film of three scenes with subtitles and soft music, check it by hand, and send it back within 48 hours.' },
   gift:{ id:'gift', icon:'🎁', name:'Heritage Gift Box', unit:'one-time', desc:'Royal Dynasty Lifetime + one real reunion photo + three stories in an elder’s voice. A digital gift — nothing is shipped: you get a gift code on WhatsApp and forward it. The perfect birthday or anniversary gift for parents.' }
 };
 
@@ -4098,7 +4201,7 @@ function createFromWizard() {
   if (fu && (d.nana || d.nani)) attachMaternal(v, fu.id, { m:[d.nana || `${firstName(d.mother)}’s father`, 'Nana · Maternal Grandfather', ''], s:d.nani ? [d.nani, 'Nani · Maternal Grandmother', ''] : null }, v.self);
   normalizeVault(v);
   if (you) you.joined = true;
-  state.vaults[v.id] = v; state.order.unshift(v.id); state.active = v.id; state.onboarded = true;
+  state.vaults[v.id] = v; state.order.unshift(v.id); state.active = v.id; state.onboarded = true; dvT('tree');
   state.view = hasDual(v) && isRoyal() ? 'fused' : 'paternal';
   closeModal('wizModal');
   if (LANG_BY[d.lang] && d.lang !== state.lang) setLang(d.lang, true);
@@ -5753,12 +5856,13 @@ function themeLockArt() {
 /* ---------- 🎛️ modular dashboard (8 tabs, no long scrolling) ---------- */
 const DASH_TABS = [
   { id:'canvas', ico:'🌳', en:'Family Tree', hn:'Family Tree', sen:'Tree', shn:'Tree', main:true },
+  { id:'arena', ico:'🌍', en:'Families', hn:'Families', sen:'Families', shn:'Families', main:true },
+  { id:'film', ico:'🎬', en:'Documentary', hn:'Documentary', sen:'Film', shn:'Film', main:true },
   { id:'voice', ico:'🎙️', en:'Voices', hn:'Awaaz', sen:'Voices', shn:'Awaaz', main:true },
   { id:'refer', ico:'🎁', en:'Share & Earn', hn:'Share & Kamao', sen:'Share', shn:'Share', main:true },
   { id:'photo', ico:'🧩', en:'Family Collage', hn:'Family Collage' },
   { id:'reunion', ico:'✨', en:'Reunion Portrait', hn:'Reunion Portrait' },
   { id:'trail', ico:'🗺️', en:'Migration Trail', hn:'Migration Trail' },
-  { id:'arena', ico:'⚔️', en:'Dynasty vs Dynasty', hn:'Dynasty vs Dynasty' },
   { id:'themes', ico:'🎨', en:'Theme Studio', hn:'Theme Studio' }
 ];
 const dash = { tab:null, syncing:false, inited:false };
@@ -5768,7 +5872,7 @@ function renderDashTabs() {
   const extra = DASH_TABS.find(t => !t.main && t.id === dash.tab);
   bar.innerHTML = MAIN_TABS().map(t => `<button role="tab" data-tab="${t.id}" id="dt-${t.id}" aria-selected="${t.id === dash.tab}" tabindex="${t.id === dash.tab ? 0 : -1}" class="${t.id === dash.tab ? 'on' : ''}${t.id === 'refer' ? ' dt-gift' : ''}"><span class="dt-ico" aria-hidden="true">${t.ico}</span><span class="dt-l"><span class="dt-full">${esc(hx(t.en, t.hn))}</span><span class="dt-sh">${esc(hx(t.sen, t.shn))}</span></span>${t.id === 'refer' && n ? `<span class="dt-badge">${n}</span>` : ''}</button>`).join('') +
     `<button type="button" class="dt-more${extra ? ' on' : ''}" id="dtMore" data-tab-more="${extra ? extra.id : ''}" aria-haspopup="menu" aria-expanded="false"><span class="dt-ico" aria-hidden="true">${extra ? extra.ico : '✦'}</span><span class="dt-l"><span class="dt-full">${esc(extra ? hx(extra.en, extra.hn) : hx('More', 'Aur'))}</span><span class="dt-sh">${esc(hx('More', 'Aur'))}</span></span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>` +
-    `<button class="dt-plans${dash.tab === 'plans' ? ' on' : ''}" data-tab="plans">👑 ${hx('Plans', 'Plans')}</button><span class="dt-ink" aria-hidden="true"></span>`;
+    `<button class="dt-plans${dash.tab === 'plans' ? ' on' : ''}" data-tab="plans"><span class="dt-ico" aria-hidden="true">👑</span><span class="dt-l">${hx('Plans', 'Plans')}</span></button><span class="dt-ink" aria-hidden="true"></span>`;
   moveInk();
 }
 function closeTabMore() { const m = $('#dtMoreMenu'); if (m) m.remove(); const b = $('#dtMore'); if (b) b.setAttribute('aria-expanded', 'false'); }
@@ -5811,6 +5915,8 @@ function showTab(id, opts = {}) {
 }
 function refreshPanel(id, force) {
   if (id === 'canvas' && typeof renderJourney === 'function') { renderJourney(); return; }
+  if (id === 'film') { renderFilm(); return; }
+  if (id === 'arena' && typeof renderDyn === 'function') { renderDyn(); return; }
   const hub = { themes:'#themeStudio', refer:'#referHub', voice:'#voiceHub', social:'#socialHub', vault:'#vaultHub' }[id]; if (!hub) return;
   const el = $(hub); if (!el) return;
   if (!force && el.contains(document.activeElement) && /INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)) return;
@@ -6584,9 +6690,13 @@ function initV10() {
   initDictation();
   initJourney();
   initDyn();
+  netInit();
+  filmInit();
   initRoute();
   initLeafUI();
   handleDynHash().then(pf => { if (!pf) return; renderArena(); if (state.onboarded && dashOn()) showTab('arena', { noScroll:true }); setTimeout(() => openDyn(pf.id), 500); });
+  handleNetHash();
+  window.addEventListener('hashchange', () => { if (/^#u=/.test(location.hash)) handleNetHash(); });
   window.addEventListener('hashchange', () => { if (/^#dyn-/.test(location.hash)) handleDynHash().then(pf => { if (pf) { renderArena(); openDyn(pf.id); } }); });
   // hash links (fresh loads and links opened while the app is already open)
   handleRefHash();
@@ -6849,6 +6959,7 @@ function dynAll() {
   return own.concat(vis, SAMPLE_DYN.map(profileFromSample));
 }
 function dynFind(id) {
+  if (id.startsWith('net_')) return NET.cache[id.slice(4)] || null;
   if (id.startsWith('own_')) { const v = state.vaults[id.slice(4)]; return v ? profileFromVault(v) : null; }
   return dynAll().find(p => p.id === id) || null;
 }
@@ -6869,6 +6980,9 @@ function renderDyn() {
       <p class="tiny muted mt-2">${hx('Living members’ birth years follow your “hide birth dates” setting in Privacy & Vault. Photos and voice recordings stay on this device when you share a link.', 'Zinda members ke janam-saal Privacy & Vault ki “birth dates chhupao” setting se chalte hain. Link share karne pe photos aur voice recordings isi device pe rehti hain.')}</p>`
     : `<p class="dm-state">🔒 ${hx('Private — only members of your vault see your tree, descriptions, posts, memories, voice notes and stories. Nothing from this dynasty shows in Dynasty vs Dynasty.', 'Private — aapka tree, descriptions, posts, yaadein, voice notes aur stories sirf vault ke members dekhte hain. Dynasty vs Dynasty mein is dynasty ka kuch nahi dikhta.')}</p>
       <button class="btn-gold sm mt-3" data-dyn-vis="public">🌍 ${hx('Make my dynasty public', 'Meri dynasty public karo')}</button>`}`;
+  if (netOn() && !isDemo(v)) { mine.insertAdjacentHTML('beforeend', netMineHTML(v)); netMine(); }
+  const nh = $('#netHead'); if (nh) nh.hidden = !netOn();
+  const ne = $('#netExplore'); if (ne) { ne.hidden = !netOn(); if (netOn()) { ne.innerHTML = netExploreHTML(); if (!NET.list && !NET.loading) netLoadList(''); } }
   const all = dynAll(); const cntEl = $('#dynCount'); if (cntEl) cntEl.textContent = hx(`${all.length} dynasties`, `${all.length} dynasties`);
   const tag = p => p.kind === 'own' ? `<span class="your-chip">${hx('Your dynasty', 'Aapki dynasty')}</span>` : p.kind === 'visit' ? `<span class="dc-visit">🔗 ${hx('Shared with you', 'Aapko share kiya')}</span>` : `<span class="sample-chip">${hx('Sample', 'Sample')}</span>`;
   grid.innerHTML = all.map(p => `<article class="dyn-card" data-dyn-open="${p.id}" tabindex="0" role="button" aria-label="${esc(hx('Open', 'Kholo'))} ${esc(p.n)}">
@@ -6986,17 +7100,20 @@ function renderDynModal() {
   else if (T === 'trail') body = dynTrailHTML(p);
   else if (T === 'stories') body = p.stories.length ? `<div class="dv-stories">${p.stories.map(s => { const left = Math.max(1, Math.ceil((DAY - (Date.now() - s.at)) / DYN_H)); return `<div class="dv-story" style="background:${s.ph ? `linear-gradient(180deg,transparent 40%,rgba(0,0,0,.75)),url('${s.ph}') center/cover` : (STORY_BG[s.bg] || STORY_BG.gold)}"><small>⏱️ ${hx(`${left}h left`, `${left} ghante baaki`)}</small><p>${esc(s.text)}</p><b>${esc(s.by)}</b></div>`; }).join('')}</div>` : `<p class="muted text-sm">${hx('No live stories right now — 24-hour stories disappear after a day.', 'Abhi koi live story nahi — 24-ghante ki stories ek din baad gayab ho jaati hain.')}</p>`;
   else { const kind = { posts:'post', mem:'memory', voice:'voice' }[T]; const list = p.posts.filter(x => x.k === kind); body = list.length ? `<div class="dv-posts">${list.map(x => dynPostHTML(x, p)).join('')}</div>` : `<p class="muted text-sm">${hx('Nothing here yet.', 'Yahan abhi kuch nahi.')}</p>`; }
+  if (p.kind === 'net' && !p.open) body = netLockedHTML(p);
   const hidden = DYN_SECTIONS.filter(([k]) => !p.show[k]);
-  box.innerHTML = `<div class="dv-banner" style="background:${STORY_BG[p.bg] || STORY_BG.gold}"><span class="dv-flag">${p.flag}</span><div class="min-w-0"><div class="dv-badge">${p.kind === 'own' ? (p.pub ? '🌍 ' + hx('Public dynasty', 'Public dynasty') : '🔒 ' + hx('Private — preview only you see', 'Private — sirf aap dekh rahe ho')) : p.kind === 'visit' ? '🔗 ' + hx(`Shared${p.by ? ' by ' + p.by : ''}`, `${p.by ? p.by + ' ne ' : ''}share kiya`) : '🌍 ' + hx('Public dynasty · sample', 'Public dynasty · sample')}</div><h3 class="font-regal dv-name">${esc(p.n)}</h3><small>${esc(p.place || '')}${p.motto ? ` · “${esc(p.motto.replace(/^[“"']+|[”"']+$/g, ''))}”` : ''}</small></div></div>
+  box.innerHTML = `<div class="dv-banner" style="background:${STORY_BG[p.bg] || STORY_BG.gold}"><span class="dv-flag">${p.flag}</span><div class="min-w-0"><div class="dv-badge">${p.kind === 'net' ? (p.vis === 'public' ? '🌍 ' + hx('Public family', 'Public family') : '🔒 ' + hx('Private family', 'Private family')) + ' · @' + esc(p.h) : p.kind === 'own' ? (p.pub ? '🌍 ' + hx('Public dynasty', 'Public dynasty') : '🔒 ' + hx('Private — preview only you see', 'Private — sirf aap dekh rahe ho')) : p.kind === 'visit' ? '🔗 ' + hx(`Shared${p.by ? ' by ' + p.by : ''}`, `${p.by ? p.by + ' ne ' : ''}share kiya`) : '🌍 ' + hx('Public dynasty · sample', 'Public dynasty · sample')}</div><h3 class="font-regal dv-name">${esc(p.n)}</h3><small>${esc(p.place || '')}${p.motto ? ` · “${esc(p.motto.replace(/^[“"']+|[”"']+$/g, ''))}”` : ''}</small></div>${p.cover ? `<img class="dv-cover" src="${p.cover}" alt="">` : ''}</div>
+    ${netBarHTML(p)}
     <div class="dv-stats"><span><b>👑 ${dynNum(p.st.s)}</b><small>${hx('Royalty', 'Royalty')}</small></span><span><b>${dynNum(p.st.m)}</b><small>${hx('Members', 'Members')}</small></span><span><b>${p.st.g}</b><small>${hx('Generations', 'Peedhiyan')}</small></span><span><b>${dynNum(p.st.vo)}</b><small>${hx('Voices', 'Awaazein')}</small></span><span><b>${dynNum(p.st.ph)}</b><small>${hx('Photos', 'Photos')}</small></span></div>
-    <div class="dv-tabs" role="tablist">${secs.map(([k, ico, l, n]) => `<button role="tab" data-dt="${k}" class="${T === k ? 'on' : ''}">${ico} ${l} <i>${n}</i></button>`).join('')}${mineNow || !state.onboarded ? '' : `<button role="tab" data-dt="vs" class="${T === 'vs' ? 'on' : ''} dv-tab-vs">⚔️ ${hx('Dynasty vs Dynasty', 'Dynasty vs Dynasty')}</button>`}</div>
+    <div class="dv-tabs" role="tablist"${p.kind === 'net' && !p.open ? ' hidden' : ''}>${secs.map(([k, ico, l, n]) => `<button role="tab" data-dt="${k}" class="${T === k ? 'on' : ''}">${ico} ${l} <i>${n}</i></button>`).join('')}${mineNow || !state.onboarded ? '' : `<button role="tab" data-dt="vs" class="${T === 'vs' ? 'on' : ''} dv-tab-vs">⚔️ ${hx('Dynasty vs Dynasty', 'Dynasty vs Dynasty')}</button>`}</div>
     <div class="dv-pane">${body}</div>
-    ${hidden.length ? `<p class="tiny muted mt-3">🔒 ${hx('Kept private by this family:', 'Is family ne private rakha:')} ${hidden.map(([, ico, en, hn]) => `${ico} ${hx(en, hn)}`).join(' · ')}</p>` : ''}
+    ${hidden.length && !(p.kind === 'net' && !p.open) ? `<p class="tiny muted mt-3">🔒 ${hx('Kept private by this family:', 'Is family ne private rakha:')} ${hidden.map(([, ico, en, hn]) => `${ico} ${hx(en, hn)}`).join(' · ')}</p>` : ''}
     ${!ownVault() && !state.onboarded ? `<button class="btn-gold w-full mt-4" data-dyn-create>👑 Create Your Family Dynasty Tree</button>` : ''}`;
   if (tv) dynTreeMount(tv, p);
   if (T === 'trail') dynTrailMount(p);
 }
 function openDyn(id, tab) {
+  if (String(id).startsWith('net_')) { openNet(String(id).slice(4), tab); return; }
   const p = dynFind(id); if (!p) return; dynStopVoice(); dynUI.id = id; dynUI.tab = tab || (dynSecList(p)[0] || ['vs'])[0];
   if (p.kind !== 'own') markUsed('dynpub');
   renderDynModal(); openModal('dynModal'); const sc = $('#dynModal .modal-panel'); if (sc) sc.scrollTop = 0;
@@ -7086,6 +7203,459 @@ function initDyn() {
   onClose.dynModal = () => { dynStopVoice(); if (dynUI.lmap) { try { dynUI.lmap.remove(); } catch (e) { /* ignore */ } dynUI.lmap = null; } };
 }
 
+
+/* ---------- 🌐 Online family profiles — public / private with follow requests (like Instagram) ----------
+   Needs the server (config.js → server). Each vault gets a secret owner key on this phone; only it can
+   change the profile. Public = anyone sees it + Explore. Private = Explore shows name, place and
+   member count; people request to follow and the owner approves them here. */
+const NET = { list:null, total:0, q:'', loading:false, cache:{}, mine:null, mineAt:0, timer:0, busy:false, again:false, err:'', check:{}, open:null };
+const netOn = () => !!DV_API;
+const netRand = () => { try { const a = new Uint8Array(18); crypto.getRandomValues(a); return Array.from(a, b => b.toString(36).padStart(2, '0')).join(''); } catch (e) { return Math.random().toString(36).slice(2) + Date.now().toString(36) + Math.random().toString(36).slice(2); } };
+function netOf(v) { v.net = v.net || {}; if (!v.net.key) { v.net.key = 'nk_' + netRand(); save(); } return v.net; }
+const netHandleOk = h => /^[a-z0-9](?:[a-z0-9._]{1,22})[a-z0-9]$/.test(h) && !/[._]{2}/.test(h);
+const netSuggest = v => String(v.name || 'family').toLowerCase().normalize('NFKD').replace(/[^\x00-\x7f]/g, '').replace(/\b(dynasty|vault|family|parivar|the|heritage)\b/g, '').replace(/[^a-z0-9]+/g, '').slice(0, 16) + '.family';
+const netLink = h => { const b = (siteBase() || (location.origin + location.pathname)).split('#')[0].split('?')[0]; return `${b}#u=${encodeURIComponent(h)}`; };
+async function netApi(path, body) {
+  const r = await fetch(DV_API + path, body ? { method:'POST', headers:{ 'Content-Type':'application/json' }, body:JSON.stringify(body) } : {});
+  const j = await r.json().catch(() => ({})); if (!r.ok) { const e = new Error(j.error || ('HTTP ' + r.status)); e.status = r.status; e.code = j.code; throw e; }
+  return j;
+}
+function netThumb(src, px) {
+  return new Promise(res => {
+    if (!src || !/^data:image\//.test(src) && !/^blob:/.test(src)) return res('');
+    const im = new Image(); im.onload = () => { try { const s = Math.min(1, px / Math.max(im.width, im.height)); const c = document.createElement('canvas'); c.width = Math.max(1, Math.round(im.width * s)); c.height = Math.max(1, Math.round(im.height * s)); c.getContext('2d').drawImage(im, 0, 0, c.width, c.height); res(c.toDataURL('image/jpeg', .72)); } catch (e) { res(''); } };
+    im.onerror = () => res(''); im.src = src;
+  });
+}
+// the same family data the profile link carries, plus small member photos when the family allows it
+function dynPayload(v) {
+  const p = profileFromVault(v); const me = v.people[v.self];
+  return { t:'dyn', n:p.n, pl:p.place, f:p.flag, mo:p.motto, sh:p.show, st:p.st, by:me ? me.name : '', at:Date.now(),
+    g:p.gens.map(g => g.map(x => [x.n, x.r, '', x.y, x.died ? 1 : 0])),
+    p:p.posts.slice(0, 15).map(x => [x.k[0], x.by, (x.text || '').slice(0, 400), x.at, x.about || '']),
+    s:p.stories.slice(0, 8).map(x => [x.by, (x.text || '').slice(0, 240), x.at, x.bg]),
+    tr:(p.trail || []).slice(0, 60).map(x => [x.y, x.p.slice(0, 60), (x.c || '').slice(0, 60), (x.t || '').slice(0, 90), +(+x.lat).toFixed(3), +(+x.lon).toFixed(3), x.f == null ? -1 : x.f, x.st ? 1 : 0, (x.fp || '').slice(0, 60)]),
+    ts:p.show.tree ? (() => { const sn = vaultSnapshot(v); sn.p.forEach(r => { r[2] = p.show.desc ? String(r[2] || '').slice(0, 280) : ''; }); return sn; })() : null };
+}
+async function netPayload(v) {
+  const d = dynPayload(v); const pr = dynPrivacy(v);
+  if (d.ts && pr.netPhotos) d.ts.ph = await Promise.all(Object.keys(indexVault(v)).map(id => netThumb(v.people[id] && v.people[id].avatar, 120)));
+  const ids = Object.keys(indexVault(v)); const face = [v.self, ...ids].map(id => v.people[id]).find(p => p && p.avatar);
+  const card = { n:d.n, pl:d.pl, f:d.f, mo:d.mo, st:d.st, ph:pr.netPhotos && face ? await netThumb(face.avatar, 160) : '' };
+  return { d, card };
+}
+const netSig = (v) => { const pr = dynPrivacy(v); const s = JSON.stringify([dynPayload(v), pr.dyn, !!pr.netPhotos, pr.netPhotos ? Object.values(v.people).map(p => (p.avatar || '').length) : 0]).replace(/"at":\d+,?/g, ''); let h = 0; for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) | 0; return h + ':' + s.length; };
+async function netSync(force) {
+  const v = ownVault(); if (!netOn() || !v || !v.net || !v.net.h) return false;
+  if (NET.busy) { NET.again = true; return false; }
+  const sig = netSig(v); if (!force && sig === v.net.sig) return true;
+  NET.busy = true;
+  try {
+    const { d, card } = await netPayload(v);
+    const j = await netApi('/api/dyn/save', { key:v.net.key, h:v.net.h, vis:dynPrivacy(v).dyn, d, card });
+    v.net.sig = sig; v.net.at = Date.now(); v.net.err = ''; NET.mine = Object.assign(NET.mine || {}, { h:j.h, vis:j.vis, followers:j.followers, views:j.views }); save();
+    return true;
+  } catch (e) { v.net.err = e.message; if (e.code === 'TAKEN') { v.net.h = ''; } save(); return false; }
+  finally { NET.busy = false; netPaint(); if (NET.again) { NET.again = false; setTimeout(() => netSync(), 1500); } }
+}
+window.__netDirty = function () { const v = ownVault(); if (!netOn() || !v || !v.net || !v.net.h) return; clearTimeout(NET.timer); NET.timer = setTimeout(() => netSync(), 12000); };
+async function netClaim(raw) {
+  const v = ownVault(); if (!v) { openWizard('form'); return; }
+  const h = String(raw || '').trim().toLowerCase().replace(/^@+/, '');
+  if (!netHandleOk(h)) { toast(hx('Use 3–24 small letters or numbers (dots and underscores are fine).', '3–24 chhote letters ya numbers likho (dot aur underscore chalega).'), 'warn'); return; }
+  const n = netOf(v); const old = n.h; n.h = h; NET.busy = false;
+  const ok = await netSync(true);
+  if (ok) { dvT('pub'); markUsed('dynpub'); toast(hx(`✓ Your family is online as @${h}`, `✓ Aapki family ab online hai: @${h}`), 'info'); netMine(true); }
+  else { if (!v.net.h) toast(hx('That handle is taken — try another.', 'Yeh handle kisi ne le liya — doosra try karo.'), 'warn'); else toast(hx('Could not reach the server: ', 'Server tak nahi pahunche: ') + (v.net.err || ''), 'warn'); n.h = n.h || old || ''; save(); }
+  netPaint();
+}
+async function netMine(force) {
+  const v = ownVault(); if (!netOn() || !v || !v.net || !v.net.h) return;
+  if (!force && Date.now() - NET.mineAt < 30000) return; NET.mineAt = Date.now();
+  try { NET.mine = await netApi('/api/dyn/mine?key=' + encodeURIComponent(v.net.key)); }
+  catch (e) { if (e.code === 'NONE') { NET.mine = null; netSync(true); } }
+  netPaint();
+}
+async function netAnswer(id, ok) {
+  const v = ownVault(); if (!v || !v.net) return;
+  try { await netApi('/api/dyn/answer', { key:v.net.key, id, ok }); NET.mine.requests = (NET.mine.requests || []).filter(r => r.id !== id); if (ok) NET.mine.followers = (NET.mine.followers || 0) + 1; toast(ok ? hx('✓ Approved — they can now see your tree', '✓ Approve kiya — ab woh aapka tree dekh sakte hain') : hx('Request removed', 'Request hata di'), 'info', 1800); }
+  catch (e) { toast(e.message, 'warn'); }
+  netPaint();
+}
+async function netRemove() {
+  const v = ownVault(); if (!v || !v.net || !v.net.h) return;
+  const ok = await confirmBox({ title:hx('Delete your online profile?', 'Online profile delete karein?'), message:hx(`@${v.net.h} and its followers will be removed from the internet. Your tree stays safe on this phone.`, `@${v.net.h} aur uske followers internet se hat jayenge. Aapka tree is phone pe safe rahega.`), ok:hx('Delete', 'Delete karo') });
+  if (!ok) return;
+  try { await netApi('/api/dyn/remove', { key:v.net.key }); } catch (e) { /* already gone */ }
+  v.net.h = ''; v.net.sig = ''; NET.mine = null; save(); netPaint(); toast(hx('Online profile deleted', 'Online profile delete ho gayi'), 'info');
+}
+function netMineHTML(v) {
+  if (!netOn() || !v || isDemo(v)) return '';
+  const n = v.net || {}; const pr = dynPrivacy(v); const pub = pr.dyn === 'public'; const m = NET.mine;
+  if (!n.h) {
+    const sug = NET.check.h || netSuggest(v);
+    return `<div class="net-box" id="netMine"><div class="net-h">🌐 ${hx('Put your family online', 'Apni family online laao')}</div>
+      <p class="tiny muted">${hx('Pick a handle so relatives and other families can find you — like Instagram. Public: anyone can see your tree. Private: people only see your family name and member count until you approve them.', 'Ek handle chuno taaki rishtedaar aur baaki families aapko dhoondh sakein — Instagram jaisa. Public: koi bhi tree dekh sakta hai. Private: jab tak aap approve na karo, log sirf family ka naam aur members ki ginti dekhte hain.')}</p>
+      <div class="net-claim"><span class="net-at">@</span><input id="netHandle" maxlength="24" autocomplete="off" autocapitalize="off" spellcheck="false" value="${esc(sug)}" aria-label="${esc(hx('Family handle', 'Family handle'))}"><button class="btn-gold sm" id="netClaimBtn">${hx('Create profile', 'Profile banao')}</button></div>
+      <p class="tiny net-hint" id="netHint">${NET.check.h === sug && NET.check.free === false ? '✕ ' + hx('Taken — try another', 'Le liya gaya — doosra try karo') : NET.check.h === sug && NET.check.free ? '✓ ' + hx('Available', 'Khaali hai') : hx('Small letters, numbers, dots and underscores.', 'Chhote letters, numbers, dot aur underscore.')}</p>
+      <div class="net-vis-pick">${pub ? '🌍 ' + hx('Your dynasty is Public — the profile will be public.', 'Aapki dynasty Public hai — profile public banegi.') : '🔒 ' + hx('Your dynasty is Private — the profile will be private (follow requests).', 'Aapki dynasty Private hai — profile private banegi (follow request se).')}</div></div>`;
+  }
+  const reqs = (m && m.requests) || [];
+  return `<div class="net-box on" id="netMine"><div class="net-top"><div class="min-w-0"><div class="net-handle">@${esc(n.h)} <span class="net-pill ${pub ? 'pub' : ''}">${pub ? '🌍 ' + hx('Public', 'Public') : '🔒 ' + hx('Private', 'Private')}</span></div>
+      <div class="net-nums"><span><b>${dynNum(m ? m.followers : 0)}</b> ${hx('followers', 'followers')}</span><span><b>${dynNum(m ? m.views : 0)}</b> ${hx('views', 'views')}</span>${reqs.length ? `<span class="net-req-n"><b>${reqs.length}</b> ${hx('requests', 'requests')}</span>` : ''}</div></div>
+      <button class="btn-gold sm" id="netShare">📤 ${hx('Share profile', 'Profile share karo')}</button></div>
+    ${reqs.length ? `<div class="net-reqs"><div class="eyebrow">◆ ${hx('Follow requests', 'Follow requests')}</div>${reqs.slice(0, 20).map(r => `<div class="net-req"><span class="pav sm"><span>${esc(initials(r.n))}</span></span><div class="min-w-0 flex-1"><b>${esc(r.n)}</b><small class="muted">${r.h ? '@' + esc(r.h) + ' · ' : ''}${timeAgo(r.t)}</small></div><button class="chip" data-net-ok="${esc(r.id)}">✓ ${hx('Approve', 'Approve')}</button><button class="chip" data-net-no="${esc(r.id)}" aria-label="${esc(hx('Decline', 'Mana karo'))}">✕</button></div>`).join('')}</div>` : ''}
+    <label class="net-opt"><input type="checkbox" id="netPhotos"${pr.netPhotos ? ' checked' : ''}> 🖼️ ${hx('Show member photos on my profile', 'Profile pe members ki photos dikhao')}</label>
+    <p class="tiny muted mt-2">${pub ? hx('Anyone can open your profile and see the sections you tick above. It updates by itself when you change your tree.', 'Koi bhi aapki profile khol ke upar tick kiye sections dekh sakta hai. Tree badalte hi profile apne aap update hoti hai.') : hx('Explore shows only your family name, place and member count. People you approve see your tree and the sections from your public settings.', 'Explore mein sirf family ka naam, jagah aur members ki ginti dikhti hai. Jinhe aap approve karte ho, woh aapka tree aur public settings wale sections dekhte hain.')}
+      ${n.err ? `<br><span style="color:var(--gold-soft)">⚠ ${esc(n.err)}</span>` : n.at ? `<br>${hx('Last updated', 'Last update')} ${timeAgo(n.at)}` : ''}</p>
+    <div class="flex flex-wrap gap-2 mt-3"><button class="chip" data-dyn-open="net_${esc(n.h)}" id="netView">👁 ${hx('View as visitor', 'Visitor ki tarah dekho')}</button><button class="chip" id="netSyncNow">↻ ${hx('Update now', 'Abhi update karo')}</button><button class="chip" id="netRename">✎ ${hx('Change handle', 'Handle badlo')}</button><button class="chip" id="netDelete">🗑 ${hx('Delete online profile', 'Online profile delete')}</button></div></div>`;
+}
+function netPaint() {
+  const box = $('#netMine'); const v = ownVault();
+  if (box && v) { const html = netMineHTML(v); if (html) { const focus = document.activeElement && document.activeElement.id === 'netHandle'; const val = focus ? $('#netHandle').value : null; box.outerHTML = html; if (focus) { const i = $('#netHandle'); i.value = val; i.focus(); } } }
+  const g = $('#netExplore'); if (g) g.innerHTML = netExploreHTML();
+}
+let netCheckT = 0;
+function netCheckHandle(h) {
+  clearTimeout(netCheckT); h = String(h || '').trim().toLowerCase().replace(/^@+/, ''); const hint = $('#netHint');
+  if (!netHandleOk(h)) { if (hint) hint.textContent = hx('3–24 small letters, numbers, dots or underscores.', '3–24 chhote letters, numbers, dot ya underscore.'); return; }
+  netCheckT = setTimeout(async () => { try { const j = await netApi('/api/dyn/check?h=' + encodeURIComponent(h)); NET.check = { h, free:j.free }; const el = $('#netHint'); if (el) el.textContent = j.free ? '✓ ' + hx('Available', 'Khaali hai') : '✕ ' + hx('Taken — try another', 'Le liya gaya — doosra try karo'); } catch (e) { /* offline */ } }, 450);
+}
+/* --- Explore: real families from the server --- */
+async function netLoadList(q) {
+  if (!netOn()) return; NET.loading = true; NET.q = q == null ? NET.q : q; netPaint();
+  try { const j = await netApi('/api/dyn/list?q=' + encodeURIComponent(NET.q) + '&limit=40'); NET.list = j.items || []; NET.total = j.total || 0; NET.err = ''; }
+  catch (e) { NET.err = hx('Could not load families right now.', 'Abhi families load nahi ho payi.'); }
+  NET.loading = false; netPaint();
+}
+function netExploreHTML() {
+  if (!netOn()) return '';
+  const mineH = (ownVault() && ownVault().net && ownVault().net.h) || '';
+  const items = (NET.list || []);
+  const card = c => `<article class="dyn-card net-card" data-dyn-open="net_${esc(c.h)}" tabindex="0" role="button" aria-label="${esc(hx('Open', 'Kholo'))} ${esc(c.n)}">
+      <div class="dc-art" style="background:${STORY_BG.gold}">${c.ph ? `<img src="${c.ph}" alt="" loading="lazy">` : `<span>${esc(c.f || '🏰')}</span>`}${c.vis === 'public' ? '' : '<i class="dc-live">🔒</i>'}</div>
+      <div class="dc-body"><div class="dc-h"><b>${esc(c.n)}</b>${c.h === mineH ? `<span class="your-chip">${hx('You', 'Aap')}</span>` : ''}</div><small class="muted">@${esc(c.h)}${c.pl ? ' · ' + esc(c.pl) : ''}</small>
+        <div class="dc-stats"><span>👥 ${dynNum(c.st && c.st.m)}</span><span>🌳 ${(c.st && c.st.g) || 0} ${hx('gen', 'peedhi')}</span><span>❤ ${dynNum(c.fol)} ${hx('followers', 'followers')}</span></div></div></article>`;
+  return `<div class="net-search"><input type="search" id="netQ" value="${esc(NET.q)}" placeholder="${esc(hx('Search families — surname, city or @handle', 'Families dhoondho — surname, shehar ya @handle'))}" aria-label="${esc(hx('Search families', 'Families dhoondho'))}"><button class="chip" id="netQGo">🔍</button></div>
+    ${NET.loading && !items.length ? `<p class="tiny muted mt-3">${hx('Loading families…', 'Families load ho rahi hain…')}</p>` : NET.err ? `<p class="tiny muted mt-3">${esc(NET.err)}</p>`
+      : items.length ? `<div class="dyn-grid mt-3">${items.map(card).join('')}</div>${NET.total > items.length ? `<p class="tiny muted mt-2">${hx(`Showing ${items.length} of ${NET.total}. Search to find more.`, `${NET.total} mein se ${items.length} dikh rahi hain. Aur ke liye search karo.`)}</p>` : ''}`
+      : NET.list ? `<p class="tiny muted mt-3">${NET.q ? hx('No family found with that name yet. Invite them — the first in your surname gets found by everyone after.', 'Is naam ki koi family abhi nahi mili. Unhe bulao — apne surname mein pehle aap, baad mein sab aapko dhoondhenge.') : hx('No families online yet — be the first! Create your profile above.', 'Abhi koi family online nahi — pehle aap bano! Upar profile banao.')}</p>` : ''}`;
+}
+/* --- open someone's online profile --- */
+function netProfFromPayload(d, h) {
+  const S = (x, n) => String(x == null ? '' : x).slice(0, n); const Nn = x => Math.max(0, Math.min(1e7, Math.round(+x || 0)));
+  const KIND = { p:'post', m:'memory', v:'voice' }; const sh = Object.assign({ tree:true, desc:true, posts:true, mem:true, voice:true, stories:true, trail:true }, d.sh || {});
+  const id = 'net_' + h;
+  const prof = { id, kind:'net', h, n:S(d.n, 60), place:S(d.pl, 60), flag:S(d.f, 8) || '🏰', bg:'gold', lang:'en-IN', motto:S(d.mo, 90), by:S(d.by, 60), at:+d.at || Date.now(),
+    show:Object.keys(sh).reduce((o, k) => (o[k] = !!sh[k], o), {}),
+    gens:(Array.isArray(d.g) ? d.g : []).slice(0, 20).map(g => (Array.isArray(g) ? g : []).slice(0, 80).map(r => ({ n:S(r[0], 80), r:S(r[1], 80), b:S(r[2], 280), y:S(r[3], 20), died:!!r[4] }))),
+    posts:(Array.isArray(d.p) ? d.p : []).slice(0, 15).map((r, i) => ({ id:`${id}_p${i}`, k:KIND[r[0]] || 'post', by:S(r[1], 60), text:S(r[2], 400), at:+r[3] || Date.now(), about:S(r[4], 80) })),
+    trail:(Array.isArray(d.tr) ? d.tr : []).slice(0, 60).filter(r => Array.isArray(r) && isFinite(+r[4]) && isFinite(+r[5]) && Math.abs(+r[4]) <= 90 && Math.abs(+r[5]) <= 180).map(r => ({ y:Nn(r[0]), p:S(r[1], 60), c:S(r[2], 60), t:S(r[3], 90), lat:+r[4], lon:+r[5], f:Number.isInteger(r[6]) ? r[6] : -1, st:!!r[7], fp:S(r[8], 60), ppl:[] })),
+    stories:(Array.isArray(d.s) ? d.s : []).slice(0, 8).filter(r => Date.now() - (+r[2] || 0) < DAY).map(r => ({ by:S(r[0], 60), text:S(r[1], 240), at:+r[2] || 0, bg:STORY_BG[r[3]] ? r[3] : 'gold' })),
+    st:{ s:Nn(d.st && d.st.s), m:Nn(d.st && d.st.m), g:Nn(d.st && d.st.g), vo:Nn(d.st && d.st.vo), ph:Nn(d.st && d.st.ph) } };
+  if (d.ts && sh.tree) { try { vaultFromSnapshot('chk', d.ts); prof.snap = d.ts; } catch (er) { /* card list fallback */ } }
+  return prof;
+}
+async function openNet(h, tab) {
+  h = String(h || '').toLowerCase().replace(/^@+/, ''); if (!h || !netOn()) return;
+  const v = ownVault(); const isMine = v && v.net && v.net.h === h;
+  if (!isOpen('dynModal')) { const box = $('#dynBody'); if (box) box.innerHTML = `<p class="muted p-6">${hx('Opening the family profile…', 'Family profile khul rahi hai…')}</p>`; openModal('dynModal'); }
+  try {
+    const j = await netApi(`/api/dyn/get?h=${encodeURIComponent(h)}&d=${encodeURIComponent(gcDeviceId())}${isMine ? '&key=' + encodeURIComponent(v.net.key) : ''}`);
+    let prof;
+    if (j.open && j.d) prof = netProfFromPayload(j.d, h);
+    else { const c = j.card || {}; prof = { id:'net_' + h, kind:'net', h, n:c.n || h, place:c.pl || '', flag:c.f || '🏰', bg:'gold', lang:'en-IN', motto:c.mo || '', show:{}, gens:[], posts:[], stories:[], trail:[], st:Object.assign({ s:0, m:0, g:0, vo:0, ph:0 }, c.st || {}) }; }
+    Object.assign(prof, { vis:j.vis, open:!!j.open, fol:j.followers || 0, views:j.views || 0, following:!!j.following, requested:!!j.requested, owner:!!j.owner, cover:(j.card && j.card.ph) || '' });
+    if (prof.snap && j.d && j.d.ts && Array.isArray(j.d.ts.ph)) prof.snap = Object.assign({}, prof.snap, { ph:j.d.ts.ph });
+    delete dynTreeCache[prof.id]; NET.cache[h] = prof; dynStopVoice(); dynUI.id = prof.id; dynUI.tab = tab || (dynSecList(prof)[0] || ['tree'])[0];
+    renderDynModal(); const sc = $('#dynModal .modal-panel'); if (sc) sc.scrollTop = 0;
+  } catch (e) {
+    const box = $('#dynBody'); if (box) box.innerHTML = `<p class="muted p-6">${e.status === 404 ? hx('This family profile does not exist any more.', 'Yeh family profile ab nahi hai.') : hx('Could not open the profile. Check the internet and try again.', 'Profile nahi khuli. Internet check karke phir try karo.')}</p>`;
+  }
+}
+function netBarHTML(p) {
+  if (p.kind !== 'net') return '';
+  const btn = p.owner ? `<span class="net-pill">${hx('Your profile', 'Aapki profile')}</span>`
+    : p.following ? `<button class="btn-ghost sm" data-net-follow="off">✓ ${hx('Following', 'Follow kar rahe ho')}</button>`
+    : p.requested ? `<button class="btn-ghost sm" data-net-follow="off">⏳ ${hx('Requested', 'Request bheji')}</button>`
+    : `<button class="btn-gold sm" data-net-follow="on">${p.vis === 'public' ? '＋ ' + hx('Follow', 'Follow karo') : '🔒 ' + hx('Request to follow', 'Follow request bhejo')}</button>`;
+  return `<div class="net-bar"><div class="net-nums"><span><b>@${esc(p.h)}</b></span><span><b>${dynNum(p.fol)}</b> ${hx('followers', 'followers')}</span><span><b>${dynNum(p.views)}</b> ${hx('views', 'views')}</span></div>
+    <div class="flex flex-wrap gap-2">${btn}<button class="chip" data-net-share>📤 ${hx('Share', 'Share')}</button>${p.owner ? '' : `<button class="chip" data-net-report aria-label="${esc(hx('Report this profile', 'Is profile ko report karo'))}">⚑</button>`}</div></div>`;
+}
+function netLockedHTML(p) {
+  return `<div class="net-lock"><div class="net-lock-ico" aria-hidden="true">🔒</div><b>${hx('This family’s profile is private', 'Is family ki profile private hai')}</b>
+    <p class="tiny muted">${p.requested ? hx('Your request is waiting. When they approve it, their tree opens here.', 'Aapki request pending hai. Approve hote hi unka tree yahan khulega.') : hx('Send a follow request. When they approve it, you can see their family tree.', 'Follow request bhejo. Approve hote hi aap unka family tree dekh paoge.')}</p></div>`;
+}
+async function netFollow(on) {
+  const p = NET.cache[(dynUI.id || '').slice(4)]; if (!p) return; const v = ownVault();
+  try {
+    const j = await netApi('/api/dyn/follow', { h:p.h, d:gcDeviceId(), on, n:v ? v.name : hx('A DynastyVault family', 'Ek DynastyVault family'), from:v && v.net ? v.net.h || '' : '' });
+    Object.assign(p, { following:j.following, requested:j.requested, fol:j.followers });
+    if (on) { dvT('follow'); toast(j.following ? hx(`✓ You follow ${p.n}`, `✓ Aap ${p.n} ko follow kar rahe ho`) : hx('✓ Request sent — you will see their tree once they approve', '✓ Request bhej di — approve hote hi tree dikhega'), 'info'); }
+    state.netFollow = Array.isArray(state.netFollow) ? state.netFollow : [];
+    state.netFollow = state.netFollow.filter(x => x !== p.h); if (on) state.netFollow.unshift(p.h); state.netFollow = state.netFollow.slice(0, 200); save();
+    if (j.following && !p.open) { openNet(p.h); return; }
+    renderDynModal();
+  } catch (e) { toast(e.message, 'warn'); }
+}
+async function netShareLink(h, name) {
+  const link = netLink(h); try { await navigator.clipboard.writeText(link); } catch (e) { /* optional */ }
+  dvT('share');
+  const msg = isHn() ? `👑 ${name} ki family profile dekho — poora family tree, kahaniyaan aur yaadein. Follow karo, aur apni family bhi banao 🌳\n${link}` : `👑 See the ${name} family profile — our family tree, stories and memories. Follow us, and build your own family tree 🌳\n${link}`;
+  if (navigator.share) { try { await navigator.share({ title:name, text:msg }); return; } catch (e) { if (e && e.name === 'AbortError') return; } }
+  shareWhatsApp(msg); toast(hx('Profile link copied ✦', 'Profile link copy ho gaya ✦'), 'info');
+}
+function netInit() {
+  if (!netOn()) return;
+  const sec = $('#arena'); if (!sec) return;
+  sec.addEventListener('input', e => { if (e.target.id === 'netHandle') { const c = e.target.value.toLowerCase().replace(/[^a-z0-9._@]/g, ''); if (c !== e.target.value) e.target.value = c; netCheckHandle(c); } });
+  sec.addEventListener('keydown', e => { if (e.key === 'Enter' && e.target.id === 'netQ') { e.preventDefault(); netLoadList(e.target.value.trim()); } if (e.key === 'Enter' && e.target.id === 'netHandle') { e.preventDefault(); netClaim(e.target.value); } });
+  sec.addEventListener('change', e => { if (e.target.id === 'netPhotos') { const v = ownVault(); if (!v) return; dynPrivacy(v).netPhotos = e.target.checked; save(); netSync(true); } });
+  sec.addEventListener('click', e => {
+    const t = e.target.closest('button, [data-dyn-open]'); if (!t) return;
+    if (t.id === 'netClaimBtn') { netClaim($('#netHandle').value); return; }
+    if (t.id === 'netQGo') { netLoadList(($('#netQ') || {}).value || ''); return; }
+    if (t.id === 'netShare') { const v = ownVault(); if (v && v.net) netShareLink(v.net.h, v.name); return; }
+    if (t.id === 'netSyncNow') { netSync(true).then(ok => toast(ok ? hx('✓ Profile updated', '✓ Profile update ho gayi') : hx('Could not update — check the internet.', 'Update nahi hua — internet check karo.'), ok ? 'info' : 'warn', 1800)); return; }
+    if (t.id === 'netDelete') { netRemove(); return; }
+    if (t.id === 'netRename') { const v = ownVault(); if (!v || !v.net) return; const h = prompt(hx('New handle (your followers stay):', 'Naya handle (followers wahi rahenge):'), v.net.h); if (h && h !== v.net.h) netClaim(h); return; }
+    if (t.dataset.netOk) { netAnswer(t.dataset.netOk, true); return; }
+    if (t.dataset.netNo) { netAnswer(t.dataset.netNo, false); return; }
+  }, true);
+  $('#dynModal').addEventListener('click', e => {
+    const f = e.target.closest('[data-net-follow]'); if (f) { netFollow(f.dataset.netFollow === 'on'); return; }
+    const p = NET.cache[(dynUI.id || '').slice(4)];
+    if (e.target.closest('[data-net-share]') && p) { netShareLink(p.h, p.n); return; }
+    if (e.target.closest('[data-net-report]') && p) {
+      const why = prompt(hx('What is wrong with this profile? (fake, abusive, someone else’s family…)', 'Is profile mein kya galat hai? (nakli, gandi baatein, kisi aur ki family…)'));
+      if (why != null) netApi('/api/dyn/report', { h:p.h, why }).then(() => toast(hx('Thanks — we will check it.', 'Shukriya — hum check karenge.'), 'info'), () => toast(hx('Could not send the report.', 'Report nahi gayi.'), 'warn'));
+    }
+  });
+}
+function handleNetHash() {
+  const m = location.hash.match(/^#u=([A-Za-z0-9._@%-]+)/); if (!m) return false;
+  const h = decodeURIComponent(m[1]).toLowerCase().replace(/^@+/, '');
+  history.replaceState(null, '', location.pathname + location.search);
+  if (!netOn()) { toast(hx('Family profiles open on the DynastyVault website.', 'Family profiles DynastyVault website pe khulti hain.'), 'warn'); return true; }
+  if (state.onboarded && typeof dashOn === 'function' && dashOn()) showTab('arena', { noScroll:true });
+  setTimeout(() => openNet(h), 300); return true;
+}
+const dvT = (e, x) => { try { if (window.dvTrack) window.dvTrack(e, x); } catch (er) { /* ignore */ } };
+
+/* ---------- 🎬 AI Family Documentary — one real photo + their life story → a short animated film ----------
+   Royal: made automatically by the server (Google's video AI, GEMINI_BILLING=on). Until that is switched on,
+   the request goes to Nabu on WhatsApp and he makes it by hand. Clips are kept on this phone (IndexedDB). */
+const FILM = { pid:null, style:'vintage', aspect:'9:16', ready:null, left:null, pollT:0, busy:false, urls:[], idx:0, exporting:false, prog:0, err:'' };
+const FILM_STYLES = [['vintage', '🎞️', 'Old film', 'Purani film'], ['natural', '🌤️', 'Natural', 'Natural'], ['cinema', '🎬', 'Cinematic', 'Cinematic']];
+const filmIDB = { p:null };
+function filmDB() { if (filmIDB.p) return filmIDB.p; filmIDB.p = new Promise(res => { try { const r = indexedDB.open('dv-film', 1); r.onupgradeneeded = () => r.result.createObjectStore('c'); r.onsuccess = () => res(r.result); r.onerror = () => res(null); } catch (e) { res(null); } }); return filmIDB.p; }
+async function filmPut(k, blob) { const db = await filmDB(); if (!db) return false; return new Promise(res => { try { const t = db.transaction('c', 'readwrite'); t.objectStore('c').put(blob, k); t.oncomplete = () => res(true); t.onerror = () => res(false); } catch (e) { res(false); } }); }
+async function filmGet(k) { const db = await filmDB(); if (!db) return null; return new Promise(res => { try { const q = db.transaction('c').objectStore('c').get(k); q.onsuccess = () => res(q.result || null); q.onerror = () => res(null); } catch (e) { res(null); } }); }
+async function filmDel(k) { const db = await filmDB(); if (!db) return; try { db.transaction('c', 'readwrite').objectStore('c').delete(k); } catch (e) { /* ignore */ } }
+const filmKey = (v, pid, i) => `${v.id}|${pid}|${i}`;
+function filmRec(v, pid) { v.films = v.films || {}; return v.films[pid] || null; }
+function filmPeople(v) {
+  const idx = indexVault(v);
+  return Object.keys(idx).filter(id => v.people[id]).sort((a, b) => (!!v.people[b].avatar - !!v.people[a].avatar) || (!!filmRec(v, b) - !!filmRec(v, a)) || (idx[a].depth - idx[b].depth));
+}
+const filmStory = p => { const s = trState(p, state.lang); return (s && s.status !== 'none' && s.tr && s.tr.text) || p.bio || ''; };
+const filmYears = p => { const b = yearOf(p.born), d = yearOf(p.died); return b && d ? `${b}–${d}` : b ? `${hx('born', 'janm')} ${b}` : d ? `† ${d}` : ''; };
+async function filmServerReady(force) {
+  if (!DV_API || !state.cloud || !state.cloud.orderId || !state.cloud.code) return false;
+  if (FILM.ready != null && !force) return FILM.ready;
+  try { const j = await (await fetch(`${DV_API}/api/film/balance?orderId=${encodeURIComponent(state.cloud.orderId)}&code=${encodeURIComponent(state.cloud.code)}`)).json(); FILM.ready = !!j.ready; if (j.left != null) FILM.left = j.left; }
+  catch (e) { FILM.ready = false; }
+  return FILM.ready;
+}
+function renderFilm() {
+  const box = $('#filmBody'); if (!box) return; const v = V(); if (!v) return;
+  const ids = filmPeople(v); if (!ids.includes(FILM.pid)) FILM.pid = ids[0] || null;
+  const p = FILM.pid && v.people[FILM.pid]; const rec = p ? filmRec(v, FILM.pid) : null;
+  const story = p ? filmStory(p).trim() : ''; const hasPh = !!(p && p.avatar); const hasStory = story.length >= 40;
+  const royal = isRoyal(); const run = rec && rec.st === 'run'; const done = rec && rec.st === 'done';
+  const pick = `<div class="film-people" role="listbox" aria-label="${esc(hx('Choose a person', 'Ek insaan chuno'))}">${ids.slice(0, 40).map(id => { const q = v.people[id]; const r = filmRec(v, id); return `<button role="option" aria-selected="${id === FILM.pid}" class="film-pp${id === FILM.pid ? ' on' : ''}" data-film-pid="${id}"><span class="film-av">${q.avatar ? `<img src="${q.avatar}" alt="">` : esc(initials(q.name))}</span><small>${esc(q.name.split(' ')[0])}</small>${r && r.st === 'done' ? '<i>🎬</i>' : r && r.st === 'run' ? '<i>⏳</i>' : ''}</button>`; }).join('')}</div>`;
+  if (!p) { box.innerHTML = `<p class="muted">${hx('Add your family to the tree first.', 'Pehle tree mein family jodo.')}</p>`; return; }
+  const checks = `<ul class="film-checks"><li class="${hasPh ? 'ok' : ''}">${hasPh ? '✓' : '○'} ${hx('A clear photo of their face', 'Chehre ki saaf photo')}${hasPh ? '' : ` <button class="chip" data-film-edit="profile">📷 ${hx('Add photo', 'Photo daalo')}</button>`}</li>
+      <li class="${hasStory ? 'ok' : ''}">${hasStory ? '✓' : '○'} ${hx('Their life story (a few lines)', 'Unki zindagi ki kahani (kuch lines)')}${hasStory ? '' : ` <button class="chip" data-film-edit="profile">✍️ ${hx('Write story', 'Kahani likho')}</button>`}</li></ul>`;
+  const opts = `<div class="film-opts"><div><span class="tiny muted">${hx('Look', 'Look')}</span><div class="flex flex-wrap gap-2 mt-1">${FILM_STYLES.map(([k, ico, en, hn]) => `<button class="chip${FILM.style === k ? ' on' : ''}" data-film-style="${k}">${ico} ${hx(en, hn)}</button>`).join('')}</div></div>
+      <div><span class="tiny muted">${hx('Shape', 'Shape')}</span><div class="flex flex-wrap gap-2 mt-1"><button class="chip${FILM.aspect === '9:16' ? ' on' : ''}" data-film-aspect="9:16">📱 ${hx('Reel / Status', 'Reel / Status')}</button><button class="chip${FILM.aspect === '16:9' ? ' on' : ''}" data-film-aspect="16:9">🖥️ ${hx('Wide', 'Wide')}</button></div></div></div>`;
+  let action;
+  if (run) action = `<div class="film-run"><div class="film-spin" aria-hidden="true"></div><div class="min-w-0"><b>${hx('Filming…', 'Film ban rahi hai…')}</b><small class="muted">${(rec.scenes || []).map((s, i) => `${hx('Scene', 'Scene')} ${i + 1}: ${s.st === 'done' ? '✓' : s.st === 'fail' ? '✕' : '⏳'}`).join(' · ')}${rec.mins ? ` · ${rec.mins} min` : ''}</small><small class="muted">${hx('Usually takes a few minutes. You can leave this page — it keeps going.', 'Aam taur pe kuch minute lagte hain. Page chhod sakte ho — film banti rahegi.')}</small></div></div>`;
+  else if (!royal) action = `<button class="btn-gold w-full btn-wrap" data-film-royal>🔒 ${hx('Make documentary', 'Documentary banao')}</button>
+      <p class="tiny muted mt-2">${hx('Royal Dynasty includes one documentary, made automatically. Or we make one for you.', 'Royal Dynasty ke saath ek documentary milti hai, apne aap banti hai. Ya hum aapke liye banayein.')}</p>
+      <button class="btn-ghost w-full btn-wrap mt-2" data-buy-service="film">🎁 ${hx('Get it made for you', 'Humse banwao')} <span data-price="services.film"></span></button>`;
+  else action = `<button class="btn-gold w-full btn-wrap" data-film-go${hasPh && hasStory ? '' : ' disabled'}>🎬 ${done ? hx('Make a new version', 'Naya version banao') : hx('Make documentary', 'Documentary banao')}</button>
+      ${FILM.left != null && FILM.ready ? `<p class="tiny muted mt-2">${hx(`${FILM.left} documentaries left in your plan`, `Plan mein ${FILM.left} documentary baaki`)}</p>` : ''}
+      ${!hasPh || !hasStory ? `<p class="tiny gm-warn mt-2">${hx('Add a photo and a few lines of their story first.', 'Pehle photo aur kahani ki kuch lines daalo.')}</p>` : ''}`;
+  const err = FILM.err ? `<p class="film-msg">${esc(FILM.err)}</p>` : rec && rec.st === 'fail' ? `<p class="film-msg">${esc(rec.err || hx('The film could not be made this time. Nothing was used — please try again with a clearer photo.', 'Is baar film nahi ban payi. Kuch kharch nahi hua — saaf photo ke saath phir try karo.'))}</p>` : '';
+  const player = done ? `<div class="film-stage ${rec.aspect === '16:9' ? 'wide' : 'tall'}" id="filmStage"><video id="filmVid" playsinline preload="auto"></video>
+      <div class="film-title" id="filmTitle"><b class="font-regal">${esc(p.name)}</b><small>${esc(filmYears(p))}</small></div><div class="film-cap" id="filmCap"></div>
+      <div class="film-end" id="filmEnd" hidden><span>👑</span><b class="font-regal">${esc(p.name)}</b><small>${hx('Made with DynastyVault', 'DynastyVault se bani')}</small></div>
+      <button class="film-big" id="filmPlay" aria-label="${esc(hx('Play film', 'Film chalao'))}">▶</button></div>
+    <div class="flex flex-wrap gap-2 mt-3"><button class="btn-gold sm" data-film-share>📤 ${hx('Share film', 'Film share karo')}</button><button class="btn-ghost sm" data-film-save>⬇ ${hx('Save film', 'Film save karo')}</button><button class="chip" data-film-del>🗑 ${hx('Delete', 'Delete')}</button></div>
+` : '';
+  box.innerHTML = `${pick}
+    <div class="film-grid">
+      <div class="film-card min-w-0">${player || `<div class="film-poster ${FILM.aspect === '16:9' ? 'wide' : 'tall'}">${hasPh ? `<img src="${p.avatar}" alt="">` : `<span class="film-ini">${esc(initials(p.name))}</span>`}<div class="film-title on"><b class="font-regal">${esc(p.name)}</b><small>${esc(filmYears(p))}</small></div>${story ? `<div class="film-cap on">${esc(trunc(firstSentence(story) || story, 110))}</div>` : ''}</div>`}</div>
+      <div class="min-w-0">${checks}${run ? '' : opts}<div class="mt-4">${action}</div>${err}
+        <p class="tiny muted mt-3">${hx('We animate their real photo into three short scenes from their story, with subtitles and soft music. Faces can change a little — check it before you share. The film stays on this phone.', 'Unki asli photo ko kahani ke 3 chhote scenes mein animate karte hain — subtitles aur halki music ke saath. Chehra thoda badal sakta hai — share karne se pehle dekh lo. Film is phone pe rehti hai.')}</p></div>
+    </div>`;
+  if (done) filmLoad(v, FILM.pid, rec);
+  if (run) filmSchedule();
+}
+async function filmLoad(v, pid, rec) {
+  FILM.urls.forEach(u => URL.revokeObjectURL(u)); FILM.urls = [];
+  const blobs = []; for (let i = 0; i < (rec.scenes || []).length; i++) { if (rec.scenes[i].st !== 'done') continue; let b = await filmGet(filmKey(v, pid, i)); if (!b && rec.job) b = await filmFetch(rec, i); if (b) { await filmPut(filmKey(v, pid, i), b); blobs.push({ b, cap:rec.scenes[i].cap }); } }
+  if (FILM.pid !== pid) return;
+  FILM.clips = blobs; FILM.urls = blobs.map(x => URL.createObjectURL(x.b));
+  const vid = $('#filmVid'); if (!vid) return;
+  if (!blobs.length) { FILM.err = hx('The film clips are not on this phone any more.', 'Film ke clips ab is phone pe nahi hain.'); return; }
+  vid.src = FILM.urls[0]; FILM.idx = 0; vid.onended = filmNext;
+  vid.onerror = () => { if (!FILM.warned) { FILM.warned = true; toast(hx('This browser cannot play the film here. Tap “Save film” and open it from your gallery.', 'Yeh browser film yahan nahi chala pa raha. “Film save karo” dabao aur gallery se kholo.'), 'warn', 6000); } };
+}
+async function filmFetch(rec, i) {
+  if (!DV_API || !state.cloud) return null;
+  try { const r = await fetch(`${DV_API}/api/film/clip?job=${encodeURIComponent(rec.job)}&i=${i}&orderId=${encodeURIComponent(state.cloud.orderId)}&code=${encodeURIComponent(state.cloud.code)}`); if (!r.ok) return null; return await r.blob(); } catch (e) { return null; }
+}
+function filmShowCap(i) { const c = $('#filmCap'); const x = FILM.clips && FILM.clips[i]; if (c) { c.textContent = x ? x.cap : ''; c.classList.toggle('on', !!(x && x.cap)); } }
+function filmPlay() {
+  const vid = $('#filmVid'); if (!vid || !FILM.urls.length) return;
+  $('#filmEnd').hidden = true; $('#filmPlay').hidden = true; const t = $('#filmTitle'); t.classList.add('on'); setTimeout(() => t.classList.remove('on'), 2600);
+  FILM.idx = 0; vid.src = FILM.urls[0]; filmShowCap(0); vid.play().catch(() => { $('#filmPlay').hidden = false; });
+}
+function filmNext() {
+  const vid = $('#filmVid'); if (!vid) return; FILM.idx++;
+  if (FILM.idx < FILM.urls.length) { vid.src = FILM.urls[FILM.idx]; filmShowCap(FILM.idx); vid.play().catch(() => {}); return; }
+  filmShowCap(-1); $('#filmEnd').hidden = false; $('#filmPlay').hidden = false; $('#filmPlay').textContent = '↻';
+}
+async function filmGo() {
+  const v = V(); const p = v.people[FILM.pid]; if (!p) return; FILM.err = '';
+  if (!isRoyal()) { openCheckout('plan', 'royal'); return; }
+  if (!(await filmServerReady(true))) return filmAsk(v, p);
+  const b64 = p.avatar.slice(p.avatar.indexOf(',') + 1); const mime = (p.avatar.match(/^data:(image\/[a-z]+)/) || [])[1] || 'image/jpeg';
+  const btn = $('[data-film-go]'); if (btn) { btn.disabled = true; btn.textContent = '⏳ ' + hx('Starting…', 'Shuru ho raha hai…'); }
+  try {
+    const r = await fetch(DV_API + '/api/film/start', { method:'POST', headers:{ 'Content-Type':'application/json' }, body:JSON.stringify({ orderId:state.cloud.orderId, code:state.cloud.code, name:p.name, years:filmYears(p), story:filmStory(p), photo:{ mime, b64 }, aspect:FILM.aspect, style:FILM.style, lang:state.lang === 'hn' ? 'hn' : state.lang === 'hi' ? 'hi' : 'en' }) });
+    const j = await r.json().catch(() => ({})); if (j.left != null) FILM.left = j.left;
+    if (!r.ok) { if (j.code === 'NOT_READY') { FILM.ready = false; return filmAsk(v, p); } FILM.err = j.code === 'NO_FILMS' ? hx('All the documentaries in your plan are used. Message us on WhatsApp for more.', 'Plan ki saari documentary use ho gayi. Aur ke liye WhatsApp karo.') : (j.error || hx('Could not start the film.', 'Film shuru nahi hui.')); renderFilm(); return; }
+    v.films = v.films || {}; const old = v.films[FILM.pid]; if (old) for (let i = 0; i < 6; i++) filmDel(filmKey(v, FILM.pid, i));
+    v.films[FILM.pid] = { job:j.job, at:Date.now(), st:'run', aspect:FILM.aspect, style:FILM.style, scenes:j.scenes }; save(); markUsed('film');
+    renderFilm();
+  } catch (e) { FILM.err = hx('Could not reach the server. Check the internet and try again.', 'Server tak nahi pahunche. Internet check karke phir try karo.'); renderFilm(); }
+}
+function filmSchedule() { clearTimeout(FILM.pollT); FILM.pollT = setTimeout(filmPoll, 7000); }
+async function filmPoll() {
+  const v = V(); if (!v || !v.films || !DV_API || !state.cloud) return;
+  const runs = Object.keys(v.films).filter(pid => v.films[pid].st === 'run'); if (!runs.length) return;
+  for (const pid of runs) {
+    const rec = v.films[pid];
+    try {
+      const j = await (await fetch(`${DV_API}/api/film/status?job=${encodeURIComponent(rec.job)}&orderId=${encodeURIComponent(state.cloud.orderId)}&code=${encodeURIComponent(state.cloud.code)}`)).json();
+      if (!j.ok) continue; rec.scenes = j.scenes; rec.mins = j.mins;
+      if (j.done) {
+        const good = j.scenes.filter(s => s.st === 'done').length;
+        if (!good) { rec.st = 'fail'; rec.err = hx(`Google could not animate this photo (${(j.scenes[0] || {}).err || 'blocked'}). Nothing was used — try a different, clearer photo.`, `Google is photo ko animate nahi kar paya (${(j.scenes[0] || {}).err || 'blocked'}). Kuch kharch nahi hua — doosri, saaf photo try karo.`); FILM.left = FILM.left != null ? FILM.left + 1 : null; }
+        else { for (let i = 0; i < j.scenes.length; i++) if (j.scenes[i].st === 'done') { const b = await filmFetch(rec, i); if (b) await filmPut(filmKey(v, pid, i), b); } rec.st = 'done'; toast(hx(`🎬 ${v.people[pid] ? v.people[pid].name : ''}’s documentary is ready`, `🎬 ${v.people[pid] ? v.people[pid].name : ''} ki documentary taiyaar hai`), 'info', 4000); }
+      }
+      save();
+    } catch (e) { /* offline — try again */ }
+  }
+  if (dash.tab === 'film') renderFilm(); else if (Object.values(v.films).some(r => r.st === 'run')) filmSchedule();
+}
+async function filmAsk(v, p) {
+  const oid = (state.cloud && state.cloud.orderId) || ((state.orders || []).slice(-1)[0] || {}).id || '';
+  const story = filmStory(p).trim();
+  const msg = `Hi DynastyVault! I am a Royal member${oid ? ' (order ' + oid + ')' : ''}. Please make our family documentary.\nPerson: ${p.name}${filmYears(p) ? ' (' + filmYears(p) + ')' : ''}\nShape: ${FILM.aspect === '9:16' ? 'Reel / Status' : 'Wide'}\nLook: ${(FILM_STYLES.find(s => s[0] === FILM.style) || [])[2] || 'Old film'}\nStory: ${story.slice(0, 900)}\n\nI am sending their photo in this chat.`;
+  try { const blob = new Blob([gmBytes(p.avatar)], { type:(p.avatar.match(/^data:(image\/[a-z]+)/) || [])[1] || 'image/jpeg' }); await saveFile(`${slug(p.name)}-photo.${gmExt(p.avatar)}`, blob); } catch (e) { /* photo save is optional */ }
+  v.films = v.films || {}; v.films[p.id] = Object.assign(v.films[p.id] || {}, { asked:Date.now() }); save();
+  const wa = payWa(msg); if (wa) window.open(wa, '_blank', 'noopener');
+  FILM.err = hx('✓ Request sent on WhatsApp. Their photo was saved on this phone — send it in the same chat. We make the film and send it back, usually within 48 hours.', '✓ WhatsApp pe request bhej di. Unki photo is phone pe save ho gayi — usi chat mein bhej do. Hum film bana ke aam taur pe 48 ghante mein bhejte hain.');
+  renderFilm();
+}
+/* --- one shareable video file: title card + every scene with its subtitle + ending card --- */
+function filmMime() { const c = ['video/mp4;codecs=avc1.42E01E,mp4a.40.2', 'video/mp4', 'video/webm;codecs=vp9,opus', 'video/webm;codecs=vp8,opus', 'video/webm']; try { return c.find(t => window.MediaRecorder && MediaRecorder.isTypeSupported(t)) || ''; } catch (e) { return ''; } }
+function filmWrap(ctx, text, maxW) { const words = String(text || '').split(/\s+/); const lines = []; let cur = ''; words.forEach(w => { const t = cur ? cur + ' ' + w : w; if (ctx.measureText(t).width > maxW && cur) { lines.push(cur); cur = w; } else cur = t; }); if (cur) lines.push(cur); return lines.slice(0, 3); }
+async function filmExport() {
+  const v = V(); const p = v.people[FILM.pid]; const rec = filmRec(v, FILM.pid); if (!p || !rec || !FILM.clips || !FILM.clips.length) return null;
+  const mime = filmMime(); if (!mime) return null;
+  const tall = rec.aspect !== '16:9'; const W = tall ? 720 : 1280, H = tall ? 1280 : 720;
+  const cv = document.createElement('canvas'); cv.width = W; cv.height = H; const ctx = cv.getContext('2d');
+  const ac = new (window.AudioContext || window.webkitAudioContext)(); const dest = ac.createMediaStreamDestination();
+  const vid = document.createElement('video'); vid.playsInline = true; vid.muted = false; vid.crossOrigin = 'anonymous';
+  const src = ac.createMediaElementSource(vid); src.connect(dest);
+  const stream = new MediaStream([...cv.captureStream(30).getVideoTracks(), ...dest.stream.getAudioTracks()]);
+  const rec2 = new MediaRecorder(stream, { mimeType:mime, videoBitsPerSecond:4000000 }); const chunks = []; rec2.ondataavailable = e => { if (e.data && e.data.size) chunks.push(e.data); };
+  const face = await new Promise(res => { const im = new Image(); im.onload = () => res(im); im.onerror = () => res(null); im.src = p.avatar || ''; });
+  const gold = '#E9C46A', ser = '"Cinzel","Cormorant Garamond",Georgia,serif';
+  const card = (title, sub, small) => {
+    ctx.fillStyle = '#07080c'; ctx.fillRect(0, 0, W, H);
+    if (face) { ctx.save(); ctx.globalAlpha = .28; ctx.filter = 'blur(18px)'; const s = Math.max(W / face.width, H / face.height); ctx.drawImage(face, (W - face.width * s) / 2, (H - face.height * s) / 2, face.width * s, face.height * s); ctx.restore(); ctx.filter = 'none'; }
+    ctx.textAlign = 'center'; ctx.fillStyle = gold; ctx.font = `700 ${tall ? 58 : 64}px ${ser}`; filmWrap(ctx, title, W * .84).forEach((l, i, a) => ctx.fillText(l, W / 2, H / 2 - (a.length - 1) * 34 + i * 68));
+    ctx.fillStyle = '#f3ead2'; ctx.font = `400 ${tall ? 30 : 32}px ${ser}`; if (sub) ctx.fillText(sub, W / 2, H / 2 + 80);
+    if (small) { ctx.fillStyle = 'rgba(243,234,210,.7)'; ctx.font = '500 24px system-ui,sans-serif'; ctx.fillText(small, W / 2, H - 70); }
+  };
+  const drawFrame = cap => {
+    ctx.fillStyle = '#000'; ctx.fillRect(0, 0, W, H);
+    if (vid.videoWidth) { const s = Math.min(W / vid.videoWidth, H / vid.videoHeight); const w = vid.videoWidth * s, h = vid.videoHeight * s; ctx.drawImage(vid, (W - w) / 2, (H - h) / 2, w, h); }
+    if (cap) { ctx.font = `600 ${tall ? 34 : 36}px system-ui,sans-serif`; const lines = filmWrap(ctx, cap, W * .86); const lh = tall ? 46 : 48; const y0 = H - (tall ? 190 : 110) - (lines.length - 1) * lh;
+      ctx.fillStyle = 'rgba(0,0,0,.55)'; ctx.fillRect(0, y0 - lh, W, lines.length * lh + 40); ctx.fillStyle = '#fff'; ctx.textAlign = 'center'; lines.forEach((l, i) => ctx.fillText(l, W / 2, y0 + i * lh)); }
+  };
+  const hold = (ms, fn) => new Promise(res => { const t0 = performance.now(); const step = () => { fn(); if (performance.now() - t0 >= ms) return res(); requestAnimationFrame(step); }; step(); });
+  const total = FILM.clips.length + 2; let doneN = 0; const tick = () => { FILM.prog = Math.min(.99, doneN / total); const n = $('#filmExportNote'); if (n) n.textContent = `🎞️ ${hx('Putting your film together…', 'Film jod rahe hain…')} ${Math.round(FILM.prog * 100)}% — ${hx('keep this screen on', 'screen on rakho')}`; };
+  try { await ac.resume(); } catch (e) { /* ignore */ }
+  rec2.start(500);
+  await hold(2200, () => card(p.name, filmYears(p), '')); doneN++; tick();
+  for (const c of FILM.clips) {
+    const url = URL.createObjectURL(c.b); vid.src = url;
+    await new Promise(res => { vid.onloadeddata = res; vid.onerror = res; });
+    let stop = false; vid.onended = () => { stop = true; };
+    try { await vid.play(); } catch (e) { stop = true; }
+    await new Promise(res => { const step = () => { drawFrame(c.cap); if (stop || vid.ended) return res(); requestAnimationFrame(step); }; step(); });
+    URL.revokeObjectURL(url); doneN++; tick();
+  }
+  await hold(2500, () => card(p.name, hx('Remembered with love', 'Pyaar se yaad'), '👑 ' + hx('Made with DynastyVault', 'DynastyVault se bani'))); doneN++;
+  const out = await new Promise(res => { rec2.onstop = () => res(new Blob(chunks, { type:mime.split(';')[0] })); rec2.stop(); });
+  try { ac.close(); } catch (e) { /* ignore */ }
+  return out;
+}
+async function filmFile() {
+  if (FILM.exporting) return null; FILM.exporting = true; FILM.prog = 0; renderFilmKeep();
+  try { const b = await filmExport(); if (b && b.size > 1000) return b; } catch (e) { console.warn('film export', e); }
+  finally { FILM.exporting = false; renderFilmKeep(); }
+  return FILM.clips && FILM.clips[0] ? FILM.clips[0].b : null;   // fallback: the first scene as it came from Google
+}
+function renderFilmKeep() { const el = $('#filmBody .film-card ~ div'); if (!el) return; const old = $('#filmExportNote'); if (old) old.remove(); if (FILM.exporting) { const n = document.createElement('p'); n.id = 'filmExportNote'; n.className = 'tiny mt-2'; n.style.color = 'var(--gold-soft)'; n.textContent = '🎞️ ' + hx('Putting your film together… keep this screen on', 'Film jod rahe hain… screen on rakho'); const a = $('[data-film-share]'); (a ? a.parentNode : el).after(n); } }
+async function filmSave() { const v = V(); const p = v.people[FILM.pid]; const b = await filmFile(); if (!b) { toast(hx('Could not make the video file on this browser.', 'Is browser pe video file nahi ban payi.'), 'warn'); return; } await saveFile(`${slug(p.name)}-documentary.${/mp4/.test(b.type) ? 'mp4' : 'webm'}`, b); dvT('share', { p:'film' }); }
+async function filmShare() {
+  const v = V(); const p = v.people[FILM.pid]; const b = await filmFile(); if (!b) { toast(hx('Could not make the video file on this browser.', 'Is browser pe video file nahi ban payi.'), 'warn'); return; }
+  const f = new File([b], `${slug(p.name)}-documentary.${/mp4/.test(b.type) ? 'mp4' : 'webm'}`, { type:b.type });
+  const text = isHn() ? `🎬 ${p.name} ki zindagi — unki asli photo se bani chhoti si film. Apni family ki film bhi banao 👑` : `🎬 ${p.name}’s life — a short film made from their real photo. Make one for your family too 👑`;
+  dvT('share', { p:'film' });
+  try { if (navigator.canShare && navigator.canShare({ files:[f] })) { await navigator.share({ files:[f], title:p.name, text }); return; } } catch (e) { if (e && e.name === 'AbortError') return; }
+  await saveFile(f.name, b); toast(hx('Saved — now share it on WhatsApp or Instagram from your gallery.', 'Save ho gayi — ab gallery se WhatsApp ya Instagram pe share karo.'), 'info', 4500);
+}
+async function filmDelete() {
+  const v = V(); const pid = FILM.pid; if (!v.films || !v.films[pid]) return;
+  const ok = await confirmBox({ title:hx('Delete this documentary?', 'Yeh documentary delete karein?'), message:hx('It will be removed from this phone. Save it first if you want to keep it.', 'Yeh is phone se hat jayegi. Rakhni hai toh pehle save kar lo.'), ok:hx('Delete', 'Delete karo') });
+  if (!ok) return; for (let i = 0; i < 6; i++) filmDel(filmKey(v, pid, i)); delete v.films[pid]; save(); renderFilm();
+}
+function filmInit() {
+  const hub = $('#filmHub'); if (!hub) return;
+  hub.addEventListener('click', e => {
+    const t = e.target.closest('button'); if (!t) return;
+    if (t.dataset.filmPid) { FILM.pid = t.dataset.filmPid; FILM.err = ''; renderFilm(); return; }
+    if (t.dataset.filmStyle) { FILM.style = t.dataset.filmStyle; renderFilm(); return; }
+    if (t.dataset.filmAspect) { FILM.aspect = t.dataset.filmAspect; renderFilm(); return; }
+    if (t.dataset.filmEdit) { openStudio(FILM.pid, false, 'profile'); return; }
+    if (t.hasAttribute('data-film-royal')) { openCheckout('plan', 'royal'); return; }
+    if (t.hasAttribute('data-film-go')) { filmGo(); return; }
+    if (t.id === 'filmPlay') { filmPlay(); return; }
+    if (t.hasAttribute('data-film-share')) { filmShare(); return; }
+    if (t.hasAttribute('data-film-save')) { filmSave(); return; }
+    if (t.hasAttribute('data-film-del')) { filmDelete(); return; }
+  });
+  filmServerReady(); const v = V(); if (v && v.films && Object.values(v.films).some(r => r.st === 'run')) filmSchedule();
+}
 
 /* ---------- 🌳 Dynasty-Canvas-style tree inside dynasty profiles ---------- */
 const dynTreeCache = {};
@@ -8078,7 +8648,7 @@ function load() {
 let state = load() || normalize(seed());
 let saveTimer = null, warnedQuota = false;
 function saveNow() {
-  try { localStorage.setItem(KEY, JSON.stringify(state, (k, val) => (k.charAt(0) === '_' ? undefined : val))); if (window.__acctDirty) window.__acctDirty(); return true; }
+  try { localStorage.setItem(KEY, JSON.stringify(state, (k, val) => (k.charAt(0) === '_' ? undefined : val))); if (window.__acctDirty) window.__acctDirty(); if (window.__netDirty) window.__netDirty(); return true; }
   catch (e) { if (!warnedQuota) { warnedQuota = true; toast('Browser storage is full — some portraits or voice samples may not persist after a reload.', 'warn', 5200); } return false; }
 }
 function save() { state.updAt = Date.now(); clearTimeout(saveTimer); saveTimer = setTimeout(() => { if (window.requestIdleCallback) requestIdleCallback(saveNow, { timeout:1500 }); else saveNow(); }, 450); }
@@ -9814,6 +10384,7 @@ function renderGame() {
   $('#leader').innerHTML = board.map((r, i) => `<li class="${r.id === state.active ? 'me' : ''}"><span class="rk">${i + 1}</span><span class="nm">${esc(r.name)}</span><b>${r.s.toLocaleString('en-IN')}</b></li>`).join('');
 }
 function shareWhatsApp(text) {
+  dvT('share');
   const base = siteBase(); const msg = base ? `${text}\n${base}` : text;
   const a = document.createElement('a'); a.href = 'https://wa.me/?text=' + encodeURIComponent(msg); a.target = '_blank'; a.rel = 'noopener'; document.body.appendChild(a); a.click(); a.remove();
 }
@@ -11748,7 +12319,7 @@ function ckGiftHTML() {
 function ckReviewHTML() { const b = ckReviewBase(); const g = ckGiftHTML(); return g ? `<div class="grid gap-4">${b}${g}</div>` : b; }
 function ckReviewBase() {
   if (ck.kind === 'service') {
-    const sv = SERVICES[ck.id]; const what = { photo:[hx('Everyone’s clear, front-facing photos', 'Sabki saaf, saamne se li gayi photos'), hx('Where and in what clothes (optional)', 'Kahan aur kaise kapdon mein (optional)')], voice:[hx('A 15–30 second voice note of the person (one voice, no music)', 'Us insaan ki 15–30 second ki voice note (ek hi awaaz, bina music)'), hx('The story text, or tell us and we write it', 'Kahani ka text, ya batao toh hum likh denge')], gift:[hx('Everyone’s photos for the reunion photo', 'Reunion photo ke liye sabki photos'), hx('Voice note + 3 stories (or tell us and we write them)', 'Voice note + 3 kahaniyan (ya batao, hum likh denge)')] }[sv.id];
+    const sv = SERVICES[ck.id]; const what = { photo:[hx('Everyone’s clear, front-facing photos', 'Sabki saaf, saamne se li gayi photos'), hx('Where and in what clothes (optional)', 'Kahan aur kaise kapdon mein (optional)')], film:[hx('One clear, front-facing photo of the person', 'Us insaan ki ek saaf, saamne se li gayi photo'), hx('Their life story in a few lines (or tell us and we write it)', 'Unki kahani kuch lines mein (ya batao, hum likh denge)')], voice:[hx('A 15–30 second voice note of the person (one voice, no music)', 'Us insaan ki 15–30 second ki voice note (ek hi awaaz, bina music)'), hx('The story text, or tell us and we write it', 'Kahani ka text, ya batao toh hum likh denge')], gift:[hx('Everyone’s photos for the reunion photo', 'Reunion photo ke liye sabki photos'), hx('Voice note + 3 stories (or tell us and we write them)', 'Voice note + 3 kahaniyan (ya batao, hum likh denge)')] }[sv.id];
     return `<div class="grid gap-4"><div class="card"><p class="text-sm">${esc(sv.desc)}</p>
       <div class="tiny muted mt-3 mb-1">${hx('After paying, send us on WhatsApp:', 'Pay karne ke baad WhatsApp pe bhejo:')}</div><ul class="flist !mb-0">${what.map(w => `<li>${esc(w)}</li>`).join('')}</ul></div>
       ${sv.id === 'gift' ? `<p class="tiny muted">${hx('Royal Dynasty Lifetime unlocks on this device with the code we send.', 'Royal Dynasty Lifetime is device pe hamare bheje code se khulega.')}</p>` : ''}</div>`;
@@ -12163,6 +12734,7 @@ function vaultFromSnapshot(id, d) {
   v.rootUnit = uids[0];
   if (d.mr >= 0 && uids[d.mr] && d.fu >= 0 && uids[d.fu]) { v.mRoot = uids[d.mr]; v.fusion = uids[d.fu]; }
   if (d.se >= 0 && pids[d.se]) v.self = pids[d.se];
+  if (Array.isArray(d.ph)) d.ph.forEach((ph, i) => { if (pids[i] && typeof ph === 'string' && /^data:image\/(jpeg|png|webp);base64,[A-Za-z0-9+/=]+$/.test(ph) && ph.length < 60000) v.people[pids[i]].avatar = ph; });
   (Array.isArray(d.pu) ? d.pu : []).forEach(r => { if (!Array.isArray(r) || !pids[r[0]] || !pids[r[2]]) return; const id = uid('u'); v.units[id] = { id, member:pids[r[0]], spouse:r[1] >= 0 && pids[r[1]] ? pids[r[1]] : null, children:[], up:pids[r[2]] }; });
   return normalizeVault(v);
 }
@@ -12498,7 +13070,7 @@ setTimeout(async () => {
     if (live !== HAS_CLOUD) { HAS_CLOUD = live; setRoyalFeatures(); try { renderPlans(); renderAddons(); updatePrices(true); } catch (e) { /* views refresh later */ } }
   } catch (e) { /* server asleep or offline — keep the last known state */ }
 }, 900);
-if (/[?&]dvtest=1/.test(location.search)) window.__dv = { get state() { return state; }, save, saveNow, startDemo, openTutorial };   // test hook, only with ?dvtest=1
+if (/[?&]dvtest=1/.test(location.search)) window.__dv = { get state() { return state; }, save, saveNow, startDemo, openTutorial, NET, FILM, dynUI, dynTreeVault, renderFilm, filmPoll };   // test hook, only with ?dvtest=1
 
 
 function toast(msg, type = 'info', ms = 3200) {
@@ -12661,7 +13233,8 @@ function wire() {
     else if (h === 'unlock') { clear(); openCheckout('unlock'); }
     else if (h === 'buy-royal') { clear(); openCheckout('plan', 'royal'); }
     else if (h === 'buy-voicepack') { clear(); openCheckout('addon', 'voicepack'); }
-    else if (/^buy-(photo|voice|gift)$/.test(h)) { clear(); openCheckout('service', h.slice(4)); }
+    else if (/^buy-(photo|voice|gift|film)$/.test(h)) { clear(); openCheckout('service', h.slice(4)); }
+    else if (h === 'film' || h === 'families') { clear(); goDashTab(h === 'film' ? 'film' : 'arena'); }
     else if (h === 'portrait' || h === 'collage') { clear(); goDashTab(h === 'portrait' ? 'reunion' : 'photo'); }
     else if (/^(signin|login|signup)$/.test(h)) { clear(); acctOpen(h === 'signup' ? 'signup' : 'login'); }
     else if (h === 'gift-royal') { clear(); openCheckout('plan', 'royal', { gift:true }); }

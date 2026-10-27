@@ -35,3 +35,15 @@ window.DV_I18N = {"langs":[{"code":"en","native":"English"},{"code":"hn","native
 (function (H) { if (!H) return; const a = (c, o) => { H[c] = Object.assign(H[c] || {}, o); };
   a('en', { card_foot:'Scan to make your family’s card — free' }); a('hn', { card_foot:'Scan karke apni family ka card banao — free' }); a('hi', { card_foot:'स्कैन करके अपने परिवार का कार्ड बनाइए — मुफ़्त' });
 })(window.DV_I18N && window.DV_I18N.home);
+
+/* added v65: family documentary + family profiles — English, Hinglish, Hindi (other languages show English for these lines) */
+(function (H) {
+  if (!H) return;
+  const add = (code, o) => { H[code] = Object.assign(H[code] || {}, o); };
+  add('en', { film_eyebrow:'New · Family Documentary', film_h2:'Their photo, moving again', film_p:'Pick one old photo of a grandparent and write a few lines about their life. We turn it into a short film — the photo gently comes alive across three scenes, with subtitles and soft music. Made for WhatsApp Status and Reels.', film_btn:'Make a family documentary', film_t1:'Hari Rawat', film_t2:'He came to Delhi in 1962 with one tin trunk.',
+    fam_eyebrow:'Family profiles', fam_h2:'Find families like yours', fam_p:'Give your family a @handle. Keep it public for everyone, or private so only relatives you approve can see the tree — like Instagram. Search by surname or city to find families like yours.', fam_btn:'Explore family profiles' });
+  add('hn', { film_eyebrow:'Naya · Family Documentary', film_h2:'Unki photo, phir se zinda', film_p:'Dada-Dadi ki ek purani photo chuno aur unki zindagi ke baare mein kuch lines likho. Hum usse ek chhoti film banate hain — photo teen scenes mein dheere se zinda hoti hai, subtitles aur halki music ke saath. WhatsApp Status aur Reels ke liye ready.', film_btn:'Family documentary banao', film_t1:'Hari Rawat', film_t2:'1962 mein ek tin ke bakse ke saath Dilli aaye.',
+    fam_eyebrow:'Family profiles', fam_h2:'Apne jaisi families dhoondho', fam_p:'Apni family ko ek @handle do. Sabke liye public rakho, ya private — taaki sirf aapke approve kiye rishtedaar hi tree dekh sakein, bilkul Instagram jaisa. Surname ya shehar se apne jaisi families dhoondho.', fam_btn:'Family profiles dekho' });
+  add('hi', { film_eyebrow:'नया · फ़ैमिली डॉक्यूमेंट्री', film_h2:'उनकी तस्वीर, फिर से ज़िंदा', film_p:'दादा-दादी की एक पुरानी तस्वीर चुनिए और उनके जीवन के बारे में कुछ पंक्तियाँ लिखिए। हम उससे एक छोटी फ़िल्म बनाते हैं — तस्वीर तीन दृश्यों में धीरे-धीरे जीवंत होती है, सबटाइटल और हल्के संगीत के साथ। WhatsApp स्टेटस और Reels के लिए तैयार।', film_btn:'फ़ैमिली डॉक्यूमेंट्री बनाइए', film_t1:'हरि रावत', film_t2:'1962 में एक टिन के बक्से के साथ दिल्ली आए।',
+    fam_eyebrow:'फ़ैमिली प्रोफ़ाइल', fam_h2:'अपने जैसे परिवार खोजिए', fam_p:'अपने परिवार को एक @handle दीजिए। सबके लिए पब्लिक रखिए, या प्राइवेट — ताकि सिर्फ़ आपके मंज़ूर किए रिश्तेदार ही ट्री देख सकें, बिल्कुल Instagram जैसा। सरनेम या शहर से अपने जैसे परिवार खोजिए।', fam_btn:'फ़ैमिली प्रोफ़ाइल देखिए' });
+})(window.DV_I18N && window.DV_I18N.home);
