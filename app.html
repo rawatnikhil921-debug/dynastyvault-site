@@ -2473,6 +2473,107 @@ html[data-theme="social"] .ig-btn:hover{background:#333}
 html[data-theme="social"] .ig-btn.pri{background:#3B8BFF;color:#fff}
 html[data-theme="social"] .ig-hl-i span{background:#121212;box-shadow:0 0 0 1px #363636,0 0 0 4px #000,0 0 0 5px #262626}
 html[data-theme="social"] ::selection{background:rgba(59,139,255,.4)}
+/* ===== v69: photo-app chrome (Social look only) ===== */
+#igNav,.hm-secs,.hdr-heart{display:none}
+html[data-theme="social"] body.dash-on #dashTabs{display:none!important}
+html[data-theme="social"] body.dash-on #igNav{display:flex}
+html[data-theme="social"] body.dash-on .hdr-heart:not([hidden]){display:inline-grid;position:relative}
+.hdr-heart.dot::after{content:"";position:absolute;top:6px;right:6px;width:9px;height:9px;border-radius:50%;background:#FF3040;box-shadow:0 0 0 2px #000}
+.ig-nav{position:fixed;z-index:60;background:#000;color:#fff}
+.ign{position:relative;flex:1;display:flex;align-items:center;justify-content:center;gap:16px;border:0;background:none;color:#fff;cursor:pointer;border-radius:12px;min-width:0}
+.ign svg{flex:none;transition:transform .15s}
+.ign:active svg{transform:scale(.88)}
+.ign-l{display:none;font-size:15px;white-space:nowrap}
+.ign.on .ign-l{font-weight:800}
+.ign-me{width:28px;height:28px;border-radius:50%;overflow:hidden;display:grid;place-items:center;background:#262626;flex:none;box-shadow:0 0 0 1px #363636}
+.ign-me img{width:100%;height:100%;object-fit:cover}.ign-me b{font-size:11px;font-weight:800;color:#fff}
+.ign-me.on{box-shadow:0 0 0 2px #000,0 0 0 3.5px #fff}
+.ign-dot{position:absolute;top:8px;left:calc(50% + 6px);width:8px;height:8px;border-radius:50%;background:#FF3040}
+@media (max-width:1023px){
+  .ig-nav{left:0;right:0;bottom:0;height:calc(54px + env(safe-area-inset-bottom,0px));padding:0 4px env(safe-area-inset-bottom,0px);border-top:1px solid #262626;align-items:stretch}
+  .ign.wide{display:none}
+  html[data-theme="social"] body.dash-on{padding-bottom:calc(66px + env(safe-area-inset-bottom,0px))}
+  html[data-theme="social"] body.dash-on .notif{bottom:calc(66px + env(safe-area-inset-bottom,0px))}
+  html[data-theme="social"] body.dash-on #toasts{bottom:calc(70px + env(safe-area-inset-bottom,0px))}
+  html[data-theme="social"] body.dash-on #hdrSearch,html[data-theme="social"] body.dash-on #btnDemo{display:none!important}
+  html[data-theme="social"] #topbar.menu-open .hm-secs{display:grid}
+  body.modal-open .ig-nav{visibility:hidden}
+}
+@media (min-width:1024px){
+  .ig-nav{top:var(--tbh,64px);left:0;bottom:0;width:76px;flex-direction:column;align-items:stretch;gap:4px;padding:14px 10px;border-right:1px solid #262626}
+  .ign{flex:none;height:50px;justify-content:center}
+  .ign:hover{background:#1a1a1a}
+  html[data-theme="social"] body.dash-on main{padding-left:96px}
+  html[data-theme="social"] body.dash-on #hdrSearch{display:none!important}
+  .ign[data-ign="more"]{margin-top:auto}
+}
+@media (min-width:1360px){.ig-nav{width:232px;padding:14px 12px}.ign{justify-content:flex-start;padding:0 14px}.ign-l{display:block}html[data-theme="social"] body.dash-on main{padding-left:250px}}
+.hm-secs{grid-template-columns:repeat(3,1fr);gap:8px;padding:4px 0 10px;border-bottom:1px solid var(--line);margin-bottom:6px}
+.hm-secs button{display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 4px;border-radius:14px;border:1px solid var(--line);background:var(--s1);color:var(--ink);font-size:11.5px;font-weight:700;cursor:pointer;text-align:center}
+.hm-secs button span{font-size:22px}
+/* explore */
+.explore-body{display:grid;grid-template-columns:minmax(0,1fr);gap:12px;max-width:940px;margin:0 auto;padding-top:14px}
+.ex-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;grid-auto-flow:dense}
+@media (max-width:640px){.ex-grid{margin:0 -16px}}
+.ex-tile{position:relative;aspect-ratio:1;border:0;padding:12px;overflow:hidden;cursor:pointer;color:#fff;display:flex;align-items:center;justify-content:center;text-align:center;background:#121212}
+.ex-tile.big{grid-row:span 2;aspect-ratio:auto}
+.ex-tile.big .ig-tt{font-size:15px;-webkit-line-clamp:9}
+.ex-tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ex-tile:hover{filter:brightness(1.1)}
+.ex-tile.sk{cursor:default;background:linear-gradient(90deg,#121212,#1f1f1f,#121212);background-size:200% 100%;animation:skel 1.1s linear infinite}
+.ex-who{position:absolute;left:8px;bottom:6px;right:8px;font-size:10.5px;font-weight:700;text-align:left;opacity:.85;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-shadow:0 1px 4px rgba(0,0,0,.5)}
+/* sheets: activity + create */
+.ig-sheet{max-width:560px;display:flex;flex-direction:column;overflow:hidden}
+@media (max-width:640px){#igActivity{align-items:stretch}#igActivity .ig-sheet{height:100dvh;max-height:100dvh;border-radius:0}}
+.ig-sheet-top{display:flex;align-items:center;justify-content:space-between;height:54px;padding:0 8px;padding-top:env(safe-area-inset-top,0px);border-bottom:1px solid var(--line);flex:none}
+.ig-sheet-top b{font-size:17px;font-weight:800}
+.ig-sheet-body{overflow-y:auto;padding:10px 16px 26px;flex:1}
+.act-h{font-size:15.5px;font-weight:800;margin:16px 0 8px}
+.act-list{display:grid;gap:4px}
+.act-row{display:flex;align-items:center;gap:12px;padding:6px 0}
+.act-row p{flex:1;min-width:0;font-size:14px;line-height:1.35;cursor:pointer}
+.act-row p small{color:var(--muted)}
+.act-row .sr-fbtn{min-width:96px}
+.act-req{display:flex;align-items:center;gap:12px;padding:8px 0}
+.act-req b{display:block;font-size:14.5px}.act-req small{display:block;color:var(--muted);font-size:13px}
+.cr-list{display:grid;gap:4px}
+.cr-opt{display:flex;align-items:center;gap:14px;width:100%;padding:10px 6px;border:0;border-radius:14px;background:none;color:var(--ink);text-align:left;cursor:pointer}
+.cr-opt:hover{background:rgba(var(--g-rgb),.07)}
+.cr-opt>span{width:46px;height:46px;flex:none;border-radius:50%;display:grid;place-items:center;font-size:22px;background:rgba(var(--g-rgb),.08);box-shadow:inset 0 0 0 1px var(--line)}
+.cr-opt b{display:block;font-size:15px}.cr-opt small{display:block;font-size:12.5px;color:var(--muted)}
+.cr-back{border:0;background:none;color:var(--gold-soft);font-weight:700;font-size:14px;padding:4px 0 10px;cursor:pointer}
+/* search sheet in the Social look: text tabs, clean result rows */
+html[data-theme="social"] .srch-filters{gap:0;border-bottom:1px solid #262626;padding:0}
+html[data-theme="social"] .srch-filters .chip{flex:1 1 0;justify-content:center;background:none;border:0;border-bottom:1.5px solid transparent;border-radius:0;color:#a8a8a8;padding:.7rem .2rem;margin-bottom:-1px}
+html[data-theme="social"] .srch-filters .chip.on{background:none;color:#fff;border-bottom-color:#fff}
+html[data-theme="social"] .sr-list.res .sr-fbtn{display:none}
+html[data-theme="social"] .srch-bar{height:40px;border-radius:10px;border:0;background:#262626}
+html[data-theme="social"] .srch-bar svg{color:#a8a8a8}
+html[data-theme="social"] .srch-cancel{color:#fff}
+html[data-theme="social"] .sr-row b{font-weight:700}
+html[data-theme="social"] .srch-pill{height:40px;border-radius:10px;border:0;background:#262626;font-size:15px}
+html[data-theme="social"] .srch-pill svg{color:#a8a8a8}
+html[data-theme="social"] .srch-pill kbd{display:none}
+
+/* v69: Social look on computers — slim header like a photo app; everything else lives in the ☰ menu */
+@media (min-width:900px){
+  html[data-theme="social"] #topbar>div{flex-wrap:nowrap;padding-top:10px;padding-bottom:10px;gap:10px}
+  html[data-theme="social"] #topbar .hdr-sub{display:none}
+  html[data-theme="social"] .nav-wide{display:none!important}
+  html[data-theme="social"] .hdr-menu-btn{display:inline-grid;place-items:center;flex:none;width:42px;height:42px;border-radius:12px}
+  html[data-theme="social"] .hdr-menu{display:none;position:absolute;top:calc(100% + 6px);right:16px;left:auto;width:420px;z-index:100;flex-direction:column;align-items:stretch;gap:10px;padding:14px;border-radius:18px;
+    background:#121212;border:1px solid #262626;box-shadow:0 30px 60px -20px #000;max-height:calc(100vh - 90px);overflow:auto}
+  html[data-theme="social"] #topbar.menu-open .hdr-menu{display:flex}
+  html[data-theme="social"] .hdr-menu .hm-links{display:flex;gap:8px}
+  html[data-theme="social"] .hdr-menu .hm-links .navlink{flex:1;text-align:center;padding:.6rem .5rem;border-radius:12px;border:1px solid var(--line);font-size:13px;font-weight:700}
+  html[data-theme="social"] .hdr-menu .refer-btn,html[data-theme="social"] .hdr-menu #btnInvite,html[data-theme="social"] .hdr-menu #acctBtn{width:100%;justify-content:center}
+  html[data-theme="social"] .hdr-menu #btnInvite span{display:inline!important}
+  html[data-theme="social"] .hdr-menu>div.flex{flex-wrap:wrap;width:100%}
+  html[data-theme="social"] .hdr-menu .vault-select{flex:1 1 100%}
+  html[data-theme="social"] .hdr-menu .lang-select{flex:1 1 0}
+  html[data-theme="social"] #topbar{position:sticky}
+  html[data-theme="social"] #topbar>div{position:relative}
+}
 </style>
 </head>
 <body>
@@ -2501,8 +2602,10 @@ html[data-theme="social"] ::selection{background:rgba(59,139,255,.4)}
     </nav>
     <button id="hdrSearch" class="icon-btn hdr-search" type="button" hidden aria-label="Search people" title="Search people (/)"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/></svg></button>
     <button id="btnDemo" class="btn-ghost sm demo-toggle" aria-label="Explore the interactive demo tree"><svg class="ico" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="5" r="2.6"/><circle cx="18" cy="5" r="2.6"/><circle cx="12" cy="19" r="2.8"/><path d="M8.6 5h6.8M12 5v11.2" stroke-linecap="round"/><path d="M10.9 17.6l2.6 1.4-2.6 1.4z" fill="var(--gold-hi)" stroke="none"/></svg> <span>Demo</span></button>
+    <button id="hdrHeart" class="icon-btn hdr-heart" type="button" hidden aria-label="Activity"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5S3 15 3 8.8A4.8 4.8 0 0 1 12 6.4a4.8 4.8 0 0 1 9 2.4C21 15 12 20.5 12 20.5z"/></svg></button>
     <button id="hdrMenuBtn" class="icon-btn hdr-menu-btn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="hdrMenu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
     <div id="hdrMenu" class="hdr-menu">
+      <div class="hm-secs" id="hmSecs"></div>
       <div class="hm-links"><a class="navlink" href="index.html">🏠 Home</a><a class="navlink" href="#pricing" data-hm-plans>👑 Plans</a></div>
       <button type="button" class="btn-ghost sm hm-tut" id="hmTut">▶ <span id="hmTutL">How it works</span></button>
     <button class="refer-btn" id="btnRefer" data-open-refer aria-label="Refer friends and earn Royal"><span class="rb-gift" aria-hidden="true">🎁</span><span class="rb-long" data-wl="hd_refer_long">Refer friends &amp; earn Royal</span><span class="rb-short" data-wl="hd_refer_short">Refer</span></button>
@@ -2529,6 +2632,7 @@ html[data-theme="social"] ::selection{background:rgba(59,139,255,.4)}
   </div>
 </header>
 
+<nav id="igNav" class="ig-nav" aria-label="Main"></nav>
 <main class="max-w-[1680px] mx-auto px-4 sm:px-6 lg:px-10">
   <!-- WELCOME CANVAS -->
   <section id="welcome" class="welcome" aria-label="Welcome">
@@ -2807,6 +2911,9 @@ html[data-theme="social"] ::selection{background:rgba(59,139,255,.4)}
       <div id="filmBody" class="mt-5"></div>
     </div>
   </section>
+
+  <!-- 🔍 EXPLORE -->
+  <section id="exploreHub" data-panel="explore" class="hub"><div id="exploreBody" class="explore-body"></div></section>
 
   <!-- THEME STUDIO -->
   <section id="themeStudio" data-panel="themes" class="hub">
@@ -3284,6 +3391,12 @@ html[data-theme="social"] ::selection{background:rgba(59,139,255,.4)}
   </div>
 </div>
 
+<div class="modal top" id="igActivity" role="dialog" aria-modal="true" aria-label="Activity">
+  <div class="modal-panel ig-sheet"><div class="ig-sheet-top"><button class="ig-back" data-close aria-label="Close">‹</button><b data-hn="Notifications">Notifications</b><span style="width:42px"></span></div><div id="igActBody" class="ig-sheet-body"></div></div>
+</div>
+<div class="modal top" id="igCreate" role="dialog" aria-modal="true" aria-label="Create">
+  <div class="modal-panel ig-sheet"><div class="ig-sheet-top"><button class="ig-back" data-close aria-label="Close">✕</button><b id="igCreateTitle">Create</b><span style="width:42px"></span></div><div id="igCreateBody" class="ig-sheet-body"></div></div>
+</div>
 <div class="modal top srch-modal" id="peopleSearch" role="dialog" aria-modal="true" aria-label="Search people">
   <div class="modal-panel srch-panel">
     <div class="srch-top">
@@ -6236,6 +6349,7 @@ const DASH_TABS = [
   { id:'film', ico:'🎬', en:'Documentary', hn:'Documentary', sen:'Film', shn:'Film', main:true },
   { id:'voice', ico:'🎙️', en:'Voices', hn:'Awaaz', sen:'Voices', shn:'Awaaz', main:true },
   { id:'refer', ico:'🎁', en:'Share & Earn', hn:'Share & Kamao', sen:'Share', shn:'Share', main:true },
+  { id:'explore', ico:'🔍', en:'Explore', hn:'Explore' },
   { id:'photo', ico:'🧩', en:'Family Collage', hn:'Family Collage' },
   { id:'reunion', ico:'✨', en:'Reunion Portrait', hn:'Reunion Portrait' },
   { id:'trail', ico:'🗺️', en:'Migration Trail', hn:'Migration Trail' },
@@ -6284,6 +6398,7 @@ function showTab(id, opts = {}) {
     try { const want = id === 'trail' ? 'map' : 'tree'; if (prev !== id || (want === 'map') !== mapUI.open) setCanvasTab(want); } finally { dash.syncing = false; }
   } else if (mapUI.open) stopJourney();
   refreshPanel(id, true);
+  if (typeof igNavRender === 'function') igNavRender();
   if (id === 'reunion' && typeof rpMountInline === 'function') rpMountInline();
   const bar = $('#dashTabs'); const btn = bar && bar.querySelector(`[data-tab="${id}"]`);
   if (btn && bar.scrollWidth > bar.clientWidth) bar.scrollTo({ left:btn.offsetLeft - bar.clientWidth / 2 + btn.offsetWidth / 2, behavior:prev ? 'smooth' : 'auto' });
@@ -6292,6 +6407,7 @@ function showTab(id, opts = {}) {
 function refreshPanel(id, force) {
   if (id === 'canvas' && typeof renderJourney === 'function') { renderJourney(); return; }
   if (id === 'film') { renderFilm(); return; }
+  if (id === 'explore') { renderExplore(); return; }
   if (id === 'arena' && typeof renderDyn === 'function') { renderDyn(); return; }
   const hub = { themes:'#themeStudio', refer:'#referHub', voice:'#voiceHub', social:'#socialHub', vault:'#vaultHub' }[id]; if (!hub) return;
   const el = $(hub); if (!el) return;
@@ -7071,6 +7187,7 @@ function initV10() {
   accInit();
   srchInit();
   igInit();
+  igInitNav();
   document.addEventListener('click', e => { const l = e.target.closest('#commHub [data-ig-like]'); if (!l) return; l.classList.toggle('on'); l.textContent = l.classList.contains('on') ? '♥' : '♡'; if (l.classList.contains('on')) srchBurst(l); });
   initRoute();
   initLeafUI();
@@ -8207,6 +8324,7 @@ function accPaint() {
   if (ACC.tok && ACC.tab === 'feed' && !ACC.feed && !ACC.loading) accLoadFeed();
 }
 function accHeader() {
+  if (typeof igNavRender === 'function') igNavRender();
   const b = $('#acctBtn'); if (!b || SB) return; if (!accOn()) return;
   b.classList.remove('hidden'); const me = ACC.tok && ACC.me;
   b.innerHTML = me ? `${accAv(me.ph, me.name, 'xs')}<span class="ac-hdr-n">@${esc(me.un)}</span>` : `👤 <span>${hx('Log in', 'Log in')}</span>`;
@@ -8434,7 +8552,7 @@ function srchPaint(keepList) {
   el.classList.remove('sr-loading');
   const it = SRCH.items;
   el.innerHTML = SRCH.busy ? `<div class="sr-skel"><i></i><i></i><i></i></div>`
-    : it.length ? `<div class="sr-head"><b>${q ? hx(`${dynNum(SRCH.total)} ${SRCH.total === 1 ? 'person' : 'people'} found`, `${dynNum(SRCH.total)} log mile`) : { surname:hx('Same surname as your family', 'Aapki family ka surname'), city:hx(`In ${srchCity() || 'your city'}`, `${srchCity() || 'aapke shehar'} mein`), popular:hx('Popular on DynastyVault', 'DynastyVault pe popular') }[SRCH.f] || ''}</b></div><div class="sr-list">${it.map(c => srchRow(c, q)).join('')}</div>${srchInviteHTML(q)}`
+    : it.length ? `<div class="sr-head"><b>${q ? hx(`${dynNum(SRCH.total)} ${SRCH.total === 1 ? 'person' : 'people'} found`, `${dynNum(SRCH.total)} log mile`) : { surname:hx('Same surname as your family', 'Aapki family ka surname'), city:hx(`In ${srchCity() || 'your city'}`, `${srchCity() || 'aapke shehar'} mein`), popular:hx('Popular on DynastyVault', 'DynastyVault pe popular') }[SRCH.f] || ''}</b></div><div class="sr-list res">${it.map(c => srchRow(c, q)).join('')}</div>${srchInviteHTML(q)}`
     : `<div class="ac-empty"><span aria-hidden="true">🔎</span><b>${q ? hx(`No one called “${esc(q)}” yet`, `“${esc(q)}” naam se abhi koi nahi`) : hx('Nobody here yet', 'Abhi yahan koi nahi')}</b><p class="tiny muted">${SRCH.err ? esc(SRCH.err) : SRCH.f === 'surname' && !srchSurnames() ? hx('Make your family tree first — then we can find people with your surname.', 'Pehle family tree banao — phir aapke surname wale log dhoondh payenge.') : SRCH.f === 'city' && !srchCity() ? hx('Add your city in Edit profile, then we can show people near you.', 'Edit profile mein apna shehar daalo, phir aapke paas ke log dikhenge.') : hx('Try their first name, surname or city.', 'Unka pehla naam, surname ya shehar try karo.')}</p></div>${srchInviteHTML(q)}`;
   SRCH.err = '';
 }
@@ -8584,6 +8702,158 @@ function igInit() {
     if (t.dataset.igPost != null) { dynUI.igPost = t.dataset.igPost === '' ? null : +t.dataset.igPost; igRender(p); const sc = $('#dynModal .modal-panel'); if (sc) sc.scrollTop = 0; return; }
     if (t.hasAttribute('data-ig-like')) { t.classList.toggle('on'); t.textContent = t.classList.contains('on') ? '♥' : '♡'; if (t.classList.contains('on')) srchBurst(t); }
   });
+}
+
+/* ---------- 📱 Photo-app chrome for the Social look: icon tab bar, Explore grid, ♡ activity, ➕ create ---------- */
+const isSocial = () => document.documentElement.dataset.theme === 'social';
+const IGN = { ex:null, exAt:0, exBusy:false, seenAt:0 };
+try { IGN.seenAt = +localStorage.getItem('dv.act.seen') || 0; } catch (e) { /* ignore */ }
+const IGI = {
+  home:'<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg>',
+  homeOn:'<svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg>',
+  search:'<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.5-4.5"/></svg>',
+  searchOn:'<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.5-4.5"/></svg>',
+  plus:'<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="5"/><path d="M12 8v8M8 12h8"/></svg>',
+  people:'<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-4 3.4-6 6.5-6s5.7 2 6.5 6"/><circle cx="17.5" cy="9" r="2.6"/><path d="M17 14c2.6.2 4.2 2 4.6 5"/></svg>',
+  peopleOn:'<svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-4 3.4-6 6.5-6s5.7 2 6.5 6z"/><circle cx="17.5" cy="9" r="2.6"/><path d="M17 14c2.6.2 4.2 2 4.6 5h-4.4" fill="none"/></svg>',
+  film:'<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><path d="M3 8.5h18M8 3l3 5.5M14 3l3 5.5"/><path d="M10 12.5v5l4.5-2.5z" fill="currentColor"/></svg>',
+  heart:'<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 20.5S3 15 3 8.8A4.8 4.8 0 0 1 12 6.4a4.8 4.8 0 0 1 9 2.4C21 15 12 20.5 12 20.5z"/></svg>',
+  more:'<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>'
+};
+const IGN_ITEMS = () => [
+  ['canvas', IGI.home, IGI.homeOn, hx('Home', 'Home')],
+  ['explore', IGI.search, IGI.searchOn, hx('Search', 'Search')],
+  ['create', IGI.plus, IGI.plus, hx('Create', 'Banao')],
+  ['arena', IGI.people, IGI.peopleOn, hx('People', 'Log')],
+  ['film', IGI.film, IGI.film, hx('Film', 'Film'), 'wide'],
+  ['heart', IGI.heart, IGI.heart, hx('Activity', 'Activity'), 'wide'],
+  ['me', '', '', hx('Profile', 'Profile')],
+  ['more', IGI.more, IGI.more, hx('More', 'Aur'), 'wide']
+];
+function igNavRender() {
+  const nav = $('#igNav'); if (!nav) return; const me = ACC && ACC.tok && ACC.me;
+  const dot = igActUnread();
+  nav.innerHTML = IGN_ITEMS().map(([id, ico, icoOn, label, cls]) => {
+    const on = dash.tab === id;
+    const face = id === 'me' ? `<span class="ign-me${on || (isOpen('dynModal') && me && dynUI.id === 'acc_' + me.un) ? ' on' : ''}">${me && me.ph ? `<img src="${me.ph}" alt="">` : `<b>${esc(me ? initials(me.name) : '👤')}</b>`}</span>` : (on ? icoOn : ico);
+    return `<button type="button" class="ign${on ? ' on' : ''}${cls ? ' ' + cls : ''}" data-ign="${id}" aria-label="${esc(label)}"${on ? ' aria-current="page"' : ''}>${face}${id === 'heart' && dot ? '<i class="ign-dot"></i>' : ''}<span class="ign-l">${esc(label)}</span></button>`;
+  }).join('');
+  const hh = $('#hdrHeart'); if (hh) { hh.hidden = !accOn(); hh.classList.toggle('dot', !!dot); }
+}
+function igActUnread() { const me = ACC && ACC.tok && ACC.me; if (!me) return 0; return (me.requests || []).length + (me.notes || []).filter(n => n.t > IGN.seenAt && n.type !== 'request').length; }
+/* --- Explore: a mosaic of posts from public families --- */
+function igSampleExplore() {
+  const out = [];
+  SAMPLE_DYN.forEach(s => s.p.forEach((r, i) => out.push({ k:r[0], text:r[2], at:Date.now() - r[3] * DYN_H, who:{ un:s.n.toLowerCase().replace(/[^a-z]+/g, '.').replace(/^\.|\.$/g, ''), name:s.n, ph:'' }, sample:s.id })));
+  return out.sort((a, b) => (a.text.length % 7) - (b.text.length % 7));
+}
+async function igLoadExplore(force) {
+  if (IGN.exBusy) return; if (!force && IGN.ex && Date.now() - IGN.exAt < 60000) return;
+  if (!accOn()) { IGN.ex = igSampleExplore(); IGN.exAt = Date.now(); return; }
+  IGN.exBusy = true;
+  try { const j = await accApi('/api/people/explore?limit=60'); IGN.ex = (j.items || []).length >= 6 ? j.items : (j.items || []).concat(igSampleExplore()); }
+  catch (e) { IGN.ex = igSampleExplore(); }
+  IGN.exAt = Date.now(); IGN.exBusy = false;
+}
+function renderExplore() {
+  const box = $('#exploreBody'); if (!box) return;
+  let it = IGN.ex;
+  if (it && it.length > 6) { it = it.slice(0, 60); const cells = a => a.reduce((n, x, i) => n + (i % 10 === 2 || i % 10 === 5 ? 2 : 1), 0); while (it.length > 6 && cells(it) % 3) it = it.slice(0, -1); }
+  box.innerHTML = `${srchPillHTML()}
+    ${it == null ? `<div class="ex-grid">${Array.from({ length:9 }, (_, i) => `<span class="ex-tile sk${i % 10 === 2 ? ' big' : ''}"></span>`).join('')}</div>`
+      : it.length ? `<div class="ex-grid">${it.map((x, i) => `<button class="ex-tile${i % 10 === 2 || i % 10 === 5 ? ' big' : ''}${x.ph ? ' ph' : ''}" ${x.sample ? `data-dyn-open="${esc(x.sample)}"` : `data-sr-open="${esc(x.who.un)}"`} style="${x.ph ? '' : `background:${IG_GRADS[i % IG_GRADS.length]}`}" aria-label="${esc((x.who.name || '') + ': ' + trunc(x.text || '', 60))}">
+          ${x.ph ? `<img src="${x.ph}" alt="" loading="lazy">` : `<span class="ig-tt">${esc(trunc(x.text || '', i % 10 === 2 || i % 10 === 5 ? 160 : 80))}</span>`}<i class="ig-tk" aria-hidden="true">${IG_ICO[x.k] || '📝'}</i><small class="ex-who">${esc(x.who.name || '')}</small></button>`).join('')}</div>`
+      : `<div class="ac-empty"><span>🧭</span><b>${hx('Nothing to explore yet', 'Abhi explore karne ko kuch nahi')}</b></div>`}`;
+  if (it == null || Date.now() - IGN.exAt > 60000) igLoadExplore().then(() => { if (dash.tab === 'explore') renderExplore(); });
+}
+/* --- ♡ Activity --- */
+function igOpenActivity() {
+  if (!accOn()) { toast(hx('Activity opens on the DynastyVault website.', 'Activity DynastyVault website pe chalti hai.'), 'info'); return; }
+  if (!ACC.tok) { accOpenAuth('signup'); return; }
+  IGN.seenAt = Date.now(); try { localStorage.setItem('dv.act.seen', String(IGN.seenAt)); } catch (e) { /* ignore */ }
+  igActBody(); openModal('igActivity'); igNavRender(); accRefresh(true).then(() => { if (isOpen('igActivity')) igActBody(); });
+  srchLoadSug(true).then(() => { if (isOpen('igActivity')) igActBody(); });
+}
+function igActBody() {
+  const el = $('#igActBody'); if (!el || !ACC.me) return; const me = ACC.me;
+  const cards = {}; (me.noteCards || []).concat(me.requestCards || []).forEach(c => { cards[c.id] = c; });
+  const reqs = me.requestCards || []; const notes = (me.notes || []).filter(n => n.type !== 'request' && cards[n.id]);
+  const say = n => ({ follow:hx('started following you.', 'ne aapko follow kiya.'), accepted:hx('accepted your follow request.', 'ne aapki follow request accept ki.') }[n.type] || '');
+  const week = notes.filter(n => Date.now() - n.t < 7 * DAY), older = notes.filter(n => Date.now() - n.t >= 7 * DAY);
+  const row = n => { const c = cards[n.id]; return `<div class="act-row">${accAv(c.ph, c.name, 'md story')}<p data-sr-open="${esc(c.un)}" role="button" tabindex="0"><b>${esc(c.un)}</b> ${say(n)} <small>${timeAgo(n.t)}</small></p>${n.type === 'follow' ? srchFollowBtn(Object.assign({}, c, { followsYou:true, isFollowing:(SRCH.ring || []).some(x => x.un === c.un) })) : ''}</div>`; };
+  const sug = (SRCH.sug || []).filter(c => !c.isFollowing).slice(0, 6);
+  el.innerHTML = `${reqs.length ? `<div class="act-req"><div class="act-req-av">${accAv(reqs[0].ph, reqs[0].name, 'md')}</div><div class="min-w-0 flex-1"><b>${hx('Follow requests', 'Follow requests')}</b><small>${esc(reqs[0].un)}${reqs.length > 1 ? hx(` + ${reqs.length - 1} others`, ` + ${reqs.length - 1} aur`) : ''}</small></div></div>
+      <div class="act-list">${reqs.map(c => `<div class="act-row">${accAv(c.ph, c.name, 'md')}<p data-sr-open="${esc(c.un)}" role="button" tabindex="0"><b>${esc(c.un)}</b> ${hx('wants to follow you.', 'aapko follow karna chahte hain.')}</p><button class="btn-gold sm" data-ac-ok="${esc(c.id)}">${hx('Confirm', 'Confirm')}</button><button class="btn-ghost sm" data-ac-no="${esc(c.id)}">${hx('Delete', 'Hatao')}</button></div>`).join('')}</div>` : ''}
+    ${week.length ? `<h4 class="act-h">${hx('This week', 'Is hafte')}</h4><div class="act-list">${week.map(row).join('')}</div>` : ''}
+    ${older.length ? `<h4 class="act-h">${hx('Earlier', 'Pehle')}</h4><div class="act-list">${older.map(row).join('')}</div>` : ''}
+    ${!reqs.length && !notes.length ? `<div class="ig-empty" style="border:0;margin:0"><span class="ig-empty-i">♡</span><b>${hx('Activity on your account', 'Aapke account ki activity')}</b><p>${hx('When someone follows you or asks to follow, you’ll see it here.', 'Jab koi aapko follow kare ya request bheje, yahan dikhega.')}</p></div>` : ''}
+    ${sug.length ? `<h4 class="act-h">${hx('Suggested for you', 'Aapke liye suggestions')}</h4><div class="sr-list">${sug.map(c => srchRow(c, '')).join('')}</div>` : ''}`;
+}
+/* --- ➕ Create --- */
+function igOpenCreate(kind) {
+  const el = $('#igCreateBody'); if (!el) return;
+  if (!kind) {
+    const opt = (k, ico, en, hn, sen, shn) => `<button class="cr-opt" data-cr="${k}"><span>${ico}</span><div><b>${hx(en, hn)}</b><small>${hx(sen, shn)}</small></div></button>`;
+    el.innerHTML = `<div class="cr-list">
+      ${opt('post', '📝', 'Post', 'Post', 'Share news or a photo with your family', 'Family ke saath khabar ya photo share karo')}
+      ${opt('memory', '🕊️', 'Memory', 'Yaad', 'Write down a memory of someone', 'Kisi ki yaad likho')}
+      ${opt('story', '⏱️', '24-hour story', '24-ghante ki story', 'Disappears after a day', 'Ek din baad gayab')}
+      ${opt('voice', '🎙️', 'Voice note', 'Voice note', 'Record their voice and story', 'Unki awaaz aur kahani record karo')}
+      ${opt('member', '👤', 'Family member', 'Family member', 'Add someone to your tree', 'Tree mein kisi ko jodo')}
+      ${opt('film', '🎬', 'Documentary', 'Documentary', 'Turn a photo into a short film', 'Photo se chhoti film banao')}
+      ${opt('card', '🪪', 'Family Card', 'Family Card', 'A golden card for WhatsApp Status', 'WhatsApp Status ke liye card')}</div>`;
+    $('#igCreateTitle').textContent = hx('Create', 'Banao');
+  } else {
+    if (!ownVault() && isDemo(V())) { closeModal('igCreate'); openWizard('form'); toast(hx('Make your family tree first — then you can post.', 'Pehle apna family tree banao — phir post kar paoge.'), 'info'); return; }
+    feedUI.drafts.ig = Object.assign(feedUI.drafts.ig || {}, { kind });
+    $('#igCreateTitle').textContent = { post:hx('New post', 'Nayi post'), memory:hx('New memory', 'Nayi yaad'), story:hx('New story', 'Nayi story'), voice:hx('Voice note', 'Voice note') }[kind] || hx('New post', 'Nayi post');
+    el.innerHTML = `<button class="cr-back" data-cr="">‹ ${hx('Back', 'Wapas')}</button>${composerHTML('ig')}`;
+    const re = () => { el.innerHTML = `<button class="cr-back" data-cr="">‹ ${hx('Back', 'Wapas')}</button>${composerHTML('ig')}`; bindComposer(el, 'ig', re); };
+    bindComposer(el, 'ig', re);
+    const ta = el.querySelector('textarea'); if (ta) setTimeout(() => ta.focus(), 80);
+  }
+  if (!isOpen('igCreate')) openModal('igCreate');
+}
+function igNavGo(id, btn) {
+  if (id === 'create') { igOpenCreate(); return; }
+  if (id === 'heart') { igOpenActivity(); return; }
+  if (id === 'me') { if (ACC.tok && ACC.me) openPerson(ACC.me.un); else if (accOn()) accOpenAuth('signup'); else showTab('arena'); return; }
+  if (id === 'more') { igMoreOpen(btn); return; }
+  if (isOpen('dynModal')) closeModal('dynModal');
+  if (dash.tab === id) { window.scrollTo({ top:0, behavior:'smooth' }); if (id === 'explore') openSearch(); return; }
+  showTab(id);
+}
+function igMoreOpen(btn) {
+  const old = $('#igMoreMenu'); if (old) { old.remove(); return; }
+  const m = document.createElement('div'); m.id = 'igMoreMenu'; m.className = 'dt-menu'; m.setAttribute('role', 'menu');
+  m.innerHTML = DASH_TABS.filter(t => !['canvas', 'explore', 'arena'].includes(t.id)).map(t => `<button role="menuitem" type="button" data-tab="${t.id}" class="${t.id === dash.tab ? 'on' : ''}"><span aria-hidden="true">${t.ico}</span>${esc(hx(t.en, t.hn))}</button>`).join('') + `<button role="menuitem" type="button" data-tab="plans"><span aria-hidden="true">👑</span>${hx('Plans', 'Plans')}</button>`;
+  document.body.appendChild(m); const r = btn.getBoundingClientRect(); const w = 240;
+  m.style.width = w + 'px'; m.style.left = Math.min(innerWidth - w - 12, r.right + 8) + 'px'; m.style.top = Math.max(8, Math.min(innerHeight - m.offsetHeight - 8, r.top - m.offsetHeight + r.height)) + 'px';
+  m.addEventListener('click', e => { const t = e.target.closest('[data-tab]'); if (!t) return; m.remove(); if (isOpen('dynModal')) closeModal('dynModal'); showTab(t.dataset.tab); });
+  setTimeout(() => document.addEventListener('click', function off(e) { if (!m.contains(e.target)) { m.remove(); document.removeEventListener('click', off); } }), 0);
+}
+function igSecsHTML() {   // section grid inside the ☰ menu on phones
+  return DASH_TABS.filter(t => !['canvas', 'explore', 'arena'].includes(t.id)).map(t => `<button type="button" data-hm-tab="${t.id}"><span aria-hidden="true">${t.ico}</span>${esc(hx(t.en, t.hn))}</button>`).join('') + `<button type="button" data-hm-tab="plans"><span aria-hidden="true">👑</span>${hx('Plans', 'Plans')}</button>`;
+}
+function igInitNav() {
+  const nav = $('#igNav'); if (!nav) return;
+  nav.addEventListener('click', e => { const b = e.target.closest('[data-ign]'); if (b) igNavGo(b.dataset.ign, b); });
+  const hh = $('#hdrHeart'); if (hh) hh.addEventListener('click', igOpenActivity);
+  const secs = $('#hmSecs'); if (secs) { secs.innerHTML = igSecsHTML(); secs.addEventListener('click', e => { const b = e.target.closest('[data-hm-tab]'); if (!b) return; $('#topbar').classList.remove('menu-open'); showTab(b.dataset.hmTab); }); }
+  $('#igCreate').addEventListener('click', e => {
+    const b = e.target.closest('[data-cr]'); if (!b) return; const k = b.dataset.cr;
+    if (!k) { igOpenCreate(); return; }
+    if (['post', 'memory', 'story', 'voice'].includes(k)) { igOpenCreate(k); return; }
+    closeModal('igCreate');
+    if (k === 'member') { if (ownVault() || !isDemo(V())) openAddAncestor(); else openWizard('form'); }
+    else if (k === 'film') showTab('film'); else if (k === 'card') openFamilyCard();
+  });
+  $('#igCreate').addEventListener('click', e => {   // a post was published → close and refresh the profile
+    if (!e.target.closest('[data-c="post"]')) return;
+    setTimeout(() => { if (!feedUI.drafts.ig) { closeModal('igCreate'); accSyncFamily(true); ACC.feed = null; if (dash.tab === 'arena') accPaint(); } }, 250);
+  });
+  igNavRender();
+  setInterval(() => { if (isSocial()) igNavRender(); }, 30000);
 }
 
 /* ---------- 🌳 Dynasty-Canvas-style tree inside dynasty profiles ---------- */
@@ -13999,7 +14269,7 @@ setTimeout(async () => {
     if (live !== HAS_CLOUD) { HAS_CLOUD = live; setRoyalFeatures(); try { renderPlans(); renderAddons(); updatePrices(true); } catch (e) { /* views refresh later */ } }
   } catch (e) { /* server asleep or offline — keep the last known state */ }
 }, 900);
-if (/[?&]dvtest=1/.test(location.search)) window.__dv = { get state() { return state; }, save, saveNow, startDemo, openTutorial, NET, FILM, ACC, SRCH, openSearch, dynUI, dynTreeVault, renderFilm, filmPoll, openPerson };   // test hook, only with ?dvtest=1
+if (/[?&]dvtest=1/.test(location.search)) window.__dv = { get state() { return state; }, save, saveNow, startDemo, openTutorial, NET, FILM, ACC, SRCH, openSearch, IGN, igOpenCreate, igOpenActivity, dynUI, dynTreeVault, renderFilm, filmPoll, openPerson };   // test hook, only with ?dvtest=1
 
 
 function toast(msg, type = 'info', ms = 3200) {
