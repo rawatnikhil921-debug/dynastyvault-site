@@ -2399,98 +2399,99 @@ html[data-theme="utsav"] .toast{background:rgba(30,20,72,.97)}
 @media (max-width:640px){.fd{margin:0 -14px}.fd-post{border-radius:0;border-left:0;border-right:0}}
 
 /* ===== v68: "Social" look — clean black like a photo-sharing app (THEMES.social) ===== */
-html[data-theme="social"]{--bg:#000;--bg2:#000;--bg3:#0c0c0c;--bg-rgb:0,0,0;--bg2-rgb:0,0,0;--s1:#121212;--s2:#000;--s1-rgb:18,18,18;--s2-rgb:0,0,0;
-  --gold:#3B8BFF;--gold-hi:#FFFFFF;--gold-lo:#7B5CFF;--gold-soft:#E8E8E8;--gold-pale:#FFFFFF;--gold-cream:#F5F5F5;--gold-deep:#1E3A8A;--on-gold:#FFFFFF;
-  --g-rgb:255,255,255;--hi-rgb:59,139,255;--lo-rgb:123,92,255;--pale-rgb:255,255,255;
-  --ink:#F5F5F5;--muted:#A8A8A8;--line:#262626;--line-strong:#3a3a3a;--land1:#1c1c1c;--land2:#121212;--ocean1:#0a0a0a;--ocean2:#000;
-  --metal:linear-gradient(0deg,#3B8BFF,#3B8BFF);color-scheme:dark}
-html[data-theme="social"] body{background:#000;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Plus Jakarta Sans',sans-serif}
+html[data-theme="social"]{--bg:#100D0A;--bg2:#100D0A;--bg3:#17130F;--bg-rgb:16,13,10;--bg2-rgb:16,13,10;--s1:#1A1612;--s2:#100D0A;--s3:#241E18;--s1-rgb:26,22,18;--s2-rgb:16,13,10;
+  --acc:#FFA41B;--acc2:#F08F00;--on-acc:#1B1203;--teal:#2BB5A5;--paper:#F4EAD7;--paper-ink:#2B2016;
+  --gold:#FFA41B;--gold-hi:#FFF6E8;--gold-lo:#2BB5A5;--gold-soft:#F2D9B0;--gold-pale:#FFF6E8;--gold-cream:#F6EFE4;--gold-deep:#7A4A08;--on-gold:#1B1203;
+  --g-rgb:246,239,228;--hi-rgb:255,164,27;--lo-rgb:43,181,165;--pale-rgb:255,246,232;
+  --ink:#F6EFE4;--muted:#B3A796;--line:#2A241D;--line-strong:#3D342A;--land1:#241E18;--land2:#1A1612;--ocean1:#120F0C;--ocean2:#0B0907;
+  --metal:linear-gradient(0deg,#FFA41B,#FFA41B);color-scheme:dark}
+html[data-theme="social"] body{background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Plus Jakarta Sans',sans-serif}
 html[data-theme="social"] body::before,html[data-theme="social"] #themeFx,html[data-theme="social"] #goldDust,html[data-theme="social"] #treeDust{display:none}
 html[data-theme="social"] .font-regal{font-family:inherit;font-weight:800;letter-spacing:-.02em}
 html[data-theme="social"] #topbar .font-regal{letter-spacing:.01em;font-weight:800}
 html[data-theme="social"] .gold-text{background:none;color:var(--ink);-webkit-text-fill-color:var(--ink)}
 html[data-theme="social"] .eyebrow{text-transform:none;letter-spacing:0;font-size:13px;color:var(--muted);font-weight:600}
-html[data-theme="social"] .glass{background:#000;border:1px solid #262626;box-shadow:none;border-radius:18px}
+html[data-theme="social"] .glass{background:var(--bg);border:1px solid var(--line);box-shadow:none;border-radius:18px}
 html[data-theme="social"] .gborder::before{display:none}
-html[data-theme="social"] .btn-gold{background:#3B8BFF;color:#fff;box-shadow:none;border-radius:10px;font-weight:700;letter-spacing:0}
-html[data-theme="social"] .btn-gold:hover{background:#2F74E0;filter:none;transform:none;box-shadow:none}
+html[data-theme="social"] .btn-gold{background:var(--acc);color:var(--on-acc);box-shadow:none;border-radius:10px;font-weight:700;letter-spacing:0}
+html[data-theme="social"] .btn-gold:hover{background:var(--acc2);filter:none;transform:none;box-shadow:none}
 html[data-theme="social"] .btn-gold::after,html[data-theme="social"] .btn-gold::before{display:none}
-html[data-theme="social"] .btn-ghost{background:#262626;border:0;color:#fff;border-radius:10px}
-html[data-theme="social"] .btn-ghost:hover{background:#333}
-html[data-theme="social"] .chip{background:#1a1a1a;border-color:#2a2a2a;color:#f0f0f0}
-html[data-theme="social"] .chip.on{background:#fff;color:#000}
-html[data-theme="social"] .icon-btn{background:transparent;border-color:#2a2a2a;color:#fff}
-html[data-theme="social"] .icon-btn:hover{background:#1a1a1a;color:#fff}
-html[data-theme="social"] #topbar{background:rgba(0,0,0,.9);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid #262626}
+html[data-theme="social"] .btn-ghost{background:var(--line);border:0;color:#fff;border-radius:10px}
+html[data-theme="social"] .btn-ghost:hover{background:var(--line-strong)}
+html[data-theme="social"] .chip{background:var(--s3);border-color:var(--line);color:var(--ink)}
+html[data-theme="social"] .chip.on{background:var(--acc);color:var(--on-acc)}
+html[data-theme="social"] .icon-btn{background:transparent;border-color:var(--line);color:#fff}
+html[data-theme="social"] .icon-btn:hover{background:var(--s3);color:#fff}
+html[data-theme="social"] #topbar{background:rgba(16,13,10,.9);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
 html[data-theme="social"] #topbar::after{display:none}
-html[data-theme="social"] .crest{background:linear-gradient(135deg,#FFB627,#FF4F8B 55%,#7B5CFF);box-shadow:none}
+html[data-theme="social"] .crest{background:linear-gradient(135deg,var(--acc),var(--teal));box-shadow:none}
 html[data-theme="social"] .crest svg path,html[data-theme="social"] .crest svg *{fill:#fff}
 html[data-theme="social"] .modal{background:rgba(0,0,0,.7)}
-html[data-theme="social"] .modal-panel{background:#121212;border-color:#262626;box-shadow:0 30px 80px -20px #000}
+html[data-theme="social"] .modal-panel{background:var(--s1);border-color:var(--line);box-shadow:0 30px 80px -20px var(--bg)}
 html[data-theme="social"] .modal-panel::before{display:none}
-html[data-theme="social"] .input{background:#1a1a1a;border-color:#2e2e2e;border-radius:10px}
-html[data-theme="social"] .input:focus{border-color:#555;box-shadow:none}
-html[data-theme="social"] .stat{background:#121212;border-color:#262626}
+html[data-theme="social"] .input{background:var(--s3);border-color:var(--line);border-radius:10px}
+html[data-theme="social"] .input:focus{border-color:var(--line-strong);box-shadow:none}
+html[data-theme="social"] .stat{background:var(--s1);border-color:var(--line)}
 html[data-theme="social"] .price [data-price],html[data-theme="social"] .totals .grand b,html[data-theme="social"] .price-lg{background:none;color:#fff;-webkit-text-fill-color:#fff}
-html[data-theme="social"] .toast,html[data-theme="social"] .notif{background:#262626;border-color:#333;box-shadow:0 14px 40px -12px #000}
-html[data-theme="social"] #treeViewport,html[data-theme="social"] #treeSizer{background-color:#000}
+html[data-theme="social"] .toast,html[data-theme="social"] .notif{background:var(--line);border-color:var(--line-strong);box-shadow:0 14px 40px -12px var(--bg)}
+html[data-theme="social"] #treeViewport,html[data-theme="social"] #treeSizer{background-color:var(--bg)}
 html[data-theme="social"] #treeSizer{background-image:radial-gradient(rgba(255,255,255,.07) 1px,transparent 1.4px);background-size:26px 26px}
-html[data-theme="social"] .ring{background:conic-gradient(from 210deg,#FFB627,#FF4F8B,#7B5CFF,#3B8BFF,#FFB627);box-shadow:none}
-html[data-theme="social"] .ring-gap{background:#000}
-html[data-theme="social"] .ring-inner{background:#000}
+html[data-theme="social"] .ring{background:conic-gradient(from 210deg,var(--acc),#FF6B3D,var(--teal),var(--acc)),#FFB627);box-shadow:none}
+html[data-theme="social"] .ring-gap{background:var(--bg)}
+html[data-theme="social"] .ring-inner{background:var(--bg)}
 html[data-theme="social"] .node:hover .ring{box-shadow:0 0 0 4px rgba(255,255,255,.08)}
-html[data-theme="social"] .node-label{background:#121212;border-color:#262626;box-shadow:none}
-html[data-theme="social"] .lrow .k{color:#A8A8A8}
-html[data-theme="social"] .ring-badge{background:#000;box-shadow:0 0 0 1.5px #3a3a3a}
+html[data-theme="social"] .node-label{background:var(--s1);border-color:var(--line);box-shadow:none}
+html[data-theme="social"] .lrow .k{color:var(--muted)}
+html[data-theme="social"] .ring-badge{background:var(--bg);box-shadow:0 0 0 1.5px var(--line-strong)}
 html[data-theme="social"] .ring-badge::before,html[data-theme="social"] .ring-badge::after{display:none}
 html[data-theme="social"] .photo span{background:none;color:#fff;-webkit-text-fill-color:#fff}
-html[data-theme="social"] .ac-av.story{background:conic-gradient(from 210deg,#FFB627,#FF4F8B,#7B5CFF,#FFB627)}
-html[data-theme="social"] .ac-av.story img,html[data-theme="social"] .ac-av.story b{border-color:#000;background:#1a1a1a;color:#fff}
+html[data-theme="social"] .ac-av.story{background:conic-gradient(from 210deg,var(--acc),#FF6B3D,var(--teal),var(--acc))}
+html[data-theme="social"] .ac-av.story img,html[data-theme="social"] .ac-av.story b{border-color:var(--bg);background:var(--s3);color:#fff}
 html[data-theme="social"] .ac-av b{color:#fff;font-family:inherit}
-html[data-theme="social"] .ac-av.halo{box-shadow:0 0 0 2px #000,0 0 0 4px #3a3a3a}
-html[data-theme="social"] .dash-tabs{background:#000;border-color:#262626;box-shadow:none}
-html[data-theme="social"] .dash-tabs button{color:#A8A8A8}
+html[data-theme="social"] .ac-av.halo{box-shadow:0 0 0 2px var(--bg),0 0 0 4px var(--line-strong)}
+html[data-theme="social"] .dash-tabs{background:var(--bg);border-color:var(--line);box-shadow:none}
+html[data-theme="social"] .dash-tabs button{color:var(--muted)}
 html[data-theme="social"] .dash-tabs button.on{color:#fff;background:none;box-shadow:none}
-html[data-theme="social"] .dash-tabs .dt-plans{border-color:#333}
+html[data-theme="social"] .dash-tabs .dt-plans{border-color:var(--line-strong)}
 html[data-theme="social"] .dt-ink{background:#fff;box-shadow:none}
 @media (max-width:640px){
-  html[data-theme="social"] body.dash-on .dash-tabs{left:0;right:0;bottom:0;border-radius:0;border:0;border-top:1px solid #262626;padding:4px 4px calc(4px + env(safe-area-inset-bottom,0px));background:rgba(0,0,0,.94);box-shadow:none}
+  html[data-theme="social"] body.dash-on .dash-tabs{left:0;right:0;bottom:0;border-radius:0;border:0;border-top:1px solid var(--line);padding:4px 4px calc(4px + env(safe-area-inset-bottom,0px));background:rgba(16,13,10,.94);box-shadow:none}
   html[data-theme="social"] body.dash-on .dash-tabs .dt-ink{display:none}
   html[data-theme="social"] body.dash-on .dash-tabs .dt-plans{box-shadow:none}
   html[data-theme="social"] body.dash-on{padding-bottom:calc(80px + env(safe-area-inset-bottom,0px))}
 }
-html[data-theme="social"] .srch-bar{background:#1a1a1a;border-color:#262626}
-html[data-theme="social"] .srch-bar:focus-within{border-color:#444;box-shadow:none}
-html[data-theme="social"] .srch-pill{background:#1a1a1a;border-color:#262626}
-html[data-theme="social"] .sr-row mark{background:rgba(59,139,255,.3);color:#fff}
-html[data-theme="social"] .sg-card,html[data-theme="social"] .ac-me,html[data-theme="social"] .ac-join,html[data-theme="social"] .ac-notes,html[data-theme="social"] .net-box{background:#121212;border-color:#262626}
-html[data-theme="social"] .ac-counts>*{background:#000;border-color:#262626}
-html[data-theme="social"] .seg button.on,html[data-theme="social"] .ptab.on{background:#fff;color:#000;box-shadow:none}
-html[data-theme="social"] .ig-top{background:#000}
-html[data-theme="social"] #dynModal.ig-on .modal-panel{background:#000}
-html[data-theme="social"] .ig-btn{background:#262626}
-html[data-theme="social"] .ig-btn:hover{background:#333}
-html[data-theme="social"] .ig-btn.pri{background:#3B8BFF;color:#fff}
-html[data-theme="social"] .ig-hl-i span{background:#121212;box-shadow:0 0 0 1px #363636,0 0 0 4px #000,0 0 0 5px #262626}
-html[data-theme="social"] ::selection{background:rgba(59,139,255,.4)}
+html[data-theme="social"] .srch-bar{background:var(--s3);border-color:var(--line)}
+html[data-theme="social"] .srch-bar:focus-within{border-color:var(--line-strong);box-shadow:none}
+html[data-theme="social"] .srch-pill{background:var(--s3);border-color:var(--line)}
+html[data-theme="social"] .sr-row mark{background:rgba(255,164,27,.3);color:#fff}
+html[data-theme="social"] .sg-card,html[data-theme="social"] .ac-me,html[data-theme="social"] .ac-join,html[data-theme="social"] .ac-notes,html[data-theme="social"] .net-box{background:var(--s1);border-color:var(--line)}
+html[data-theme="social"] .ac-counts>*{background:var(--bg);border-color:var(--line)}
+html[data-theme="social"] .seg button.on,html[data-theme="social"] .ptab.on{background:var(--acc);color:var(--on-acc);box-shadow:none}
+html[data-theme="social"] .ig-top{background:var(--bg)}
+html[data-theme="social"] #dynModal.ig-on .modal-panel{background:var(--bg)}
+html[data-theme="social"] .ig-btn{background:var(--line)}
+html[data-theme="social"] .ig-btn:hover{background:var(--line-strong)}
+html[data-theme="social"] .ig-btn.pri{background:var(--acc);color:var(--on-acc)}
+html[data-theme="social"] .ig-hl-i span{background:var(--s1);box-shadow:0 0 0 1px var(--line-strong),0 0 0 4px var(--bg),0 0 0 5px var(--line)}
+html[data-theme="social"] ::selection{background:rgba(255,164,27,.4)}
 /* ===== v69: photo-app chrome (Social look only) ===== */
 #igNav,.hm-secs,.hdr-heart{display:none}
 html[data-theme="social"] body.dash-on #dashTabs{display:none!important}
 html[data-theme="social"] body.dash-on #igNav{display:flex}
 html[data-theme="social"] body.dash-on .hdr-heart:not([hidden]){display:inline-grid;position:relative}
-.hdr-heart.dot::after{content:"";position:absolute;top:6px;right:6px;width:9px;height:9px;border-radius:50%;background:#FF3040;box-shadow:0 0 0 2px #000}
-.ig-nav{position:fixed;z-index:60;background:#000;color:#fff}
+.hdr-heart.dot::after{content:"";position:absolute;top:6px;right:6px;width:9px;height:9px;border-radius:50%;background:#FF3040;box-shadow:0 0 0 2px var(--bg)}
+.ig-nav{position:fixed;z-index:60;background:var(--bg);color:#fff}
 .ign{position:relative;flex:1;display:flex;align-items:center;justify-content:center;gap:16px;border:0;background:none;color:#fff;cursor:pointer;border-radius:12px;min-width:0}
 .ign svg{flex:none;transition:transform .15s}
 .ign:active svg{transform:scale(.88)}
 .ign-l{display:none;font-size:15px;white-space:nowrap}
 .ign.on .ign-l{font-weight:800}
-.ign-me{width:28px;height:28px;border-radius:50%;overflow:hidden;display:grid;place-items:center;background:#262626;flex:none;box-shadow:0 0 0 1px #363636}
+.ign-me{width:28px;height:28px;border-radius:50%;overflow:hidden;display:grid;place-items:center;background:var(--line);flex:none;box-shadow:0 0 0 1px var(--line-strong)}
 .ign-me img{width:100%;height:100%;object-fit:cover}.ign-me b{font-size:11px;font-weight:800;color:#fff}
-.ign-me.on{box-shadow:0 0 0 2px #000,0 0 0 3.5px #fff}
+.ign-me.on{box-shadow:0 0 0 2px var(--bg),0 0 0 3.5px #fff}
 .ign-dot{position:absolute;top:8px;left:calc(50% + 6px);width:8px;height:8px;border-radius:50%;background:#FF3040}
 @media (max-width:1023px){
-  .ig-nav{left:0;right:0;bottom:0;height:calc(54px + env(safe-area-inset-bottom,0px));padding:0 4px env(safe-area-inset-bottom,0px);border-top:1px solid #262626;align-items:stretch}
+  .ig-nav{left:0;right:0;bottom:0;height:calc(54px + env(safe-area-inset-bottom,0px));padding:0 4px env(safe-area-inset-bottom,0px);border-top:1px solid var(--line);align-items:stretch}
   .ign.wide{display:none}
   html[data-theme="social"] body.dash-on{padding-bottom:calc(66px + env(safe-area-inset-bottom,0px))}
   html[data-theme="social"] body.dash-on .notif{bottom:calc(66px + env(safe-area-inset-bottom,0px))}
@@ -2500,9 +2501,9 @@ html[data-theme="social"] body.dash-on .hdr-heart:not([hidden]){display:inline-g
   body.modal-open .ig-nav{visibility:hidden}
 }
 @media (min-width:1024px){
-  .ig-nav{top:var(--tbh,64px);left:0;bottom:0;width:76px;flex-direction:column;align-items:stretch;gap:4px;padding:14px 10px;border-right:1px solid #262626}
+  .ig-nav{top:var(--tbh,64px);left:0;bottom:0;width:76px;flex-direction:column;align-items:stretch;gap:4px;padding:14px 10px;border-right:1px solid var(--line)}
   .ign{flex:none;height:50px;justify-content:center}
-  .ign:hover{background:#1a1a1a}
+  .ign:hover{background:var(--s3)}
   html[data-theme="social"] body.dash-on main{padding-left:96px}
   html[data-theme="social"] body.dash-on #hdrSearch{display:none!important}
   .ign[data-ign="more"]{margin-top:auto}
@@ -2515,12 +2516,12 @@ html[data-theme="social"] body.dash-on .hdr-heart:not([hidden]){display:inline-g
 .explore-body{display:grid;grid-template-columns:minmax(0,1fr);gap:12px;max-width:940px;margin:0 auto;padding-top:14px}
 .ex-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;grid-auto-flow:dense}
 @media (max-width:640px){.ex-grid{margin:0 -16px}}
-.ex-tile{position:relative;aspect-ratio:1;border:0;padding:12px;overflow:hidden;cursor:pointer;color:#fff;display:flex;align-items:center;justify-content:center;text-align:center;background:#121212}
+.ex-tile{position:relative;aspect-ratio:1;border:0;padding:12px;overflow:hidden;cursor:pointer;color:#fff;display:flex;align-items:center;justify-content:center;text-align:center;background:var(--s1)}
 .ex-tile.big{grid-row:span 2;aspect-ratio:auto}
 .ex-tile.big .ig-tt{font-size:15px;-webkit-line-clamp:9}
 .ex-tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .ex-tile:hover{filter:brightness(1.1)}
-.ex-tile.sk{cursor:default;background:linear-gradient(90deg,#121212,#1f1f1f,#121212);background-size:200% 100%;animation:skel 1.1s linear infinite}
+.ex-tile.sk{cursor:default;background:linear-gradient(90deg,var(--s1),var(--s3),var(--s1));background-size:200% 100%;animation:skel 1.1s linear infinite}
 .ex-who{position:absolute;left:8px;bottom:6px;right:8px;font-size:10.5px;font-weight:700;text-align:left;opacity:.85;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-shadow:0 1px 4px rgba(0,0,0,.5)}
 /* sheets: activity + create */
 .ig-sheet{max-width:560px;display:flex;flex-direction:column;overflow:hidden}
@@ -2543,16 +2544,16 @@ html[data-theme="social"] body.dash-on .hdr-heart:not([hidden]){display:inline-g
 .cr-opt b{display:block;font-size:15px}.cr-opt small{display:block;font-size:12.5px;color:var(--muted)}
 .cr-back{border:0;background:none;color:var(--gold-soft);font-weight:700;font-size:14px;padding:4px 0 10px;cursor:pointer}
 /* search sheet in the Social look: text tabs, clean result rows */
-html[data-theme="social"] .srch-filters{gap:0;border-bottom:1px solid #262626;padding:0}
-html[data-theme="social"] .srch-filters .chip{flex:1 1 0;justify-content:center;background:none;border:0;border-bottom:1.5px solid transparent;border-radius:0;color:#a8a8a8;padding:.7rem .2rem;margin-bottom:-1px}
+html[data-theme="social"] .srch-filters{gap:0;border-bottom:1px solid var(--line);padding:0}
+html[data-theme="social"] .srch-filters .chip{flex:1 1 0;justify-content:center;background:none;border:0;border-bottom:1.5px solid transparent;border-radius:0;color:var(--muted);padding:.7rem .2rem;margin-bottom:-1px}
 html[data-theme="social"] .srch-filters .chip.on{background:none;color:#fff;border-bottom-color:#fff}
 html[data-theme="social"] .sr-list.res .sr-fbtn{display:none}
-html[data-theme="social"] .srch-bar{height:40px;border-radius:10px;border:0;background:#262626}
-html[data-theme="social"] .srch-bar svg{color:#a8a8a8}
+html[data-theme="social"] .srch-bar{height:40px;border-radius:10px;border:0;background:var(--line)}
+html[data-theme="social"] .srch-bar svg{color:var(--muted)}
 html[data-theme="social"] .srch-cancel{color:#fff}
 html[data-theme="social"] .sr-row b{font-weight:700}
-html[data-theme="social"] .srch-pill{height:40px;border-radius:10px;border:0;background:#262626;font-size:15px}
-html[data-theme="social"] .srch-pill svg{color:#a8a8a8}
+html[data-theme="social"] .srch-pill{height:40px;border-radius:10px;border:0;background:var(--line);font-size:15px}
+html[data-theme="social"] .srch-pill svg{color:var(--muted)}
 html[data-theme="social"] .srch-pill kbd{display:none}
 
 /* v69: Social look on computers — slim header like a photo app; everything else lives in the ☰ menu */
@@ -2562,7 +2563,7 @@ html[data-theme="social"] .srch-pill kbd{display:none}
   html[data-theme="social"] .nav-wide{display:none!important}
   html[data-theme="social"] .hdr-menu-btn{display:inline-grid;place-items:center;flex:none;width:42px;height:42px;border-radius:12px}
   html[data-theme="social"] .hdr-menu{display:none;position:absolute;top:calc(100% + 6px);right:16px;left:auto;width:420px;z-index:100;flex-direction:column;align-items:stretch;gap:10px;padding:14px;border-radius:18px;
-    background:#121212;border:1px solid #262626;box-shadow:0 30px 60px -20px #000;max-height:calc(100vh - 90px);overflow:auto}
+    background:var(--s1);border:1px solid var(--line);box-shadow:0 30px 60px -20px var(--bg);max-height:calc(100vh - 90px);overflow:auto}
   html[data-theme="social"] #topbar.menu-open .hdr-menu{display:flex}
   html[data-theme="social"] .hdr-menu .hm-links{display:flex;gap:8px}
   html[data-theme="social"] .hdr-menu .hm-links .navlink{flex:1;text-align:center;padding:.6rem .5rem;border-radius:12px;border:1px solid var(--line);font-size:13px;font-weight:700}
@@ -2584,7 +2585,7 @@ html[data-theme="social"] .srch-pill kbd{display:none}
 .hs-av .ac-av.lg{width:66px;height:66px}
 .hs-av .ac-av.lg b{font-size:22px}
 .hs-av.mine .ac-av{box-shadow:0 0 0 1px var(--line-strong)}
-.hs-av.mine i{position:absolute;right:-1px;bottom:-1px;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-weight:800;font-size:15px;line-height:1;background:#3B8BFF;color:#fff;box-shadow:0 0 0 2.5px var(--bg)}
+.hs-av.mine i{position:absolute;right:-1px;bottom:-1px;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-weight:800;font-size:15px;line-height:1;background:var(--acc);color:var(--on-acc);box-shadow:0 0 0 2.5px var(--bg)}
 .hp-list{display:grid}
 .hp{border-bottom:1px solid var(--line);padding-bottom:6px}
 .hp-sug{font-weight:800;font-size:15px;padding:16px 4px 6px}
@@ -2605,7 +2606,7 @@ html[data-theme="social"] .srch-pill kbd{display:none}
 .hp-join b{display:block;font-size:16px}.hp-join p{color:var(--muted);font-size:13.5px;margin:6px 0 12px}
 .hp-sgw{padding:12px 0;border-bottom:1px solid var(--line)}
 @media (max-width:640px){.home-body{margin:0 -16px}.hp-media{border-radius:0}.hs-row{padding-left:12px;padding-right:12px}.hp header,.hp-cap,.hp-t,.hp-sug{padding-left:12px;padding-right:12px}.hp-acts{padding:4px 6px}.hp-join{margin:14px 12px}.hp-sgw{padding-left:12px;padding-right:12px}}
-.ig-page-bar{position:sticky;top:var(--tbh,60px);z-index:30;display:flex;align-items:center;justify-content:space-between;height:48px;margin:0 -16px 8px;padding:0 6px;background:rgba(0,0,0,.92);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.ig-page-bar{position:sticky;top:var(--tbh,60px);z-index:30;display:flex;align-items:center;justify-content:space-between;height:48px;margin:0 -16px 8px;padding:0 6px;background:rgba(16,13,10,.92);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
 .ig-page-bar b{font-size:16.5px;font-weight:800}
 @media (min-width:640px){.ig-page-bar{margin:0 0 8px;border-radius:0 0 14px 14px}}
 .cr-h{font-size:13px;font-weight:800;color:var(--muted);margin:12px 4px 6px}
@@ -2620,6 +2621,81 @@ html[data-theme="social"] .srch-pill kbd{display:none}
 .tree-stories{max-width:980px;margin:0 auto}
 .tree-stories .hs-row{border-bottom:0;padding-top:12px;padding-bottom:6px}
 @media (max-width:640px){.tree-stories{margin:0 -16px}.tree-stories .hs-row{padding-left:12px;padding-right:12px}}
+/* ===== v72: Roots — memory wall, letters, blessings, daily question, Kin Finder ===== */
+html[data-theme="social"] body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
+html[data-theme="social"] .font-regal,html[data-theme="social"] .ig-un,html[data-theme="social"] .ig-bio>b{font-family:'Fraunces',Georgia,serif;letter-spacing:-.01em}
+html[data-theme="social"] #topbar .font-regal{font-family:'Fraunces',Georgia,serif;letter-spacing:.02em;font-weight:800}
+html[data-theme="social"] .ign.on{color:var(--acc)}
+html[data-theme="social"] .ign.on .ign-l{color:var(--ink)}
+html[data-theme="social"] .ign[data-ign="create"] svg{color:var(--acc)}
+html[data-theme="social"] .ign-me.on{box-shadow:0 0 0 2px var(--bg),0 0 0 3.5px var(--acc)}
+/* memory wall: polaroids and letters in two loose columns */
+.mw{columns:2;column-gap:12px;padding:16px 2px 8px}
+@media (min-width:560px){.mw{columns:3}}
+.mw-card{position:relative;display:block;width:100%;margin:0 0 14px;break-inside:avoid;border:0;cursor:pointer;text-align:left;transform:rotate(var(--tilt,0deg));transition:transform .2s;box-shadow:0 10px 24px -12px rgba(0,0,0,.7)}
+.mw-card:hover{transform:rotate(0) translateY(-2px)}
+.mw-card.ph{background:#F7F1E6;padding:8px 8px 10px;border-radius:3px}
+.mw-ph{display:block;aspect-ratio:1;overflow:hidden;background:#ddd}.mw-ph img{width:100%;height:100%;object-fit:cover}
+.mw-cap{display:block;margin-top:7px;font:600 12px/1.3 'Fraunces',Georgia,serif;color:#3A2E22}
+.mw-card.letter{background:var(--paper,#F4EAD7);color:var(--paper-ink,#2B2016);padding:14px 12px 16px;border-radius:4px;background-image:repeating-linear-gradient(0deg,transparent 0 21px,rgba(43,32,22,.07) 21px 22px)}
+.mw-card.tribute.letter{background-color:#EFE6D2;border-top:4px solid #C98A1B}
+.mw-stamp{display:inline-block;font:700 10px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#8A5A12;border:1.5px solid #C98A1B;border-radius:4px;padding:3px 5px;transform:rotate(-3deg);margin-bottom:8px}
+.mw-tx{display:block;font:500 13.5px/1.45 'Fraunces',Georgia,serif}
+.mw-k{position:absolute;top:6px;right:7px;font-style:normal;font-size:14px}
+/* feed: letters & polaroids */
+.hp{border-bottom:1px solid var(--line);padding:6px 0 10px}
+.hp header b{font-family:'Fraunces',Georgia,serif;font-size:15px}
+.hp-k{margin-left:auto;font-size:17px;padding-right:4px}
+.hp-letter{position:relative;margin:2px 4px;padding:22px 20px 18px;border-radius:6px;background:var(--paper,#F4EAD7);color:var(--paper-ink,#2B2016);box-shadow:0 14px 30px -18px rgba(0,0,0,.8);border-left:6px solid var(--edge,#C98A1B);background-image:repeating-linear-gradient(0deg,transparent 0 27px,rgba(43,32,22,.07) 27px 28px);user-select:none}
+.hp-letter p{font:500 18px/1.55 'Fraunces',Georgia,serif;white-space:pre-line}
+.hp-stamp{position:absolute;top:10px;right:12px;font:700 10px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#8A5A12;border:1.5px solid #C98A1B;border-radius:4px;padding:3px 6px;transform:rotate(4deg)}
+.hp-sign{display:block;text-align:right;margin-top:10px;font:italic 600 14px 'Fraunces',Georgia,serif;color:#6B5238}
+.hp.trib .hp-letter{background-color:#EFE6D2;border-left-color:#C98A1B}
+.hp-polar{position:relative;margin:2px 4px;padding:10px 10px 14px;background:#F7F1E6;border-radius:4px;box-shadow:0 14px 30px -18px rgba(0,0,0,.8);transform:rotate(-.6deg);user-select:none}
+.hp-ph{display:block;aspect-ratio:1;overflow:hidden;background:#ddd}.hp-ph img{width:100%;height:100%;object-fit:cover}
+.hp-polar p{margin-top:10px;font:600 15px/1.4 'Fraunces',Georgia,serif;color:#3A2E22}
+.hp-heart{font-size:84px;color:inherit}
+.hp-acts{display:flex;align-items:center;gap:4px;padding:8px 4px 0}
+.hp-bless{display:inline-flex;align-items:center;gap:7px;height:36px;padding:0 14px;border-radius:999px;border:1px solid var(--line-strong);background:none;color:var(--ink);font-weight:700;font-size:13px;cursor:pointer;transition:background .2s,border-color .2s}
+.hp-bless span{font-size:16px;filter:grayscale(1) opacity(.7);transition:filter .2s}
+.hp-bless.on{border-color:var(--acc);background:rgba(var(--hi-rgb),.12)}
+.hp-bless.on span{filter:none;animation:fpop .45s cubic-bezier(.2,1.6,.4,1)}
+.hp-t{margin-left:auto;font-size:11.5px;color:var(--muted);padding:0 4px}
+@media (max-width:640px){.hp-letter,.hp-polar{margin:2px 12px}.hp-acts{padding:8px 12px 0}}
+/* daily question + kin finder */
+.roots-cards{display:grid;gap:12px;max-width:980px;margin:6px auto 12px}
+.roots-cards.feed{max-width:500px}
+@media (max-width:640px){.roots-cards{margin:6px 0 12px}}
+.rq{position:relative;overflow:hidden;padding:16px 16px 14px;border-radius:20px;background:linear-gradient(135deg,rgba(var(--hi-rgb),.22),rgba(var(--lo-rgb),.14) 70%),var(--s1);border:1px solid rgba(var(--hi-rgb),.35)}
+.rq::after{content:"";position:absolute;right:-40px;top:-40px;width:140px;height:140px;border-radius:50%;background:radial-gradient(circle,rgba(var(--hi-rgb),.35),transparent 70%);pointer-events:none}
+.rq-top{display:flex;align-items:center;gap:8px}
+.rq-sun{font-size:20px}.rq-k{font-size:12.5px;font-weight:800;color:var(--gold-soft)}
+.rq-st{margin-left:auto;font-size:12.5px;font-weight:800;padding:.2rem .6rem;border-radius:999px;background:rgba(var(--hi-rgb),.18);color:var(--ink)}
+.rq-q{margin:10px 0 12px;font:700 20px/1.3 'Fraunces',Georgia,serif;color:var(--ink);position:relative;z-index:1}
+.rq-ok{font-size:13px;color:var(--gold-soft);margin:-4px 0 10px}
+.rq-btns{display:flex;flex-wrap:wrap;gap:8px;position:relative;z-index:1}
+.rq-b{height:36px;padding:0 14px;border-radius:999px;border:1px solid var(--line-strong);background:rgba(var(--bg-rgb),.45);color:var(--ink);font-weight:700;font-size:13px;cursor:pointer}
+.rq-b.pri{background:var(--acc);border-color:var(--acc);color:var(--on-acc)}
+.rq.done .rq-b.pri{background:rgba(var(--bg-rgb),.45);border-color:var(--line-strong);color:var(--ink)}
+.kf{padding:14px 16px;border-radius:20px;background:var(--s1);border:1px solid var(--line)}
+.kf.hit{border-color:rgba(var(--lo-rgb),.6);background:linear-gradient(135deg,rgba(var(--lo-rgb),.18),transparent 70%),var(--s1)}
+.kf-top{display:flex;align-items:center;gap:8px}.kf-top span{font-size:20px}.kf-top b{font-size:15px}
+.kf-p{font-size:13px;color:var(--muted);margin:6px 0 10px;line-height:1.45}
+.kf.quiet .kf-p{margin-bottom:10px}
+.kf-list{display:grid;gap:6px;margin-top:10px}
+.kf-row{display:flex;align-items:center;gap:12px;padding:8px;border-radius:14px;background:rgba(var(--bg-rgb),.4);cursor:pointer}
+.kf-row>div{min-width:0;flex:1}.kf-row b{display:block;font-size:14px}.kf-row small{display:block;font-size:12px;color:var(--muted);line-height:1.35}.kf-row em{font-style:normal;color:var(--ink);font-weight:700}
+.kf-go{flex:none;font-size:12.5px;font-weight:800;color:var(--teal,#2BB5A5)}
+.kf-note{font-size:11.5px;color:var(--muted);margin-top:8px}
+#rootsTree.roots-cards{grid-auto-flow:column;grid-auto-columns:minmax(300px,1fr);overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-bottom:2px}
+#rootsTree.roots-cards::-webkit-scrollbar{display:none}
+#rootsTree.roots-cards>*{scroll-snap-align:start}
+@media (max-width:640px){#rootsTree.roots-cards{grid-auto-columns:88%;padding:0 12px;margin:6px -16px 12px;scroll-padding:0 12px}#rootsTree .rq-q{font-size:18px}}
+/* discover tiles read like letters */
+html[data-theme="social"] .ex-tile:not(.ph) .ig-tt{font-family:'Fraunces',Georgia,serif;font-weight:600}
+html[data-theme="social"] .rt-tabs button{font-size:13px;font-weight:700}
+html[data-theme="social"] .ig-tabs.rt-tabs button.on{color:var(--acc);border-top-color:var(--acc)}
+html[data-theme="social"] .hs-av.mine i{background:var(--acc);color:var(--on-acc)}
 </style>
 </head>
 <body>
@@ -2648,7 +2724,7 @@ html[data-theme="social"] .srch-pill kbd{display:none}
     </nav>
     <button id="hdrSearch" class="icon-btn hdr-search" type="button" hidden aria-label="Search people" title="Search people (/)"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/></svg></button>
     <button id="btnDemo" class="btn-ghost sm demo-toggle" aria-label="Explore the interactive demo tree"><svg class="ico" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="5" r="2.6"/><circle cx="18" cy="5" r="2.6"/><circle cx="12" cy="19" r="2.8"/><path d="M8.6 5h6.8M12 5v11.2" stroke-linecap="round"/><path d="M10.9 17.6l2.6 1.4-2.6 1.4z" fill="var(--gold-hi)" stroke="none"/></svg> <span>Demo</span></button>
-    <button id="hdrHeart" class="icon-btn hdr-heart" type="button" hidden aria-label="Activity"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5S3 15 3 8.8A4.8 4.8 0 0 1 12 6.4a4.8 4.8 0 0 1 9 2.4C21 15 12 20.5 12 20.5z"/></svg></button>
+    <button id="hdrHeart" class="icon-btn hdr-heart" type="button" hidden aria-label="Activity"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20.5a2 2 0 0 0 4 0"/></svg></button>
     <button id="hdrMenuBtn" class="icon-btn hdr-menu-btn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="hdrMenu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
     <div id="hdrMenu" class="hdr-menu">
       <div class="hm-secs" id="hmSecs"></div>
@@ -2707,6 +2783,7 @@ html[data-theme="social"] .srch-pill kbd{display:none}
   <div class="ref-ribbon" id="refRibbon" hidden></div>
   <!-- HERO -->
   <div id="treeStories" class="tree-stories" data-panel="canvas" hidden></div>
+  <div id="rootsTree" class="roots-cards" data-panel="canvas" hidden></div>
   <section id="vault" data-panel="canvas" class="vault-hero pt-5 sm:pt-9 pb-4">
     <div class="min-w-0">
       <div class="demo-banner" id="demoBanner" hidden><span data-hn="Aap <b>interactive demo tree</b> dekh rahe ho. Apna banana hai?">You’re exploring the <b>interactive demo tree</b>. Ready for your own?</span><button class="btn-gold sm" id="demoCreate" data-hn="👑 Apna Dynasty Tree banao">👑 Create Your Dynasty Tree</button></div>
@@ -2961,7 +3038,7 @@ html[data-theme="social"] .srch-pill kbd{display:none}
   </section>
 
   <!-- 🏠 HOME FEED -->
-  <section id="homeHub" data-panel="home" class="hub"><div id="homeBody" class="home-body"></div></section>
+  <section id="homeHub" data-panel="home" class="hub"><div id="rootsFeed" class="roots-cards feed" hidden></div><div id="homeBody" class="home-body"></div></section>
 
   <!-- 🔍 EXPLORE -->
   <section id="exploreHub" data-panel="explore" class="hub"><div id="exploreBody" class="explore-body"></div></section>
@@ -3443,7 +3520,7 @@ html[data-theme="social"] .srch-pill kbd{display:none}
 </div>
 
 <div class="modal top" id="igActivity" role="dialog" aria-modal="true" aria-label="Activity">
-  <div class="modal-panel ig-sheet"><div class="ig-sheet-top"><button class="ig-back" data-close aria-label="Close">‹</button><b data-hn="Notifications">Notifications</b><span style="width:42px"></span></div><div id="igActBody" class="ig-sheet-body"></div></div>
+  <div class="modal-panel ig-sheet"><div class="ig-sheet-top"><button class="ig-back" data-close aria-label="Close">‹</button><b data-hn="Updates">Updates</b><span style="width:42px"></span></div><div id="igActBody" class="ig-sheet-body"></div></div>
 </div>
 <div class="modal top" id="igCreate" role="dialog" aria-modal="true" aria-label="Create">
   <div class="modal-panel ig-sheet"><div class="ig-sheet-top"><button class="ig-back" data-close aria-label="Close">✕</button><b id="igCreateTitle">Create</b><span style="width:42px"></span></div><div id="igCreateBody" class="ig-sheet-body"></div></div>
@@ -6309,8 +6386,8 @@ const dashOn = () => document.body.classList.contains('dash-on');
 // The look new visitors get: Utsav Night (indigo, marigold, rani pink). Nabu: black & gold wapas chahiye? look.js mein DV_LOOK = 'classic' likho.
 const DEFAULT_THEME = window.DV_LOOK === 'classic' ? 'imperial' : window.DV_LOOK === 'utsav' ? 'utsav' : 'social';
 const THEMES = {
-  social:{ name:'Social', free:true, blurb:'Clean black, bright photos and colourful rings — like your favourite photo app.', hb:'Saaf black look, chamakti photos aur rangeen rings — aapki pasandida photo app jaisa.',
-    sw:['#000000', '#3B8BFF', '#FFFFFF', '#FF4F8B'], dust:['255,255,255', '200,200,210', '160,160,170', '120,120,130'], tree:['#FFFFFF', '#1f1f1f', '#4a4a4a', '#9a9a9a', '#e5e5e5'] },
+  social:{ name:'Roots', free:true, blurb:'Warm ink, marigold and teal — a family network, not a photo app.', hb:'Garam syaahi, genda aur teal — family network, photo app nahi.',
+    sw:['#100D0A', '#FFA41B', '#2BB5A5', '#F6EFE4'], dust:['255,246,232', '255,164,27', '43,181,165', '180,160,130'], tree:['#F6EFE4', '#2A241D', '#5c5040', '#a8977c', '#efe4d0'] },
   utsav:{ name:'Utsav Night', free:true, blurb:'Indigo night sky with marigold and rani-pink lights — festive, warm and bright.', hb:'Neela raat ka aasmaan, genda aur rani-pink roshni — tyohaar jaisa, garam aur chamakdaar.',
     sw:['#140C33', '#FFB627', '#FF4F8B', '#7B5CFF'], dust:['255,236,200', '255,182,39', '255,79,139', '123,92,255'], tree:['#FF4F8B', '#3A1550', '#FF7A59', '#FFB627', '#FFE7A8'] },
   imperial:{ name:'Imperial Gold', free:true, blurb:'Deep charcoal and rich metallic gold — the classic dynasty look.', hb:'Deep charcoal aur asli metallic gold — classic dynasty look.',
@@ -6400,8 +6477,8 @@ const DASH_TABS = [
   { id:'film', ico:'🎬', en:'Documentary', hn:'Documentary', sen:'Film', shn:'Film', main:true },
   { id:'voice', ico:'🎙️', en:'Voices', hn:'Awaaz', sen:'Voices', shn:'Awaaz', main:true },
   { id:'refer', ico:'🎁', en:'Share & Earn', hn:'Share & Kamao', sen:'Share', shn:'Share', main:true },
-  { id:'home', ico:'📰', en:'Feed', hn:'Feed' },
-  { id:'explore', ico:'🔍', en:'Explore', hn:'Explore' },
+  { id:'home', ico:'🫂', en:'Family Circle', hn:'Family Circle' },
+  { id:'explore', ico:'🧭', en:'Discover', hn:'Khojo' },
   { id:'photo', ico:'🧩', en:'Family Collage', hn:'Family Collage' },
   { id:'reunion', ico:'✨', en:'Reunion Portrait', hn:'Reunion Portrait' },
   { id:'trail', ico:'🗺️', en:'Migration Trail', hn:'Migration Trail' },
@@ -7242,6 +7319,7 @@ function initV10() {
   igInit();
   igInitNav();
   homeInit();
+  rootsInit();
   document.addEventListener('click', e => { const l = e.target.closest('#commHub [data-ig-like]'); if (!l) return; l.classList.toggle('on'); l.textContent = l.classList.contains('on') ? '♥' : '♡'; if (l.classList.contains('on')) srchBurst(l); });
   initRoute();
   initLeafUI();
@@ -7854,7 +7932,7 @@ function netMineHTML(v) {
   if (!n.h) {
     const sug = NET.check.h || netSuggest(v);
     return `<div class="net-box" id="netMine"><div class="net-h">🌐 ${hx('Put your family online', 'Apni family online laao')}</div>
-      <p class="tiny muted">${hx('Pick a handle so relatives and other families can find you — like Instagram. Public: anyone can see your tree. Private: people only see your family name and member count until you approve them.', 'Ek handle chuno taaki rishtedaar aur baaki families aapko dhoondh sakein — Instagram jaisa. Public: koi bhi tree dekh sakta hai. Private: jab tak aap approve na karo, log sirf family ka naam aur members ki ginti dekhte hain.')}</p>
+      <p class="tiny muted">${hx('Pick a handle so relatives and other families can find you. Public: anyone can see your tree. Private: people only see your family name and member count until you approve them.', 'Ek handle chuno taaki rishtedaar aur baaki families aapko dhoondh sakein. Public: koi bhi tree dekh sakta hai. Private: jab tak aap approve na karo, log sirf family ka naam aur members ki ginti dekhte hain.')}</p>
       <div class="net-claim"><span class="net-at">@</span><input id="netHandle" maxlength="24" autocomplete="off" autocapitalize="off" spellcheck="false" value="${esc(sug)}" aria-label="${esc(hx('Family handle', 'Family handle'))}"><button class="btn-gold sm" id="netClaimBtn">${hx('Create profile', 'Profile banao')}</button></div>
       <p class="tiny net-hint" id="netHint">${NET.check.h === sug && NET.check.free === false ? '✕ ' + hx('Taken — try another', 'Le liya gaya — doosra try karo') : NET.check.h === sug && NET.check.free ? '✓ ' + hx('Available', 'Khaali hai') : hx('Small letters, numbers, dots and underscores.', 'Chhote letters, numbers, dot aur underscore.')}</p>
       <div class="net-vis-pick">${pub ? '🌍 ' + hx('Your dynasty is Public — the profile will be public.', 'Aapki dynasty Public hai — profile public banegi.') : '🔒 ' + hx('Your dynasty is Private — the profile will be private (follow requests).', 'Aapki dynasty Private hai — profile private banegi (follow request se).')}</div></div>`;
@@ -8354,7 +8432,7 @@ function accHubHTML() {
   const me = ACC.tok && ACC.me;
   if (!me) return `${srchPillHTML()}<div class="ac-join"><div class="ac-join-art" aria-hidden="true"><span>👵</span><span>👨‍👩‍👧</span><span>🧓</span></div>
       <h3 class="font-regal gold-text">${hx('Your family, your people', 'Aapki family, aapke log')}</h3>
-      <p class="muted text-sm">${hx('Make your own DynastyVault account — like Instagram, but for families. Share your family tree, follow relatives and see their memories.', 'Apna DynastyVault account banao — Instagram jaisa, par families ke liye. Apna family tree share karo, rishtedaaron ko follow karo aur unki yaadein dekho.')}</p>
+      <p class="muted text-sm">${hx('Make your own DynastyVault account. Show your family tree, keep your circle of relatives, and find cousins whose trees share your ancestors.', 'Apna DynastyVault account banao. Apna family tree dikhao, rishtedaaron ka circle banao, aur woh cousins dhoondho jinke tree mein aapke purvaj hain.')}</p>
       <div class="flex flex-wrap gap-2 mt-4 justify-center"><button class="btn-gold" data-ac-auth="signup">✨ ${hx('Create account', 'Account banao')}</button><button class="btn-ghost" data-ac-auth="login">${hx('Log in', 'Log in')}</button></div></div>
     <div class="ac-sec"><div class="eyebrow">◆ ${hx('People on DynastyVault', 'DynastyVault pe log')}</div>${accExploreHTML()}</div>`;
   return `${srchPillHTML()}${srchRingHTML()}<div class="ac-me"><div class="ac-me-top" data-pf-open="${esc(me.un)}" role="button" tabindex="0">${accAv(me.ph, me.name, 'lg halo')}<div class="min-w-0"><b class="ac-me-name">${esc(me.name)}</b><small>@${esc(me.un)}${me.city ? ' · ' + esc(me.city) : ''} · ${me.vis === 'private' ? '🔒 ' + hx('Private', 'Private') : '🌍 ' + hx('Public', 'Public')}</small></div></div>
@@ -8366,7 +8444,7 @@ function accHubHTML() {
     <div class="seg ac-tabs mt-5" role="tablist"><button role="tab" data-ac-tab="feed" class="${ACC.tab === 'feed' ? 'on' : ''}">🏠 ${hx('Feed', 'Feed')}</button><button role="tab" data-ac-tab="explore" class="${ACC.tab === 'explore' ? 'on' : ''}">🔍 ${hx('Explore', 'Explore')}</button></div>
     <div class="ac-sec">${ACC.tab === 'feed' ? accFeedHTML() : accExploreHTML()}</div>`;
 }
-const srchPillHTML = () => `<button class="srch-pill" data-sr-search type="button"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/></svg><span>${hx('Search friends & family', 'Dost aur family dhoondho')}</span><kbd>/</kbd></button>`;
+const srchPillHTML = () => `<button class="srch-pill" data-sr-search type="button"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/></svg><span>${hx('Search people, surnames, places', 'Log, surname, jagah dhoondho')}</span><kbd>/</kbd></button>`;
 function accPaint() {
   accHeader();
   const box = $('#commHub'); if (!box) return;
@@ -8394,7 +8472,7 @@ async function openPerson(un, tab) {
     if (j.d) prof = netProfFromPayload(j.d, un); else prof = { kind:'net', n:c.famName || c.name, place:c.city, flag:'', bg:'gold', show:{}, gens:[], posts:[], stories:[], trail:[], st:{ s:0, m:c.m || 0, g:c.g || 0, vo:0, ph:0 } };
     Object.assign(prof, { id:'acc_' + un, kind:'acct', un, h:un, person:c, vis:c.vis, open:j.open, fol:c.followers, fing:c.following, views:c.views, following:j.isFollowing, requested:j.requested, followsYou:j.followsYou, owner:j.self, hasFam:!!j.d });
     if (prof.snap) delete dynTreeCache[prof.id];
-    NET.cache['acc:' + un] = prof; dynStopVoice(); dynUI.id = prof.id; dynUI.list = null; dynUI.igPost = null; dynUI.igTab = tab || 'grid';
+    NET.cache['acc:' + un] = prof; dynStopVoice(); dynUI.id = prof.id; dynUI.list = null; dynUI.igPost = null; dynUI.igTab = tab || (prof.snap && j.open ? 'tree' : 'grid');
     dynUI.tab = tab || (dynSecList(prof)[0] || ['tree'])[0]; renderDynModal(); const sc = $('#dynModal .modal-panel'); if (sc) sc.scrollTop = 0;
   } catch (e) { const box = $('#dynBody'); if (box) box.innerHTML = `<p class="muted p-6">${e.status === 404 ? hx('This account does not exist any more.', 'Yeh account ab nahi hai.') : hx('Could not open the profile. Check the internet and try again.', 'Profile nahi khuli. Internet check karke phir try karo.')}</p>`; }
 }
@@ -8685,12 +8763,14 @@ function srchInit() {
 }
 
 /* ---------- 📱 Social-style profile page (photo + stats + bio + highlights + posts grid) ---------- */
-const IG_GRADS = ['linear-gradient(135deg,#FF8A5B,#FF4F8B)', 'linear-gradient(135deg,#7B5CFF,#3BA4FF)', 'linear-gradient(135deg,#FFB627,#FF7A59)', 'linear-gradient(135deg,#14B8A6,#3B82F6)', 'linear-gradient(135deg,#F472B6,#A855F7)', 'linear-gradient(135deg,#22C55E,#14B8A6)'];
+const IG_GRADS = ['#B4532A', '#1F6F6A', '#C98A1B', '#3E4A8C', '#8E3B54', '#4F6B2E'];   // terracotta, teal, turmeric, indigo, rose-wood, olive
 const IG_ICO = { post:'📝', memory:'🕊️', voice:'🎙️' };
 function igCount(n) { n = +n || 0; return n >= 1e6 ? (n / 1e6).toFixed(1).replace(/\.0$/, '') + 'M' : n >= 1e4 ? (n / 1e3).toFixed(1).replace(/\.0$/, '') + 'K' : dynNum(n); }
+const igStamp = t => { try { return new Date(t).toLocaleDateString(state.lang === 'hi' ? 'hi-IN' : 'en-IN', { month:'short', year:'numeric' }); } catch (e) { return ''; } };
 function igTile(x, i) {
-  return `<button class="ig-tile${x.ph ? ' ph' : ''}" data-ig-post="${i}" style="${x.ph ? '' : `background:${IG_GRADS[i % IG_GRADS.length]}`}" aria-label="${esc(trunc(x.text || '', 60))}">
-    ${x.ph ? `<img src="${x.ph}" alt="" loading="lazy">` : `<span class="ig-tt">${esc(trunc(x.text || '', 90))}</span>`}<i class="ig-tk" aria-hidden="true">${IG_ICO[x.k] || '📝'}</i></button>`;
+  const tilt = [-2.2, 1.6, -1, 2, -1.6, 1.1][i % 6];
+  return `<button class="mw-card${x.ph ? ' ph' : ' letter'}${x.k === 'memory' ? ' tribute' : ''}" data-ig-post="${i}" style="--tilt:${tilt}deg" aria-label="${esc(trunc(x.text || '', 60))}">
+    ${x.ph ? `<span class="mw-ph"><img src="${x.ph}" alt="" loading="lazy"></span><span class="mw-cap">${esc(trunc(x.text || '', 50))}</span>` : `<span class="mw-stamp">${esc(igStamp(x.at))}</span><span class="mw-tx">${esc(trunc(x.text || '', 140))}</span>`}<i class="mw-k" aria-hidden="true">${x.k === 'memory' ? '🪔' : IG_ICO[x.k] || '📝'}</i></button>`;
 }
 function igPostView(p, x) {
   const c = p.person || {};
@@ -8729,17 +8809,17 @@ function igProfileHTML(p, tv) {
   else if (tab === 'trail') body = `<div class="ig-trail">${dynTrailHTML(p)}</div>`;
   else {
     const list = tab === 'mem' ? mem : tab === 'voice' ? posts.filter(x => x.k === 'voice') : posts;
-    body = list.length ? `<div class="ig-grid">${list.map(x => igTile(x, posts.indexOf(x))).join('')}</div>`
+    body = list.length ? `<div class="mw">${list.map(x => igTile(x, posts.indexOf(x))).join('')}</div>`
       : `<div class="ig-empty"><span class="ig-empty-i">📷</span><b>${p.owner ? hx('Share your first memory', 'Apni pehli yaad share karo') : hx('No posts yet', 'Abhi koi post nahi')}</b>${p.owner ? `<p>${hx('Posts and memories from your family feed show up here.', 'Aapki family feed ki posts aur yaadein yahan dikhengi.')}</p>` : ''}</div>`;
   }
   return `<div class="ig">
     <div class="ig-top"><button class="ig-back" data-close aria-label="${esc(hx('Close', 'Band karo'))}">‹</button><b class="ig-un">${esc(p.un)}${p.vis === 'private' ? ' <span aria-label="private">🔒</span>' : ''}</b><button class="ig-back" data-pf-share aria-label="${esc(hx('Share profile', 'Profile share karo'))}">⋯</button></div>
     <div class="ig-head"><span class="ig-av${fresh ? ' fresh' : ''}">${accAv(c.ph, c.name, 'xxl story')}</span>
-      <div class="ig-stats"><span><b>${igCount(posts.length)}</b><small>${hx('posts', 'posts')}</small></span>${p.local ? `<span><b>${dynNum(mem2)}</b><small>${hx('family', 'family')}</small></span><span><b>${gens}</b><small>${hx('generations', 'peedhiyan')}</small></span>` : `<button data-pf-list="followers"><b>${igCount(p.fol)}</b><small>${hx('followers', 'followers')}</small></button><button data-pf-list="following"><b>${igCount(p.fing)}</b><small>${hx('following', 'following')}</small></button>`}</div></div>
+      <div class="ig-stats"><span><b>${igCount(posts.length)}</b><small>${hx('memories', 'yaadein')}</small></span><span><b>${dynNum(mem2)}</b><small>${hx('family', 'family')}</small></span>${p.local ? `<span><b>${gens}</b><small>${hx('generations', 'peedhiyan')}</small></span>` : `<button data-pf-list="followers"><b>${igCount(p.fol)}</b><small>${hx('in circle', 'circle mein')}</small></button>`}</div></div>
     <div class="ig-bio"><b>${esc(c.name || p.un)}</b>${c.famName || mem2 ? `<small class="ig-cat">${c.famName ? '🏰 ' + esc(c.famName) : ''}${mem2 ? ` · ${dynNum(mem2)} ${hx('family members', 'family members')}${gens ? ` · ${gens} ${hx('generations', 'peedhiyan')}` : ''}` : ''}</small>` : ''}${c.bio ? `<p>${esc(c.bio)}</p>` : ''}${c.city ? `<small class="ig-city">📍 ${esc(c.city)}</small>` : ''}${p.followsYou && !p.owner ? `<small class="ig-fy">${hx('Follows you', 'Aapko follow karte hain')}</small>` : ''}</div>
     <div class="ig-btns">${fbtn}<button class="ig-btn" ${p.local ? 'data-ig-card' : 'data-pf-share'}>${p.local ? hx('Family Card', 'Family Card') : hx('Share profile', 'Profile share karo')}</button>${p.owner ? `<button class="ig-btn sq" data-sr-search aria-label="${esc(hx('Find people', 'Log dhoondho'))}">👤+</button>` : `<button class="ig-btn sq" data-pf-report aria-label="${esc(hx('Report', 'Report'))}">⚑</button>`}</div>
     ${hl.length ? `<div class="ig-hl" role="list">${hl.map(([k, ico, l]) => `<button class="ig-hl-i${tab === k ? ' on' : ''}" data-ig-tab="${k}" role="listitem"><span>${ico}</span><small>${l}</small></button>`).join('')}</div>` : ''}
-    ${p.open && !dynUI.list ? `<div class="ig-tabs" role="tablist"><button role="tab" data-ig-tab="grid" class="${tab === 'grid' || tab === 'voice' ? 'on' : ''}" aria-label="${esc(hx('Posts', 'Posts'))}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/></svg></button><button role="tab" data-ig-tab="tree" class="${tab === 'tree' ? 'on' : ''}" aria-label="${esc(hx('Family tree', 'Family tree'))}"><span aria-hidden="true">🌳</span></button><button role="tab" data-ig-tab="mem" class="${tab === 'mem' ? 'on' : ''}" aria-label="${esc(hx('Memories', 'Yaadein'))}"><span aria-hidden="true">🕊️</span></button></div>` : ''}
+    ${p.open && !dynUI.list ? `<div class="ig-tabs rt-tabs" role="tablist"><button role="tab" data-ig-tab="tree" class="${tab === 'tree' ? 'on' : ''}">🌳 ${hx('Tree', 'Tree')}</button><button role="tab" data-ig-tab="grid" class="${tab === 'grid' || tab === 'voice' ? 'on' : ''}">🖼️ ${hx('Memory wall', 'Memory wall')}</button><button role="tab" data-ig-tab="mem" class="${tab === 'mem' ? 'on' : ''}">🪔 ${hx('Tributes', 'Shraddhanjali')}</button></div>` : ''}
     <div class="ig-body">${body}</div></div>`;
 }
 function igRender(p) {
@@ -8778,16 +8858,22 @@ const IGI = {
   treeOn:'<svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2.8"/><circle cx="5.5" cy="18.5" r="2.8"/><circle cx="18.5" cy="18.5" r="2.8"/><path d="M12 7.6V12M12 12H5.5v3.9M12 12h6.5v3.9" fill="none"/></svg>',
   feed:'<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><path d="M7.5 8.5h9M7.5 12h9M7.5 15.5h5"/></svg>',
   feedOn:'<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5" fill="currentColor"/><path d="M7.5 8.5h9M7.5 12h9M7.5 15.5h5" stroke="#000"/></svg>',
+  compass:'<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg>',
+  compassOn:'<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><circle cx="12" cy="12" r="9" fill="currentColor"/><path d="M15.5 8.5l-2 5-5 2 2-5z" fill="var(--bg)" stroke="var(--bg)"/></svg>',
+  seed:'<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 17V10M12 13c-2.6 0-4-1.6-4-4 2.6 0 4 1.6 4 4zM12 11.5c0-2.2 1.3-3.6 3.6-3.6 0 2.2-1.3 3.6-3.6 3.6z"/></svg>',
+  circle:'<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="3" r="1.6" fill="currentColor"/><circle cx="19.8" cy="16.5" r="1.6" fill="currentColor"/><circle cx="4.2" cy="16.5" r="1.6" fill="currentColor"/></svg>',
+  circleOn:'<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5" fill="currentColor"/><circle cx="12" cy="3" r="2" fill="currentColor"/><circle cx="19.8" cy="16.5" r="2" fill="currentColor"/><circle cx="4.2" cy="16.5" r="2" fill="currentColor"/></svg>',
+  bell:'<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20.5a2 2 0 0 0 4 0"/></svg>',
   more:'<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>'
 };
 const IGN_ITEMS = () => [
-  ['canvas', IGI.home, IGI.homeOn, hx('Home', 'Home')],
-  ['explore', IGI.search, IGI.searchOn, hx('Search', 'Search')],
-  ['create', IGI.plus, IGI.plus, hx('Create', 'Banao')],
-  ['home', IGI.feed, IGI.feedOn, hx('Feed', 'Feed')],
+  ['canvas', IGI.tree, IGI.treeOn, hx('Tree', 'Tree')],
+  ['explore', IGI.compass, IGI.compassOn, hx('Discover', 'Khojo')],
+  ['create', IGI.seed, IGI.seed, hx('Create', 'Banao')],
+  ['home', IGI.circle, IGI.circleOn, hx('Circle', 'Circle')],
   ['arena', IGI.people, IGI.peopleOn, hx('People', 'Log'), 'wide'],
-  ['heart', IGI.heart, IGI.heart, hx('Activity', 'Activity'), 'wide'],
-  ['me', '', '', hx('Profile', 'Profile')],
+  ['heart', IGI.bell, IGI.bell, hx('Updates', 'Updates'), 'wide'],
+  ['me', '', '', hx('Me', 'Main')],
   ['more', IGI.more, IGI.more, hx('More', 'Aur'), 'wide']
 ];
 function igNavRender() {
@@ -8929,7 +9015,7 @@ function homeLocalPosts() {
 function homeSamplePosts() { return igSampleExplore().slice(0, 8).map(x => Object.assign({}, x, { suggested:true })); }
 function homeStoriesHTML() {
   const v = ownVault() || V(); const me = ACC.tok && ACC.me; const self = v && v.people[v.self];
-  const items = [`<button class="hs-i" data-hs="mine"><span class="hs-av mine">${accAv((me && me.ph) || (self && self.avatar), (me && me.name) || (self && self.name) || 'Me', 'lg')}<i>+</i></span><small>${hx('Your story', 'Aapki story')}</small></button>`];
+  const items = [`<button class="hs-i" data-hs="mine"><span class="hs-av mine">${accAv((me && me.ph) || (self && self.avatar), (me && me.name) || (self && self.name) || 'Me', 'lg')}<i>+</i></span><small>${hx('Share today', 'Aaj ka pal')}</small></button>`];
   const st = v ? activeStories(v) : []; const by = new Map(); st.forEach((s, i) => { if (!by.has(s.byPid)) by.set(s.byPid, i); });
   by.forEach((i, pid) => { const a = v.people[pid]; items.push(`<button class="hs-i" data-hs-local="${i}"><span class="hs-av">${accAv(a && a.avatar, (a && a.name) || st[i].by, 'lg story live')}</span><small>${esc(((a && a.name) || st[i].by).split(' ')[0])}</small></button>`); });
   (SRCH.ring || []).forEach(c => items.push(`<button class="hs-i" data-sr-open="${esc(c.un)}"><span class="hs-av">${accAv(c.ph, c.name, 'lg story')}</span><small>${esc(c.un)}</small></button>`));
@@ -8939,11 +9025,12 @@ function homeStoriesHTML() {
 function homePostHTML(x, i) {
   const open = x.sample ? `data-dyn-open="${esc(x.sample)}"` : x.local ? 'data-home-me' : `data-sr-open="${esc(x.who.un)}"`;
   const joined = x.k === 'joined'; const text = joined ? hx(`Joined DynastyVault${x.who.fam ? ' with the ' + x.who.fam : ''} 👋`, `DynastyVault pe aaye${x.who.fam ? ' — ' + x.who.fam : ''} 👋`) : x.text;
-  return `<article class="hp">${x.suggested && i === x._first ? `<div class="hp-sug">${hx('Suggested posts', 'Suggested posts')}</div>` : ''}
-    <header ${open} role="button" tabindex="0">${accAv(x.who.ph, x.who.name, 'sm story')}<div class="min-w-0"><b>${esc(x.who.un)}</b>${x.about || x.suggested ? `<small>${x.suggested ? hx('Suggested for you', 'Aapke liye') : esc(x.about)}</small>` : ''}</div><span class="hp-more" aria-hidden="true">⋯</span></header>
-    <div class="hp-media${x.ph ? ' ph' : ''}" data-hp-like style="${x.ph ? '' : `background:${IG_GRADS[i % IG_GRADS.length]}`}">${x.ph ? `<img src="${x.ph}" alt="" loading="lazy">` : `<p>${esc(trunc(text, 240))}</p>`}<span class="hp-heart" aria-hidden="true">♥</span></div>
-    <div class="hp-acts"><button class="ig-act" data-ig-like aria-label="${esc(hx('Like', 'Like'))}">♡</button><button class="ig-act" ${open} aria-label="${esc(hx('Comment', 'Comment'))}">💬</button><button class="ig-act" data-hp-share="${i}" aria-label="${esc(hx('Share', 'Share'))}">✈</button><span class="hp-k" aria-hidden="true">${IG_ICO[x.k] || (joined ? '👋' : '📝')}</span></div>
-    ${x.ph && text ? `<p class="hp-cap"><b>${esc(x.who.un)}</b> ${esc(text)}</p>` : ''}<small class="hp-t">${timeAgo(x.at)}</small></article>`;
+  const trib = x.k === 'memory'; const act = trib ? ['🪔', hx('Light a diya', 'Diya jalao')] : ['💛', hx('Bless', 'Ashirwad')];
+  return `<article class="hp${trib ? ' trib' : ''}">${x.suggested && i === x._first ? `<div class="hp-sug">${hx('From families around the world', 'Duniya bhar ki families se')}</div>` : ''}
+    <header ${open} role="button" tabindex="0">${accAv(x.who.ph, x.who.name, 'sm story')}<div class="min-w-0"><b>${esc(x.who.name)}</b><small>@${esc(x.who.un)}${x.about ? ' · ' + hx('about', 'ke baare mein') + ' ' + esc(x.about) : ''}${x.suggested ? ' · ' + hx('suggested', 'suggested') : ''}</small></div><span class="hp-k" aria-hidden="true">${trib ? '🕊️' : IG_ICO[x.k] || (joined ? '👋' : '📝')}</span></header>
+    ${x.ph ? `<div class="hp-polar" data-hp-like><span class="hp-ph"><img src="${x.ph}" alt="" loading="lazy"></span>${text ? `<p>${esc(trunc(text, 200))}</p>` : ''}<span class="hp-heart" aria-hidden="true">${act[0]}</span></div>`
+      : `<div class="hp-letter" data-hp-like style="--edge:${IG_GRADS[i % IG_GRADS.length]}"><span class="hp-stamp">${esc(igStamp(x.at))}</span><p>${esc(trunc(text, 320))}</p><span class="hp-sign">— ${esc(x.who.name.split(' ')[0])}</span><span class="hp-heart" aria-hidden="true">${act[0]}</span></div>`}
+    <div class="hp-acts"><button class="hp-bless" data-ig-like data-ico="${act[0]}" aria-label="${esc(act[1])}"><span>${act[0]}</span>${act[1]}</button><button class="ig-act" ${open} aria-label="${esc(hx('Open their family', 'Unki family dekho'))}">🌳</button><button class="ig-act" data-hp-share="${i}" aria-label="${esc(hx('Share', 'Share'))}">📤</button><small class="hp-t">${timeAgo(x.at)}</small></div></article>`;
 }
 function renderHome() {
   const box = $('#homeBody'); if (!box) return;
@@ -8968,7 +9055,7 @@ function openLocalProfile(tab) {
   const vp = (v.feed || []).slice(0, 15); prof.posts.forEach((x, i) => { if (vp[i] && vp[i].photo) x.ph = vp[i].photo; });
   Object.assign(prof, { id:'acc_' + prof.h, kind:'acct', un:prof.h, local:true, owner:true, open:true, hasFam:true, vis:'private', fol:0, fing:0, views:0,
     person:{ name:self.name || v.name, ph:self.avatar || '', bio:v.motto ? v.motto.replace(/^[“"']+|[”"']+$/g, '') : '', city:String(v.region || '').split(',')[0], famName:v.name } });
-  delete dynTreeCache[prof.id]; NET.cache['acc:' + prof.h] = prof; dynStopVoice(); dynUI.id = prof.id; dynUI.list = null; dynUI.igPost = null; dynUI.igTab = tab || 'grid';
+  delete dynTreeCache[prof.id]; NET.cache['acc:' + prof.h] = prof; dynStopVoice(); dynUI.id = prof.id; dynUI.list = null; dynUI.igPost = null; dynUI.igTab = tab || 'tree';
   renderDynModal(); openModal('dynModal'); const sc = $('#dynModal .modal-panel'); if (sc) sc.scrollTop = 0;
 }
 /* --- the ‹ back bar on feature pages --- */
@@ -8977,6 +9064,7 @@ function igPageBar() {
   const id = dash.tab; const t = DASH_TABS.find(x => x.id === id);
   const show = isSocial() && document.body.classList.contains('dash-on') && !['home', 'explore', 'canvas'].includes(id);
   const ts = $('#treeStories'); if (ts) { ts.hidden = !(isSocial() && id === 'canvas'); if (!ts.hidden) ts.innerHTML = homeStoriesHTML(); }
+  rootsPaint();
   if (ts && !ts.hidden && accOn() && ACC.tok && SRCH.ring == null) srchRingLoad().then(() => { if (dash.tab === 'canvas') igPageBar(); });
   bar.hidden = !show; if (!show) return;
   bar.innerHTML = `<button class="ig-back" data-ign="canvas" aria-label="${esc(hx('Back to home', 'Home pe wapas'))}">‹</button><b>${id === 'plans' ? hx('Plans', 'Plans') : t ? esc(hx(t.en, t.hn)) : ''}</b><button class="ig-back" data-ign="create" aria-label="${esc(hx('Create', 'Banao'))}">＋</button>`;
@@ -8992,10 +9080,108 @@ function homeInit() {
     if (t.dataset.hpShare != null) { const x = HOME.posts[+t.dataset.hpShare]; if (x) shareWhatsApp(`${x.who.name}: “${trunc(x.text || '', 200)}” — DynastyVault 👑`); return; }
     const like = t.hasAttribute('data-ig-like') ? t : t.closest('.hp').querySelector('[data-ig-like]');
     if (t.hasAttribute('data-hp-like')) { if (e.detail < 2) return; const h = t.querySelector('.hp-heart'); h.classList.remove('pop'); void h.offsetWidth; h.classList.add('pop'); if (like.classList.contains('on')) return; }
-    like.classList.toggle('on'); like.textContent = like.classList.contains('on') ? '♥' : '♡'; if (like.classList.contains('on')) srchBurst(like);
+    like.classList.toggle('on'); if (like.classList.contains('hp-bless')) { /* label stays */ } else like.textContent = like.classList.contains('on') ? '♥' : '♡'; if (like.classList.contains('on')) srchBurst(like);
   });
   document.addEventListener('click', e => { const o = e.target.closest('[data-dyn-open]'); if (!o || o.closest('#arena') || o.closest('#dynModal')) return; e.preventDefault(); openDyn(o.dataset.dynOpen); });
   const pb = $('#igPage'); if (pb) pb.addEventListener('click', e => { const b = e.target.closest('[data-ign]'); if (b) igNavGo(b.dataset.ign, b); });
+}
+
+/* ---------- 🌅 Roots: daily question + 🧬 Kin Finder (the parts no photo app has) ---------- */
+const RQ = [
+  ['What was your very first job, and how much did it pay?', 'Aapki pehli naukri kya thi, aur kitni tankhwah milti thi?'],
+  ['What did your childhood home look like?', 'Aapka bachpan ka ghar kaisa dikhta tha?'],
+  ['How did you and your partner first meet?', 'Aap aur aapke jeevan-saathi pehli baar kaise mile?'],
+  ['What is the one dish only you can make the family way?', 'Kaunsi dish sirf aap ghar wale tareeke se bana sakte ho?'],
+  ['What was your favourite game as a child?', 'Bachpan mein aapka pasandida khel kaunsa tha?'],
+  ['Which festival do you remember most from childhood, and why?', 'Bachpan ka kaunsa tyohaar sabse zyada yaad hai, aur kyun?'],
+  ['What was school like for you?', 'Aapka school kaisa tha?'],
+  ['Who was your best friend growing up?', 'Bade hote hue aapka sabse accha dost kaun tha?'],
+  ['What did your parents do for a living?', 'Aapke maa-baap kya kaam karte the?'],
+  ['What is the bravest thing you have ever done?', 'Aapne zindagi mein sabse himmat wala kaam kya kiya?'],
+  ['What song reminds you of your youth?', 'Kaunsa gaana aapko jawani ki yaad dilata hai?'],
+  ['What was the first film you saw in a cinema?', 'Cinema mein dekhi aapki pehli film kaunsi thi?'],
+  ['How did your family celebrate weddings back then?', 'Us zamane mein shaadiyan kaise manayi jaati thi?'],
+  ['What was the biggest change you saw in your lifetime?', 'Aapne apni zindagi mein sabse bada badlav kya dekha?'],
+  ['What advice would you give your 20-year-old self?', 'Apne 20 saal ke roop ko aap kya salah doge?'],
+  ['Where did our family come from, as far back as you know?', 'Jitna aap jaante ho, hamari family kahan se aayi thi?'],
+  ['What did a normal day look like when you were ten?', 'Jab aap das saal ke the, ek aam din kaisa hota tha?'],
+  ['What was the first thing you ever bought with your own money?', 'Apne paise se khareedi pehli cheez kya thi?'],
+  ['Which grandparent were you closest to, and why?', 'Aap kis dada-dadi ya nana-nani ke sabse kareeb the, aur kyun?'],
+  ['What is a saying your mother or father always used?', 'Aapki maa ya papa ka koi takiya-kalaam kya tha?'],
+  ['What did you want to become when you grew up?', 'Bade hoke aap kya banna chahte the?'],
+  ['What was your proudest moment?', 'Aapka sabse garv wala pal kaunsa tha?'],
+  ['How did people send news to family far away?', 'Door rehne wali family ko khabar kaise bhejte the?'],
+  ['What was the hardest time our family went through?', 'Hamari family ka sabse mushkil waqt kaunsa tha?'],
+  ['What is a family tradition you want us to keep?', 'Family ki kaunsi parampara aap chahte ho ki hum zinda rakhein?'],
+  ['What did you eat on special days?', 'Khaas dinon pe kya khaana banta tha?'],
+  ['Tell the story behind your name.', 'Apne naam ke peeche ki kahani batao.'],
+  ['What was the first trip you ever took?', 'Aapki pehli yatra kaunsi thi?'],
+  ['What made you laugh the most as a child?', 'Bachpan mein aapko sabse zyada hasi kis baat pe aati thi?'],
+  ['What do you want your great-grandchildren to know about you?', 'Aap chahte ho ki aapke parpote aapke baare mein kya jaanein?']
+];
+const RQ_DAY0 = Date.UTC(2026, 9, 1);
+const rqDay = () => Math.floor((Date.now() + 5.5 * 3600000 - RQ_DAY0) / 86400000);
+const rqToday = () => RQ[((rqDay() % RQ.length) + RQ.length) % RQ.length];
+function rqState() { state.rq = state.rq || { streak:0, last:-9, done:{} }; return state.rq; }
+function rqStreak() { const r = rqState(); return r.last >= rqDay() - 1 ? r.streak : 0; }
+function rqMarkDone() {
+  const r = rqState(); const d = rqDay(); if (r.done[d]) return;
+  r.streak = r.last === d - 1 ? r.streak + 1 : 1; r.last = d; r.done[d] = 1; save();
+  toast(hx(`🔥 ${r.streak}-day Roots streak!`, `🔥 ${r.streak} din ki Roots streak!`), 'info', 2600);
+}
+function rqCardHTML() {
+  const q = rqToday(); const r = rqState(); const done = !!r.done[rqDay()]; const st = rqStreak();
+  return `<div class="rq${done ? ' done' : ''}"><div class="rq-top"><span class="rq-sun" aria-hidden="true">🌅</span><span class="rq-k">${hx('Today’s Roots question', 'Aaj ka Roots sawaal')}</span>${st ? `<span class="rq-st">🔥 ${st}</span>` : ''}</div>
+    <p class="rq-q">${esc(hx(q[0], q[1]))}</p>
+    ${done ? `<p class="rq-ok">✓ ${hx('Answered today — come back tomorrow for a new question.', 'Aaj ka jawab ho gaya — kal naya sawaal aayega.')}</p>` : ''}
+    <div class="rq-btns"><button class="rq-b pri" data-rq="voice">🎙️ ${hx('Record the answer', 'Jawab record karo')}</button><button class="rq-b" data-rq="write">✍️ ${hx('Write', 'Likho')}</button><button class="rq-b" data-rq="ask" aria-label="${esc(hx('Ask family on WhatsApp', 'WhatsApp pe family se poocho'))}">📤 ${hx('Ask family', 'Family se poocho')}</button></div></div>`;
+}
+function rqGo(kind) {
+  const q = rqToday(); const text = hx(q[0], q[1]);
+  if (kind === 'ask') { shareWhatsApp(isHn() ? `🌅 Aaj ka sawaal — ${text}\nJawab voice note mein bhejo, main hamare family tree mein save karunga 🌳` : `🌅 Today’s question for our family — ${text}\nReply with a voice note and I’ll save it in our family tree 🌳`); return; }
+  if (!ownVault() && isDemo(V())) { openWizard('form'); toast(hx('Make your family tree first — then save answers in it.', 'Pehle family tree banao — phir jawab usme save karo.'), 'info'); return; }
+  feedUI.drafts.ig = { text:`🌅 ${text}\n\n`, about:'', as:defaultAuthor(ownVault() || V()), photo:null, audio:null, secs:0, kind:kind === 'voice' ? 'voice' : 'memory', vis:'family', bg:'gold' };
+  state.rqPending = rqDay(); igOpenCreate(kind === 'voice' ? 'voice' : 'memory');
+}
+/* --- 🧬 Kin Finder --- */
+const KIN = { items:null, busy:false, at:0, err:'' };
+function kinNames() {
+  const v = ownVault(); if (!v) return [];
+  return Object.values(v.people).filter(p => String(p.name || '').trim().split(/\s+/).length > 1 && p.id !== v.self).map(p => [p.name, (String(p.born || '').match(/^\d{4}/) || [''])[0]]).slice(0, 300);
+}
+async function kinLoad(force) {
+  if (!accOn() || KIN.busy || (!force && KIN.items && Date.now() - KIN.at < 300000)) return;
+  const names = kinNames(); if (!names.length) { KIN.items = []; return; }
+  KIN.busy = true;
+  try { const j = await accApi('/api/people/kin', { names }); KIN.items = j.items || []; KIN.fams = j.families || 0; KIN.err = ''; }
+  catch (e) { KIN.err = e.message; KIN.items = KIN.items || []; }
+  KIN.busy = false; KIN.at = Date.now();
+}
+function kinCardHTML() {
+  if (!accOn() || !ownVault()) return '';
+  if (KIN.items == null) { kinLoad().then(() => { if (dash.tab === 'canvas' || dash.tab === 'home') rootsPaint(); }); return `<div class="kf"><div class="kf-top"><span aria-hidden="true">🧬</span><b>${hx('Kin Finder', 'Kin Finder')}</b></div><p class="kf-p">${hx('Looking for your ancestors in other families’ trees…', 'Doosri families ke tree mein aapke purvaj dhoondh rahe hain…')}</p></div>`; }
+  const it = KIN.items;
+  if (!it.length) return `<div class="kf quiet"><div class="kf-top"><span aria-hidden="true">🧬</span><b>${hx('Kin Finder', 'Kin Finder')}</b></div><p class="kf-p">${hx('No relatives found yet. Every new family on DynastyVault is checked for your ancestors’ names — add your great-grandparents to find more cousins.', 'Abhi koi rishtedaar nahi mila. DynastyVault pe aane wali har nayi family mein aapke purvajon ke naam dhoondhe jaate hain — par-dada/par-dadi jodo taaki aur cousins milein.')}</p>
+    <div class="rq-btns"><button class="rq-b" data-kin="add">＋ ${hx('Add ancestors', 'Purvaj jodo')}</button><button class="rq-b" data-sr-invite>💌 ${hx('Invite relatives', 'Rishtedaar bulao')}</button></div></div>`;
+  return `<div class="kf hit"><div class="kf-top"><span aria-hidden="true">🧬</span><b>${it.length === 1 ? hx('A possible relative found!', 'Ek sambhavit rishtedaar mila!') : hx(`${it.length} possible relatives found!`, `${it.length} sambhavit rishtedaar mile!`)}</b></div>
+    <div class="kf-list">${it.slice(0, 4).map(g => `<div class="kf-row" data-kin-open="${esc(g.un)}" role="button" tabindex="0">${accAv(g.ph, g.name, 'md story')}<div class="min-w-0 flex-1"><b>${esc(g.name)}</b><small>${hx('Their tree also has', 'Unke tree mein bhi hain')} ${g.people.slice(0, 2).map(p => `<em>${esc(p.person)}${p.y ? ' (' + p.y + ')' : ''}</em>`).join(', ')}${g.people.length > 2 ? ` +${g.people.length - 2}` : ''}</small></div><span class="kf-go">${hx('See tree', 'Tree dekho')} ›</span></div>`).join('')}</div>
+    <p class="kf-note">${hx('Same names can be a coincidence — open their tree and ask them before you assume.', 'Ek jaise naam sanyog bhi ho sakte hain — pehle unka tree dekho aur unse poocho.')}</p></div>`;
+}
+function rootsPaint() {
+  const html = rqCardHTML() + kinCardHTML();
+  ['#rootsTree', '#rootsFeed'].forEach(sel => { const el = $(sel); if (!el) return; const show = isSocial() && (sel === '#rootsTree' ? dash.tab === 'canvas' : dash.tab === 'home'); el.hidden = !show; if (show) el.innerHTML = html; });
+}
+function rootsInit() {
+  document.addEventListener('click', e => {
+    const t = e.target.closest('[data-rq],[data-kin],[data-kin-open]'); if (!t) return;
+    if (t.dataset.rq) { rqGo(t.dataset.rq); return; }
+    if (t.dataset.kin === 'add') { if (ownVault()) openAddAncestor(); return; }
+    if (t.dataset.kinOpen) { dynUI.list = null; openPerson(t.dataset.kinOpen, 'tree'); }
+  });
+  $('#igCreate').addEventListener('click', e => {   // the daily answer was posted → streak
+    if (!e.target.closest('[data-c="post"]') || state.rqPending !== rqDay()) return;
+    setTimeout(() => { if (!feedUI.drafts.ig) { state.rqPending = null; rqMarkDone(); rootsPaint(); } }, 300);
+  });
 }
 
 /* ---------- 🌳 Dynasty-Canvas-style tree inside dynasty profiles ---------- */
@@ -14411,7 +14597,7 @@ setTimeout(async () => {
     if (live !== HAS_CLOUD) { HAS_CLOUD = live; setRoyalFeatures(); try { renderPlans(); renderAddons(); updatePrices(true); } catch (e) { /* views refresh later */ } }
   } catch (e) { /* server asleep or offline — keep the last known state */ }
 }, 900);
-if (/[?&]dvtest=1/.test(location.search)) window.__dv = { get state() { return state; }, save, saveNow, startDemo, openTutorial, NET, FILM, ACC, SRCH, openSearch, IGN, igOpenCreate, igOpenActivity, openLocalProfile, HOME, dynUI, dynTreeVault, renderFilm, filmPoll, openPerson };   // test hook, only with ?dvtest=1
+if (/[?&]dvtest=1/.test(location.search)) window.__dv = { get state() { return state; }, save, saveNow, startDemo, openTutorial, NET, FILM, ACC, SRCH, openSearch, IGN, igOpenCreate, igOpenActivity, openLocalProfile, HOME, KIN, rqMarkDone, rootsPaint, dynUI, dynTreeVault, renderFilm, filmPoll, openPerson };   // test hook, only with ?dvtest=1
 
 
 function toast(msg, type = 'info', ms = 3200) {
