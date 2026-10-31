@@ -55,3 +55,20 @@ window.DV_I18N = {"langs":[{"code":"en","native":"English"},{"code":"hn","native
   add('hn', { pm_bio:'Almora se Dilli, Dilli se Toronto. Dadi ki recipes aur Dada ji ki kahaniyaan zinda rakh rahe hain.', pm_share:'Profile share karo', pm_voices:'Awaazein', pm_mem:'Yaadein', pm_journey:'Safar' });
   add('hi', { pm_posts:'पोस्ट', pm_fol:'फ़ॉलोअर्स', pm_fing:'फ़ॉलोइंग', pm_bio:'अल्मोड़ा से दिल्ली, दिल्ली से टोरंटो। दादी की रेसिपी और दादा जी की कहानियाँ ज़िंदा रख रहे हैं।', pm_follow:'फ़ॉलो', pm_share:'प्रोफ़ाइल शेयर', pm_tree:'फ़ैमिली ट्री', pm_voices:'आवाज़ें', pm_mem:'यादें', pm_journey:'सफ़र' });
 })(window.DV_I18N && window.DV_I18N.home);
+
+/* added v72: Roots — the family-first ideas (English, Hinglish, Hindi; other languages show English) */
+(function (H) {
+  if (!H) return; const add = (c, o) => { H[c] = Object.assign(H[c] || {}, o); };
+  add('en', { rt1_h:'Find relatives you didn’t know', rt1_p:'Add your grandparents and great-grandparents. When another family’s tree has the same ancestor, Kin Finder shows you — maybe a cousin you have never met.',
+    rt2_h:'One question a day for the elders', rt2_p:'“How did you two meet?” “What was your first job?” Record the answer in their own voice, or send the question to the family WhatsApp group. Keep your streak going.',
+    rt3_h:'A diya, not a like', rt3_p:'Memories are kept like letters and polaroids on a family wall. You send blessings to the living, and light a diya for those who are gone.',
+    pm_today:'Share today', pm_qk:'Today’s Roots question', pm_q:'How did Dadi and Dada ji first meet?', pm_qb:'🎙️ Record the answer', pm_letter:'Dada ji opened his sweet shop in Chandni Chowk with ₹40 and one brass kadhai.', pm_sign:'— Papa', pm_diya:'28 diyas lit', pm_kin:'Hari Rawat (1931) is also in the Bisht family’s tree' });
+  add('hn', { rt1_h:'Woh rishtedaar dhoondho jinhe aap jaante nahi', rt1_p:'Apne dada-dadi aur par-dada jodo. Jab kisi aur family ke tree mein wahi purvaj hoga, Kin Finder aapko dikha dega — shayad koi cousin jisse aap kabhi mile hi nahi.',
+    rt2_h:'Bado ke liye roz ek sawaal', rt2_p:'“Aap dono pehli baar kaise mile?” “Pehli naukri kya thi?” Jawab unki apni awaaz mein record karo, ya sawaal family WhatsApp group mein bhejo. Apni streak chalu rakho.',
+    rt3_h:'Like nahi, diya', rt3_p:'Yaadein family wall pe chitthiyon aur polaroid ki tarah rakhi jaati hain. Jo saath hain unhe ashirwad bhejo, jo chale gaye unke liye diya jalao.',
+    pm_today:'Aaj share karo', pm_qk:'Aaj ka Roots sawaal', pm_q:'Dadi aur Dada ji pehli baar kaise mile?', pm_qb:'🎙️ Jawab record karo', pm_letter:'Dada ji ne Chandni Chowk mein ₹40 aur ek peetal ki kadhai se mithai ki dukaan kholi thi.', pm_sign:'— Papa', pm_diya:'28 diye jale', pm_kin:'Hari Rawat (1931) Bisht family ke tree mein bhi hain' });
+  add('hi', { rt1_h:'वे रिश्तेदार खोजिए जिन्हें आप नहीं जानते', rt1_p:'अपने दादा-दादी और परदादा जोड़िए। जब किसी और परिवार के ट्री में वही पूर्वज होंगे, Kin Finder आपको दिखा देगा — शायद कोई कज़िन जिनसे आप कभी मिले ही नहीं।',
+    rt2_h:'बड़ों के लिए रोज़ एक सवाल', rt2_p:'“आप दोनों पहली बार कैसे मिले?” “पहली नौकरी क्या थी?” जवाब उनकी अपनी आवाज़ में रिकॉर्ड कीजिए, या सवाल परिवार के WhatsApp ग्रुप में भेजिए। अपनी स्ट्रीक जारी रखिए।',
+    rt3_h:'लाइक नहीं, दीया', rt3_p:'यादें परिवार की दीवार पर चिट्ठियों और पोलरॉइड की तरह रखी जाती हैं। जो साथ हैं उन्हें आशीर्वाद भेजिए, जो चले गए उनके लिए दीया जलाइए।',
+    pm_today:'आज साझा करें', pm_qk:'आज का Roots सवाल', pm_q:'दादी और दादा जी पहली बार कैसे मिले?', pm_qb:'🎙️ जवाब रिकॉर्ड करें', pm_letter:'दादा जी ने चांदनी चौक में ₹40 और एक पीतल की कड़ाही से मिठाई की दुकान खोली थी।', pm_sign:'— पापा', pm_diya:'28 दीये जले', pm_kin:'हरि रावत (1931) बिष्ट परिवार के ट्री में भी हैं' });
+})(window.DV_I18N && window.DV_I18N.home);
