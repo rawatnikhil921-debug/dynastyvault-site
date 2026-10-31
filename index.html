@@ -131,6 +131,12 @@ section.band{padding-block:clamp(48px,7vw,84px);border-top:1px solid var(--line)
 .plan ul{list-style:none;padding:0;margin:16px 0 22px;display:grid;gap:8px;font-size:.95rem}
 .plan li{display:flex;gap:10px}.plan li::before{content:"◆";color:var(--gold);font-size:.7rem;margin-top:.45em;flex:none}
 .plan .btn{margin-top:auto}
+.plan .perday{margin:6px 0 0;font-size:.9rem;color:var(--muted)}.plan .perday b{color:var(--ink)}
+.plan-micro{margin:10px 0 0;font-size:.8rem;color:var(--muted);text-align:center}
+.trust-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:20px;max-width:860px}
+.trust-row>div{display:flex;gap:10px;align-items:flex-start;padding:14px 16px;border-radius:14px;border:1px solid var(--line);font-size:.9rem;line-height:1.45}
+.trust-row a{color:var(--gold-hi);font-weight:700}
+@media (max-width:700px){.trust-row{grid-template-columns:1fr}}
 @media (max-width:700px){.plans{grid-template-columns:1fr}}
 
 .svc{margin-top:28px;border-radius:20px;border:1px solid var(--line);overflow:hidden;max-width:860px}
@@ -502,9 +508,16 @@ footer a{color:var(--ink);text-decoration:none}footer a:hover{color:var(--gold-h
         </article>
         <article class="plan royal"><span class="seal-badge" aria-hidden="true">BEST<br>VALUE</span>
           <h3 style="color:var(--gold-hi)" data-t="royal_h">Royal Dynasty Lifetime</h3><div class="price"><span data-inr="₹999" data-usd="$19">₹999</span> <s class="was" data-inr="₹1,999" data-usd="$39">₹1,999</s><small data-t="pay_once">pay once</small></div>
+          <p class="perday" data-perday></p>
           <ul><li data-t="royal_li1"></li><li data-t="royal_li2"></li><li data-cloud="1" hidden data-t="royal_li3"></li><li data-t="royal_li4"></li><li data-t="royal_li5"></li><li data-t="royal_li6"></li></ul>
           <a class="btn btn-gold" href="app.html#buy-royal" data-t="get_royal">Get Royal for life</a>
+          <p class="plan-micro" data-t="royal_micro"></p>
         </article>
+      </div>
+      <div class="trust-row">
+        <div><span aria-hidden="true">💳</span><span data-t="trust1"></span></div>
+        <div><span aria-hidden="true">🛡️</span><span data-t="trust2"></span></div>
+        <div><span aria-hidden="true">📱</span><span data-t="trust3"></span></div>
       </div>
       <div class="svc" aria-label="Made for you">
         <div class="svc-row"><div><b data-t="svc1_b"></b><small data-t="svc1_s"></small></div><span class="amt"><span data-inr="₹199" data-usd="$4.99">₹199</span></span><a class="btn btn-ghost" href="app.html#buy-photo" data-t="order">Order</a></div>
@@ -547,6 +560,8 @@ footer a{color:var(--ink);text-decoration:none}footer a:hover{color:var(--gold-h
         <details><summary data-t="q6"></summary><p data-t="a6"></p></details>
         <details><summary data-t="q7"></summary><p data-t="a7"></p></details>
         <details><summary data-t="q8"></summary><p data-t="a8"></p></details>
+        <details><summary data-t="q9"></summary><p data-t="a9"></p></details>
+        <details><summary data-t="q10"></summary><p data-t="a10"></p></details>
       </div>
     </div>
   </section>
@@ -646,10 +661,14 @@ footer a{color:var(--ink);text-decoration:none}footer a:hover{color:var(--gold-h
       const [path, hash] = raw.split('#'); a.setAttribute('href', path.split('?')[0] + '?lang=' + lang + (hash ? '#' + hash : ''));
     });
   }
-  sel.addEventListener('change', () => { lang = sel.value; try { localStorage.setItem('dv.lang', lang); } catch (e) { /* ignore */ } apply(); });
+  function paintPerDay() {   // "Less than ₹3 a day for one year" — the price per day in the visitor's currency
+    const c = window.__dvCur || 'inr'; const p = c === 'inr' ? '₹3' : '$0.06';
+    document.querySelectorAll('[data-perday]').forEach(el => { const t = String(T('per_day') || ''); const i = t.indexOf('{p}'); el.textContent = ''; if (i < 0) { el.textContent = t; return; } const b = document.createElement('b'); b.setAttribute('data-inr', '₹3'); b.setAttribute('data-usd', '$0.06'); b.textContent = p; el.append(t.slice(0, i), b, t.slice(i + 3)); });
+  }
+  sel.addEventListener('change', () => { lang = sel.value; try { localStorage.setItem('dv.lang', lang); } catch (e) { /* ignore */ } apply(); paintPerDay(); });
   // ---- prices: rupees in India, dollars elsewhere (visitor can switch)
   let cur = 'inr'; try { const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; if (!/^Asia\/(Kolkata|Calcutta)$/.test(tz)) cur = 'usd'; } catch (e) { /* keep rupees */ }
-  const showCur = c => { document.querySelectorAll('[data-inr]').forEach(el => { el.textContent = el.dataset[c]; }); document.querySelectorAll('.cur-switch button').forEach(b => b.classList.toggle('on', b.dataset.cur === c)); };
+  const showCur = c => { window.__dvCur = c; paintPerDay(); document.querySelectorAll('[data-inr]').forEach(el => { el.textContent = el.dataset[c]; }); document.querySelectorAll('.cur-switch button').forEach(b => b.classList.toggle('on', b.dataset.cur === c)); };
   document.querySelectorAll('.cur-switch button').forEach(b => b.addEventListener('click', () => showCur(b.dataset.cur)));
   showCur(cur);
   // cloud voice rows only when the server says its voice key is in
