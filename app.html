@@ -13508,6 +13508,7 @@ function psInline(on) {
   else if (m.classList.contains('ps-inline')) { m.classList.remove('ps-inline', 'open'); m.setAttribute('aria-modal', 'true'); document.body.appendChild(m); }
 }
 async function rpMountInline() {
+  try { let gone = 0; Object.values(state.vaults || {}).forEach(v => { if (v && v.reunion && v.reunion.by === 'classic') { delete v.reunion; gone++; } }); if (gone) saveNow(); } catch (e) { /* nothing to clean */ }
   if (isOpen('portraitModal') && !$('#portraitModal').classList.contains('ps-inline')) closeModal('portraitModal');
   psInline(true); GM.tab = 'photo';
   try { setEngine(); await gmOpen(); } catch (e) { /* the studio still shows; it refreshes on the next visit */ }
@@ -14382,10 +14383,7 @@ const RP_LOCKED = true;   // Nabu: AI reunion portrait stays locked until the Ge
 function rpHTML(v, n) {
   const royal = isRoyal();
   let btn;
-  const classic = `<button class="btn-gold w-full btn-wrap" data-gm-classic>🎨 ${hx('Generate classic portrait', 'Classic portrait banao')}</button>
-      <p class="tiny muted mt-2">${hx('A painted family portrait from everyone’s real photos — free, ready in seconds.', 'Sabki asli photos se painting jaisa family portrait — free, seconds mein.')}</p>`;
-  if (RP_LOCKED) btn = `${classic}
-      <button class="btn-ghost w-full btn-wrap mt-2 rp-locked" id="rpLocked" aria-disabled="true">🔒 ${hx('AI portrait — coming soon', 'AI portrait — jaldi aa raha hai')}</button>
+  if (RP_LOCKED) btn = `<button class="btn-gold w-full btn-wrap rp-locked" id="rpLocked" aria-disabled="true">🔒 ${hx('Generate portrait', 'Portrait banao')}</button>
       <label class="btn-ghost w-full btn-wrap mt-2 gm-up" style="cursor:pointer;justify-content:center"><input type="file" id="gmFile" accept="image/*" class="hidden">📁 ${hx('Upload a family photo', 'Family photo upload karo')}</label>
       <button class="btn-ghost w-full btn-wrap mt-2" data-gm-collage-go>🧩 ${hx('Make the free Family Collage', 'Free Family Collage banao')}</button>`;
   else if (!royal) btn = `<button class="btn-gold w-full btn-wrap" id="rpBuy">🔒 ${hx('Generate portrait', 'Portrait banao')}</button>
@@ -14396,7 +14394,7 @@ function rpHTML(v, n) {
       ${RP.left != null ? `<p class="tiny muted mt-2">${hx(`${RP.left} portraits left in your plan`, `Plan mein ${RP.left} portrait baaki`)}</p>` : ''}
       ${state.rpAsked && !RP.ready ? `<label class="chip mt-2 gm-up" style="cursor:pointer"><input type="file" id="gmFile" accept="image/*" class="hidden">📁 ${hx('Add the portrait we sent you', 'Humari bheji portrait yahan daalo')}</label>` : ''}`;
   return `<div class="gm-step"><b class="gm-n">3</b><div class="min-w-0"><div class="gm-h">${hx('Generate', 'Banao')}</div>
-      ${n || RP_LOCKED ? btn + (RP_LOCKED ? '' : `<button class="btn-ghost w-full btn-wrap mt-2" data-gm-classic>🎨 ${hx('Or a free classic portrait', 'Ya free classic portrait')}</button>`) : `<p class="tiny gm-warn">${hx('Add photos to the family profiles first.', 'Pehle family profiles mein photos daalo.')}</p>`}
+      ${n || RP_LOCKED ? btn : `<p class="tiny gm-warn">${hx('Add photos to the family profiles first.', 'Pehle family profiles mein photos daalo.')}</p>`}
       ${v.reunion ? `<button class="chip mt-2" id="gmRemove">✕ ${hx('Remove this portrait', 'Yeh portrait hatao')}</button>` : ''}
     </div></div>`;
 }
@@ -15382,108 +15380,6 @@ function reelHomeHTML() {   // home: the Diwali card in season, otherwise the Dy
   return `<button type="button" class="home-reel" data-reel="dynasty"><span class="hrl-ico" aria-hidden="true">🎞️</span><span class="hrl-tx"><b>${esc(hx('Make your Dynasty Reel', 'Apni Dynasty Reel banao'))}</b><small>${esc(hx('Watch your tree grow, generation by generation — a video for WhatsApp Status.', 'Apna tree peedhi-dar-peedhi ugta dekho — WhatsApp Status ke liye video.'))}</small></span><span class="hrl-go">${esc(hx('Make it', 'Banao'))}</span></button>`;
 }
 
-/* ---------- 🎨 Portrait · Classic mode v2 — a formal painted studio portrait (no AI: drawn on the phone from the real photos) ---------- */
-const CL_CLOTH = [['#7a1f2b', '#3d0c14'], ['#1f3a5f', '#0d1a2e'], ['#1f5a4a', '#0b2a22'], ['#6b4a1f', '#2e1e0a'], ['#5a2a6b', '#24102e'], ['#8a6a3a', '#3a2a12'], ['#2a2a2a', '#0e0e0e']];
-function clCurtain(x, W, H, side) {   // a heavy velvet drape gathered by a gold rope
-  const cw = W * 0.17, x0 = side < 0 ? 0 : W - cw; const tieY = H * 0.6;
-  x.save(); x.beginPath();
-  if (side < 0) { x.moveTo(0, 0); x.lineTo(cw, 0); x.bezierCurveTo(cw * 0.95, H * 0.3, cw * 0.35, tieY * 0.9, cw * 0.42, tieY); x.bezierCurveTo(cw * 0.5, H * 0.8, cw * 0.9, H * 0.92, cw * 1.05, H); x.lineTo(0, H); }
-  else { x.moveTo(W, 0); x.lineTo(W - cw, 0); x.bezierCurveTo(W - cw * 0.95, H * 0.3, W - cw * 0.35, tieY * 0.9, W - cw * 0.42, tieY); x.bezierCurveTo(W - cw * 0.5, H * 0.8, W - cw * 0.9, H * 0.92, W - cw * 1.05, H); x.lineTo(W, H); }
-  x.closePath(); x.clip();
-  for (let i = 0; i < 18; i++) { const fx = x0 + (cw * 1.1) * (i / 18) - (side > 0 ? cw * 0.05 : 0); const g = x.createLinearGradient(fx, 0, fx + cw / 18 * 1.2, 0); g.addColorStop(0, '#3a0710'); g.addColorStop(0.45, '#9e1f2c'); g.addColorStop(0.6, '#b8323d'); g.addColorStop(1, '#3a0710'); x.fillStyle = g; x.fillRect(fx, 0, cw / 18 * 1.25, H); }
-  const sh = x.createLinearGradient(x0, 0, x0 + cw, 0); sh.addColorStop(side < 0 ? 0 : 1, 'rgba(0,0,0,.45)'); sh.addColorStop(side < 0 ? 1 : 0, 'rgba(0,0,0,0)'); x.fillStyle = sh; x.fillRect(x0, 0, cw, H);
-  x.restore();
-  // gold rope tie-back with a tassel
-  const tx = side < 0 ? cw * 0.42 : W - cw * 0.42; x.save(); x.strokeStyle = '#d9b25a'; x.lineWidth = H * 0.012; x.lineCap = 'round'; x.beginPath(); x.moveTo(side < 0 ? 0 : W, tieY - H * 0.02); x.quadraticCurveTo(tx, tieY + H * 0.03, tx + side * -H * 0.005, tieY); x.stroke();
-  const tg = x.createLinearGradient(tx, tieY, tx, tieY + H * 0.12); tg.addColorStop(0, '#f2d48a'); tg.addColorStop(1, '#8a6420'); x.fillStyle = tg; x.beginPath(); x.moveTo(tx - H * 0.018, tieY + H * 0.02); x.lineTo(tx + H * 0.018, tieY + H * 0.02); x.lineTo(tx + H * 0.03, tieY + H * 0.12); x.lineTo(tx - H * 0.03, tieY + H * 0.12); x.closePath(); x.fill();
-  x.fillStyle = '#e6c26a'; x.beginPath(); x.arc(tx, tieY + H * 0.015, H * 0.02, 0, Math.PI * 2); x.fill(); x.restore();
-}
-function clValance(x, W, H) {   // scalloped velvet valance with a gold fringe along the top
-  const vh = H * 0.085; x.save(); const g = x.createLinearGradient(0, 0, 0, vh * 1.4); g.addColorStop(0, '#5a0c16'); g.addColorStop(1, '#2a050a'); x.fillStyle = g;
-  x.beginPath(); x.moveTo(0, 0); x.lineTo(W, 0); x.lineTo(W, vh * 0.7); const n = 9; for (let i = n; i >= 0; i--) { const px = W * i / n; x.quadraticCurveTo(px + W / n / 2, vh * 1.5, px, vh * 0.7); } x.closePath(); x.fill();
-  x.strokeStyle = '#d9b25a'; x.lineWidth = H * 0.006; x.beginPath(); x.moveTo(W, vh * 0.7); for (let i = n; i >= 0; i--) { const px = W * i / n; x.quadraticCurveTo(px + W / n / 2, vh * 1.5, px, vh * 0.7); } x.stroke();
-  x.fillStyle = '#c99a3e'; for (let i = 0; i < n; i++) { const px = W * (i + 0.5) / n; x.beginPath(); x.moveTo(px - H * 0.008, vh * 1.08); x.lineTo(px + H * 0.008, vh * 1.08); x.lineTo(px, vh * 1.32); x.closePath(); x.fill(); }
-  x.restore();
-}
-function clBust(x, cx, cy, d, cloth, k) {   // shoulders, a garment with a collar, and a neck; cy is the centre of the face
-  const ry = d * 0.54, rx = d * 0.42; const sw = d * 1.02, by = cy + ry * 3.1;
-  x.save();
-  const g = x.createLinearGradient(cx - sw, cy + ry, cx + sw * 0.6, by); g.addColorStop(0, cloth[0]); g.addColorStop(1, cloth[1]); x.fillStyle = g;
-  x.beginPath(); x.moveTo(cx - sw, by); x.bezierCurveTo(cx - sw * 1.02, cy + ry * 1.45, cx - rx * 1.25, cy + ry * 1.05, cx - rx * 0.42, cy + ry * 0.92); x.lineTo(cx + rx * 0.42, cy + ry * 0.92); x.bezierCurveTo(cx + rx * 1.25, cy + ry * 1.05, cx + sw * 1.02, cy + ry * 1.45, cx + sw, by); x.closePath(); x.fill();
-  x.fillStyle = 'rgba(0,0,0,.28)'; x.beginPath(); x.moveTo(cx - rx * 0.42, cy + ry * 0.92); x.lineTo(cx, cy + ry * (1.7 + 0.2 * (k % 2))); x.lineTo(cx + rx * 0.42, cy + ry * 0.92); x.closePath(); x.fill();   // collar
-  x.strokeStyle = 'rgba(255,214,150,.22)'; x.lineWidth = d * 0.025; x.beginPath(); x.moveTo(cx - sw, by); x.bezierCurveTo(cx - sw * 1.02, cy + ry * 1.45, cx - rx * 1.25, cy + ry * 1.05, cx - rx * 0.42, cy + ry * 0.92); x.stroke();   // rim light from the key lamp
-  const ng = x.createLinearGradient(cx - rx * 0.4, 0, cx + rx * 0.4, 0); ng.addColorStop(0, '#6b4630'); ng.addColorStop(0.5, '#9a6b4b'); ng.addColorStop(1, '#5a3a26'); x.fillStyle = ng; x.fillRect(cx - rx * 0.38, cy + ry * 0.55, rx * 0.76, ry * 0.45);
-  x.restore();
-}
-async function clHead(x, p, cx, cy, d) {
-  const ry = d * 0.54, rx = d * 0.42; const img = p.avatar ? await loadImg(p.avatar) : null;
-  const off = document.createElement('canvas'); off.width = Math.ceil(rx * 2.6); off.height = Math.ceil(ry * 2.6); const o = off.getContext('2d'); const ox = off.width / 2, oy = off.height / 2;
-  if (img) {
-    const iw = img.naturalWidth, ih = img.naturalHeight, s = Math.max(rx * 2.25 / iw, ry * 2.25 / ih), dw = iw * s, dh = ih * s;
-    if ('filter' in o) o.filter = 'sepia(.28) saturate(.92) contrast(1.08) brightness(1.04)';
-    o.drawImage(img, ox - dw / 2, oy - ry * 1.12 - Math.max(0, (dh - ry * 2.25) * 0.16), dw, dh); o.filter = 'none';
-    o.globalCompositeOperation = 'soft-light'; o.fillStyle = 'rgba(255,190,120,.35)'; o.fillRect(0, 0, off.width, off.height); o.globalCompositeOperation = 'source-over';
-  } else {   // an elegant painted silhouette instead of a placeholder
-    const hg = o.createRadialGradient(ox - rx * 0.3, oy - ry * 0.35, rx * 0.1, ox, oy, ry * 1.25); hg.addColorStop(0, '#4a3326'); hg.addColorStop(1, '#1a100a'); o.fillStyle = hg; o.fillRect(0, 0, off.width, off.height);
-    o.fillStyle = '#120a06'; o.beginPath(); o.ellipse(ox, oy - ry * 0.42, rx * 1.02, ry * 0.62, 0, Math.PI, 0); o.fill();   // hair
-    o.strokeStyle = 'rgba(255,214,150,.35)'; o.lineWidth = rx * 0.08; o.beginPath(); o.ellipse(ox, oy, rx * 0.97, ry * 0.97, 0, Math.PI * 0.75, Math.PI * 1.35); o.stroke();
-    o.fillStyle = 'rgba(233,207,138,.55)'; o.font = `600 ${Math.round(ry * 0.34)}px ${RL_SERIF}`; o.textAlign = 'center'; o.textBaseline = 'middle'; o.fillText(gmInitials(p.name), ox, oy + ry * 0.05);
-  }
-  o.globalCompositeOperation = 'destination-in'; o.save(); o.translate(ox, oy); o.scale(rx / ry, 1);
-  const m = o.createRadialGradient(0, 0, ry * 0.55, 0, 0, ry * 1.04); m.addColorStop(0, 'rgba(0,0,0,1)'); m.addColorStop(0.75, 'rgba(0,0,0,.92)'); m.addColorStop(1, 'rgba(0,0,0,0)'); o.fillStyle = m; o.beginPath(); o.arc(0, 0, ry * 1.04, 0, Math.PI * 2); o.fill(); o.restore();
-  x.drawImage(off, cx - ox, cy - oy);
-}
-async function gmClassic() {
-  const v = V(); const { rows, total } = gmCollageRows(v);
-  if (!total) { gmSay(hx('Add family members to the tree first.', 'Pehle tree mein family members jodo.'), 'warn'); return; }
-  gmSay(hx('🎨 Painting your family portrait…', '🎨 Aapka family portrait paint ho raha hai…'));
-  try { await psFonts(); } catch (e) { /* fonts optional */ }
-  const W = 3200, H = 1800;   // 16:9 — fills the studio frame, like a real group portrait
-  const c = document.createElement('canvas'); c.width = W; c.height = H; const x = c.getContext('2d'); const rnd = rlRand(hashStr(v.id || v.name || 'v'));
-  // painted studio backdrop: warm mottled canvas + a soft spotlight behind the family
-  x.fillStyle = '#3a2016'; x.fillRect(0, 0, W, H);
-  for (let i = 0; i < 70; i++) { const bx = rnd() * W, by = rnd() * H * 0.85, br = H * (0.15 + rnd() * 0.35); const cols = ['rgba(140,86,52,', 'rgba(92,52,32,', 'rgba(60,32,22,', 'rgba(168,110,66,']; const g = x.createRadialGradient(bx, by, 0, bx, by, br); g.addColorStop(0, cols[i % 4] + (0.12 + rnd() * 0.12) + ')'); g.addColorStop(1, cols[i % 4] + '0)'); x.fillStyle = g; x.fillRect(bx - br, by - br, br * 2, br * 2); }
-  const spot = x.createRadialGradient(W / 2, H * 0.48, H * 0.05, W / 2, H * 0.5, H * 0.75); spot.addColorStop(0, 'rgba(255,205,140,.42)'); spot.addColorStop(1, 'rgba(255,205,140,0)'); x.fillStyle = spot; x.fillRect(0, 0, W, H);
-  const fy = H * 0.8; const fl = x.createLinearGradient(0, fy, 0, H); fl.addColorStop(0, '#2a160d'); fl.addColorStop(1, '#0e0705'); x.fillStyle = fl; x.fillRect(0, fy, W, H - fy);
-  x.fillStyle = 'rgba(255,200,130,.08)'; x.fillRect(0, fy, W, H * 0.004);
-  // the family
-  const maxPer = 7; const lines = []; rows.forEach((r, gi) => { const ppl = r.people; for (let i = 0; i < ppl.length; i += maxPer) lines.push({ gi, people:ppl.slice(i, i + maxPer) }); });
-  const L = lines.slice(0, 4); const nL = L.length; const kMax = Math.max(...L.map(l => l.people.length));
-  const d = Math.min((W * 0.62) / (kMax * 1.04), (H * 0.36) / (0.56 + (nL - 1) * 0.95), H * 0.22);
-  const step = d * 0.95; const frontY = H * 0.62;   // back rows stand higher, their faces just above the shoulders in front
-  x.save(); x.fillStyle = 'rgba(0,0,0,.35)'; x.beginPath(); x.ellipse(W / 2, fy + H * 0.02, Math.min(W * 0.36, kMax * d * 0.62), H * 0.035, 0, 0, Math.PI * 2); x.filter = 'blur(20px)'; x.fill(); x.filter = 'none'; x.restore();
-  const placed = [];
-  for (let li = nL - 1; li >= 0; li--) {
-    const ln = L[li]; const sc = 1 - li * 0.06; const dd = d * sc; const n = ln.people.length; const gap = dd * 1.04; const x0 = W / 2 - gap * (n - 1) / 2;
-    const cy = frontY - li * step;
-    for (let i = 0; i < n; i++) { const nd = ln.people[i]; const cx = x0 + gap * i; const k = (li * 2 + i + (hashStr(v.id || '') % 3)) % 6; clBust(x, cx, cy, dd, CL_CLOTH[k], k); await clHead(x, nd.p, cx, cy, dd); placed.push({ li, name:String(nd.p.name || '').trim().split(/\s+/)[0] }); }
-  }
-  x.fillStyle = '#0e0705'; x.fillRect(0, H * 0.905, W, H * 0.095);   // the floor edge hides the bottom of the busts
-  clCurtain(x, W, H, -1); clCurtain(x, W, H, 1); clValance(x, W, H);
-  // painterly finish: canvas grain, warm varnish, vignette
-  x.save(); for (let i = 0; i < W * H / 1200; i++) { x.fillStyle = rnd() < 0.5 ? 'rgba(255,236,200,.03)' : 'rgba(0,0,0,.045)'; x.fillRect(rnd() * W, rnd() * H, 2 + rnd() * 3, 1 + rnd() * 2); } x.restore();
-  x.save(); x.globalCompositeOperation = 'soft-light'; x.fillStyle = 'rgba(255,180,100,.18)'; x.fillRect(0, 0, W, H); x.restore();
-  const vg = x.createRadialGradient(W / 2, H * 0.5, H * 0.35, W / 2, H * 0.5, W * 0.62); vg.addColorStop(0, 'rgba(0,0,0,0)'); vg.addColorStop(1, 'rgba(0,0,0,.55)'); x.fillStyle = vg; x.fillRect(0, 0, W, H);
-  // gold title plaque under the valance
-  const fam = String(v.name || '').trim(); const sinceY = (() => { const ys = []; rows.forEach(r => r.people.forEach(n => { const y = yearOf(n.p.born); if (y && y > 1000) ys.push(y); })); return ys.length ? Math.min(...ys) : 0; })();
-  let ts = Math.round(H * 0.052); x.font = `700 ${ts}px ${RL_SERIF}`; while (x.measureText(fam).width > W * 0.42 && ts > 30) { ts -= 3; x.font = `700 ${ts}px ${RL_SERIF}`; }
-  const pw = Math.max(x.measureText(fam).width + ts * 2.4, W * 0.24), ph = ts * (sinceY || rows.length ? 2.5 : 2.1), px = W / 2 - pw / 2, py = H * 0.11;
-  x.save(); x.shadowColor = 'rgba(0,0,0,.5)'; x.shadowBlur = ts * 0.6; x.shadowOffsetY = ts * 0.15; const pg = x.createLinearGradient(px, py, px + pw, py + ph); pg.addColorStop(0, '#8a6420'); pg.addColorStop(0.3, '#f2d48a'); pg.addColorStop(0.55, '#c99a3e'); pg.addColorStop(0.8, '#f7e2a6'); pg.addColorStop(1, '#8a6420'); rlRR(x, px, py, pw, ph, ph * 0.18); x.fillStyle = pg; x.fill(); x.restore();
-  x.fillStyle = '#1f1408'; rlRR(x, px + ts * 0.16, py + ts * 0.16, pw - ts * 0.32, ph - ts * 0.32, ph * 0.14); x.fill();
-  x.fillStyle = '#f1d57a'; x.textAlign = 'center'; x.textBaseline = 'middle'; x.fillText(fam, W / 2, py + ph * 0.42);
-  const gens = rows.length; const sub = [sinceY ? hxf('Since {y}', '{y} se', { y:sinceY }) : '', `${gens} ${gens === 1 ? hx('generation', 'peedhi') : hx('generations', 'peedhiyaan')}`].filter(Boolean).join('  ·  ');
-  x.font = `600 ${Math.round(ts * 0.36)}px ${RL_SERIF}`; x.fillStyle = 'rgba(241,213,122,.8)'; x.fillText(sub, W / 2, py + ph * 0.77);
-  // names, row by row, on an engraved strip along the floor (nobody's name covers a face)
-  const rowsTxt = []; for (let li = 0; li < nL; li++) { const nm = placed.filter(q => q.li === li).map(q => q.name).filter(Boolean); if (nm.length) rowsTxt.push(nm.join(', ')); }
-  const cap = rowsTxt.reverse().join('   ·   '); let cs = Math.round(H * 0.026); x.font = `600 ${cs}px ${RL_SERIF}`; while (x.measureText(cap).width > W * 0.7 && cs > 16) { cs -= 1; x.font = `600 ${cs}px ${RL_SERIF}`; }
-  x.fillStyle = 'rgba(233,207,138,.85)'; x.textBaseline = 'middle'; x.fillText(cap, W / 2, H * 0.952); x.textBaseline = 'alphabetic';
-  const kept = await gmSaveReunion(c.toDataURL('image/jpeg', 0.92), 'classic');
-  try { markUsed && markUsed('portrait'); } catch (e) { /* optional */ }
-  gmPanel(); await gmRender(true); gmFacts(); renderPromo();
-  const noPhoto = rows.reduce((s2, rr) => s2 + rr.people.filter(n => !n.p.avatar).length, 0);
-  gmSay(hxf('✓ Your classic family portrait is ready — {n} people.', '✓ Aapka classic family portrait taiyaar — {n} log.', { n:total }) + (noPhoto ? ' ' + hxf('{n} without a photo are painted with their initials — add their photos and paint it again.', '{n} logon ki photo nahi hai, unke akshar paint hue hain — photo daal ke dobara banao.', { n:noPhoto }) : '') + (kept ? '' : ' ' + hx('(Browser storage is full, so it may not stay after a reload.)', '(Browser storage bhar gaya hai, reload ke baad shayad na rahe.)')));
-}
-
 function gmSay(t, kind) { const el = $('#gmSay'); if (!el) return; el.textContent = t || ''; el.className = 'gm-say' + (kind ? ' ' + kind : ''); el.hidden = !t; }
 async function gmUpload(file) {
   try {
@@ -16428,7 +16324,7 @@ setTimeout(async () => {
     if (live !== HAS_CLOUD) { HAS_CLOUD = live; setRoyalFeatures(); try { renderPlans(); renderAddons(); updatePrices(true); } catch (e) { /* views refresh later */ } }
   } catch (e) { /* server asleep or offline — keep the last known state */ }
 }, 900);
-if (/[?&]dvtest=1/.test(location.search)) window.__dv = { get state() { return state; }, save, saveNow, startDemo, openTutorial, NET, FILM, ACC, SRCH, openSearch, IGN, igOpenCreate, igOpenActivity, openLocalProfile, HOME, KIN, PLAY, playOpen, mutualRowHTML, igOpenFeatures, ALLY, allyAct, playState, rootsPaint, STUDIO, studioGo, KHOJ, khojPaint, palHTML, L10N, dynUI, dynTreeVault, renderFilm, filmPoll, openPerson, PWA, installHomeHTML, treeStoriesPaint, pwaInstall, IN_STORE, openCheckout, RL, openReel, closeReel, rlRecord, gmClassic, rlDraw };   // test hook, only with ?dvtest=1
+if (/[?&]dvtest=1/.test(location.search)) window.__dv = { get state() { return state; }, save, saveNow, startDemo, openTutorial, NET, FILM, ACC, SRCH, openSearch, IGN, igOpenCreate, igOpenActivity, openLocalProfile, HOME, KIN, PLAY, playOpen, mutualRowHTML, igOpenFeatures, ALLY, allyAct, playState, rootsPaint, STUDIO, studioGo, KHOJ, khojPaint, palHTML, L10N, dynUI, dynTreeVault, renderFilm, filmPoll, openPerson, PWA, installHomeHTML, treeStoriesPaint, pwaInstall, IN_STORE, openCheckout, RL, openReel, closeReel, rlRecord, rlDraw };   // test hook, only with ?dvtest=1
 
 
 function toast(msg, type = 'info', ms = 3200) {
@@ -16634,8 +16530,7 @@ function wire() {
     if (e.target.closest('#gcGo')) { gcMake(!!V().reunion); return; }
     const gcBuyBtn = e.target.closest('[data-gc-buy]'); if (gcBuyBtn) { gcBuy(gcBuyBtn.dataset.gcBuy); return; }
     if (e.target.closest('#rpGo')) { rpMake(); return; }
-    if (e.target.closest('[data-gm-classic]')) { gmClassic(); return; }
-    if (e.target.closest('#rpLocked')) { toast(hx('The AI portrait is coming soon. Until then, tap “Generate classic portrait” — it’s free.', 'AI portrait jaldi aa raha hai. Tab tak “Classic portrait banao” dabao — free hai.'), 'info', 4000); return; }
+    if (e.target.closest('#rpLocked')) { toast(hx('AI portrait isn’t switched on yet. For now, upload a family photo or make the free Family Collage.', 'AI portrait abhi chalu nahi hua. Abhi ke liye family photo upload karo ya free Family Collage banao.'), 'info', 3500); return; }
     if (e.target.closest('[data-gm-collage-go]')) { closeModal('portraitModal'); showTab('photo'); window.scrollTo({ top:0 }); return; }
     if (e.target.closest('#rpBuy')) { openCheckout('plan', 'royal'); return; }
     if (e.target.closest('#gmZip')) { gmDownloadZip(); return; }
