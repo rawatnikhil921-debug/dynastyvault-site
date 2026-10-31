@@ -2700,6 +2700,42 @@ body.pls-on{overflow:hidden}
 .pls-cta{width:100%;max-width:340px;height:52px;border-radius:14px;border:0;background:#fff;color:#111;font-weight:800;font-size:16px;cursor:pointer}
 .pls-sec{margin-top:10px;width:100%;max-width:340px;height:46px;border-radius:14px;border:1px solid rgba(255,255,255,.4);background:none;color:#fff;font-weight:700;cursor:pointer}
 @media (prefers-reduced-motion:reduce){.pls,.pls-o.wrong{animation:none}.pls-bars i.now:not(.done) b{animation:none;width:50%}}
+
+/* ===== v75: DynastyVault Studio — features shown properly ===== */
+.studio{max-width:980px;margin:18px auto 6px}
+.studio[hidden]{display:none}
+.ex-studio{margin:14px 0 16px}
+.st-head{display:flex;align-items:center;justify-content:space-between;padding:0 2px 10px}.st-head b{font-size:17px;font-weight:800;letter-spacing:-.01em}
+.st-all{border:0;background:none;color:#3B8BFF;font-weight:700;font-size:13.5px;cursor:pointer;padding:6px 2px}
+.st-row{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:2px 2px 8px}
+.st-row::-webkit-scrollbar{display:none}
+.st-reel{position:relative;flex:none;width:148px;aspect-ratio:3/4.3;scroll-snap-align:start;display:flex;flex-direction:column;justify-content:space-between;padding:12px;border:0;border-radius:18px;background:var(--bg);color:#fff;text-align:left;cursor:pointer;overflow:hidden;box-shadow:0 10px 24px -14px rgba(0,0,0,.8);transition:transform .15s}
+.st-reel::after{content:"";position:absolute;inset:auto 0 0 0;height:60%;background:linear-gradient(transparent,rgba(0,0,0,.45));pointer-events:none}
+.st-reel:hover{transform:translateY(-2px)}.st-reel:active{transform:scale(.97)}
+.st-reel:focus-visible,.st-card:focus-visible,.st-spot-btn:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.st-ico{font-size:44px;line-height:1;margin-top:18px;filter:drop-shadow(0 6px 12px rgba(0,0,0,.25))}
+.st-tx{position:relative;z-index:1}.st-tx b{display:block;font-size:15px;font-weight:800;line-height:1.15}.st-tx small{display:block;margin-top:4px;font-size:11.5px;line-height:1.3;opacity:.92}
+.st-b{position:absolute;top:10px;left:10px;z-index:1;font-style:normal;font-size:10.5px;font-weight:800;padding:3px 8px;border-radius:999px;background:rgba(0,0,0,.35);color:#fff;backdrop-filter:blur(4px)}
+.st-b.new{background:#fff;color:#111}.st-b.free{background:#22C55E;color:#fff}
+@media (max-width:640px){.studio{margin:16px -16px 4px}.st-head{padding:0 16px 10px}.st-row{padding:2px 16px 8px;scroll-padding:0 16px}.ex-studio{margin:14px -16px 16px}}
+/* in Create */
+.cr-quick{display:flex;gap:8px;margin:2px 0 6px}
+.cr-q{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 4px;border:0;border-radius:14px;background:rgba(var(--g-rgb),.06);color:var(--ink);font-weight:700;font-size:12px;cursor:pointer}.cr-q span{font-size:22px}
+.st-list{display:grid;gap:2px}
+.st-card{display:flex;align-items:center;gap:12px;padding:9px 6px;border:0;border-radius:14px;background:none;color:var(--ink);text-align:left;cursor:pointer}
+.st-card:hover{background:rgba(var(--g-rgb),.06)}
+.st-ci{width:48px;height:48px;flex:none;border-radius:14px;display:grid;place-items:center;font-size:24px}
+.st-ct{flex:1;min-width:0}.st-ct b{display:flex;align-items:center;gap:6px;font-size:14.5px}.st-ct small{display:block;font-size:12.5px;color:var(--muted);line-height:1.35}
+.st-ct .st-b{position:static;backdrop-filter:none;background:rgba(var(--g-rgb),.12);color:var(--ink);font-size:10px;padding:2px 7px}
+.st-ct .st-b.new{background:#3B8BFF;color:#fff}.st-ct .st-b.free{background:#22C55E;color:#fff}
+.st-go{font-size:22px;color:var(--muted)}
+/* in the feed */
+.st-spot{display:flex;align-items:stretch;gap:0;margin:14px 0;border-radius:18px;overflow:hidden;border:1px solid var(--line,#262626);background:var(--s1,#121212)}
+.st-spot-art{flex:0 0 38%;display:grid;place-items:center;background:var(--bg)}.st-spot-art span{font-size:56px;filter:drop-shadow(0 8px 16px rgba(0,0,0,.3))}
+.st-spot-tx{flex:1;min-width:0;padding:14px 14px 14px}.st-spot-tx small{font-size:11.5px;color:var(--muted);font-weight:700}.st-spot-tx b{display:block;font-size:17px;font-weight:800;margin-top:2px}
+.st-spot-tx p{margin:4px 0 10px;font-size:13px;color:var(--muted);line-height:1.4}
+.st-spot-btn{height:32px;padding:0 16px;border-radius:9px;border:0;background:#3B8BFF;color:#fff;font-weight:800;font-size:13px;cursor:pointer}
+@media (max-width:640px){.st-spot{margin:14px 12px}}
 </style>
 </head>
 <body>
@@ -2872,6 +2908,7 @@ body.pls-on{overflow:hidden}
     <p class="tiny muted px-2 pt-3 tree-only" data-hn="⚭ Fused view mein papa ki family (Dada–Dadi side) left mein aur mummy ki family (Nana–Nani side) right mein hoti hai, jo mummy-papa aur bachchon pe milti hai. Kisi bhi portrait pe tap karke uska <span class=&quot;text-[color:var(--gold-soft)] font-bold&quot;>Profile &amp; Voice Studio</span> kholo. Drag karke ghumao · Ctrl/⌘ + scroll se zoom · kisi bhi member pe ＋ Child / 💍 Spouse se dynasty badhao.">⚭ In the fused view the paternal side (father’s family) sits on the left and the maternal side (mother’s family) on the right, meeting at the parents and their children. Tap any portrait to open its <span class="text-[color:var(--gold-soft)] font-bold">Profile &amp; Voice Studio</span>. Drag to pan · Ctrl/⌘ + scroll to zoom · use ＋ Child / 💍 Spouse on any member to grow the dynasty.</p>
   </section>
 
+  <section id="studioTree" class="studio" data-panel="canvas" hidden aria-label="DynastyVault Studio"></section>
   <section id="vaultActs" data-panel="canvas" class="vault-acts" aria-label="Family actions">
     <div class="va-btns">
     <button class="btn-gold" id="btnFamCard">🪪 <span data-hn="Family Card banao">Family Card</span></button>
@@ -7324,6 +7361,7 @@ function initV10() {
   igInitNav();
   homeInit();
   rootsInit();
+  studioInit();
   document.addEventListener('click', e => { const l = e.target.closest('#commHub [data-ig-like]'); if (!l) return; l.classList.toggle('on'); l.textContent = l.classList.contains('on') ? '♥' : '♡'; if (l.classList.contains('on')) srchBurst(l); });
   initRoute();
   initLeafUI();
@@ -8902,7 +8940,7 @@ function renderExplore() {
   const box = $('#exploreBody'); if (!box) return;
   let it = IGN.ex;
   if (it && it.length > 6) { it = it.slice(0, 60); const cells = a => a.reduce((n, x, i) => n + (i % 10 === 2 || i % 10 === 5 ? 2 : 1), 0); while (it.length > 6 && cells(it) % 3) it = it.slice(0, -1); }
-  box.innerHTML = `${srchPillHTML()}
+  box.innerHTML = `${srchPillHTML()}${isSocial() ? `<div class="studio ex-studio">${studioStripHTML(hx('✨ Made for families', '✨ Families ke liye bana'))}</div>` : ''}
     ${it == null ? `<div class="ex-grid">${Array.from({ length:9 }, (_, i) => `<span class="ex-tile sk${i % 10 === 2 ? ' big' : ''}"></span>`).join('')}</div>`
       : it.length ? `<div class="ex-grid">${it.map((x, i) => `<button class="ex-tile${i % 10 === 2 || i % 10 === 5 ? ' big' : ''}${x.ph ? ' ph' : ''}" ${x.sample ? `data-dyn-open="${esc(x.sample)}"` : `data-sr-open="${esc(x.who.un)}"`} style="${x.ph ? '' : `background:${IG_GRADS[i % IG_GRADS.length]}`}" aria-label="${esc((x.who.name || '') + ': ' + trunc(x.text || '', 60))}">
           ${x.ph ? `<img src="${x.ph}" alt="" loading="lazy">` : `<span class="ig-tt">${esc(trunc(x.text || '', i % 10 === 2 || i % 10 === 5 ? 160 : 80))}</span>`}<i class="ig-tk" aria-hidden="true">${IG_ICO[x.k] || '📝'}</i><small class="ex-who">${esc(x.who.name || '')}</small></button>`).join('')}</div>`
@@ -8941,11 +8979,8 @@ function igOpenCreate(kind) {
       ${opt('post', '📝', 'Post', 'Post', 'Share news or a photo with your family', 'Family ke saath khabar ya photo share karo')}
       ${opt('memory', '🕊️', 'Memory', 'Yaad', 'Write down a memory of someone', 'Kisi ki yaad likho')}
       ${opt('story', '⏱️', '24-hour story', '24-ghante ki story', 'Disappears after a day', 'Ek din baad gayab')}</div>
-      <div class="cr-h">DynastyVault</div><div class="cr-grid">
-      ${[['tab:canvas', '🌳', 'Family tree', 'Family tree'], ['member', '👤', 'Add member', 'Member jodo'], ['tab:voice', '🎙️', 'Voice studio', 'Voice studio'], ['tab:film', '🎬', 'Documentary', 'Documentary'],
-        ['tab:photo', '🧩', 'Family Collage', 'Family Collage'], ['tab:reunion', '✨', 'Reunion Portrait', 'Reunion Portrait'], ['tab:trail', '🗺️', 'Migration Trail', 'Migration Safar'], ['card', '🪪', 'Family Card', 'Family Card'],
-        ['tab:arena', '⚔️', 'Dynasty vs Dynasty', 'Dynasty vs Dynasty'], ['tab:refer', '🎁', 'Share & Earn', 'Share & Kamao'], ['tab:themes', '🎨', 'Theme Studio', 'Theme Studio'], ['tab:plans', '👑', 'Plans', 'Plans']]
-        .map(([k, ico, en, hn]) => `<button class="cr-tile" data-cr="${k}"><span>${ico}</span><small>${hx(en, hn)}</small></button>`).join('')}</div>`;
+      <div class="cr-quick">${[['member', '👤', 'Add member', 'Member jodo'], ['tab:canvas', '🌳', 'My tree', 'Mera tree'], ['tab:plans', '👑', 'Plans', 'Plans']].map(([k, ico, en, hn]) => `<button class="cr-q" data-cr="${k}"><span>${ico}</span>${hx(en, hn)}</button>`).join('')}</div>
+      <div class="cr-h">✨ DynastyVault Studio</div><div class="st-list">${STUDIO.map(studioCardHTML).join('')}</div>`;
     $('#igCreateTitle').textContent = hx('Create', 'Banao');
   } else {
     if (!ownVault() && isDemo(V())) { closeModal('igCreate'); openWizard('form'); toast(hx('Make your family tree first — then you can post.', 'Pehle apna family tree banao — phir post kar paoge.'), 'info'); return; }
@@ -8990,6 +9025,7 @@ function igInitNav() {
     if (['post', 'memory', 'story', 'voice'].includes(k)) { igOpenCreate(k); return; }
     closeModal('igCreate');
     if (k === 'member') { if (ownVault() || !isDemo(V())) openAddAncestor(); else openWizard('form'); }
+    else if (k.startsWith('st:')) studioGo(k.slice(3));
     else if (k.startsWith('tab:')) { if (isOpen('dynModal')) closeModal('dynModal'); showTab(k.slice(4)); window.scrollTo({ top:0 }); } else if (k === 'card') openFamilyCard();
   });
   $('#igCreate').addEventListener('click', e => {   // a post was published → close and refresh the profile
@@ -9036,6 +9072,7 @@ function renderHome() {
   const sug = loggedIn ? (SRCH.sug || []).filter(c => !c.isFollowing).slice(0, 10) : [];
   const parts = posts.map((x, i) => homePostHTML(x, i));
   if (sug.length && parts.length > 1) parts.splice(Math.min(2, parts.length), 0, `<div class="sg-wrap hp-sgw"><div class="sr-head"><b>${hx('Suggested for you', 'Aapke liye suggestions')}</b><button class="kin-link" data-sr-search>${hx('See all', 'Sab dekho')}</button></div><div class="sg-strip">${sug.map(srchSugCard).join('')}</div></div>`);
+  if (isSocial() && parts.length > 2) parts.splice(3, 0, studioSpotHTML(playDay()));
   if (accOn() && !loggedIn) parts.splice(Math.min(1, parts.length), 0, `<div class="hp-join"><b>${hx('Follow your family on DynastyVault', 'DynastyVault pe apni family ko follow karo')}</b><p>${hx('Make a free account to see your relatives’ posts here and share yours.', 'Free account banao — rishtedaaron ki posts yahan dikhengi aur aap apni share kar paoge.')}</p><button class="btn-gold sm" data-ac-auth="signup">${hx('Create account', 'Account banao')}</button></div>`);
   box.innerHTML = `<div class="hp-list">${parts.join('')}</div>`;
   if (loggedIn && !ACC.feed && !ACC.loading) accLoadFeed().then(() => { if (dash.tab === 'home') renderHome(); });
@@ -9059,7 +9096,7 @@ function igPageBar() {
   const id = dash.tab; const t = DASH_TABS.find(x => x.id === id);
   const show = isSocial() && document.body.classList.contains('dash-on') && !['home', 'explore', 'canvas'].includes(id);
   const ts = $('#treeStories'); if (ts) { ts.hidden = !(isSocial() && id === 'canvas'); if (!ts.hidden) ts.innerHTML = homeStoriesHTML(); }
-  rootsPaint();
+  rootsPaint(); studioPaint();
   if (ts && !ts.hidden && accOn() && ACC.tok && SRCH.ring == null) srchRingLoad().then(() => { if (dash.tab === 'canvas') igPageBar(); });
   bar.hidden = !show; if (!show) return;
   bar.innerHTML = `<button class="ig-back" data-ign="canvas" aria-label="${esc(hx('Back to home', 'Home pe wapas'))}">‹</button><b>${id === 'plans' ? hx('Plans', 'Plans') : t ? esc(hx(t.en, t.hn)) : ''}</b><button class="ig-back" data-ign="create" aria-label="${esc(hx('Create', 'Banao'))}">＋</button>`;
@@ -9300,6 +9337,52 @@ function rootsInit() {
     if (t.dataset.kinOpen) { dynUI.list = null; openPerson(t.dataset.kinOpen, 'tree'); }
   });
   document.addEventListener('keydown', e => { const el = $('#playSheet'); if (e.key === 'Escape' && el && !el.hidden) playClose(); });
+}
+
+/* ---------- ✨ DynastyVault Studio: every feature shown properly, with what it does ---------- */
+const STUDIO = [   // [action, emoji, name en, name hn, line en, line hn, badge, gradient]
+  ['tab:voice', '🎙️', 'Voice Studio', 'Voice Studio', 'Save Dadi’s voice. Hear her story told in it.', 'Dadi ki awaaz save karo. Kahani unki awaaz mein suno.', 'AI', 'linear-gradient(150deg,#FF8A5B,#FF4F8B)'],
+  ['tab:film', '🎬', 'AI Documentary', 'AI Documentary', 'An old photo comes alive in a 3-scene film.', 'Purani photo 3 scene ki film mein zinda.', 'New', 'linear-gradient(150deg,#7B5CFF,#3BA4FF)'],
+  ['tab:reunion', '✨', 'Reunion Portrait', 'Reunion Portrait', 'Everyone in one photo — even those who never met.', 'Sab ek photo mein — woh bhi jo kabhi mile nahi.', 'AI', 'linear-gradient(150deg,#FFB627,#FF7A59)'],
+  ['play', '🎮', 'Today’s Game', 'Aaj ka Game', 'This or That and a 60-second quiz.', 'This or That aur 60 second quiz.', 'Daily', 'linear-gradient(150deg,#F472B6,#A855F7)'],
+  ['kin', '🧬', 'Kin Finder', 'Kin Finder', 'Find relatives whose trees share your ancestors.', 'Woh rishtedaar dhoondho jinke tree mein aapke purvaj hain.', 'New', 'linear-gradient(150deg,#14B8A6,#3B82F6)'],
+  ['card', '🪪', 'Family Card', 'Family Card', 'A golden card of your family for WhatsApp.', 'WhatsApp ke liye family ka golden card.', 'Free', 'linear-gradient(150deg,#D4AF37,#8A6510)'],
+  ['print', '🖨️', '4K Wall Print', '4K Wall Print', 'Your tree as a 4K PDF, ready to frame.', 'Tree ka 4K PDF — frame karke lagao.', '4K', 'linear-gradient(150deg,#334155,#0F172A)'],
+  ['tab:photo', '🧩', 'Family Collage', 'Family Collage', 'All your family photos in one collage.', 'Saari family photos ek collage mein.', '', 'linear-gradient(150deg,#22C55E,#14B8A6)'],
+  ['tab:trail', '🗺️', 'Migration Trail', 'Migration Safar', 'From the village to the city, on a map.', 'Gaon se shehar tak ka safar, map pe.', '', 'linear-gradient(150deg,#0EA5E9,#6366F1)'],
+  ['tab:arena', '⚔️', 'Dynasty vs Dynasty', 'Dynasty vs Dynasty', 'Climb the leaderboard with your family.', 'Family ke saath leaderboard pe chadho.', '', 'linear-gradient(150deg,#EF4444,#F97316)'],
+  ['tab:refer', '🎁', 'Share & Earn', 'Share & Kamao', 'Invite family, unlock rewards.', 'Family ko bulao, rewards pao.', '', 'linear-gradient(150deg,#EC4899,#F59E0B)'],
+  ['tab:themes', '🎨', 'Theme Studio', 'Theme Studio', 'Give your tree a new look.', 'Apne tree ko naya look do.', '', 'linear-gradient(150deg,#8B5CF6,#EC4899)']
+];
+const studioBadge = b => b ? `<em class="st-b${b === 'Free' ? ' free' : b === 'New' ? ' new' : ''}">${b === 'Daily' ? hx('Daily', 'Roz') : b === 'Free' ? hx('Free', 'Free') : b === 'New' ? hx('New', 'Naya') : b}</em>` : '';
+function studioReel(f) {
+  return `<button class="st-reel" data-st="${f[0]}" style="--bg:${f[7]}" aria-label="${esc(hx(f[2], f[3]) + ' — ' + hx(f[4], f[5]))}">${studioBadge(f[6])}<span class="st-ico" aria-hidden="true">${f[1]}</span><span class="st-tx"><b>${esc(hx(f[2], f[3]))}</b><small>${esc(hx(f[4], f[5]))}</small></span></button>`;
+}
+function studioStripHTML(title) {
+  return `<div class="st-head"><b>${title || hx('✨ DynastyVault Studio', '✨ DynastyVault Studio')}</b><button class="st-all" data-st="all">${hx('See all', 'Sab dekho')}</button></div><div class="st-row">${STUDIO.map(studioReel).join('')}</div>`;
+}
+function studioCardHTML(f) {   // the big list item inside Create
+  return `<button class="st-card" data-cr="st:${f[0]}"><span class="st-ci" style="background:${f[7]}" aria-hidden="true">${f[1]}</span><span class="st-ct"><b>${esc(hx(f[2], f[3]))}${studioBadge(f[6])}</b><small>${esc(hx(f[4], f[5]))}</small></span><span class="st-go" aria-hidden="true">›</span></button>`;
+}
+function studioSpotHTML(i) {   // one feature, big, inside the feed
+  const f = STUDIO[i % STUDIO.length];
+  return `<div class="st-spot" style="--bg:${f[7]}"><div class="st-spot-art" aria-hidden="true"><span>${f[1]}</span></div><div class="st-spot-tx"><small>${hx('Try on DynastyVault', 'DynastyVault pe try karo')}</small><b>${esc(hx(f[2], f[3]))}</b><p>${esc(hx(f[4], f[5]))}</p><button class="st-spot-btn" data-st="${f[0]}">${hx('Open', 'Kholo')}</button></div></div>`;
+}
+function studioGo(k) {
+  if (isOpen('dynModal')) closeModal('dynModal');
+  if (k === 'all') { igOpenCreate(); openModal('igCreate'); const b = $('#igCreateBody .st-list'); if (b) b.scrollIntoView({ block:'start' }); return; }
+  if (k === 'play') { playOpen(); return; }
+  if (k === 'card') { openFamilyCard(); return; }
+  if (k === 'print') { if (!ownVault() && isDemo(V())) { openWizard('form'); toast(hx('Make your family tree first — then print it in 4K.', 'Pehle family tree banao — phir 4K mein print karo.'), 'info'); return; } openPrintUpsell(); return; }
+  if (k === 'kin') { showTab('canvas'); setTimeout(() => { const el = $('#rootsTree'); if (!el) return; el.scrollIntoView({ behavior:'smooth', block:'start' }); const kf = el.querySelector('.kf'); if (kf) el.scrollTo({ left:kf.offsetLeft - 12, behavior:'smooth' }); if (!accOn() || !(ACC.tok && ACC.me)) toast(hx('Make a free account — Kin Finder looks for your ancestors in other families’ trees.', 'Free account banao — Kin Finder doosri families ke tree mein aapke purvaj dhoondhta hai.'), 'info', 3200); }, 250); return; }
+  if (k.startsWith('tab:')) { showTab(k.slice(4)); window.scrollTo({ top:0 }); }
+}
+function studioPaint() {
+  const on = isSocial() && document.body.classList.contains('dash-on');
+  const el = $('#studioTree'); if (!el) return; const show = on && dash.tab === 'canvas'; el.hidden = !show; if (show) el.innerHTML = studioStripHTML();
+}
+function studioInit() {
+  document.addEventListener('click', e => { const b = e.target.closest('[data-st]'); if (!b) return; e.preventDefault(); studioGo(b.dataset.st); });
 }
 
 /* ---------- 🌳 Dynasty-Canvas-style tree inside dynasty profiles ---------- */
@@ -14715,7 +14798,7 @@ setTimeout(async () => {
     if (live !== HAS_CLOUD) { HAS_CLOUD = live; setRoyalFeatures(); try { renderPlans(); renderAddons(); updatePrices(true); } catch (e) { /* views refresh later */ } }
   } catch (e) { /* server asleep or offline — keep the last known state */ }
 }, 900);
-if (/[?&]dvtest=1/.test(location.search)) window.__dv = { get state() { return state; }, save, saveNow, startDemo, openTutorial, NET, FILM, ACC, SRCH, openSearch, IGN, igOpenCreate, igOpenActivity, openLocalProfile, HOME, KIN, PLAY, playOpen, playState, rootsPaint, dynUI, dynTreeVault, renderFilm, filmPoll, openPerson };   // test hook, only with ?dvtest=1
+if (/[?&]dvtest=1/.test(location.search)) window.__dv = { get state() { return state; }, save, saveNow, startDemo, openTutorial, NET, FILM, ACC, SRCH, openSearch, IGN, igOpenCreate, igOpenActivity, openLocalProfile, HOME, KIN, PLAY, playOpen, playState, rootsPaint, STUDIO, studioGo, dynUI, dynTreeVault, renderFilm, filmPoll, openPerson };   // test hook, only with ?dvtest=1
 
 
 function toast(msg, type = 'info', ms = 3200) {
