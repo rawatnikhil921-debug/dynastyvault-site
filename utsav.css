@@ -1,0 +1,41 @@
+/* Utsav Night — only applies when look.js says DV_LOOK = 'utsav' */
+html[data-look="utsav"]{--bg:#130B30;--panel:#1D1446;--panel2:#261A57;--gold:#FFB627;--gold-hi:#FFD670;--gold-deep:#FF4F8B;
+  --ink:#FBF4FF;--muted:#B9AEDB;--line:rgba(255,182,39,.2);--line-strong:rgba(255,182,39,.45);--on-gold:#2B0A2E;--ok:#7FE0B5;
+  --f-display:'Fraunces','Cinzel',Georgia,serif;--s1:#1D1446;--s2:#140C35}
+html[data-look="utsav"] body{background:
+  radial-gradient(900px 620px at -5% -5%,rgba(255,79,139,.20),transparent 60%),
+  radial-gradient(800px 560px at 105% 0%,rgba(123,92,255,.26),transparent 62%),
+  radial-gradient(1000px 700px at 50% 110%,rgba(255,182,39,.10),transparent 60%),
+  linear-gradient(180deg,#130B30 0%,#180F3C 50%,#120A2C 100%) fixed;background-color:#130B30}
+html[data-look="utsav"] .eyebrow{text-transform:none;letter-spacing:.05em;font-size:.86rem;color:var(--gold-hi)}
+html[data-look="utsav"] h1,html[data-look="utsav"] .hero h1{letter-spacing:-.015em;background-image:linear-gradient(180deg,#FFF1CC 0%,#FFD670 34%,#FFB627 64%,#FF6F86 100%);background-size:100% 100%;-webkit-background-clip:text;background-clip:text;color:transparent}
+html[data-look="utsav"] h2{letter-spacing:-.01em}
+html[data-look="utsav"] .btn-gold{background:linear-gradient(135deg,#FFC94D 0%,#FFB627 35%,#FF8A5B 70%,#FF4F8B 100%);color:#2B0A2E;box-shadow:0 12px 30px -8px rgba(255,79,139,.55),inset 0 1px 0 rgba(255,255,255,.5)}
+html[data-look="utsav"] .btn-gold:hover{box-shadow:0 16px 38px -8px rgba(255,79,139,.7),inset 0 1px 0 rgba(255,255,255,.5)}
+html[data-look="utsav"] .btn-ghost{background:rgba(255,255,255,.04);border-color:rgba(255,182,39,.42)}
+html[data-look="utsav"] .top,html[data-look="utsav"] header{background:rgba(19,11,48,.86)}
+html[data-look="utsav"] .offer{background:linear-gradient(90deg,#3a0f3f,#5b1846 50%,#3a0f3f);color:#FFD670;border-bottom-color:rgba(255,79,139,.4)}
+html[data-look="utsav"] .brand svg rect{fill:#1D1446;stroke:#FFB627}
+html[data-look="utsav"] .brand svg path{fill:#FFB627}
+html[data-look="utsav"] .nav a:hover{background:rgba(255,182,39,.1)}
+/* landing hero: a string of festival lights that switches on once */
+html[data-look="utsav"] .hero::before{background:radial-gradient(50% 45% at 75% 40%,rgba(255,79,139,.20),transparent 70%),radial-gradient(40% 40% at 8% 0%,rgba(255,182,39,.14),transparent 70%)}
+.garland{display:none}
+html[data-look="utsav"] .garland{display:block;position:absolute;left:0;right:0;top:0;height:86px;pointer-events:none;z-index:0}
+html[data-look="utsav"] .garland svg{width:100%;height:100%;display:block}
+html[data-look="utsav"] .garland .wire{fill:none;stroke:rgba(255,214,112,.35);stroke-width:1.2}
+html[data-look="utsav"] .garland circle{opacity:.18;animation:bulbOn .5s ease forwards;filter:drop-shadow(0 0 6px currentColor)}
+@keyframes bulbOn{to{opacity:1}}
+@media (prefers-reduced-motion:reduce){html[data-look="utsav"] .garland circle{animation:none;opacity:1}}
+html[data-look="utsav"] .heirloom{background:radial-gradient(120% 90% at 50% 0%,#2C1E66 0%,#1D1446 55%,#130B30 100%);border-color:rgba(255,182,39,.42);box-shadow:0 30px 80px rgba(5,2,20,.7),0 0 0 6px rgba(255,79,139,.08)}
+html[data-look="utsav"] .heirloom .ln{stroke:#FFB627}
+html[data-look="utsav"] .heirloom .halo{fill:rgba(255,79,139,.18)}
+html[data-look="utsav"] .heirloom g[fill="#0F1016"]{fill:#1D1446}
+html[data-look="utsav"] .heirloom .tl{fill:#FFD670}
+html[data-look="utsav"] .fcard,html[data-look="utsav"] .reel{border-color:#FFB627;box-shadow:0 30px 70px rgba(5,2,20,.7),0 0 0 6px rgba(255,79,139,.12)}
+html[data-look="utsav"] .fcard{background:linear-gradient(170deg,#2C1E66,#140C35 65%)}
+html[data-look="utsav"] .reel-play{background:linear-gradient(135deg,#FFC94D,#FF8A5B 55%,#FF4F8B);color:#2B0A2E}
+html[data-look="utsav"] .fam-card{border-color:rgba(255,182,39,.3);background:rgba(255,255,255,.03)}
+html[data-look="utsav"] .fam-av{background:#1D1446;border-color:#FFB627}
+html[data-look="utsav"] .feat .ico,html[data-look="utsav"] .feat svg{color:#FFB627}
+@media (max-width:640px){html[data-look="utsav"] .hero{padding-top:64px}html[data-look="utsav"] .garland{height:70px}}

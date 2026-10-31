@@ -9,7 +9,8 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2307080B'/%3E%3Cpath d='M10 24 L22 34 L32 14 L42 34 L54 24 L49 46 H15 Z' fill='%23D4AF37'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<script src="look.js"></script>
 <script src="config.js"></script>
 <script src="dv-track.js" defer></script>
 <style>
@@ -30,7 +31,7 @@ img,video{max-width:100%;height:auto}
   --bg:#07080B; --bg2:#0E0F14; --bg3:#14161D;
   --gold:#D4AF37; --gold-hi:#FFDF00; --gold-lo:#AA7C11; --gold-soft:#E9CF7A;
   --ink:#EFE8D6; --muted:#9C9583;
-  --line:rgba(212,175,55,.22); --line-strong:rgba(212,175,55,.48);
+  --line:rgba(var(--g-rgb),.22); --line-strong:rgba(var(--g-rgb),.48);
   --metal:linear-gradient(135deg,#7A5A0C 0%,#D4AF37 16%,#FFF1A8 30%,#FFDF00 42%,#AA7C11 60%,#E9CF7A 80%,#8A6510 100%);
   --gold-pale:#FFF1A8; --gold-cream:#F3E2A2; --gold-deep:#7A5A0C; --on-gold:#1A1405;
   --g-rgb:212,175,55; --hi-rgb:255,223,0; --lo-rgb:170,124,17; --pale-rgb:255,241,168; --bg-rgb:7,8,11; --bg2-rgb:14,15,20;
@@ -809,7 +810,7 @@ body.welcome-mode .vault-select,body.welcome-mode #planBadge{display:none!import
 .wl-see{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
 .ac-social{display:flex;align-items:center;justify-content:center;gap:10px;font-weight:700}
 .ac-or{display:flex;align-items:center;gap:12px;margin:18px 0 6px;color:var(--muted,#9a9aa5);font-size:.78rem}
-.ac-or::before,.ac-or::after{content:'';flex:1;height:1px;background:rgba(212,175,55,.25)}
+.ac-or::before,.ac-or::after{content:'';flex:1;height:1px;background:rgba(var(--g-rgb),.25)}
 #acctModal .gm-tabs button{flex:1}
 body.welcome-mode main>section:not(#welcome):not(#pricing):not(#addons),body.welcome-mode main>.anniv{display:none!important}
 body:not(.welcome-mode) #welcome{display:none}
@@ -1007,7 +1008,7 @@ body:not(.welcome-mode) #welcome{display:none}
 .wm-border{stroke:rgba(255,250,232,.9);stroke-width:1}
 .wm-z1 .wm-border{stroke-width:1.5}
 .wm-disp{stroke:rgba(255,250,232,.85);stroke-width:1.1;stroke-dasharray:4 3}
-#wmHi{fill:rgba(255,223,0,.2);stroke:#FFDF00;stroke-width:1.8;vector-effect:non-scaling-stroke;fill-rule:evenodd;pointer-events:none}
+#wmHi{fill:rgba(var(--hi-rgb),.2);stroke:#FFDF00;stroke-width:1.8;vector-effect:non-scaling-stroke;fill-rule:evenodd;pointer-events:none}
 .wl-c,.wl-big,.wl-r,.wl-s,.wl-d{font-family:'Plus Jakarta Sans',Arial,sans-serif;text-anchor:middle;dominant-baseline:middle;pointer-events:none;paint-order:stroke;stroke:rgba(5,8,14,.8);stroke-width:calc(2.6px * var(--k,1));stroke-linejoin:round}
 .wl-c{font-weight:800;fill:#FFF8E1;letter-spacing:.01em}
 .wl-big{font-weight:800;fill:rgba(255,248,225,.3);stroke:none;letter-spacing:.3em;text-transform:uppercase}
@@ -1608,7 +1609,7 @@ html select.dict-lang option,html select.dict-lang optgroup{background:#0E0F14;c
 .leaflet-container.leaflet-touch-zoom{touch-action:pan-x pan-y}
 .leaflet-container.leaflet-touch-drag{touch-action:none;touch-action:pinch-zoom}
 .leaflet-container.leaflet-touch-drag.leaflet-touch-zoom{touch-action:none}
-.leaflet-container a{-webkit-tap-highlight-color:rgba(212,175,55,.35)}
+.leaflet-container a{-webkit-tap-highlight-color:rgba(var(--g-rgb),.35)}
 .leaflet-tile{filter:inherit;visibility:hidden}
 .leaflet-tile-loaded{visibility:inherit}
 .leaflet-zoom-box{width:0;height:0;box-sizing:border-box;z-index:800}
@@ -1659,17 +1660,17 @@ svg.leaflet-zoom-animated{will-change:transform}
 .map-view.pin-mode .leaflet-container{cursor:crosshair}
 .lf-street .leaflet-tile-pane{filter:saturate(.85) contrast(1.02)}
 .lf-dark .leaflet-tile-pane{filter:invert(1) hue-rotate(180deg) brightness(.92) contrast(.92) saturate(.6)}
-.lf-arc{stroke-dasharray:7 7;animation:lfDash 1.4s linear infinite;filter:drop-shadow(0 0 3px rgba(255,223,0,.6))}
+.lf-arc{stroke-dasharray:7 7;animation:lfDash 1.4s linear infinite;filter:drop-shadow(0 0 3px rgba(var(--hi-rgb),.6))}
 @keyframes lfDash{to{stroke-dashoffset:-14}}
 .lf-comet{filter:drop-shadow(0 0 6px #FFDF00)}
 .lf-icon,.lf-geo{background:none;border:0}
-.lf-icon .lf-ring{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 200deg,#AA7C11,#FFF1A8,#D4AF37,#FFDF00,#AA7C11);box-shadow:0 0 14px rgba(255,223,0,.55),0 4px 10px rgba(0,0,0,.7)}
+.lf-icon .lf-ring{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 200deg,#AA7C11,#FFF1A8,#D4AF37,#FFDF00,#AA7C11);box-shadow:0 0 14px rgba(var(--hi-rgb),.55),0 4px 10px rgba(0,0,0,.7)}
 .lf-icon .lf-dot{position:absolute;inset:3px;border-radius:50%;display:grid;place-items:center;background:#120e04;color:#FFDF00;font:800 11px/1 'Plus Jakarta Sans',sans-serif}
-.lf-pulse{position:absolute;inset:-9px;border-radius:50%;border:2px solid rgba(255,223,0,.55);animation:lfPulse 2.2s ease-out infinite}
+.lf-pulse{position:absolute;inset:-9px;border-radius:50%;border:2px solid rgba(var(--hi-rgb),.55);animation:lfPulse 2.2s ease-out infinite}
 @keyframes lfPulse{from{transform:scale(.55);opacity:1}to{transform:scale(1.35);opacity:0}}
-.lf-icon.sel .lf-ring{box-shadow:0 0 0 3px rgba(255,241,168,.6),0 0 26px rgba(255,223,0,.9)}
+.lf-icon.sel .lf-ring{box-shadow:0 0 0 3px rgba(255,241,168,.6),0 0 26px rgba(var(--hi-rgb),.9)}
 .lf-icon.sel .lf-dot{background:#FFDF00;color:#120e04}
-.lf-tag{position:absolute;left:50%;transform:translateX(-50%);white-space:nowrap;display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:999px;font:700 11.5px/1.2 'Plus Jakarta Sans',sans-serif;color:#F6E9C6;background:rgba(10,9,6,.88);border:1px solid rgba(212,175,55,.55);box-shadow:0 4px 12px rgba(0,0,0,.55)}
+.lf-tag{position:absolute;left:50%;transform:translateX(-50%);white-space:nowrap;display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:999px;font:700 11.5px/1.2 'Plus Jakarta Sans',sans-serif;color:#F6E9C6;background:rgba(10,9,6,.88);border:1px solid rgba(var(--g-rgb),.55);box-shadow:0 4px 12px rgba(0,0,0,.55)}
 .lf-tag b{color:#FFDF00;font-weight:900}
 .lf-tag.up{bottom:calc(100% + 8px)}.lf-tag.down{top:calc(100% + 8px)}
 .lf-avs{display:inline-flex;margin-left:2px}
@@ -1678,7 +1679,7 @@ svg.leaflet-zoom-animated{will-change:transform}
 .lf-av img{width:100%;height:100%;object-fit:cover}
 .lf-geo .lf-gdot{position:absolute;inset:4px;border-radius:50%;background:#E7604C;border:2px solid #fff;box-shadow:0 0 12px rgba(231,96,76,.8)}
 .lf-geo .lf-pulse{border-color:rgba(231,96,76,.7)}
-.lf-popup .leaflet-popup-content-wrapper,.lf-popup .leaflet-popup-tip{background:linear-gradient(180deg,#17140b,#0c0b07);color:#EFE8D6;border:1px solid rgba(212,175,55,.5);box-shadow:0 18px 40px rgba(0,0,0,.7)}
+.lf-popup .leaflet-popup-content-wrapper,.lf-popup .leaflet-popup-tip{background:linear-gradient(180deg,#17140b,#0c0b07);color:#EFE8D6;border:1px solid rgba(var(--g-rgb),.5);box-shadow:0 18px 40px rgba(0,0,0,.7)}
 .lp-h{display:flex;align-items:center;gap:10px;padding-right:18px}
 .lp-h b{display:block;font-size:14.5px;color:#FFF1A8}
 .lp-h small{display:block;font-size:11.5px;color:#b9ae8f}
@@ -1689,20 +1690,20 @@ svg.leaflet-zoom-animated{will-change:transform}
 .lp-img{width:100%;height:110px;object-fit:cover;border-radius:10px;margin:6px 0;filter:sepia(.25)}
 .lp-ppl{display:flex;flex-wrap:wrap;gap:5px;margin-top:9px}
 .lp-lbl{width:100%;font-size:10.5px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:#D4AF37}
-.lp-mem{display:inline-flex;align-items:center;gap:5px;padding:3px 9px 3px 3px;border-radius:999px;border:1px solid rgba(212,175,55,.4);background:rgba(212,175,55,.08);color:#F6E9C6;font:700 11.5px/1.2 'Plus Jakarta Sans',sans-serif;cursor:pointer}
-.lp-mem:hover{background:rgba(212,175,55,.2)}
+.lp-mem{display:inline-flex;align-items:center;gap:5px;padding:3px 9px 3px 3px;border-radius:999px;border:1px solid rgba(var(--g-rgb),.4);background:rgba(var(--g-rgb),.08);color:#F6E9C6;font:700 11.5px/1.2 'Plus Jakarta Sans',sans-serif;cursor:pointer}
+.lp-mem:hover{background:rgba(var(--g-rgb),.2)}
 .lp-none{margin-top:8px!important;font-size:11.5px!important;color:#9a917a!important}
 .lp-f{display:flex;gap:6px;margin-top:11px}
 .lp-btn{flex:1;padding:7px 10px;border-radius:999px;border:0;cursor:pointer;font:800 12px/1.2 'Plus Jakarta Sans',sans-serif;color:#120e04;background:linear-gradient(135deg,#FFF1A8,#FFDF00 45%,#D4AF37)}
-.lp-nav{width:32px;flex:none;border-radius:999px;border:1px solid rgba(212,175,55,.5);background:transparent;color:#FFDF00;font-size:18px;line-height:1;cursor:pointer}
-.lp-nav:hover{background:rgba(212,175,55,.15)}
+.lp-nav{width:32px;flex:none;border-radius:999px;border:1px solid rgba(var(--g-rgb),.5);background:transparent;color:#FFDF00;font-size:18px;line-height:1;cursor:pointer}
+.lp-nav:hover{background:rgba(var(--g-rgb),.15)}
 
 .dtr-sum{padding:12px 14px;border-radius:16px;border:1px solid rgba(var(--g-rgb),.35);background:rgba(var(--g-rgb),.07)}
 .dtr-sum b{display:block;color:var(--gold-pale);font-size:14px;line-height:1.45;overflow-wrap:anywhere}
 .dtr-sum small{color:var(--muted);font-size:12px}
 .dtr-map{position:relative;height:300px;margin-top:10px;border-radius:16px;overflow:hidden;border:1px solid var(--line)}
-.dtr-map .leaflet-control-zoom a{display:block;width:30px;height:30px;line-height:30px;text-align:center;text-decoration:none;font-weight:900;color:var(--gold-pale);background:rgba(10,9,6,.9);border-bottom:1px solid rgba(212,175,55,.3)}
-.dtr-map .leaflet-bar{border-radius:10px;overflow:hidden;border:1px solid rgba(212,175,55,.45)}
+.dtr-map .leaflet-control-zoom a{display:block;width:30px;height:30px;line-height:30px;text-align:center;text-decoration:none;font-weight:900;color:var(--gold-pale);background:rgba(10,9,6,.9);border-bottom:1px solid rgba(var(--g-rgb),.3)}
+.dtr-map .leaflet-bar{border-radius:10px;overflow:hidden;border:1px solid rgba(var(--g-rgb),.45)}
 .dtr-list{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:0;position:relative}
 .dtr-list li{position:relative;display:flex;gap:12px;align-items:flex-start;padding:10px 0 14px 4px}
 .dtr-list li:not(:last-child)::before{content:'';position:absolute;left:30px;top:40px;bottom:-6px;width:2px;background:linear-gradient(var(--gold),rgba(var(--g-rgb),.15))}
@@ -1746,7 +1747,7 @@ svg.leaflet-zoom-animated{will-change:transform}
   .rr-meta{grid-template-columns:minmax(0,1fr)}
   .route-row.compact .rr-meta{grid-template-columns:minmax(0,1fr)}
 }
-.lp-move{margin-top:8px;padding:5px 9px;border-radius:10px;font-size:12px;font-weight:700;color:#F6E9C6;background:rgba(212,175,55,.1);border:1px solid rgba(212,175,55,.3)}
+.lp-move{margin-top:8px;padding:5px 9px;border-radius:10px;font-size:12px;font-weight:700;color:#F6E9C6;background:rgba(var(--g-rgb),.1);border:1px solid rgba(var(--g-rgb),.3)}
 .lp-move b{color:#FFDF00}
 .dtr-move{display:block;font-size:11px!important;font-weight:800;color:var(--gold-soft)!important;margin-bottom:1px}
 
@@ -2129,6 +2130,105 @@ body.dash-on #addons,body.dash-on #services{padding-bottom:40px}
 html .gold-text{background:linear-gradient(180deg,var(--gold-pale) 0%,var(--gold-hi) 34%,var(--gold) 70%,var(--gold-lo) 108%);background-size:100% 100%;-webkit-background-clip:text;background-clip:text}
 /* v65 polish: the reminder card takes less of the phone screen */
 @media (max-width:640px){html .notif{padding:8px 8px 8px 12px;gap:8px;bottom:12px;left:12px;right:12px;border-radius:14px}html .notif small{font-size:9.5px;letter-spacing:.1em}html .notif b{font-size:13px}html .notif .notif-ic{font-size:20px}}
+
+/* ===== v66: personal accounts ===== */
+.ac-av{position:relative;flex:none;display:inline-grid;place-items:center;width:44px;height:44px;border-radius:50%;overflow:hidden;background:radial-gradient(circle at 35% 28%,var(--s1),var(--s2) 75%);border:1px solid var(--line-strong)}
+.ac-av img{width:100%;height:100%;object-fit:cover}
+.ac-av b{font-family:'Cinzel',serif;font-weight:800;font-size:15px;color:var(--gold-soft)}
+.ac-av.xs{width:26px;height:26px}.ac-av.xs b{font-size:10px}
+.ac-av.sm{width:36px;height:36px}.ac-av.sm b{font-size:12px}
+.ac-av.lg{width:64px;height:64px}.ac-av.lg b{font-size:22px}
+.ac-av.xl{width:72px;height:72px;font-size:34px}
+.ac-av.xxl{width:92px;height:92px}.ac-av.xxl b{font-size:32px}
+.ac-av.ring{border:0;box-shadow:0 0 0 2px var(--bg),0 0 0 4px var(--gold),0 0 22px -4px rgba(var(--hi-rgb),.55)}
+.ac-av.crest{margin:0 auto;border:0;box-shadow:0 0 0 2px var(--gold),0 0 30px -6px rgba(var(--hi-rgb),.6)}
+.ac-auth-top{text-align:center}.ac-auth-top h3{font-size:24px;font-weight:700;margin-top:12px}.ac-auth-top p{margin-top:6px}
+.ac-seg{display:flex}
+.ac-at{display:flex;align-items:center;gap:0;position:relative}.ac-at i{position:absolute;left:12px;font-style:normal;font-weight:800;color:var(--gold)}.ac-at .input{padding-left:28px}
+.ac-pw{display:flex;gap:6px}.ac-pw .input{flex:1;min-width:0}
+.ac-vis{display:grid;grid-template-columns:1fr 1fr;gap:8px}.ac-vis .opt{flex-direction:column;align-items:flex-start;gap:4px}.ac-vis-i{font-size:20px}
+@media (max-width:380px){.ac-vis{grid-template-columns:1fr}}
+.comm-hub{display:grid;gap:4px}
+.ac-join{text-align:center;padding:26px 18px;border-radius:22px;border:1px solid var(--line-strong);background:radial-gradient(120% 90% at 50% 0%,rgba(var(--g-rgb),.16),transparent 65%),rgba(var(--bg-rgb),.4)}
+.ac-join h3{font-size:24px;font-weight:700;margin:10px 0 6px}
+.ac-join-art{display:flex;justify-content:center;gap:0}.ac-join-art span{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;font-size:26px;background:var(--s1);box-shadow:0 0 0 2px var(--gold),0 8px 20px -8px #000;margin:0 -6px}
+.ac-join-art span:nth-child(2){transform:translateY(-8px) scale(1.12);z-index:1}
+.ac-sec{margin-top:16px}
+.ac-me{padding:16px;border-radius:20px;border:1px solid var(--line-strong);background:linear-gradient(160deg,rgba(var(--g-rgb),.1),rgba(var(--bg-rgb),.45))}
+.ac-me-top{display:flex;align-items:center;gap:14px;cursor:pointer}
+.ac-me-name{display:block;font-size:18px;color:var(--ink)}
+.ac-me-top small{display:block;color:var(--muted);font-size:12.5px;margin-top:2px}
+.ac-counts{display:flex;gap:6px;margin-top:14px}
+.ac-counts>*{flex:1;display:flex;flex-direction:column;align-items:center;padding:8px 4px;border-radius:14px;background:rgba(var(--bg-rgb),.5);border:1px solid var(--line);color:var(--ink);cursor:pointer}
+.ac-counts>span{cursor:default}
+.ac-counts b{font-size:17px}.ac-counts span span,.ac-counts button span{font-size:11px;color:var(--muted)}
+.ac-tabs{display:flex}.ac-tabs button{flex:1}
+.ac-list{display:grid;gap:8px}
+.ac-row{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:16px;border:1px solid var(--line);background:rgba(var(--bg-rgb),.5);cursor:pointer;min-width:0}
+.ac-row:hover{border-color:var(--line-strong)}
+.ac-row b{display:block;font-size:14px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ac-row small{display:block;font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ac-pill{font-size:11px;font-weight:800;padding:.25rem .6rem;border-radius:999px;border:1px solid var(--line);color:var(--gold-soft);white-space:nowrap}
+.ac-notes{margin-top:14px;padding:14px;border-radius:18px;border:1px solid var(--line);background:rgba(var(--g-rgb),.04);display:grid;gap:8px}
+.ac-note{display:flex;align-items:center;gap:10px;font-size:13px;cursor:pointer}
+.ac-feed{display:grid;gap:10px}
+.ac-post{padding:14px;border-radius:18px;border:1px solid var(--line);background:rgba(var(--bg-rgb),.55)}
+.ac-post header{display:flex;align-items:center;gap:10px;cursor:pointer}
+.ac-post header b{display:block;font-size:14px}.ac-post header small{display:block;font-size:11.5px;color:var(--muted)}
+.ac-post .ac-k{margin-left:auto;font-size:18px}
+.ac-post p{margin-top:10px;font-size:14.5px;line-height:1.6;color:var(--ink)}
+.ac-empty{text-align:center;padding:26px 16px;border-radius:18px;border:1px dashed var(--line-strong)}
+.ac-empty span{font-size:34px}.ac-empty b{display:block;margin-top:6px;color:var(--gold-soft)}
+.ac-hdr-n{max-width:110px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#acctBtn .ac-av{margin-right:2px}
+.pf-head{display:flex;align-items:center;gap:18px}
+.pf-nums{flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:4px;text-align:center}
+.pf-nums>*{display:flex;flex-direction:column;align-items:center;background:none;border:0;color:var(--ink);cursor:pointer;padding:4px}
+.pf-nums>span{cursor:default}
+.pf-nums b{font-size:19px;font-weight:800}.pf-nums small{font-size:11.5px;color:var(--muted)}
+.pf-id{margin-top:12px}.pf-id b{font-size:16px;color:var(--ink)}.pf-id small{display:block;color:var(--muted);font-size:12.5px;margin-top:2px}
+.pf-id p{margin-top:8px;font-size:14px;line-height:1.55;color:var(--ink);white-space:pre-line}
+.pf-id .pf-fam{color:var(--gold-soft);font-weight:700}
+.pf-btns{display:flex;gap:8px;margin:14px 0 6px}.pf-btns .btn-gold,.pf-btns .btn-ghost{flex:1}
+.ac-edit-ph{display:flex;flex-direction:column;align-items:center;gap:8px}
+.ac-ph-pick{display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer}
+.ac-more summary{cursor:pointer;font-weight:700;color:var(--gold-soft);font-size:13.5px}
+
+/* ===== v66: Utsav Night — indigo night, marigold and rani-pink lights (default look; THEMES.imperial = classic black & gold) ===== */
+html[data-theme="utsav"]{--bg:#130B30;--bg2:#1A1040;--bg3:#22164F;--bg-rgb:19,11,48;--bg2-rgb:26,16,64;
+  --gold:#FFB627;--gold-hi:#FFD670;--gold-lo:#FF4F8B;--gold-soft:#FFCF7A;--gold-pale:#FFF1CC;--gold-cream:#FFE2B8;--gold-deep:#B0275E;--on-gold:#2B0A2E;
+  --g-rgb:255,182,39;--hi-rgb:255,214,112;--lo-rgb:255,79,139;--pale-rgb:255,241,204;--s1:#21164F;--s2:#140C35;--s1-rgb:33,22,79;--s2-rgb:20,12,53;
+  --ink:#FBF4FF;--muted:#B9AEDB;--line:rgba(255,182,39,.2);--line-strong:rgba(255,182,39,.45);--land1:#2a1d5c;--land2:#1a1140;--ocean1:#120a2c;--ocean2:#08051a;
+  --metal:linear-gradient(135deg,#FF7A59 0%,#FFB627 30%,#FFD670 48%,#FF8A5B 66%,#FF4F8B 100%);color-scheme:dark}
+html[data-theme="utsav"] body{background:#130B30}
+html[data-theme="utsav"] body::before{background:
+  radial-gradient(900px 600px at 0% -5%,rgba(255,79,139,.20),transparent 60%),
+  radial-gradient(800px 520px at 100% 0%,rgba(123,92,255,.26),transparent 62%),
+  radial-gradient(900px 640px at 50% 105%,rgba(255,182,39,.12),transparent 60%),
+  linear-gradient(180deg,#130B30 0%,#180F3C 50%,#120A2C 100%)}
+html[data-theme="utsav"] #themeFx{opacity:1;background:
+  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='360' height='90' viewBox='0 0 360 90'%3E%3Cpath d='M0 8 Q90 70 180 8 T360 8' fill='none' stroke='%23FFD670' stroke-opacity='.18' stroke-width='1.2'/%3E%3Cg fill='%23FFB627'%3E%3Ccircle cx='30' cy='26' r='2.2' opacity='.55'/%3E%3Ccircle cx='70' cy='42' r='2.2' opacity='.4'/%3E%3Ccircle cx='110' cy='42' r='2.2' opacity='.55'/%3E%3Ccircle cx='150' cy='26' r='2.2' opacity='.4'/%3E%3C/g%3E%3Cg fill='%23FF4F8B'%3E%3Ccircle cx='210' cy='26' r='2.2' opacity='.5'/%3E%3Ccircle cx='250' cy='42' r='2.2' opacity='.4'/%3E%3Ccircle cx='290' cy='42' r='2.2' opacity='.5'/%3E%3Ccircle cx='330' cy='26' r='2.2' opacity='.4'/%3E%3C/g%3E%3C/svg%3E") top center/360px 90px repeat-x}
+html[data-theme="utsav"] .font-regal{font-family:'Fraunces','Cinzel',Georgia,serif;letter-spacing:-.01em;font-weight:700}
+html[data-theme="utsav"] #topbar .font-regal{letter-spacing:.06em}
+html[data-theme="utsav"] .eyebrow{letter-spacing:.06em;text-transform:none;font-size:12.5px;color:var(--gold-soft)}
+html[data-theme="utsav"] .glass{background:linear-gradient(180deg,rgba(36,24,86,.86),rgba(22,13,58,.92));box-shadow:0 30px 80px -30px rgba(5,2,20,.9),inset 0 1px 0 rgba(255,214,112,.12)}
+html[data-theme="utsav"] .gborder::before{background:linear-gradient(135deg,rgba(255,182,39,.8),rgba(123,92,255,.18) 38%,rgba(123,92,255,.18) 62%,rgba(255,79,139,.75))}
+html[data-theme="utsav"] .btn-gold{background:linear-gradient(135deg,#FFC94D 0%,#FFB627 35%,#FF8A5B 70%,#FF4F8B 100%);color:#2B0A2E;box-shadow:0 12px 30px -10px rgba(255,79,139,.6),inset 0 1px 0 rgba(255,255,255,.55)}
+html[data-theme="utsav"] .btn-gold:hover{box-shadow:0 16px 38px -10px rgba(255,79,139,.75),inset 0 1px 0 rgba(255,255,255,.55)}
+html[data-theme="utsav"] .btn-ghost:not(.on){background:rgba(255,255,255,.04);border-color:rgba(255,182,39,.4)}
+html[data-theme="utsav"] #topbar{background:rgba(19,11,48,.92);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+html[data-theme="utsav"] #topbar::after{background:linear-gradient(90deg,transparent,rgba(255,79,139,.6),rgba(255,182,39,.6),transparent)}
+html[data-theme="utsav"] .crest{background:radial-gradient(circle at 35% 25%,#2C1E66,#130B30);box-shadow:0 0 0 1px rgba(255,182,39,.5),0 0 24px -4px rgba(255,79,139,.55)}
+html[data-theme="utsav"] .dash-tabs{background:linear-gradient(180deg,rgba(33,22,79,.94),rgba(20,12,53,.96))}
+html[data-theme="utsav"] .dash-tabs button.on{background:linear-gradient(180deg,rgba(255,182,39,.2),rgba(255,79,139,.1));box-shadow:inset 0 0 0 1px rgba(255,182,39,.45)}
+html[data-theme="utsav"] .modal-panel{background:linear-gradient(180deg,#22175A,#140C35)}
+html[data-theme="utsav"] .gold-text{background:linear-gradient(180deg,#FFF1CC 0%,#FFD670 30%,#FFB627 62%,#FF6F7F 100%);-webkit-background-clip:text;background-clip:text}
+html[data-theme="utsav"] .input{background:rgba(12,6,34,.7);border-color:rgba(255,182,39,.28)}
+html[data-theme="utsav"] #treeViewport,html[data-theme="utsav"] #treeSizer{background-color:#120A2E}
+html[data-theme="utsav"] #treeSizer{background-image:radial-gradient(rgba(255,214,112,.09) 1px,transparent 1.4px);background-size:28px 28px}
+html[data-theme="utsav"] .ring{background:conic-gradient(from 200deg,#B0275E,#FFD670,#FFB627,#FFF1CC,#FF4F8B,#FFD670,#B0275E)}
+html[data-theme="utsav"] .chip{background:rgba(255,255,255,.04)}
+html[data-theme="utsav"] .toast{background:rgba(30,20,72,.97)}
 </style>
 </head>
 <body>
@@ -2345,8 +2445,9 @@ html .gold-text{background:linear-gradient(180deg,var(--gold-pale) 0%,var(--gold
   <!-- DYNASTY vs DYNASTY -->
   <section id="arena" data-panel="arena" class="pt-6 reveal">
     <div class="glass gborder p-5 sm:p-8">
-      <div class="min-w-0"><div class="eyebrow">◆ <span data-hn="Family profiles · Dynasty vs Dynasty">Family profiles · Dynasty vs Dynasty</span></div><h2 class="font-regal gold-text text-2xl sm:text-3xl font-bold mt-2" data-hn="🌍 Families">🌍 Families</h2>
+      <div class="min-w-0"><div class="eyebrow">◆ <span data-hn="Aapke log · Dynasty vs Dynasty">Your people · Dynasty vs Dynasty</span></div><h2 class="font-regal gold-text text-2xl sm:text-3xl font-bold mt-2" data-hn="👥 Community">👥 Community</h2>
         <p class="muted text-sm mt-2 max-w-2xl" id="dynIntro">Make your dynasty public to show other families your tree, descriptions, posts, memories, voice notes and 24-hour stories — or keep it private for family only.</p></div>
+      <div id="commHub" class="comm-hub mt-6" hidden></div>
       <div id="dynMine" class="dyn-mine mt-6"></div>
       <div class="dyn-head mt-8" id="netHead"><div class="eyebrow" data-hn="◆ Families on DynastyVault">◆ Families on DynastyVault</div></div>
       <div id="netExplore" class="net-explore" hidden></div>
@@ -2938,6 +3039,18 @@ html .gold-text{background:linear-gradient(180deg,var(--gold-pale) 0%,var(--gold
   </div>
 </div>
 
+<div class="modal top" id="peopleAuth" role="dialog" aria-modal="true" aria-label="Create account or log in">
+  <div class="modal-panel max-w-md"><div class="p-6 sm:p-8">
+    <div class="flex items-center justify-between gap-4"><div class="eyebrow">&#9670; DynastyVault</div><button class="icon-btn" data-close aria-label="Close">&#10005;</button></div>
+    <div id="peopleAuthBody"></div>
+  </div></div>
+</div>
+<div class="modal top" id="peopleEdit" role="dialog" aria-modal="true" aria-label="Edit profile">
+  <div class="modal-panel max-w-md"><div class="p-6 sm:p-8">
+    <div class="flex items-center justify-between gap-4 mb-4"><div><div class="eyebrow">&#9670; <span data-hn="Aapki profile">Your profile</span></div><h3 class="font-regal gold-text text-2xl font-bold mt-1" data-hn="Profile edit karo">Edit profile</h3></div><button class="icon-btn" data-close aria-label="Close">&#10005;</button></div>
+    <div id="peopleEditBody"></div>
+  </div></div>
+</div>
 <div class="modal top" id="acctModal" role="dialog" aria-modal="true" aria-labelledby="acctTitle">
   <div class="modal-panel max-w-md">
     <div class="p-6 sm:p-8">
@@ -5772,7 +5885,11 @@ function waOpen(text) { const a = document.createElement('a'); a.href = 'https:/
 const dashOn = () => document.body.classList.contains('dash-on');
 
 /* ---------- 🎨 Theme Studio: themes & custom portrait frames ---------- */
+// The look new visitors get: Utsav Night (indigo, marigold, rani pink). Nabu: black & gold wapas chahiye? look.js mein DV_LOOK = 'classic' likho.
+const DEFAULT_THEME = window.DV_LOOK === 'classic' ? 'imperial' : 'utsav';
 const THEMES = {
+  utsav:{ name:'Utsav Night', free:true, blurb:'Indigo night sky with marigold and rani-pink lights — festive, warm and bright.', hb:'Neela raat ka aasmaan, genda aur rani-pink roshni — tyohaar jaisa, garam aur chamakdaar.',
+    sw:['#140C33', '#FFB627', '#FF4F8B', '#7B5CFF'], dust:['255,236,200', '255,182,39', '255,79,139', '123,92,255'], tree:['#FF4F8B', '#3A1550', '#FF7A59', '#FFB627', '#FFE7A8'] },
   imperial:{ name:'Imperial Gold', free:true, blurb:'Deep charcoal and rich metallic gold — the classic dynasty look.', hb:'Deep charcoal aur asli metallic gold — classic dynasty look.',
     sw:['#07080B', '#D4AF37', '#FFDF00', '#AA7C11'], dust:['255,248,210', '255,223,0', '212,175,55', '170,124,17'], tree:['#D4AF37', '#5E450A', '#AA7C11', '#D4AF37', '#FFF1A8'] },
   palace:{ name:'Heritage Palace', blurb:'Royal maroon, rose gold and ivory under jharokha arches.', hb:'Royal maroon, rose gold aur ivory — Rajput mahal ke jharokhon jaisa.',
@@ -5792,7 +5909,7 @@ const FRAMES = {
 const themeUI = { preview:null, framePreview:null };
 const themeAllowed = id => isRoyal() || !!(THEMES[id] && THEMES[id].free);
 const frameAllowed = id => isRoyal() || !!(FRAMES[id] && FRAMES[id].free);
-const curTheme = () => { const t = themeUI.preview || (themeAllowed(state.theme) ? state.theme : 'imperial'); return THEMES[t] ? t : 'imperial'; };
+const curTheme = () => { const t = themeUI.preview || (themeAllowed(state.theme) ? state.theme : DEFAULT_THEME); return THEMES[t] ? t : DEFAULT_THEME; };
 const curFrame = () => { const f = themeUI.framePreview || (frameAllowed(state.frame) ? state.frame : 'dual'); return FRAMES[f] ? f : 'dual'; };
 function applyTheme() {
   const root = document.documentElement; const t = curTheme(), f = curFrame();
@@ -5812,7 +5929,7 @@ function laurelMask() {
 const ringHTML = (p, name) => `<span class="ring"><span class="ring-gap"><span class="ring-inner"><span class="photo">${p && p.avatar ? `<img src="${p.avatar}" alt="" draggable="false">` : `<span>${esc(initials(name || (p && p.name) || '?'))}</span>`}</span></span></span></span>`;
 function renderThemeStudio() {
   const grid = $('#themeGrid'); if (!grid) return;
-  const saved = themeAllowed(state.theme) && THEMES[state.theme] ? state.theme : 'imperial', savedF = frameAllowed(state.frame) && FRAMES[state.frame] ? state.frame : 'dual';
+  const saved = themeAllowed(state.theme) && THEMES[state.theme] ? state.theme : DEFAULT_THEME, savedF = frameAllowed(state.frame) && FRAMES[state.frame] ? state.frame : 'dual';
   grid.innerHTML = Object.entries(THEMES).map(([id, t]) => {
     const on = curTheme() === id; const lock = !themeAllowed(id);
     return `<button class="theme-card${on ? ' on' : ''}" data-theme-pick="${id}" aria-pressed="${on}">
@@ -5833,7 +5950,7 @@ function renderThemeStudio() {
 function pickTheme(id) {
   markUsed('themes');
   if (!THEMES[id]) return;
-  if (themeAllowed(id)) { themeUI.preview = null; state.theme = id; save(); applyTheme(); renderThemeStudio(); toast(hx(`🎨 ${THEMES[id].name} applied to your whole vault`, `🎨 ${THEMES[id].name} poore vault pe lag gaya`)); return; }
+  if (themeAllowed(id)) { themeUI.preview = null; state.theme = id; state.themePicked = true; save(); applyTheme(); renderThemeStudio(); toast(hx(`🎨 ${THEMES[id].name} applied to your whole vault`, `🎨 ${THEMES[id].name} poore vault pe lag gaya`)); return; }
   themeUI.preview = id; themeUI.framePreview = null; applyTheme(); renderThemeStudio();
   clearTimeout(themeUI.t); themeUI.t = setTimeout(() => { if (themeUI.preview === id) openThemeLock(); }, 900);
 }
@@ -5846,7 +5963,7 @@ function pickFrame(id) {
 }
 function openThemeLock() {
   const t = themeUI.preview, f = themeUI.framePreview;
-  openLock('themes', () => { if (t) state.theme = t; if (f) state.frame = f; themeUI.preview = themeUI.framePreview = null; save(); applyTheme(); renderThemeStudio(); toast(hx('🎨 Premium themes & frames unlocked — your choice is saved', '🎨 Premium themes & frames unlock — aapki choice save ho gayi')); });
+  openLock('themes', () => { if (t) { state.theme = t; state.themePicked = true; } if (f) state.frame = f; themeUI.preview = themeUI.framePreview = null; save(); applyTheme(); renderThemeStudio(); toast(hx('🎨 Premium themes & frames unlocked — your choice is saved', '🎨 Premium themes & frames unlock — aapki choice save ho gayi')); });
 }
 function cancelThemePreview() { clearTimeout(themeUI.t); if (!themeUI.preview && !themeUI.framePreview) return; themeUI.preview = themeUI.framePreview = null; applyTheme(); renderThemeStudio(); }
 function themeLockArt() {
@@ -5856,7 +5973,7 @@ function themeLockArt() {
 /* ---------- 🎛️ modular dashboard (8 tabs, no long scrolling) ---------- */
 const DASH_TABS = [
   { id:'canvas', ico:'🌳', en:'Family Tree', hn:'Family Tree', sen:'Tree', shn:'Tree', main:true },
-  { id:'arena', ico:'🌍', en:'Families', hn:'Families', sen:'Families', shn:'Families', main:true },
+  { id:'arena', ico:'👥', en:'Community', hn:'Community', sen:'People', shn:'Log', main:true },
   { id:'film', ico:'🎬', en:'Documentary', hn:'Documentary', sen:'Film', shn:'Film', main:true },
   { id:'voice', ico:'🎙️', en:'Voices', hn:'Awaaz', sen:'Voices', shn:'Awaaz', main:true },
   { id:'refer', ico:'🎁', en:'Share & Earn', hn:'Share & Kamao', sen:'Share', shn:'Share', main:true },
@@ -6692,6 +6809,7 @@ function initV10() {
   initDyn();
   netInit();
   filmInit();
+  accInit();
   initRoute();
   initLeafUI();
   handleDynHash().then(pf => { if (!pf) return; renderArena(); if (state.onboarded && dashOn()) showTab('arena', { noScroll:true }); setTimeout(() => openDyn(pf.id), 500); });
@@ -6960,6 +7078,7 @@ function dynAll() {
 }
 function dynFind(id) {
   if (id.startsWith('net_')) return NET.cache[id.slice(4)] || null;
+  if (id.startsWith('acc_')) return NET.cache['acc:' + id.slice(4)] || null;
   if (id.startsWith('own_')) { const v = state.vaults[id.slice(4)]; return v ? profileFromVault(v) : null; }
   return dynAll().find(p => p.id === id) || null;
 }
@@ -6969,6 +7088,7 @@ const dynNum = n => (+n || 0).toLocaleString('en-IN');
 function renderDyn() {
   const intro = $('#dynIntro'), mine = $('#dynMine'), grid = $('#dynGrid'); if (!mine || !grid) return; const v = V(); if (!v) return;
   if (intro) intro.innerHTML = hx('Make your dynasty <b class="text-[color:var(--gold-soft)]">🌍 Public</b> to show other families your tree, descriptions, posts, memories, voice notes and 24-hour stories — or keep it <b class="text-[color:var(--gold-soft)]">🔒 Private</b> for family only. Explore public dynasties, crown 👑 what moves you and go head-to-head.', 'Apni dynasty <b class="text-[color:var(--gold-soft)]">🌍 Public</b> karo taaki baaki families aapka tree, descriptions, posts, yaadein, voice notes aur 24-ghante ki stories dekh sakein — ya <b class="text-[color:var(--gold-soft)]">🔒 Private</b> rakho, sirf family ke liye. Public dynasties dekho, 👑 crown do aur aamne-saamne muqabla karo.');
+  if (intro && accOn()) intro.innerHTML = hx('Your own account and your family tree, in one place. Follow relatives, see their posts and memories, and let them follow you back.', 'Aapka apna account aur family tree, ek jagah. Rishtedaaron ko follow karo, unki posts aur yaadein dekho, aur unhe bhi follow karne do.');
   const pr = dynPrivacy(v); const pub = pr.dyn === 'public'; const pf = profileFromVault(v);
   const cnt = { tree:pf.st.m, desc:Object.keys(indexVault(v)).filter(id => (v.people[id].bio || '').trim()).length, posts:(v.feed || []).filter(f => dynFeedSec(f) === 'posts').length, mem:(v.feed || []).filter(f => dynFeedSec(f) === 'mem').length, voice:(v.feed || []).filter(f => dynFeedSec(f) === 'voice').length, stories:activeStories(v).length, trail:(v.trail || []).length };
   mine.innerHTML = `<div class="dm-top"><span class="dm-flag" aria-hidden="true">${pf.flag}</span>
@@ -6980,9 +7100,10 @@ function renderDyn() {
       <p class="tiny muted mt-2">${hx('Living members’ birth years follow your “hide birth dates” setting in Privacy & Vault. Photos and voice recordings stay on this device when you share a link.', 'Zinda members ke janam-saal Privacy & Vault ki “birth dates chhupao” setting se chalte hain. Link share karne pe photos aur voice recordings isi device pe rehti hain.')}</p>`
     : `<p class="dm-state">🔒 ${hx('Private — only members of your vault see your tree, descriptions, posts, memories, voice notes and stories. Nothing from this dynasty shows in Dynasty vs Dynasty.', 'Private — aapka tree, descriptions, posts, yaadein, voice notes aur stories sirf vault ke members dekhte hain. Dynasty vs Dynasty mein is dynasty ka kuch nahi dikhta.')}</p>
       <button class="btn-gold sm mt-3" data-dyn-vis="public">🌍 ${hx('Make my dynasty public', 'Meri dynasty public karo')}</button>`}`;
-  if (netOn() && !isDemo(v)) { mine.insertAdjacentHTML('beforeend', netMineHTML(v)); netMine(); }
-  const nh = $('#netHead'); if (nh) nh.hidden = !netOn();
-  const ne = $('#netExplore'); if (ne) { ne.hidden = !netOn(); if (netOn()) { ne.innerHTML = netExploreHTML(); if (!NET.list && !NET.loading) netLoadList(''); } }
+  if (netOn() && !accOn() && !isDemo(v)) { mine.insertAdjacentHTML('beforeend', netMineHTML(v)); netMine(); }
+  accPaint();
+  const nh = $('#netHead'); if (nh) nh.hidden = !netOn() || accOn();
+  const ne = $('#netExplore'); if (ne) { ne.hidden = !netOn() || accOn(); if (netOn() && !accOn()) { ne.innerHTML = netExploreHTML(); if (!NET.list && !NET.loading) netLoadList(''); } }
   const all = dynAll(); const cntEl = $('#dynCount'); if (cntEl) cntEl.textContent = hx(`${all.length} dynasties`, `${all.length} dynasties`);
   const tag = p => p.kind === 'own' ? `<span class="your-chip">${hx('Your dynasty', 'Aapki dynasty')}</span>` : p.kind === 'visit' ? `<span class="dc-visit">🔗 ${hx('Shared with you', 'Aapko share kiya')}</span>` : `<span class="sample-chip">${hx('Sample', 'Sample')}</span>`;
   grid.innerHTML = all.map(p => `<article class="dyn-card" data-dyn-open="${p.id}" tabindex="0" role="button" aria-label="${esc(hx('Open', 'Kholo'))} ${esc(p.n)}">
@@ -7101,16 +7222,18 @@ function renderDynModal() {
   else if (T === 'stories') body = p.stories.length ? `<div class="dv-stories">${p.stories.map(s => { const left = Math.max(1, Math.ceil((DAY - (Date.now() - s.at)) / DYN_H)); return `<div class="dv-story" style="background:${s.ph ? `linear-gradient(180deg,transparent 40%,rgba(0,0,0,.75)),url('${s.ph}') center/cover` : (STORY_BG[s.bg] || STORY_BG.gold)}"><small>⏱️ ${hx(`${left}h left`, `${left} ghante baaki`)}</small><p>${esc(s.text)}</p><b>${esc(s.by)}</b></div>`; }).join('')}</div>` : `<p class="muted text-sm">${hx('No live stories right now — 24-hour stories disappear after a day.', 'Abhi koi live story nahi — 24-ghante ki stories ek din baad gayab ho jaati hain.')}</p>`;
   else { const kind = { posts:'post', mem:'memory', voice:'voice' }[T]; const list = p.posts.filter(x => x.k === kind); body = list.length ? `<div class="dv-posts">${list.map(x => dynPostHTML(x, p)).join('')}</div>` : `<p class="muted text-sm">${hx('Nothing here yet.', 'Yahan abhi kuch nahi.')}</p>`; }
   if (p.kind === 'net' && !p.open) body = netLockedHTML(p);
+  let accOv = null; if (p.kind === 'acct') { accOv = accProfBody(p); if (accOv) body = accOv; }
   const hidden = DYN_SECTIONS.filter(([k]) => !p.show[k]);
   box.innerHTML = `<div class="dv-banner" style="background:${STORY_BG[p.bg] || STORY_BG.gold}"><span class="dv-flag">${p.flag}</span><div class="min-w-0"><div class="dv-badge">${p.kind === 'net' ? (p.vis === 'public' ? '🌍 ' + hx('Public family', 'Public family') : '🔒 ' + hx('Private family', 'Private family')) + ' · @' + esc(p.h) : p.kind === 'own' ? (p.pub ? '🌍 ' + hx('Public dynasty', 'Public dynasty') : '🔒 ' + hx('Private — preview only you see', 'Private — sirf aap dekh rahe ho')) : p.kind === 'visit' ? '🔗 ' + hx(`Shared${p.by ? ' by ' + p.by : ''}`, `${p.by ? p.by + ' ne ' : ''}share kiya`) : '🌍 ' + hx('Public dynasty · sample', 'Public dynasty · sample')}</div><h3 class="font-regal dv-name">${esc(p.n)}</h3><small>${esc(p.place || '')}${p.motto ? ` · “${esc(p.motto.replace(/^[“"']+|[”"']+$/g, ''))}”` : ''}</small></div>${p.cover ? `<img class="dv-cover" src="${p.cover}" alt="">` : ''}</div>
     ${netBarHTML(p)}
     <div class="dv-stats"><span><b>👑 ${dynNum(p.st.s)}</b><small>${hx('Royalty', 'Royalty')}</small></span><span><b>${dynNum(p.st.m)}</b><small>${hx('Members', 'Members')}</small></span><span><b>${p.st.g}</b><small>${hx('Generations', 'Peedhiyan')}</small></span><span><b>${dynNum(p.st.vo)}</b><small>${hx('Voices', 'Awaazein')}</small></span><span><b>${dynNum(p.st.ph)}</b><small>${hx('Photos', 'Photos')}</small></span></div>
-    <div class="dv-tabs" role="tablist"${p.kind === 'net' && !p.open ? ' hidden' : ''}>${secs.map(([k, ico, l, n]) => `<button role="tab" data-dt="${k}" class="${T === k ? 'on' : ''}">${ico} ${l} <i>${n}</i></button>`).join('')}${mineNow || !state.onboarded ? '' : `<button role="tab" data-dt="vs" class="${T === 'vs' ? 'on' : ''} dv-tab-vs">⚔️ ${hx('Dynasty vs Dynasty', 'Dynasty vs Dynasty')}</button>`}</div>
+    <div class="dv-tabs" role="tablist"${(p.kind === 'net' && !p.open) || accOv ? ' hidden' : ''}>${secs.map(([k, ico, l, n]) => `<button role="tab" data-dt="${k}" class="${T === k ? 'on' : ''}">${ico} ${l} <i>${n}</i></button>`).join('')}${mineNow || !state.onboarded ? '' : `<button role="tab" data-dt="vs" class="${T === 'vs' ? 'on' : ''} dv-tab-vs">⚔️ ${hx('Dynasty vs Dynasty', 'Dynasty vs Dynasty')}</button>`}</div>
     <div class="dv-pane">${body}</div>
-    ${hidden.length && !(p.kind === 'net' && !p.open) ? `<p class="tiny muted mt-3">🔒 ${hx('Kept private by this family:', 'Is family ne private rakha:')} ${hidden.map(([, ico, en, hn]) => `${ico} ${hx(en, hn)}`).join(' · ')}</p>` : ''}
+    ${hidden.length && !(p.kind === 'net' && !p.open) && !accOv ? `<p class="tiny muted mt-3">🔒 ${hx('Kept private by this family:', 'Is family ne private rakha:')} ${hidden.map(([, ico, en, hn]) => `${ico} ${hx(en, hn)}`).join(' · ')}</p>` : ''}
     ${!ownVault() && !state.onboarded ? `<button class="btn-gold w-full mt-4" data-dyn-create>👑 Create Your Family Dynasty Tree</button>` : ''}`;
-  if (tv) dynTreeMount(tv, p);
-  if (T === 'trail') dynTrailMount(p);
+  if (p.kind === 'acct') { box.querySelectorAll('.dv-banner,.net-bar,.dv-stats').forEach(x => x.remove()); box.insertAdjacentHTML('afterbegin', accProfHead(p)); }
+  if (tv && !accOv) dynTreeMount(tv, p);
+  if (T === 'trail' && !accOv) dynTrailMount(p);
 }
 function openDyn(id, tab) {
   if (String(id).startsWith('net_')) { openNet(String(id).slice(4), tab); return; }
@@ -7438,7 +7561,7 @@ function handleNetHash() {
   history.replaceState(null, '', location.pathname + location.search);
   if (!netOn()) { toast(hx('Family profiles open on the DynastyVault website.', 'Family profiles DynastyVault website pe khulti hain.'), 'warn'); return true; }
   if (state.onboarded && typeof dashOn === 'function' && dashOn()) showTab('arena', { noScroll:true });
-  setTimeout(() => openNet(h), 300); return true;
+  setTimeout(() => accOn() ? openPerson(h) : openNet(h), 300); return true;
 }
 const dvT = (e, x) => { try { if (window.dvTrack) window.dvTrack(e, x); } catch (er) { /* ignore */ } };
 
@@ -7655,6 +7778,314 @@ function filmInit() {
     if (t.hasAttribute('data-film-del')) { filmDelete(); return; }
   });
   filmServerReady(); const v = V(); if (v && v.films && Object.values(v.films).some(r => r.st === 'run')) filmSchedule();
+}
+
+/* ---------- 👤 Personal accounts — everyone gets their own profile, like Instagram / Facebook ----------
+   Username + password on Nabu's server. Profile photo, bio, city, public/private, followers/following,
+   a feed of the people you follow, and your family tree on your profile. Log in on any phone: the tree comes back. */
+const ACC = { tok:'', me:null, tab:'feed', feed:null, list:null, q:'', loading:false, err:'', meAt:0, famT:0, bakT:0, busy:false };
+try { const s = JSON.parse(localStorage.getItem('dv.acct.v1') || 'null'); if (s && s.tok) { ACC.tok = s.tok; ACC.me = s.me || null; } } catch (e) { /* storage blocked */ }
+const accOn = () => netOn() && !SB;
+function accKeep() { try { if (ACC.tok) localStorage.setItem('dv.acct.v1', JSON.stringify({ tok:ACC.tok, me:ACC.me })); else localStorage.removeItem('dv.acct.v1'); } catch (e) { /* ignore */ } }
+async function accApi(path, body, tok) {
+  const h = { 'Content-Type':'application/json' }; const t = tok === undefined ? ACC.tok : tok; if (t) h.Authorization = 'Bearer ' + t;
+  const r = await fetch(DV_API + path, body ? { method:'POST', headers:h, body:JSON.stringify(body) } : { headers:h });
+  const j = await r.json().catch(() => ({}));
+  if (r.status === 401 && j.code === 'LOGIN' && t) { ACC.tok = ''; ACC.me = null; accKeep(); accPaint(); }
+  if (!r.ok) { const e = new Error(j.error || ('HTTP ' + r.status)); e.status = r.status; e.code = j.code; throw e; }
+  return j;
+}
+const accAv = (ph, name, cls) => `<span class="ac-av ${cls || ''}">${ph ? `<img src="${ph}" alt="">` : `<b>${esc(initials(name || '?'))}</b>`}</span>`;
+async function accRefresh(force) {
+  if (!accOn() || !ACC.tok) return; if (!force && Date.now() - ACC.meAt < 20000) return; ACC.meAt = Date.now();
+  try { const j = await accApi('/api/acct/me'); ACC.me = j.me; accKeep(); } catch (e) { /* offline */ }
+  accPaint();
+}
+/* --- sign up / log in --- */
+const AUTH = { mode:'signup', err:'', busy:false, check:{} };
+function accOpenAuth(mode) { AUTH.mode = mode === 'login' ? 'login' : 'signup'; AUTH.err = ''; accAuthBody(); openModal('peopleAuth'); setTimeout(() => { const f = $('#peopleAuth input'); if (f) f.focus(); }, 250); }
+function accAuthBody() {
+  const el = $('#peopleAuthBody'); if (!el) return; const up = AUTH.mode === 'signup';
+  el.innerHTML = `<div class="ac-auth-top">${accAv('', '👑', 'xl crest')}<h3 class="font-regal gold-text">${up ? hx('Create your account', 'Apna account banao') : hx('Welcome back', 'Phir se swagat hai')}</h3>
+      <p class="tiny muted">${up ? hx('Your own profile — share your family tree, follow relatives and see their memories.', 'Aapki apni profile — family tree share karo, rishtedaaron ko follow karo aur unki yaadein dekho.') : hx('Log in to see your profile, feed and family on this phone.', 'Is phone pe apni profile, feed aur family dekhne ke liye log in karo.')}</p></div>
+    <div class="gm-tabs ac-seg mt-4" role="tablist"><button role="tab" data-au="signup" class="${up ? 'on' : ''}">${hx('Sign up', 'Sign up')}</button><button role="tab" data-au="login" class="${up ? '' : 'on'}">${hx('Log in', 'Log in')}</button></div>
+    <form id="acForm" class="grid gap-3 mt-4" novalidate>
+      ${up ? `<label class="field"><span>${hx('Your full name', 'Aapka poora naam')}</span><input class="input" name="name" autocomplete="name" maxlength="60" required value="${esc((ownVault() && ownVault().people[ownVault().self] || {}).name || '')}"></label>
+      <label class="field"><span>${hx('Username', 'Username')} <b id="acUHint"></b></span><div class="ac-at"><i>@</i><input class="input" name="username" autocomplete="username" autocapitalize="off" spellcheck="false" maxlength="24" required></div></label>`
+      : `<label class="field"><span>${hx('Username or email', 'Username ya email')}</span><input class="input" name="username" autocomplete="username" autocapitalize="off" spellcheck="false" required></label>`}
+      <label class="field"><span>${hx('Password', 'Password')}</span><div class="ac-pw"><input class="input" name="password" type="password" autocomplete="${up ? 'new-password' : 'current-password'}" minlength="6" required><button type="button" class="chip" data-au-eye aria-label="${esc(hx('Show password', 'Password dikhao'))}">👁</button></div></label>
+      ${up ? `<label class="field"><span>${hx('Email (optional — helps if you forget the password)', 'Email (optional — password bhoolne pe kaam aata hai)')}</span><input class="input" name="email" type="email" autocomplete="email" maxlength="120"></label>
+      <div class="ac-vis" role="radiogroup" aria-label="${esc(hx('Account type', 'Account type'))}"><label class="opt on"><input type="radio" name="vis" value="public" checked hidden><span class="ac-vis-i">🌍</span><span><b>${hx('Public', 'Public')}</b><small>${hx('Anyone can see your profile and follow you', 'Koi bhi profile dekh aur follow kar sakta hai')}</small></span></label><label class="opt"><input type="radio" name="vis" value="private" hidden><span class="ac-vis-i">🔒</span><span><b>${hx('Private', 'Private')}</b><small>${hx('Only people you approve see your tree', 'Sirf aapke approve kiye log tree dekhte hain')}</small></span></label></div>
+      <label class="ai-check"><input type="checkbox" name="famOn" checked> ${hx('Show my family tree on my profile', 'Meri profile pe mera family tree dikhao')}</label>` : ''}
+      <p class="err" id="acErr">${esc(AUTH.err)}</p>
+      <button class="btn-gold w-full" type="submit"${AUTH.busy ? ' disabled' : ''}>${AUTH.busy ? '⏳' : up ? hx('Create account', 'Account banao') : hx('Log in', 'Log in')}</button>
+      ${up ? `<p class="tiny muted text-center">${hx('By signing up you agree to the', 'Sign up karke aap')} <a href="terms.html" target="_blank" rel="noopener" class="underline">${hx('Terms', 'Terms')}</a> &amp; <a href="privacy.html" target="_blank" rel="noopener" class="underline">${hx('Privacy', 'Privacy')}</a>${hx('.', ' maante ho.')}</p>`
+        : `<p class="tiny muted text-center">${hx('Forgot your password?', 'Password bhool gaye?')} <button type="button" class="kin-link" data-au-forgot>${hx('Message us on WhatsApp', 'WhatsApp pe batao')}</button></p>`}
+    </form>`;
+}
+let accUT = 0;
+async function accSubmit(f) {
+  if (AUTH.busy) return; const fd = new FormData(f); const up = AUTH.mode === 'signup';
+  const body = { username:String(fd.get('username') || '').trim(), password:String(fd.get('password') || '') };
+  if (up) Object.assign(body, { name:String(fd.get('name') || '').trim(), email:String(fd.get('email') || '').trim(), vis:fd.get('vis') === 'private' ? 'private' : 'public', famOn:!!fd.get('famOn'), city:(ownVault() && ownVault().region) || '' });
+  AUTH.busy = true; AUTH.err = ''; const b = f.querySelector('[type=submit]'); if (b) { b.disabled = true; b.textContent = '⏳'; }
+  try {
+    const j = await accApi(up ? '/api/acct/signup' : '/api/acct/login', body, '');
+    ACC.tok = j.token; ACC.me = j.me; ACC.feed = null; accKeep(); closeModal('peopleAuth');
+    toast(up ? hx(`🎉 Welcome, @${j.me.un}! Your profile is ready.`, `🎉 Swagat hai, @${j.me.un}! Aapki profile taiyaar hai.`) : hx(`Welcome back, ${j.me.name.split(' ')[0]} 👋`, `Wapas aaye, ${j.me.name.split(' ')[0]} 👋`), 'info', 3200);
+    if (up) dvT('signup');
+    await accAfterLogin(!up);
+  } catch (e) { AUTH.err = e.message; const er = $('#acErr'); if (er) er.textContent = e.message; }
+  finally { AUTH.busy = false; const b2 = $('#acForm [type=submit]'); if (b2) { b2.disabled = false; b2.textContent = up ? hx('Create account', 'Account banao') : hx('Log in', 'Log in'); } }
+}
+async function accAfterLogin(isLogin) {
+  if (isLogin && !ownVault()) {   // new phone → bring the family back from the account
+    try { const b = await accApi('/api/acct/backup'); if (b.vault && b.vault.people) {
+      const ok = await confirmBox({ title:hx(`Bring back “${b.vault.name}”?`, `“${b.vault.name}” wapas laayein?`), message:hx('Your family tree is saved in your account. Load it on this phone?', 'Aapka family tree account mein save hai. Is phone pe laayein?'), ok:hx('Load my family', 'Family laao') });
+      if (ok) { accRestore(b.vault); return; } } } catch (e) { /* no backup */ }
+  }
+  accSyncFamily(true); accBackup(true); accPaint(); accLoadFeed();
+  if (document.body.classList.contains('welcome-mode') || !ownVault()) { wizAfter = 'arena'; openWizard('form'); toast(hx('Now make your family tree — it will show on your profile.', 'Ab apna family tree banao — yeh aapki profile pe dikhega.'), 'info', 3500); } else showTab('arena');
+}
+function accRestore(vault) {
+  const v = JSON.parse(JSON.stringify(vault)); if (state.vaults[v.id]) v.id = uid('v'); v.demo = false; v.joined = true;
+  try { normalizeVault(v); } catch (e) { toast(hx('That backup could not be read.', 'Backup padha nahi ja saka.'), 'warn'); return; }
+  state.vaults[v.id] = v; state.order.unshift(v.id); state.active = v.id; state.lastOwn = v.id; state.onboarded = true; saveNow();
+  toast(hx('✓ Your family is back. Opening…', '✓ Aapki family wapas aa gayi. Khul rahi hai…'), 'info'); setTimeout(() => location.reload(), 900);
+}
+async function accLogout() {
+  try { await accApi('/api/acct/logout', {}); } catch (e) { /* ignore */ }
+  ACC.tok = ''; ACC.me = null; ACC.feed = null; accKeep(); closeModal('peopleEdit'); accPaint(); toast(hx('Logged out — your family stays on this phone.', 'Log out ho gaye — family is phone pe rahegi.'), 'info');
+}
+/* --- keep the profile's family tree and the backup up to date --- */
+async function accSyncFamily(force) {
+  const v = ownVault(); if (!accOn() || !ACC.tok || !ACC.me || !v) return;
+  if (!ACC.me.famOn) { if (ACC.me.hasFam) { try { await accApi('/api/acct/family', { off:true }); ACC.me.hasFam = false; accKeep(); } catch (e) { /* later */ } } return; }
+  const sig = netSig(v); if (!force && sig === state.accFamSig) return;
+  try { const { d } = await netPayload(v); await accApi('/api/acct/family', { d }); state.accFamSig = sig; ACC.me.hasFam = true; accKeep(); save(); } catch (e) { /* offline — next change retries */ }
+}
+async function accCompact(v) {
+  const c = JSON.parse(JSON.stringify(v, (k, val) => k.charAt(0) === '_' ? undefined : val));
+  for (const p of Object.values(c.people || {})) {
+    if (p.voice) { delete p.voice.sample; delete p.voice.samples; }
+    if (p.avatar && p.avatar.length > 150000) p.avatar = await netThumb(p.avatar, 480);
+  }
+  const strip = o => { if (!o || typeof o !== 'object') return; for (const k of Object.keys(o)) { const x = o[k]; if (typeof x === 'string' && x.startsWith('data:') && (x.startsWith('data:audio') || x.length > 300000)) delete o[k]; else if (typeof x === 'object') strip(x); } };
+  strip(c); return c;
+}
+async function accBackup(force) {
+  const v = ownVault(); if (!accOn() || !ACC.tok || !v) return;
+  const now = Date.now(); if (!force && now - (state.accBakAt || 0) < 120000) return;
+  try { await accApi('/api/acct/backup', { vault:await accCompact(v) }); state.accBakAt = now; save(); } catch (e) { /* too big or offline */ }
+}
+window.__accDirty = function () { if (!accOn() || !ACC.tok) return; clearTimeout(ACC.famT); ACC.famT = setTimeout(() => { accSyncFamily(); accBackup(); }, 12000); };
+/* --- the Community tab --- */
+async function accLoadFeed() { if (!accOn() || !ACC.tok) return; ACC.loading = true; accPaint(); try { ACC.feed = (await accApi('/api/people/feed')).items || []; ACC.err = ''; } catch (e) { ACC.err = e.message; } ACC.loading = false; accPaint(); }
+async function accLoadList(q) { if (!accOn()) return; if (q != null) ACC.q = q; ACC.loading = true; accPaint(); try { const j = await accApi('/api/people/search?q=' + encodeURIComponent(ACC.q) + '&limit=40'); ACC.list = j.items || []; ACC.total = j.total || 0; ACC.err = ''; } catch (e) { ACC.err = hx('Could not load people right now.', 'Abhi log load nahi ho paaye.'); } ACC.loading = false; accPaint(); }
+function accPersonRow(c) {
+  return `<div class="ac-row" data-pf-open="${esc(c.un)}" role="button" tabindex="0">${accAv(c.ph, c.name)}<div class="min-w-0 flex-1"><b>${esc(c.name)}</b><small>@${esc(c.un)}${c.city ? ' · ' + esc(c.city) : ''}</small>${c.m ? `<small>🌳 ${dynNum(c.m)} ${hx('family members', 'family members')}</small>` : ''}</div>
+    ${ACC.me && c.id === ACC.me.id ? '' : c.isFollowing ? `<span class="ac-pill">✓ ${hx('Following', 'Following')}</span>` : `<button class="btn-gold sm" data-ac-follow="${esc(c.un)}">${c.vis === 'private' ? '🔒 ' + hx('Request', 'Request') : hx('Follow', 'Follow')}</button>`}</div>`;
+}
+function accFeedHTML() {
+  if (ACC.loading && !ACC.feed) return `<p class="tiny muted mt-4">${hx('Loading your feed…', 'Feed load ho rahi hai…')}</p>`;
+  const it = ACC.feed || [];
+  if (!it.length) return `<div class="ac-empty"><span aria-hidden="true">🏡</span><b>${hx('Your feed is empty', 'Aapki feed khaali hai')}</b><p class="tiny muted">${hx('Follow your relatives and other families — their posts and memories show up here.', 'Rishtedaaron aur baaki families ko follow karo — unki posts aur yaadein yahan dikhengi.')}</p><button class="btn-gold sm mt-3" data-ac-tab="explore">🔍 ${hx('Find people', 'Log dhoondho')}</button></div>`;
+  const ico = { post:'📝', memory:'🕊️', voice:'🎙️', joined:'👋' };
+  return `<div class="ac-feed">${it.map(x => `<article class="ac-post"><header data-pf-open="${esc(x.who.un)}" role="button" tabindex="0">${accAv(x.who.ph, x.who.name, 'sm')}<div class="min-w-0"><b>${esc(x.who.name)}</b><small>@${esc(x.who.un)} · ${timeAgo(x.at)}</small></div><span class="ac-k" aria-hidden="true">${ico[x.k] || '📝'}</span></header>
+      ${x.k === 'joined' ? `<p>${hx(`Joined DynastyVault${x.who.fam ? ' with the ' + esc(x.who.fam) : ''}. Say hello!`, `DynastyVault pe aaye${x.who.fam ? ' — ' + esc(x.who.fam) : ''}. Hello bolo!`)}</p>` : `<p>${esc(x.text)}</p>${x.about ? `<small class="muted">${hx('about', 'ke baare mein')} ${esc(x.about)}</small>` : ''}`}</article>`).join('')}</div>`;
+}
+function accExploreHTML() {
+  const it = ACC.list || [];
+  return `<div class="net-search mt-1"><input type="search" id="acQ" value="${esc(ACC.q)}" placeholder="${esc(hx('Search people — name, surname, city or @username', 'Log dhoondho — naam, surname, shehar ya @username'))}" aria-label="${esc(hx('Search people', 'Log dhoondho'))}"><button class="chip" id="acQGo" aria-label="${esc(hx('Search', 'Search'))}">🔍</button></div>
+    ${ACC.loading && !it.length ? `<p class="tiny muted mt-3">${hx('Loading…', 'Load ho raha hai…')}</p>` : ACC.err ? `<p class="tiny muted mt-3">${esc(ACC.err)}</p>`
+      : it.length ? `<div class="ac-list mt-3">${it.map(accPersonRow).join('')}</div>` : ACC.list ? `<p class="tiny muted mt-3">${ACC.q ? hx('Nobody found with that name yet — invite them with your profile link.', 'Is naam se abhi koi nahi mila — apna profile link bhej ke bulao.') : hx('No one here yet — be the first and invite your family!', 'Abhi yahan koi nahi — pehle aap bano aur family ko bulao!')}</p>` : ''}`;
+}
+function accNotesHTML(me) {
+  const cards = {}; (me.noteCards || []).concat(me.requestCards || []).forEach(c => { cards[c.id] = c; });
+  const reqs = (me.requestCards || []);
+  const notes = (me.notes || []).filter(n => n.type !== 'request' && cards[n.id]).slice(0, 6);
+  if (!reqs.length && !notes.length) return '';
+  const say = n => ({ follow:hx('started following you', 'ne aapko follow kiya'), accepted:hx('accepted your follow request', 'ne aapki request accept ki') }[n.type] || '');
+  return `<div class="ac-notes">${reqs.length ? `<div class="eyebrow">◆ ${hx('Follow requests', 'Follow requests')} · ${reqs.length}</div>${reqs.slice(0, 20).map(c => `<div class="ac-row">${accAv(c.ph, c.name, 'sm')}<div class="min-w-0 flex-1" data-pf-open="${esc(c.un)}" role="button" tabindex="0"><b>${esc(c.name)}</b><small>@${esc(c.un)}</small></div><button class="btn-gold sm" data-ac-ok="${esc(c.id)}">${hx('Confirm', 'Confirm')}</button><button class="chip" data-ac-no="${esc(c.id)}" aria-label="${esc(hx('Delete request', 'Request hatao'))}">✕</button></div>`).join('')}` : ''}
+    ${notes.length ? `<div class="eyebrow mt-3">◆ ${hx('Activity', 'Activity')}</div>${notes.map(n => { const c = cards[n.id]; return `<div class="ac-note" data-pf-open="${esc(c.un)}" role="button" tabindex="0">${accAv(c.ph, c.name, 'xs')}<span><b>${esc(c.name)}</b> ${say(n)} <small class="muted">· ${timeAgo(n.t)}</small></span></div>`; }).join('')}` : ''}</div>`;
+}
+function accHubHTML() {
+  if (!accOn()) return '';
+  const me = ACC.tok && ACC.me;
+  if (!me) return `<div class="ac-join"><div class="ac-join-art" aria-hidden="true"><span>👵</span><span>👨‍👩‍👧</span><span>🧓</span></div>
+      <h3 class="font-regal gold-text">${hx('Your family, your people', 'Aapki family, aapke log')}</h3>
+      <p class="muted text-sm">${hx('Make your own DynastyVault account — like Instagram, but for families. Share your family tree, follow relatives and see their memories.', 'Apna DynastyVault account banao — Instagram jaisa, par families ke liye. Apna family tree share karo, rishtedaaron ko follow karo aur unki yaadein dekho.')}</p>
+      <div class="flex flex-wrap gap-2 mt-4 justify-center"><button class="btn-gold" data-ac-auth="signup">✨ ${hx('Create account', 'Account banao')}</button><button class="btn-ghost" data-ac-auth="login">${hx('Log in', 'Log in')}</button></div></div>
+    <div class="ac-sec"><div class="eyebrow">◆ ${hx('People on DynastyVault', 'DynastyVault pe log')}</div>${accExploreHTML()}</div>`;
+  return `<div class="ac-me"><div class="ac-me-top" data-pf-open="${esc(me.un)}" role="button" tabindex="0">${accAv(me.ph, me.name, 'lg ring')}<div class="min-w-0"><b class="ac-me-name">${esc(me.name)}</b><small>@${esc(me.un)}${me.city ? ' · ' + esc(me.city) : ''} · ${me.vis === 'private' ? '🔒 ' + hx('Private', 'Private') : '🌍 ' + hx('Public', 'Public')}</small></div></div>
+      <div class="ac-counts"><button data-pf-list="followers"><b>${dynNum(me.followers)}</b><span>${hx('Followers', 'Followers')}</span></button><button data-pf-list="following"><b>${dynNum(me.following)}</b><span>${hx('Following', 'Following')}</span></button><span><b>${dynNum(me.views)}</b><span>${hx('Profile views', 'Profile views')}</span></span></div>
+      <div class="flex flex-wrap gap-2 mt-3"><button class="btn-ghost sm" data-ac-edit>✎ ${hx('Edit profile', 'Profile edit karo')}</button><button class="btn-gold sm" data-ac-share>📤 ${hx('Share profile', 'Profile share karo')}</button></div>
+      ${!me.ph ? `<p class="tiny mt-2" style="color:var(--gold-soft)">📷 ${hx('Add a profile photo so relatives recognise you.', 'Profile photo lagao taaki rishtedaar pehchaan sakein.')} <button class="kin-link" data-ac-edit>${hx('Add photo', 'Photo lagao')}</button></p>` : ''}</div>
+    ${accNotesHTML(me)}
+    <div class="seg ac-tabs mt-5" role="tablist"><button role="tab" data-ac-tab="feed" class="${ACC.tab === 'feed' ? 'on' : ''}">🏠 ${hx('Feed', 'Feed')}</button><button role="tab" data-ac-tab="explore" class="${ACC.tab === 'explore' ? 'on' : ''}">🔍 ${hx('Explore', 'Explore')}</button></div>
+    <div class="ac-sec">${ACC.tab === 'feed' ? accFeedHTML() : accExploreHTML()}</div>`;
+}
+function accPaint() {
+  accHeader();
+  const box = $('#commHub'); if (!box) return;
+  if (!accOn()) { box.hidden = true; return; }
+  const q = document.activeElement && document.activeElement.id === 'acQ' ? $('#acQ').value : null;
+  box.hidden = false; box.innerHTML = accHubHTML();
+  if (q != null) { const i = $('#acQ'); if (i) { i.value = q; i.focus(); } }
+  if (!ACC.list && !ACC.loading && (!ACC.tok || ACC.tab === 'explore')) accLoadList('');
+  if (ACC.tok && ACC.tab === 'feed' && !ACC.feed && !ACC.loading) accLoadFeed();
+}
+function accHeader() {
+  const b = $('#acctBtn'); if (!b || SB) return; if (!accOn()) return;
+  b.classList.remove('hidden'); const me = ACC.tok && ACC.me;
+  b.innerHTML = me ? `${accAv(me.ph, me.name, 'xs')}<span class="ac-hdr-n">@${esc(me.un)}</span>` : `👤 <span>${hx('Log in', 'Log in')}</span>`;
+  b.setAttribute('aria-label', me ? hx('My profile', 'Meri profile') : hx('Log in or sign up', 'Log in ya sign up'));
+}
+/* --- a person's profile (opens in the profile sheet) --- */
+async function openPerson(un, tab) {
+  un = String(un || '').toLowerCase().replace(/^@+/, ''); if (!un || !accOn()) return;
+  if (!isOpen('dynModal')) { const box = $('#dynBody'); if (box) box.innerHTML = `<p class="muted p-6">${hx('Opening profile…', 'Profile khul rahi hai…')}</p>`; openModal('dynModal'); }
+  try {
+    const j = await accApi(`/api/people/view?u=${encodeURIComponent(un)}&d=${encodeURIComponent(gcDeviceId())}`);
+    const c = j.p; let prof;
+    if (j.d) prof = netProfFromPayload(j.d, un); else prof = { kind:'net', n:c.famName || c.name, place:c.city, flag:'', bg:'gold', show:{}, gens:[], posts:[], stories:[], trail:[], st:{ s:0, m:c.m || 0, g:c.g || 0, vo:0, ph:0 } };
+    Object.assign(prof, { id:'acc_' + un, kind:'acct', un, h:un, person:c, vis:c.vis, open:j.open, fol:c.followers, fing:c.following, views:c.views, following:j.isFollowing, requested:j.requested, followsYou:j.followsYou, owner:j.self, hasFam:!!j.d });
+    if (prof.snap) delete dynTreeCache[prof.id];
+    NET.cache['acc:' + un] = prof; dynStopVoice(); dynUI.id = prof.id; dynUI.list = null;
+    dynUI.tab = tab || (dynSecList(prof)[0] || ['tree'])[0]; renderDynModal(); const sc = $('#dynModal .modal-panel'); if (sc) sc.scrollTop = 0;
+  } catch (e) { const box = $('#dynBody'); if (box) box.innerHTML = `<p class="muted p-6">${e.status === 404 ? hx('This account does not exist any more.', 'Yeh account ab nahi hai.') : hx('Could not open the profile. Check the internet and try again.', 'Profile nahi khuli. Internet check karke phir try karo.')}</p>`; }
+}
+function accProfHead(p) {
+  const c = p.person || {};
+  const btn = p.owner ? `<button class="btn-ghost sm" data-ac-edit>✎ ${hx('Edit profile', 'Profile edit karo')}</button>`
+    : p.following ? `<button class="btn-ghost sm" data-pf-follow="off">✓ ${hx('Following', 'Following')}</button>`
+    : p.requested ? `<button class="btn-ghost sm" data-pf-follow="off">⏳ ${hx('Requested', 'Request bheji')}</button>`
+    : `<button class="btn-gold sm" data-pf-follow="on">${p.followsYou ? hx('Follow back', 'Follow back') : hx('Follow', 'Follow')}</button>`;
+  return `<div class="pf-head">${accAv(c.ph, c.name, 'xxl ring')}<div class="pf-nums"><span><b>${dynNum(p.st && p.st.m)}</b><small>${hx('Family', 'Family')}</small></span><button data-pf-list="followers"><b>${dynNum(p.fol)}</b><small>${hx('Followers', 'Followers')}</small></button><button data-pf-list="following"><b>${dynNum(p.fing)}</b><small>${hx('Following', 'Following')}</small></button></div></div>
+    <div class="pf-id"><b>${esc(c.name)}</b> ${p.vis === 'private' ? '<span class="ac-pill">🔒</span>' : ''}<small>@${esc(p.un)}${c.city ? ' · ' + esc(c.city) : ''}${p.followsYou && !p.owner ? ' · ' + hx('Follows you', 'Aapko follow karte hain') : ''}</small>${c.bio ? `<p>${esc(c.bio)}</p>` : ''}${c.famName ? `<p class="pf-fam">🏰 ${esc(c.famName)}</p>` : ''}</div>
+    <div class="pf-btns">${btn}<button class="btn-ghost sm" data-pf-share>📤 ${hx('Share', 'Share')}</button>${p.owner ? '' : `<button class="chip" data-pf-report aria-label="${esc(hx('Report this account', 'Is account ko report karo'))}">⚑</button>`}</div>`;
+}
+function accProfBody(p) {
+  if (dynUI.list) return `<div class="pf-list"><button class="chip" data-pf-list="">← ${hx('Back', 'Wapas')}</button><div class="eyebrow mt-3">◆ ${dynUI.list === 'followers' ? hx('Followers', 'Followers') : hx('Following', 'Following')}</div><div class="ac-list mt-2" id="pfListBox"><p class="tiny muted">${hx('Loading…', 'Load ho raha hai…')}</p></div></div>`;
+  if (!p.open) return `<div class="net-lock"><div class="net-lock-ico" aria-hidden="true">🔒</div><b>${hx('This account is private', 'Yeh account private hai')}</b><p class="tiny muted">${p.requested ? hx('Your request is waiting. Once they approve it, their family tree and posts open here.', 'Aapki request pending hai. Approve hote hi unka tree aur posts yahan khulenge.') : hx('Follow this account to see their family tree and posts.', 'Unka family tree aur posts dekhne ke liye follow karo.')}</p></div>`;
+  if (!p.hasFam) return `<div class="ac-empty"><span aria-hidden="true">🌱</span><b>${p.owner ? hx('Your family tree is not on your profile yet', 'Aapka family tree abhi profile pe nahi hai') : hx('No family tree shared yet', 'Abhi family tree share nahi kiya')}</b>${p.owner ? `<p class="tiny muted">${hx('Turn on “Show my family tree” in Edit profile.', 'Edit profile mein “Family tree dikhao” chalu karo.')}</p>` : ''}</div>`;
+  return null;
+}
+async function accFillList(p) {
+  try { const j = await accApi(`/api/people/list?u=${encodeURIComponent(p.un)}&kind=${dynUI.list}`); const box = $('#pfListBox'); if (box) box.innerHTML = (j.items || []).length ? j.items.map(c => accPersonRow(c)).join('') : `<p class="tiny muted">${hx('Nobody yet.', 'Abhi koi nahi.')}</p>`; }
+  catch (e) { const box = $('#pfListBox'); if (box) box.innerHTML = `<p class="tiny muted">${esc(e.message)}</p>`; }
+}
+async function accFollow(un, on, fromCard) {
+  if (!ACC.tok) { accOpenAuth('signup'); toast(hx('Make a free account to follow people.', 'Follow karne ke liye free account banao.'), 'info', 2500); return; }
+  try {
+    const j = await accApi('/api/people/follow', { u:un, on });
+    const p = NET.cache['acc:' + un]; if (p) { Object.assign(p, { following:j.isFollowing, requested:j.requested, fol:j.followers }); if (isOpen('dynModal') && dynUI.id === p.id) { if (j.isFollowing && !p.open) { openPerson(un); } else renderDynModal(); } }
+    (ACC.list || []).forEach(c => { if (c.un === un) c.isFollowing = j.isFollowing; });
+    if (on) toast(j.isFollowing ? hx(`✓ Following @${un}`, `✓ @${un} ko follow kar rahe ho`) : hx('✓ Request sent', '✓ Request bhej di'), 'info', 1800);
+    ACC.feed = null; accRefresh(true);
+  } catch (e) { toast(e.message, 'warn'); }
+}
+async function accShare(un, name) {
+  const link = netLink(un); try { await navigator.clipboard.writeText(link); } catch (e) { /* optional */ }
+  dvT('share');
+  const msg = isHn() ? `👑 DynastyVault pe meri profile dekho — mera family tree, kahaniyaan aur yaadein. Follow karo, aur apna account bhi banao 🌳\n${link}` : `👑 Follow me on DynastyVault — my family tree, stories and memories. Make your own account too 🌳\n${link}`;
+  if (navigator.share) { try { await navigator.share({ title:name || 'DynastyVault', text:msg }); return; } catch (e) { if (e && e.name === 'AbortError') return; } }
+  shareWhatsApp(msg); toast(hx('Profile link copied ✦', 'Profile link copy ho gaya ✦'), 'info');
+}
+/* --- edit profile --- */
+const EDIT = { photo:null, thumb:null, busy:false, err:'' };
+function accOpenEdit() { if (!ACC.me) { accOpenAuth('login'); return; } EDIT.photo = null; EDIT.thumb = null; EDIT.err = ''; accEditBody(); closeModal('dynModal'); openModal('peopleEdit'); }
+function accEditBody() {
+  const el = $('#peopleEditBody'); if (!el || !ACC.me) return; const me = ACC.me; const v = ownVault(); const pr = v ? dynPrivacy(v) : {};
+  el.innerHTML = `<form id="acEdit" class="grid gap-3" novalidate>
+      <div class="ac-edit-ph"><label class="ac-ph-pick" title="${esc(hx('Change profile photo', 'Profile photo badlo'))}">${accAv(EDIT.photo || me.ph, me.name, 'xxl ring')}<input type="file" accept="image/*" id="acPhoto" hidden><span class="chip">📷 ${hx('Change photo', 'Photo badlo')}</span></label>${me.ph || EDIT.photo ? `<button type="button" class="kin-link" data-ac-nophoto>${hx('Remove photo', 'Photo hatao')}</button>` : ''}</div>
+      <label class="field"><span>${hx('Name', 'Naam')}</span><input class="input" name="name" maxlength="60" value="${esc(me.name)}"></label>
+      <label class="field"><span>${hx('Username', 'Username')}</span><div class="ac-at"><i>@</i><input class="input" name="username" maxlength="24" autocapitalize="off" spellcheck="false" value="${esc(me.un)}"></div></label>
+      <label class="field"><span>${hx('Bio', 'Bio')} <b id="acBioN">${(me.bio || '').length}/300</b></span><textarea class="input" name="bio" maxlength="300" rows="3" style="min-height:84px" placeholder="${esc(hx('e.g. Rawat family from Almora · Keeping Dadi’s recipes alive', 'Jaise: Almora ki Rawat family · Dadi ki recipes zinda rakh rahe hain'))}">${esc(me.bio || '')}</textarea></label>
+      <label class="field"><span>${hx('City', 'Shehar')}</span><input class="input" name="city" maxlength="60" value="${esc(me.city || '')}"></label>
+      <label class="field"><span>${hx('Email (for password help)', 'Email (password help ke liye)')}</span><input class="input" name="email" type="email" maxlength="120" value="${esc(me.email || '')}"></label>
+      <label class="ai-check"><input type="checkbox" name="private"${me.vis === 'private' ? ' checked' : ''}> 🔒 ${hx('Private account — only people you approve see your tree and posts', 'Private account — sirf approve kiye log tree aur posts dekhte hain')}</label>
+      <label class="ai-check"><input type="checkbox" name="famOn"${me.famOn ? ' checked' : ''}> 🌳 ${hx('Show my family tree on my profile', 'Profile pe mera family tree dikhao')}${v ? '' : ` <small class="muted">(${hx('make your tree first', 'pehle tree banao')})</small>`}</label>
+      ${v ? `<label class="ai-check"><input type="checkbox" name="photos"${pr.netPhotos ? ' checked' : ''}> 🖼️ ${hx('Show family members’ photos', 'Family members ki photos dikhao')}</label>` : ''}
+      <p class="err" id="acEditErr">${esc(EDIT.err)}</p>
+      <button class="btn-gold w-full" type="submit">${hx('Save profile', 'Profile save karo')}</button>
+    </form>
+    <details class="ac-more mt-5"><summary>${hx('Password & account', 'Password aur account')}</summary>
+      <div class="grid gap-2 mt-3"><input class="input" type="password" id="acOld" placeholder="${esc(hx('Current password', 'Abhi ka password'))}" autocomplete="current-password"><input class="input" type="password" id="acNew" placeholder="${esc(hx('New password (6+ characters)', 'Naya password (6+ akshar)'))}" autocomplete="new-password"><button class="btn-ghost sm" type="button" data-ac-pass>${hx('Change password', 'Password badlo')}</button></div>
+      <div class="flex flex-wrap gap-2 mt-4"><button class="btn-ghost sm" type="button" data-ac-logout>↩ ${hx('Log out', 'Log out')}</button><button class="btn-danger" type="button" data-ac-delete>🗑 ${hx('Delete account', 'Account delete karo')}</button></div>
+      <p class="tiny muted mt-2">${hx('Deleting removes your profile, followers and online backup. The family tree on this phone stays.', 'Delete karne se profile, followers aur online backup hat jaate hain. Is phone pe tree rehta hai.')}</p></details>`;
+}
+function accPhotoPick(file) {
+  if (!file) return; const r = new FileReader();
+  r.onload = () => { const im = new Image(); im.onload = () => {
+    const sq = (px, q) => { const s = Math.min(im.width, im.height); const c = document.createElement('canvas'); c.width = c.height = px; c.getContext('2d').drawImage(im, (im.width - s) / 2, (im.height - s) / 2, s, s, 0, 0, px, px); return c.toDataURL('image/jpeg', q); };
+    EDIT.photo = sq(400, .82); EDIT.thumb = sq(96, .75); const av = $('#peopleEditBody .ac-ph-pick .ac-av'); if (av) av.innerHTML = `<img src="${EDIT.photo}" alt="">`;
+  }; im.onerror = () => toast(hx('That photo could not be opened.', 'Yeh photo khul nahi payi.'), 'warn'); im.src = r.result; };
+  r.readAsDataURL(file);
+}
+async function accSaveEdit(f) {
+  if (EDIT.busy) return; const fd = new FormData(f); EDIT.busy = true;
+  const body = { name:fd.get('name'), username:fd.get('username'), bio:fd.get('bio'), city:fd.get('city'), email:fd.get('email'), vis:fd.get('private') ? 'private' : 'public', famOn:!!fd.get('famOn') };
+  if (EDIT.photo === '') body.photo = ''; else if (EDIT.photo) { body.photo = EDIT.photo; body.thumb = EDIT.thumb; }
+  const v = ownVault(); if (v) { const pr = dynPrivacy(v); const ph = !!fd.get('photos'); if (pr.netPhotos !== ph) { pr.netPhotos = ph; state.accFamSig = ''; save(); } }
+  try { const j = await accApi('/api/acct/update', body); ACC.me = Object.assign(ACC.me, j.me); accKeep(); closeModal('peopleEdit'); toast(hx('✓ Profile saved', '✓ Profile save ho gayi'), 'info', 1800); accSyncFamily(true); accPaint(); }
+  catch (e) { EDIT.err = e.message; const er = $('#acEditErr'); if (er) er.textContent = e.message; }
+  finally { EDIT.busy = false; }
+}
+function accInit() {
+  if (!accOn()) return;
+  document.addEventListener('click', e => {
+    const t = e.target.closest('[data-ac-auth],[data-ac-edit],[data-ac-share],[data-ac-tab],[data-ac-follow],[data-ac-ok],[data-ac-no],[data-pf-open],[data-pf-follow],[data-pf-share],[data-pf-report],[data-pf-list],#acQGo,#acctBtn');
+    if (!t) return;
+    if (t.id === 'acctBtn') { e.stopImmediatePropagation(); if (ACC.me && ACC.tok) openPerson(ACC.me.un); else accOpenAuth('login'); return; }
+    if (t.dataset.acAuth) { accOpenAuth(t.dataset.acAuth); return; }
+    if (t.hasAttribute('data-ac-edit')) { accOpenEdit(); return; }
+    if (t.hasAttribute('data-ac-share')) { if (ACC.me) accShare(ACC.me.un, ACC.me.name); return; }
+    if (t.dataset.acTab) { ACC.tab = t.dataset.acTab; accPaint(); if (ACC.tab === 'feed') accLoadFeed(); else accLoadList(); return; }
+    if (t.dataset.acFollow) { e.stopPropagation(); t.disabled = true; accFollow(t.dataset.acFollow, true).then(() => { if (dash.tab === 'arena') accPaint(); }); return; }
+    if (t.dataset.acOk || t.dataset.acNo) { accApi('/api/people/answer', { id:t.dataset.acOk || t.dataset.acNo, ok:!!t.dataset.acOk }).then(() => accRefresh(true), er => toast(er.message, 'warn')); return; }
+    if (t.id === 'acQGo') { accLoadList(($('#acQ') || {}).value || ''); return; }
+    if (t.dataset.pfOpen) { if (t.closest('#dynModal')) dynUI.list = null; openPerson(t.dataset.pfOpen); return; }
+    const p = NET.cache['acc:' + ((dynUI.id || '').replace(/^acc_/, ''))];
+    if (t.dataset.pfFollow && p) { accFollow(p.un, t.dataset.pfFollow === 'on'); return; }
+    if (t.hasAttribute('data-pf-share') && p) { accShare(p.un, p.person && p.person.name); return; }
+    if (t.hasAttribute('data-pf-report') && p) { const why = prompt(hx('What is wrong with this account? (fake, abusive, pretending to be someone…)', 'Is account mein kya galat hai? (nakli, gandi baatein, kisi aur ban ke…)')); if (why != null) accApi('/api/people/report', { u:p.un, why }).then(() => toast(hx('Thanks — we will check it.', 'Shukriya — hum check karenge.'), 'info'), () => {}); return; }
+    if (t.dataset.pfList != null) {
+      const inModal = t.closest('#dynModal');
+      if (!inModal) { if (ACC.me) { openPerson(ACC.me.un).then(() => { const q = NET.cache['acc:' + ACC.me.un]; if (q && t.dataset.pfList) { dynUI.list = t.dataset.pfList; renderDynModal(); accFillList(q); } }); } return; }
+      if (!p) return; if (!p.open && t.dataset.pfList) { toast(hx('This account is private.', 'Yeh account private hai.'), 'info', 1600); return; }
+      dynUI.list = t.dataset.pfList || null; renderDynModal(); if (dynUI.list) accFillList(p); return;
+    }
+  }, true);
+  document.addEventListener('keydown', e => { if (e.key === 'Enter' && e.target.id === 'acQ') { e.preventDefault(); accLoadList(e.target.value.trim()); } if ((e.key === 'Enter' || e.key === ' ') && e.target.matches && e.target.matches('[data-pf-open][role=button]')) { e.preventDefault(); e.target.click(); } });
+  const am = $('#peopleAuth');
+  am.addEventListener('click', e => {
+    const t = e.target.closest('[data-au],[data-au-eye],[data-au-forgot],.ac-vis .opt'); if (!t) return;
+    if (t.dataset.au) { AUTH.mode = t.dataset.au; AUTH.err = ''; accAuthBody(); return; }
+    if (t.hasAttribute('data-au-eye')) { const i = am.querySelector('input[name=password]'); i.type = i.type === 'password' ? 'text' : 'password'; return; }
+    if (t.hasAttribute('data-au-forgot')) { const wa = payWa('Hi DynastyVault! I forgot my account password. My username is: '); if (wa) window.open(wa, '_blank', 'noopener'); return; }
+    if (t.classList.contains('opt')) { am.querySelectorAll('.ac-vis .opt').forEach(o => o.classList.toggle('on', o === t)); t.querySelector('input').checked = true; }
+  });
+  am.addEventListener('submit', e => { e.preventDefault(); accSubmit(e.target); });
+  am.addEventListener('input', e => {
+    if (e.target.name !== 'username' || AUTH.mode !== 'signup') return;
+    const c = e.target.value.toLowerCase().replace(/[^a-z0-9._]/g, ''); if (c !== e.target.value) e.target.value = c;
+    clearTimeout(accUT); const hint = $('#acUHint'); if (!netHandleOk(c)) { if (hint) hint.textContent = c ? hx('3–24 letters', '3–24 akshar') : ''; return; }
+    accUT = setTimeout(async () => { try { const j = await accApi('/api/acct/check?u=' + encodeURIComponent(c), null, ''); const h2 = $('#acUHint'); if (h2) h2.textContent = j.free ? '✓ ' + hx('available', 'khaali') : '✕ ' + hx('taken', 'le liya gaya'); } catch (er) { /* offline */ } }, 400);
+  });
+  const em = $('#peopleEdit');
+  em.addEventListener('change', e => { if (e.target.id === 'acPhoto') accPhotoPick(e.target.files[0]); });
+  em.addEventListener('input', e => { if (e.target.name === 'bio') { const n = $('#acBioN'); if (n) n.textContent = e.target.value.length + '/300'; } if (e.target.name === 'username') { const c = e.target.value.toLowerCase().replace(/[^a-z0-9._]/g, ''); if (c !== e.target.value) e.target.value = c; } });
+  em.addEventListener('submit', e => { e.preventDefault(); accSaveEdit(e.target); });
+  em.addEventListener('click', async e => {
+    const t = e.target.closest('button'); if (!t) return;
+    if (t.hasAttribute('data-ac-nophoto')) { EDIT.photo = ''; const av = $('#peopleEditBody .ac-ph-pick .ac-av'); if (av) av.innerHTML = `<b>${esc(initials(ACC.me.name))}</b>`; return; }
+    if (t.hasAttribute('data-ac-logout')) { accLogout(); return; }
+    if (t.hasAttribute('data-ac-pass')) { try { await accApi('/api/acct/password', { old:$('#acOld').value, new:$('#acNew').value }); toast(hx('✓ Password changed', '✓ Password badal gaya'), 'info'); $('#acOld').value = ''; $('#acNew').value = ''; } catch (er) { toast(er.message, 'warn'); } return; }
+    if (t.hasAttribute('data-ac-delete')) { const pw = prompt(hx('Type your password to delete your account for ever:', 'Account hamesha ke liye delete karne ke liye password likho:')); if (!pw) return; try { await accApi('/api/acct/delete', { password:pw }); ACC.tok = ''; ACC.me = null; accKeep(); closeModal('peopleEdit'); accPaint(); toast(hx('Account deleted.', 'Account delete ho gaya.'), 'info'); } catch (er) { toast(er.message, 'warn'); } }
+  });
+  accHeader(); if (ACC.tok) { accRefresh(true); setTimeout(() => { accSyncFamily(); }, 4000); }
+  setInterval(() => { if (ACC.tok && document.visibilityState === 'visible') accRefresh(); }, 60000);
 }
 
 /* ---------- 🌳 Dynasty-Canvas-style tree inside dynasty profiles ---------- */
@@ -8628,7 +9059,7 @@ function normalize(s) {
   if (s.version < 6) s.version = 6;
   if (s.version < 7) { Object.values(s.vaults).forEach(v => { if (v.demo && v.name === 'Kapoor Dynasty') seedKapoorTrail(v); }); s.version = 7; }
   if (s.version < 8) { Object.values(s.vaults).forEach(v => { if (v.demo) seedHinglish(v); }); s.version = 8; }
-  s.theme = THEMES[s.theme] ? s.theme : 'imperial'; s.frame = FRAMES[s.frame] ? s.frame : 'dual'; s.tab = typeof s.tab === 'string' ? s.tab : 'canvas'; s.rewards = s.rewards || {};
+  s.theme = !s.themePicked ? DEFAULT_THEME : THEMES[s.theme] ? s.theme : DEFAULT_THEME; s.frame = FRAMES[s.frame] ? s.frame : 'dual'; s.tab = typeof s.tab === 'string' ? s.tab : 'canvas'; s.rewards = s.rewards || {};
   Object.values(s.vaults).forEach(refreshDemoStories);
   s.friends = Array.isArray(s.friends) ? s.friends : []; s.crowned = s.crowned || {}; s.seenStories = s.seenStories || {};
   s.lit = s.lit || {}; s.backups = s.backups || {};
@@ -8648,7 +9079,7 @@ function load() {
 let state = load() || normalize(seed());
 let saveTimer = null, warnedQuota = false;
 function saveNow() {
-  try { localStorage.setItem(KEY, JSON.stringify(state, (k, val) => (k.charAt(0) === '_' ? undefined : val))); if (window.__acctDirty) window.__acctDirty(); if (window.__netDirty) window.__netDirty(); return true; }
+  try { localStorage.setItem(KEY, JSON.stringify(state, (k, val) => (k.charAt(0) === '_' ? undefined : val))); if (window.__acctDirty) window.__acctDirty(); if (window.__netDirty) window.__netDirty(); if (window.__accDirty) window.__accDirty(); return true; }
   catch (e) { if (!warnedQuota) { warnedQuota = true; toast('Browser storage is full — some portraits or voice samples may not persist after a reload.', 'warn', 5200); } return false; }
 }
 function save() { state.updAt = Date.now(); clearTimeout(saveTimer); saveTimer = setTimeout(() => { if (window.requestIdleCallback) requestIdleCallback(saveNow, { timeout:1500 }); else saveNow(); }, 450); }
@@ -13031,7 +13462,7 @@ function acProvider(pv) {
   if (!SB || !SB[pv]) { acErr(wt('ac_soon_p', { p:pv === 'google' ? 'Google' : 'Facebook' })); return; }
   location.href = SB.url + '/auth/v1/authorize?provider=' + pv + '&redirect_to=' + encodeURIComponent(location.origin + location.pathname);
 }
-function acctOpen(mode) { if (mode === 'signup' || mode === 'login') acctMode = mode; acctStep = sess ? 'email' : acctStep; acctBody(); openModal('acctModal'); }
+function acctOpen(mode) { if (!SB && accOn()) { accOpenAuth(mode === 'signup' ? 'signup' : 'login'); return; } if (mode === 'signup' || mode === 'login') acctMode = mode; acctStep = sess ? 'email' : acctStep; acctBody(); openModal('acctModal'); }
 if ($('#acctBtn')) $('#acctBtn').addEventListener('click', () => acctOpen('login'));
 if ($('#wlLogin')) $('#wlLogin').addEventListener('click', () => acctOpen('login'));
 $('#acctBody').addEventListener('click', e => {
@@ -13070,7 +13501,7 @@ setTimeout(async () => {
     if (live !== HAS_CLOUD) { HAS_CLOUD = live; setRoyalFeatures(); try { renderPlans(); renderAddons(); updatePrices(true); } catch (e) { /* views refresh later */ } }
   } catch (e) { /* server asleep or offline — keep the last known state */ }
 }, 900);
-if (/[?&]dvtest=1/.test(location.search)) window.__dv = { get state() { return state; }, save, saveNow, startDemo, openTutorial, NET, FILM, dynUI, dynTreeVault, renderFilm, filmPoll };   // test hook, only with ?dvtest=1
+if (/[?&]dvtest=1/.test(location.search)) window.__dv = { get state() { return state; }, save, saveNow, startDemo, openTutorial, NET, FILM, ACC, dynUI, dynTreeVault, renderFilm, filmPoll, openPerson };   // test hook, only with ?dvtest=1
 
 
 function toast(msg, type = 'info', ms = 3200) {

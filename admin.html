@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<script src="look.js"></script>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
 <title>DynastyVault Admin</title>
@@ -72,6 +73,7 @@ th{color:var(--muted);font-weight:600}
 .foot{margin-top:24px;font-size:12px;color:var(--muted)}
 @media (max-width:520px){.tile b{font-size:24px}.chart{height:190px}}
 </style>
+<link rel="stylesheet" href="utsav.css">
 </head>
 <body>
 <div class="wrap" id="app"></div>
@@ -149,9 +151,9 @@ th{color:var(--muted);font-weight:600}
     return box;
   }
   function table(days) {
-    var head = ['Day', 'Phones', 'Visits', 'App opens', 'Trees', 'Profiles', 'Films', 'Royal'];
+    var head = ['Day', 'Phones', 'Visits', 'Trees', 'Accounts', 'Films', 'Royal'];
     var t = el('table', null, [el('thead', null, [el('tr', null, head.map(function (h) { return el('th', { text: h }); }))]),
-      el('tbody', null, days.slice().reverse().map(function (d) { return el('tr', null, [dshort(d.d), d.users, d.visit, d.app, d.tree, d.pub, d.film, d.royal].map(function (c, i) { return el('td', { text: i ? fmt(c) : c }); })); }))]);
+      el('tbody', null, days.slice().reverse().map(function (d) { return el('tr', null, [dshort(d.d), d.users, d.visit, d.tree, d.signup || 0, d.film, d.royal].map(function (c, i) { return el('td', { text: i ? fmt(c) : c }); })); }))]);
     return el('div', { cls: 'tablewrap' }, [t]);
   }
 
@@ -168,27 +170,37 @@ th{color:var(--muted);font-weight:600}
       tile(today.users, 'phones today'),
       tile(d.uniqueUsers, 'phones in ' + DAYS + ' days'),
       tile(sum(days, 'tree'), 'family trees made'),
-      tile(d.profiles.total, 'family profiles (' + d.profiles.public + ' public, ' + d.profiles.private + ' private)'),
+      tile(d.accounts ? d.accounts.total : 0, 'accounts (' + (d.accounts ? d.accounts.public : 0) + ' public, ' + (d.accounts ? d.accounts.private : 0) + ' private)'),
       tile(sum(days, 'royal'), 'Royal orders approved')
     ]);
     app.appendChild(tiles);
     var tbtn = el('button', { cls: 'btn', text: tableOn ? 'Hide table' : 'Show table', 'aria-expanded': String(tableOn), onclick: function () { tableOn = !tableOn; draw(); } });
     app.appendChild(el('section', { cls: 'card' }, [el('div', { cls: 'row', style: 'justify-content:space-between' }, [el('div', null, [el('h2', { text: 'People using DynastyVault' }), el('p', { cls: 'sub', text: 'Different phones that opened the website each day. Tap a bar for the day’s numbers.' })]), tbtn]), chart(days), tableOn ? table(days) : null]));
     var tot = d.totals.ev || {};
-    var funnel = { 'Website visits': tot.visit || 0, 'Family trees made': tot.tree || 0, 'Profiles put online': tot.pub || 0, 'Links shared': tot.share || 0, 'Documentaries made': tot.film || 0, 'Royal orders': tot.royal || 0 };
+    var funnel = { 'Website visits': tot.visit || 0, 'Family trees made': tot.tree || 0, 'Accounts made': tot.signup || 0, 'Follows': tot.follow || 0, 'Profiles put online': tot.pub || 0, 'Links shared': tot.share || 0, 'Documentaries made': tot.film || 0, 'Royal orders': tot.royal || 0 };
     app.appendChild(el('div', { cls: 'grid2' }, [
       el('section', { cls: 'card' }, [el('h2', { text: 'From visit to sale' }), el('p', { cls: 'sub', text: 'Totals for the range.' }), rank(funnel, 'Nothing yet.')]),
       el('section', { cls: 'card' }, [el('h2', { text: 'Where visitors come from' }), el('p', { cls: 'sub', text: 'From links with ?ref= or ?utm_source=, and other websites.' }), rank(d.totals.rf, 'No sources yet — share links like …/?ref=instagram to see them here.')]),
       el('section', { cls: 'card' }, [el('h2', { text: 'Pages opened' }), rank(d.totals.pg, 'No visits yet.')]),
       el('section', { cls: 'card' }, [el('h2', { text: 'Phone languages' }), rank(d.totals.lg, 'No visits yet.')])
     ]));
-    var profs = el('section', { cls: 'card' }, [el('h2', { text: 'Newest family profiles' }), el('p', { cls: 'sub', text: 'Hide a profile if it is fake or abusive — it disappears from Explore and its link stops working.' })]);
-    if (!d.profiles.recent.length) profs.appendChild(el('p', { cls: 'empty', text: 'No family has put its profile online yet.' }));
-    d.profiles.recent.forEach(function (p) {
+    var A = d.accounts || { recent: [] };
+    var accs = el('section', { cls: 'card' }, [el('h2', { text: 'Newest accounts' }), el('p', { cls: 'sub', text: 'Hide a fake or abusive account. If someone forgot their password, tap Reset and send them the temporary password on WhatsApp.' })]);
+    if (!A.recent.length) accs.appendChild(el('p', { cls: 'empty', text: 'Nobody has made an account yet.' }));
+    A.recent.forEach(function (a) {
+      var out = el('span', { cls: 'muted' });
+      var hb = el('button', { cls: 'btn', text: a.hidden ? 'Unhide' : 'Hide', onclick: function () { hb.disabled = true; post('/api/admin/acct/hide', { key: KEY, u: a.un, hide: !a.hidden }).then(refresh, refresh); } });
+      var rb = el('button', { cls: 'btn', text: 'Reset password', onclick: function () { if (!confirm('Make a new temporary password for @' + a.un + '?')) return; post('/api/admin/acct/reset', { key: KEY, u: a.un }).then(function (j) { out.textContent = j.ok ? 'Temporary password: ' + j.temp : (j.error || 'Failed'); }); } });
+      accs.appendChild(el('div', { cls: 'prof' }, [el('div', { cls: 'n' }, [el('b', { text: a.name }), el('small', { text: '@' + a.un + ' · ' + fmt(a.m) + ' family members · ' + fmt(a.fol) + ' followers' })]), el('span', { cls: 'pill', text: a.hidden ? 'hidden' : a.vis === 'public' ? '🌍 public' : '🔒 private' }), hb, rb, out]));
+    });
+    app.appendChild(accs);
+    var profs = el('section', { cls: 'card' }, [el('h2', { text: 'Older family handles' }), el('p', { cls: 'sub', text: 'Hide a profile if it is fake or abusive — it disappears from Explore and its link stops working.' })]);
+    if (!d.profiles.recent.length) profs = null;
+    (profs ? d.profiles.recent : []).forEach(function (p) {
       var b = el('button', { cls: 'btn', text: p.hidden ? 'Unhide' : 'Hide', onclick: function () { b.disabled = true; post('/api/admin/dyn/hide', { key: KEY, h: p.h, hide: !p.hidden }).then(refresh, refresh); } });
       profs.appendChild(el('div', { cls: 'prof' }, [el('div', { cls: 'n' }, [el('b', { text: p.n }), el('small', { text: '@' + p.h + ' · ' + fmt(p.m) + ' members · ' + fmt(p.fol) + ' followers' })]), el('span', { cls: 'pill', text: p.hidden ? 'hidden' : p.vis === 'public' ? '🌍 public' : '🔒 private' }), b]));
     });
-    app.appendChild(profs);
+    if (profs) app.appendChild(profs);
     if (d.reports && d.reports.length) app.appendChild(el('section', { cls: 'card' }, [el('h2', { text: 'Reports from visitors' })].concat(d.reports.slice(0, 20).map(function (r) { return el('div', { cls: 'prof' }, [el('div', { cls: 'n' }, [el('b', { text: '@' + r.h }), el('small', { text: (r.why || '—') + ' · ' + new Date(r.t).toLocaleString('en-IN') })])]); }))));
     var oid = el('input', { placeholder: 'Order ID e.g. DV-1234', 'aria-label': 'Order ID' }), n = el('input', { type: 'number', value: '1', min: '1', max: '20', style: 'width:80px', 'aria-label': 'How many films' }), out = el('span', { cls: 'muted' });
     app.appendChild(el('section', { cls: 'card' }, [el('h2', { text: 'Give extra documentaries' }), el('p', { cls: 'sub', text: 'After a customer pays for more films, add them to their Royal order here.' }),
