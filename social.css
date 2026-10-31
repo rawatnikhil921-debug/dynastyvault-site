@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&display=swap');
 /* "Social" look — clean black, colourful rings. Only applies when look.js says DV_LOOK = 'social'. */
 .phone-mock{display:none}
 .roots-trio{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;max-width:820px;margin:28px 0 0}
@@ -54,3 +55,26 @@ html[data-look="social"] .phone-mock{display:block;justify-self:center;width:min
 .pm-hl i{font-style:normal;width:48px;height:48px;border-radius:50%;display:grid;place-items:center;font-size:20px;background:#121212;box-shadow:0 0 0 1px #363636,0 0 0 3px #000,0 0 0 4px #262626}.pm-hl small{font-size:10.5px}
 .pm-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin:0 -12px -16px;border-radius:0 0 30px 30px;overflow:hidden;border-top:1px solid #262626;padding-top:2px}
 .pm-grid span{aspect-ratio:1;display:grid;place-items:center;padding:8px;text-align:center;font-size:10.5px;font-weight:800;line-height:1.25;color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.25)}
+
+/* "Aangan" look (v76) — peacock-teal night, brass, jaali lattice. Applies when look.js says DV_LOOK = 'aangan'. */
+html[data-look="aangan"]{--bg:#071B1C;--panel:#0E2A2B;--panel2:#123435;--gold:#F2B544;--gold-hi:#FFD27A;--gold-deep:#0E7C74;
+  --ink:#EEF6F2;--muted:#9CB9B3;--line:rgba(242,181,68,.18);--line-strong:rgba(242,181,68,.42);--ok:#19B3A6;--on-gold:#1E1403;
+  --f-display:'Bricolage Grotesque','Plus Jakarta Sans',system-ui,sans-serif}
+html[data-look="aangan"] body{background:#071B1C;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Cg fill='none' stroke='%23F2B544' stroke-opacity='.05' stroke-width='1'%3E%3Cpath d='M36 6l9 21 21 9-21 9-9 21-9-21-21-9 21-9z'/%3E%3Ccircle cx='36' cy='36' r='7'/%3E%3C/g%3E%3C/svg%3E")}
+html[data-look="aangan"] #dust,html[data-look="aangan"] .garland{display:none}
+html[data-look="aangan"] .hero::before{background:radial-gradient(60% 60% at 85% 20%,rgba(25,179,166,.22),transparent 70%),radial-gradient(50% 50% at 10% 90%,rgba(242,181,68,.12),transparent 70%)}
+html[data-look="aangan"] h1,html[data-look="aangan"] h2,html[data-look="aangan"] h3{font-weight:800;letter-spacing:-.02em}
+html[data-look="aangan"] .hero h1{background:linear-gradient(110deg,#FFF0CC 0%,#FFD27A 35%,#F2B544 65%,#E8963A 100%);-webkit-background-clip:text;background-clip:text;color:transparent;animation:none;letter-spacing:-.035em;line-height:1.02}
+html[data-look="aangan"] .eyebrow{text-transform:none;letter-spacing:.01em;font-weight:700;color:#F6C969}
+html[data-look="aangan"] .btn{border-radius:999px}
+html[data-look="aangan"] .btn-gold{background:linear-gradient(135deg,#FFD27A,#F2B544 60%,#E89B2D);color:#1E1403;box-shadow:0 12px 28px -12px rgba(242,181,68,.6)}
+html[data-look="aangan"] .btn-ghost{background:rgba(255,255,255,.03);border-color:rgba(25,179,166,.5);color:#EEF6F2}
+html[data-look="aangan"] .top,html[data-look="aangan"] header{background:rgba(7,27,28,.9);border-bottom-color:rgba(25,179,166,.25)}
+html[data-look="aangan"] .offer{background:linear-gradient(90deg,#0E7C74,#19B3A6 45%,#F2B544);color:#071B1C;border-bottom:0}
+html[data-look="aangan"] .offer a{color:#071B1C}
+html[data-look="aangan"] .fcard,html[data-look="aangan"] .reel,html[data-look="aangan"] .heirloom{border-color:rgba(25,179,166,.35);background-color:#0B2526}
+html[data-look="aangan"] .fam-av{border:0;background:conic-gradient(from 210deg,#19B3A6,#F2B544,#19B3A6);padding:2px}
+html[data-look="aangan"] .feat .ico,html[data-look="aangan"] .feat svg{color:#19B3A6}
+html[data-look="aangan"] .lang-pick,html[data-look="aangan"] select{background:#0E2A2B;border-color:rgba(25,179,166,.35);color:#EEF6F2}
+html[data-look="aangan"] .rt-i:nth-child(1){border-top:3px solid #19B3A6}
+html[data-look="aangan"] .rt-i:nth-child(2){border-top:3px solid #F2B544}

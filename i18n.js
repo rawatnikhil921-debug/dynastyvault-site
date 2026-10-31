@@ -72,3 +72,11 @@ window.DV_I18N = {"langs":[{"code":"en","native":"English"},{"code":"hn","native
     rt3_h:'लाइक नहीं, दीया', rt3_p:'यादें परिवार की दीवार पर चिट्ठियों और पोलरॉइड की तरह रखी जाती हैं। जो साथ हैं उन्हें आशीर्वाद भेजिए, जो चले गए उनके लिए दीया जलाइए।',
     pm_today:'आज साझा करें', pm_qk:'आज का Roots सवाल', pm_q:'दादी और दादा जी पहली बार कैसे मिले?', pm_qb:'🎙️ जवाब रिकॉर्ड करें', pm_letter:'दादा जी ने चांदनी चौक में ₹40 और एक पीतल की कड़ाही से मिठाई की दुकान खोली थी।', pm_sign:'— पापा', pm_diya:'28 दीये जले', pm_kin:'हरि रावत (1931) बिष्ट परिवार के ट्री में भी हैं' });
 })(window.DV_I18N && window.DV_I18N.home);
+
+/* added v76: community copy without the photo-app comparison */
+(function (H) {
+  if (!H) return; const add = (c, o) => { H[c] = Object.assign(H[c] || {}, o); };
+  add('en', { fam_p:'Make a free account with your own @username and photo. Show your family tree, keep up with relatives, and find cousins whose trees share your ancestors. Public or private, your choice.' });
+  add('hn', { fam_p:'Apne @username aur photo ke saath free account banao. Apna family tree dikhao, rishtedaaron se jude raho, aur woh cousins dhoondho jinke tree mein aapke purvaj hain. Public ya private, aapki marzi.' });
+  add('hi', { fam_p:'अपने @username और फ़ोटो के साथ मुफ़्त अकाउंट बनाइए। अपना फ़ैमिली ट्री दिखाइए, रिश्तेदारों से जुड़े रहिए, और वे कज़िन खोजिए जिनके ट्री में आपके पूर्वज हैं। पब्लिक या प्राइवेट, आपकी मर्ज़ी।' });
+})(window.DV_I18N && window.DV_I18N.home);
