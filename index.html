@@ -8,6 +8,9 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="Build both sides of your family tree, save your grandparents' voices, and hear their life stories in their own voice. Free to start.">
 <meta name="theme-color" content="#000000">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-title" content="DynastyVault">
 <link rel="canonical" href="https://rawatnikhil921-debug.github.io/dynastyvault-site/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="DynastyVault">
@@ -79,6 +82,7 @@ p{margin:0}
 .hero .lede{font-size:var(--step-1);color:var(--ink);max-width:34ch;margin-top:18px}
 .hero .hn{color:var(--muted);margin-top:10px;font-style:italic}
 .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.pwa-btn{cursor:pointer;font:inherit}.pwa-ios{margin:12px 0 0;font-size:14px;color:var(--muted,#aaa);max-width:46ch}
 .trust{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:22px;font-size:.88rem;color:var(--muted)}
 .trust span::before{content:"✓";color:var(--ok);font-weight:800;margin-right:6px}
 @media (max-width:880px){.hero .wrap{grid-template-columns:1fr}}
@@ -345,7 +349,9 @@ footer a{color:var(--ink);text-decoration:none}footer a:hover{color:var(--gold-h
         <div class="cta-row">
           <a class="btn btn-gold" href="app.html" data-t="cta_start">Start your family tree — free</a>
           <a class="btn btn-ghost" href="app.html#demo" data-t="cta_demo">See a demo family</a>
+          <button class="btn btn-ghost pwa-btn" id="pwaBtn" type="button" style="display:none" data-t="install_app">📲 Install the app</button>
         </div>
+        <p class="pwa-ios" id="pwaIos" style="display:none" data-t="install_ios">On iPhone: tap Share (the square with an arrow), then “Add to Home Screen”.</p>
         <a class="hero-quiz" href="quiz.html" data-t="hero_quiz">🧭 What kind of dynasty is your family? Take the 1-minute quiz →</a>
         <div class="trust"><span data-t="trust1">Free to start, no card</span><span data-t="trust2">Your data stays on your device</span><span data-t="trust3">Available in 16 languages</span></div>
       </div>
@@ -580,6 +586,23 @@ footer a{color:var(--ink);text-decoration:none}footer a:hover{color:var(--gold-h
     });
     box.hidden = false;
   }).catch(function () { /* server asleep — the section still works without the strip */ });
+})();
+</script>
+<script>
+/* 📲 install the website as an app (PWA) */
+(function () {
+  var btn = document.getElementById('pwaBtn'), ios = document.getElementById('pwaIos'), ev = null;
+  var standalone = function () { try { return matchMedia('(display-mode: standalone)').matches || navigator.standalone === true; } catch (e) { return false; } };
+  var isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) window.addEventListener('load', function () { navigator.serviceWorker.register('sw.js').catch(function () {}); });
+  if (!btn || standalone()) return;
+  if (isIOS) btn.style.display = '';
+  window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); ev = e; btn.style.display = ''; });
+  window.addEventListener('appinstalled', function () { ev = null; btn.style.display = 'none'; if (ios) ios.style.display = 'none'; });
+  btn.addEventListener('click', function () {
+    if (ev) { var x = ev; ev = null; x.prompt(); x.userChoice.then(function (r) { if (r && r.outcome === 'accepted') btn.style.display = 'none'; }).catch(function () {}); return; }
+    if (ios) ios.style.display = '';
+  });
 })();
 </script>
 <script src="i18n.js"></script>

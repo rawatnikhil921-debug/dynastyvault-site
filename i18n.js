@@ -101,3 +101,24 @@ window.DV_I18N = {"langs":[{"code":"en","native":"English"},{"code":"hn","native
   H['ru'] = Object.assign(H['ru'] || {}, {"free_li1": "Семейное древо — по отцу, до 10 человек", "free_li2": "Свой профиль, публикации и истории на 24 часа", "free_li3": "Союзники, поиск и «Династия против династии»", "free_li4": "Поиск родни — родственники в других древах", "free_li5": "Семейный коллаж из настоящих фото", "royal_li4": "ИИ-фильм — старое фото превращается в фильм из 3 сцен", "royal_li5": "Истории на всех 16 языках, с озвучкой"});
   H['ja'] = Object.assign(H['ja'] || {}, {"free_li1": "家系図 — 父方、10人まで", "free_li2": "自分のプロフィール、投稿、24時間ストーリー", "free_li3": "アライ、検索、ダイナスティ対決", "free_li4": "キンファインダー — 他の家系図から親戚を探す", "free_li5": "実際の写真でファミリーコラージュ", "royal_li4": "AIドキュメンタリー — 古い写真が3シーンの映像に", "royal_li5": "ストーリーは16言語すべて、音声付き"});
 })(window.DV_I18N && window.DV_I18N.home);
+
+/* v82: install-the-app button */
+(function (H) {
+  if (!H) return;
+  H['en'] = Object.assign(H['en'] || {}, {"install_app": "📲 Install the app", "install_ios": "On iPhone: tap Share (the square with an arrow), then “Add to Home Screen”."});
+  H['hn'] = Object.assign(H['hn'] || {}, {"install_app": "📲 App install karo", "install_ios": "iPhone pe: Share button (arrow wala square) dabao, phir “Add to Home Screen” chuno."});
+  H['hi'] = Object.assign(H['hi'] || {}, {"install_app": "📲 ऐप इंस्टॉल करें", "install_ios": "iPhone पर: शेयर (तीर वाला चौकोर) दबाएँ, फिर “होम स्क्रीन में जोड़ें” चुनें।"});
+  H['gu'] = Object.assign(H['gu'] || {}, {"install_app": "📲 ઍપ ઇન્સ્ટોલ કરો", "install_ios": "iPhone પર: શેર (તીરવાળો ચોરસ) દબાવો, પછી “હોમ સ્ક્રીન પર ઉમેરો” પસંદ કરો."});
+  H['mr'] = Object.assign(H['mr'] || {}, {"install_app": "📲 ॲप इन्स्टॉल करा", "install_ios": "iPhone वर: शेअर (बाण असलेला चौकोन) दाबा, मग “होम स्क्रीनवर जोडा” निवडा."});
+  H['pa'] = Object.assign(H['pa'] || {}, {"install_app": "📲 ਐਪ ਇੰਸਟਾਲ ਕਰੋ", "install_ios": "iPhone 'ਤੇ: ਸ਼ੇਅਰ (ਤੀਰ ਵਾਲਾ ਚੌਰਸ) ਦਬਾਓ, ਫਿਰ “ਹੋਮ ਸਕ੍ਰੀਨ 'ਤੇ ਜੋੜੋ” ਚੁਣੋ।"});
+  H['bn'] = Object.assign(H['bn'] || {}, {"install_app": "📲 অ্যাপ ইনস্টল করুন", "install_ios": "iPhone-এ: শেয়ার (তীর চিহ্নসহ চৌকো) চাপুন, তারপর “হোম স্ক্রিনে যোগ করুন” বেছে নিন।"});
+  H['ta'] = Object.assign(H['ta'] || {}, {"install_app": "📲 செயலியை நிறுவு", "install_ios": "iPhone-இல்: பகிர் (அம்புக்குறி உள்ள சதுரம்) என்பதைத் தட்டி, பிறகு “முகப்புத் திரையில் சேர்” என்பதைத் தேர்ந்தெடுங்கள்."});
+  H['te'] = Object.assign(H['te'] || {}, {"install_app": "📲 యాప్ ఇన్‌స్టాల్ చేయండి", "install_ios": "iPhoneలో: షేర్ (బాణం ఉన్న చతురస్రం) నొక్కి, ఆపై “హోమ్ స్క్రీన్‌కు జోడించు” ఎంచుకోండి."});
+  H['kn'] = Object.assign(H['kn'] || {}, {"install_app": "📲 ಆ್ಯಪ್ ಇನ್‌ಸ್ಟಾಲ್ ಮಾಡಿ", "install_ios": "iPhone ನಲ್ಲಿ: ಶೇರ್ (ಬಾಣದ ಗುರುತಿರುವ ಚೌಕ) ಒತ್ತಿ, ನಂತರ “ಹೋಮ್ ಸ್ಕ್ರೀನ್‌ಗೆ ಸೇರಿಸಿ” ಆಯ್ಕೆಮಾಡಿ."});
+  H['ml'] = Object.assign(H['ml'] || {}, {"install_app": "📲 ആപ്പ് ഇൻസ്റ്റാൾ ചെയ്യൂ", "install_ios": "iPhone-ൽ: ഷെയർ (അമ്പടയാളമുള്ള ചതുരം) ടാപ്പ് ചെയ്ത്, തുടർന്ന് “ഹോം സ്ക്രീനിലേക്ക് ചേർക്കുക” തിരഞ്ഞെടുക്കൂ."});
+  H['es'] = Object.assign(H['es'] || {}, {"install_app": "📲 Instalar la app", "install_ios": "En iPhone: toca Compartir (el cuadrado con una flecha) y luego “Agregar a inicio”."});
+  H['fr'] = Object.assign(H['fr'] || {}, {"install_app": "📲 Installer l’app", "install_ios": "Sur iPhone : touchez Partager (le carré avec une flèche), puis « Sur l’écran d’accueil »."});
+  H['pt'] = Object.assign(H['pt'] || {}, {"install_app": "📲 Instalar o app", "install_ios": "No iPhone: toque em Compartilhar (o quadrado com uma seta) e depois em “Adicionar à Tela de Início”."});
+  H['ru'] = Object.assign(H['ru'] || {}, {"install_app": "📲 Установить приложение", "install_ios": "На iPhone: нажмите «Поделиться» (квадрат со стрелкой), затем «На экран „Домой“»."});
+  H['ja'] = Object.assign(H['ja'] || {}, {"install_app": "📲 アプリをインストール", "install_ios": "iPhoneの場合：共有（矢印付きの四角）をタップし、「ホーム画面に追加」を選びます。"});
+})(window.DV_I18N && window.DV_I18N.home);
