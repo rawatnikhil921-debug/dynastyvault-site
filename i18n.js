@@ -143,3 +143,24 @@ window.DV_I18N = {"langs":[{"code":"en","native":"English"},{"code":"hn","native
   H['ru'] = Object.assign(H['ru'] || {}, {"pr_h2": "Обе линии вашей семьи. Навсегда.", "per_day": "Меньше {p} в день в течение года — а потом ваше навсегда.", "royal_micro": "UPI или карта · код в WhatsApp · гарантия 7 дней", "trust1": "Один платёж: без подписки и автосписаний", "trust2": "Гарантия 7 дней: если Royal работает не так, как описано, мы исправим или вернём деньги <a href=\"refund.html\">Правила возврата</a>", "trust3": "Данные вашей семьи остаются на вашем телефоне", "q9": "Это правда разовый платёж?", "a9": "Да. Вы платите один раз через UPI, картой или PayPal. Ничего не продлевается и не списывается автоматически.", "q10": "А если у меня не заработает?", "a10": "Если код не придёт за 3 дня или Royal в течение 7 дней после разблокировки работает не так, как описано, мы исправим это или вернём деньги полностью."});
   H['ja'] = Object.assign(H['ja'] || {}, {"pr_h2": "父方も母方も、ずっと残す。", "per_day": "1年間なら1日{p}未満 — その後はずっとあなたのもの。", "royal_micro": "UPIまたはカード · WhatsAppでコード · 7日間の保証", "trust1": "支払いは1回だけ — サブスクも自動引き落としもなし", "trust2": "7日間の保証 — 説明どおりに動かなければ、修正するか返金します <a href=\"refund.html\">返金ポリシー</a>", "trust3": "家族のデータはあなたのスマホに保存されます", "q9": "本当に1回だけの支払いですか？", "a9": "はい。UPI、カード、PayPalで1回支払うだけです。更新も自動引き落としもありません。", "q10": "うまく使えなかったら？", "a10": "3日以内にコードが届かない場合、またはロック解除から7日以内にRoyalが説明どおりに動かない場合は、修正するか全額返金します。"});
 })(window.DV_I18N && window.DV_I18N.home);
+
+/* v85: Diwali reel link in the hero */
+(function (H) {
+  if (!H) return;
+  H['en'] = Object.assign(H['en'] || {}, {"diwali_cta": "🪔 Make your family’s Diwali reel — free"});
+  H['hn'] = Object.assign(H['hn'] || {}, {"diwali_cta": "🪔 Apni family ki Diwali reel banao — free"});
+  H['hi'] = Object.assign(H['hi'] || {}, {"diwali_cta": "🪔 अपने परिवार की दिवाली रील बनाएँ — मुफ़्त"});
+  H['gu'] = Object.assign(H['gu'] || {}, {"diwali_cta": "🪔 તમારા પરિવારની દિવાળી રીલ બનાવો — મફત"});
+  H['mr'] = Object.assign(H['mr'] || {}, {"diwali_cta": "🪔 तुमच्या कुटुंबाची दिवाळी रील बनवा — मोफत"});
+  H['pa'] = Object.assign(H['pa'] || {}, {"diwali_cta": "🪔 ਆਪਣੇ ਪਰਿਵਾਰ ਦੀ ਦੀਵਾਲੀ ਰੀਲ ਬਣਾਓ — ਮੁਫ਼ਤ"});
+  H['bn'] = Object.assign(H['bn'] || {}, {"diwali_cta": "🪔 আপনার পরিবারের দীপাবলি রিল বানান — বিনামূল্যে"});
+  H['ta'] = Object.assign(H['ta'] || {}, {"diwali_cta": "🪔 உங்கள் குடும்ப தீபாவளி ரீலை உருவாக்குங்கள் — இலவசம்"});
+  H['te'] = Object.assign(H['te'] || {}, {"diwali_cta": "🪔 మీ కుటుంబ దీపావళి రీల్ చేయండి — ఉచితం"});
+  H['kn'] = Object.assign(H['kn'] || {}, {"diwali_cta": "🪔 ನಿಮ್ಮ ಕುಟುಂಬದ ದೀಪಾವಳಿ ರೀಲ್ ಮಾಡಿ — ಉಚಿತ"});
+  H['ml'] = Object.assign(H['ml'] || {}, {"diwali_cta": "🪔 നിങ്ങളുടെ കുടുംബത്തിന്റെ ദീപാവലി റീൽ ഉണ്ടാക്കൂ — സൗജന്യം"});
+  H['es'] = Object.assign(H['es'] || {}, {"diwali_cta": "🪔 Haz el reel de Diwali de tu familia — gratis"});
+  H['fr'] = Object.assign(H['fr'] || {}, {"diwali_cta": "🪔 Créez le reel de Diwali de votre famille — gratuit"});
+  H['pt'] = Object.assign(H['pt'] || {}, {"diwali_cta": "🪔 Faça o reel de Diwali da sua família — grátis"});
+  H['ru'] = Object.assign(H['ru'] || {}, {"diwali_cta": "🪔 Сделайте ролик на Дивали для своей семьи — бесплатно"});
+  H['ja'] = Object.assign(H['ja'] || {}, {"diwali_cta": "🪔 家族のディワリ・リールを作ろう — 無料"});
+})(window.DV_I18N && window.DV_I18N.home);

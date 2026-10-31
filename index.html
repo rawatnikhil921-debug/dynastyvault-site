@@ -82,7 +82,11 @@ p{margin:0}
 .hero .lede{font-size:var(--step-1);color:var(--ink);max-width:34ch;margin-top:18px}
 .hero .hn{color:var(--muted);margin-top:10px;font-style:italic}
 .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
-.pwa-btn{cursor:pointer;font:inherit}.pwa-ios{margin:12px 0 0;font-size:14px;color:var(--muted,#aaa);max-width:46ch}
+.pwa-btn{cursor:pointer;font:inherit}
+.hero-reel{display:inline-flex;align-items:center;gap:8px;margin-top:18px;padding:12px 18px;border-radius:999px;font-weight:700;color:#fff;text-decoration:none;background:linear-gradient(120deg,#7a1d4a,#c2410c);box-shadow:0 10px 30px -10px rgba(194,65,12,.7);position:relative;overflow:hidden}
+.hero-reel::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.25) 50%,transparent 70%);transform:translateX(-100%);animation:heroShine 3s 1.2s infinite}
+@keyframes heroShine{60%,100%{transform:translateX(100%)}}
+@media (prefers-reduced-motion:reduce){.hero-reel::after{animation:none}}.pwa-ios{margin:12px 0 0;font-size:14px;color:var(--muted,#aaa);max-width:46ch}
 .trust{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:22px;font-size:.88rem;color:var(--muted)}
 .trust span::before{content:"✓";color:var(--ok);font-weight:800;margin-right:6px}
 @media (max-width:880px){.hero .wrap{grid-template-columns:1fr}}
@@ -358,6 +362,7 @@ footer a{color:var(--ink);text-decoration:none}footer a:hover{color:var(--gold-h
           <button class="btn btn-ghost pwa-btn" id="pwaBtn" type="button" style="display:none" data-t="install_app">📲 Install the app</button>
         </div>
         <p class="pwa-ios" id="pwaIos" style="display:none" data-t="install_ios">On iPhone: tap Share (the square with an arrow), then “Add to Home Screen”.</p>
+        <a class="hero-reel" href="app.html#diwali" data-t="diwali_cta">🪔 Make your family’s Diwali reel — free</a>
         <a class="hero-quiz" href="quiz.html" data-t="hero_quiz">🧭 What kind of dynasty is your family? Take the 1-minute quiz →</a>
         <div class="trust"><span data-t="trust1">Free to start, no card</span><span data-t="trust2">Your data stays on your device</span><span data-t="trust3">Available in 16 languages</span></div>
       </div>
@@ -604,6 +609,8 @@ footer a{color:var(--ink);text-decoration:none}footer a:hover{color:var(--gold-h
 })();
 </script>
 <script>
+/* 🪔 the Diwali link shows only in the festival season */
+(function () { var r = document.querySelector('.hero-reel'); if (r && new Date() > new Date('2026-11-16T00:00:00+05:30')) r.remove(); })();
 /* 📲 install the website as an app (PWA) */
 (function () {
   var btn = document.getElementById('pwaBtn'), ios = document.getElementById('pwaIos'), ev = null;
