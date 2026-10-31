@@ -1,10 +1,10 @@
 /* =========================================================
    DYNASTYVAULT — WEBSITE LOOK (one switch for every page and the app)
-   'aangan'  = Aangan: peacock-teal night, brass, jaali — tabs on top, Khoj search (new, v76)
-   'social'  = photo-app style (Instagram-like, v68–v75)
+   'social'  = photo-app style + DynastyVault: feature bar with ＋, mutual friends on top (default, v77)
+   'aangan'  = Aangan: peacock-teal night, brass, jaali — tabs on top, Khoj search (v76)
    'utsav'   = Utsav Night: indigo night sky, marigold and rani-pink lights
    'classic' = the original black & gold
-   Nabu: purana look chahiye? Neeche 'aangan' ki jagah 'social' (Instagram jaisa), 'utsav' ya 'classic' likh do — website aur app dono badal jayenge.
+   Nabu: purana look chahiye? Neeche 'social' ki jagah 'aangan', 'utsav' ya 'classic' (purana black-gold) likh do — website aur app dono badal jayenge.
    ========================================================= */
-var DV_LOOK = 'aangan';
+var DV_LOOK = 'social';
 document.documentElement.setAttribute('data-look', DV_LOOK);
