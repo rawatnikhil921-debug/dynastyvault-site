@@ -2615,6 +2615,11 @@ html[data-theme="social"] .srch-pill kbd{display:none}
 .cr-tile span{font-size:26px;line-height:1}
 .cr-tile small{font-size:11.5px;font-weight:700;line-height:1.2}
 @media (max-width:360px){.cr-grid{grid-template-columns:repeat(3,1fr)}}
+
+/* v71: Home = family tree, with the stories row on top */
+.tree-stories{max-width:980px;margin:0 auto}
+.tree-stories .hs-row{border-bottom:0;padding-top:12px;padding-bottom:6px}
+@media (max-width:640px){.tree-stories{margin:0 -16px}.tree-stories .hs-row{padding-left:12px;padding-right:12px}}
 </style>
 </head>
 <body>
@@ -2701,6 +2706,7 @@ html[data-theme="social"] .srch-pill kbd{display:none}
   <nav id="dashTabs" class="dash-tabs" role="tablist" aria-label="Dashboard"></nav>
   <div class="ref-ribbon" id="refRibbon" hidden></div>
   <!-- HERO -->
+  <div id="treeStories" class="tree-stories" data-panel="canvas" hidden></div>
   <section id="vault" data-panel="canvas" class="vault-hero pt-5 sm:pt-9 pb-4">
     <div class="min-w-0">
       <div class="demo-banner" id="demoBanner" hidden><span data-hn="Aap <b>interactive demo tree</b> dekh rahe ho. Apna banana hai?">You’re exploring the <b>interactive demo tree</b>. Ready for your own?</span><button class="btn-gold sm" id="demoCreate" data-hn="👑 Apna Dynasty Tree banao">👑 Create Your Dynasty Tree</button></div>
@@ -4689,7 +4695,7 @@ function applyMode() {
   const welcome = !state.onboarded;
   document.body.classList.toggle('welcome-mode', welcome);
   document.body.classList.toggle('dash-on', !welcome);
-  if (!welcome && !dash.tab) { renderDashTabs(); const st = window.__startTab || (curTheme() === 'social' ? 'home' : state.tab || 'canvas'); window.__startTab = null; showTab(st, { noScroll:true }); }
+  if (!welcome && !dash.tab) { renderDashTabs(); const st = window.__startTab || (curTheme() === 'social' ? 'canvas' : state.tab || 'canvas'); window.__startTab = null; showTab(st, { noScroll:true }); }
   if (typeof renderRefBanners === 'function') renderRefBanners();
   const ban = $('#demoBanner');
   if (ban) { const v = V(); ban.hidden = welcome || !isDemo(v); }
@@ -6394,7 +6400,7 @@ const DASH_TABS = [
   { id:'film', ico:'🎬', en:'Documentary', hn:'Documentary', sen:'Film', shn:'Film', main:true },
   { id:'voice', ico:'🎙️', en:'Voices', hn:'Awaaz', sen:'Voices', shn:'Awaaz', main:true },
   { id:'refer', ico:'🎁', en:'Share & Earn', hn:'Share & Kamao', sen:'Share', shn:'Share', main:true },
-  { id:'home', ico:'🏠', en:'Home', hn:'Home' },
+  { id:'home', ico:'📰', en:'Feed', hn:'Feed' },
   { id:'explore', ico:'🔍', en:'Explore', hn:'Explore' },
   { id:'photo', ico:'🧩', en:'Family Collage', hn:'Family Collage' },
   { id:'reunion', ico:'✨', en:'Reunion Portrait', hn:'Reunion Portrait' },
@@ -8770,13 +8776,15 @@ const IGI = {
   heart:'<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 20.5S3 15 3 8.8A4.8 4.8 0 0 1 12 6.4a4.8 4.8 0 0 1 9 2.4C21 15 12 20.5 12 20.5z"/></svg>',
   tree:'<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2.6"/><circle cx="5.5" cy="18.5" r="2.6"/><circle cx="18.5" cy="18.5" r="2.6"/><path d="M12 7.6V12M12 12H5.5v3.9M12 12h6.5v3.9"/></svg>',
   treeOn:'<svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2.8"/><circle cx="5.5" cy="18.5" r="2.8"/><circle cx="18.5" cy="18.5" r="2.8"/><path d="M12 7.6V12M12 12H5.5v3.9M12 12h6.5v3.9" fill="none"/></svg>',
+  feed:'<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><path d="M7.5 8.5h9M7.5 12h9M7.5 15.5h5"/></svg>',
+  feedOn:'<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5" fill="currentColor"/><path d="M7.5 8.5h9M7.5 12h9M7.5 15.5h5" stroke="#000"/></svg>',
   more:'<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>'
 };
 const IGN_ITEMS = () => [
-  ['home', IGI.home, IGI.homeOn, hx('Home', 'Home')],
+  ['canvas', IGI.home, IGI.homeOn, hx('Home', 'Home')],
   ['explore', IGI.search, IGI.searchOn, hx('Search', 'Search')],
   ['create', IGI.plus, IGI.plus, hx('Create', 'Banao')],
-  ['canvas', IGI.tree, IGI.treeOn, hx('Family tree', 'Family tree')],
+  ['home', IGI.feed, IGI.feedOn, hx('Feed', 'Feed')],
   ['arena', IGI.people, IGI.peopleOn, hx('People', 'Log'), 'wide'],
   ['heart', IGI.heart, IGI.heart, hx('Activity', 'Activity'), 'wide'],
   ['me', '', '', hx('Profile', 'Profile')],
@@ -8947,10 +8955,11 @@ function renderHome() {
   const parts = posts.map((x, i) => homePostHTML(x, i));
   if (sug.length && parts.length > 1) parts.splice(Math.min(2, parts.length), 0, `<div class="sg-wrap hp-sgw"><div class="sr-head"><b>${hx('Suggested for you', 'Aapke liye suggestions')}</b><button class="kin-link" data-sr-search>${hx('See all', 'Sab dekho')}</button></div><div class="sg-strip">${sug.map(srchSugCard).join('')}</div></div>`);
   if (accOn() && !loggedIn) parts.splice(Math.min(1, parts.length), 0, `<div class="hp-join"><b>${hx('Follow your family on DynastyVault', 'DynastyVault pe apni family ko follow karo')}</b><p>${hx('Make a free account to see your relatives’ posts here and share yours.', 'Free account banao — rishtedaaron ki posts yahan dikhengi aur aap apni share kar paoge.')}</p><button class="btn-gold sm" data-ac-auth="signup">${hx('Create account', 'Account banao')}</button></div>`);
-  box.innerHTML = `${homeStoriesHTML()}<div class="hp-list">${parts.join('')}</div>`;
+  box.innerHTML = `<div class="hp-list">${parts.join('')}</div>`;
   if (loggedIn && !ACC.feed && !ACC.loading) accLoadFeed().then(() => { if (dash.tab === 'home') renderHome(); });
   if (loggedIn && SRCH.sug == null) srchLoadSug().then(() => { if (dash.tab === 'home') renderHome(); });
   if (loggedIn && SRCH.ring == null) srchRingLoad().then(() => { if (dash.tab === 'home') renderHome(); });
+  if (dash.tab === 'canvas') igPageBar();
 }
 /* --- your profile from this phone, when you have no account yet (or no server) --- */
 function openLocalProfile(tab) {
@@ -8966,12 +8975,15 @@ function openLocalProfile(tab) {
 function igPageBar() {
   const bar = $('#igPage'); if (!bar) return;
   const id = dash.tab; const t = DASH_TABS.find(x => x.id === id);
-  const show = isSocial() && document.body.classList.contains('dash-on') && !['home', 'explore'].includes(id);
+  const show = isSocial() && document.body.classList.contains('dash-on') && !['home', 'explore', 'canvas'].includes(id);
+  const ts = $('#treeStories'); if (ts) { ts.hidden = !(isSocial() && id === 'canvas'); if (!ts.hidden) ts.innerHTML = homeStoriesHTML(); }
+  if (ts && !ts.hidden && accOn() && ACC.tok && SRCH.ring == null) srchRingLoad().then(() => { if (dash.tab === 'canvas') igPageBar(); });
   bar.hidden = !show; if (!show) return;
-  bar.innerHTML = `<button class="ig-back" data-ign="home" aria-label="${esc(hx('Back to home', 'Home pe wapas'))}">‹</button><b>${id === 'plans' ? hx('Plans', 'Plans') : t ? esc(hx(t.en, t.hn)) : ''}</b><button class="ig-back" data-ign="create" aria-label="${esc(hx('Create', 'Banao'))}">＋</button>`;
+  bar.innerHTML = `<button class="ig-back" data-ign="canvas" aria-label="${esc(hx('Back to home', 'Home pe wapas'))}">‹</button><b>${id === 'plans' ? hx('Plans', 'Plans') : t ? esc(hx(t.en, t.hn)) : ''}</b><button class="ig-back" data-ign="create" aria-label="${esc(hx('Create', 'Banao'))}">＋</button>`;
 }
 function homeInit() {
   const hb = $('#homeHub'); if (!hb) return;
+  const ts = $('#treeStories'); if (ts) ts.addEventListener('click', e => { const t = e.target.closest('[data-hs],[data-hs-local]'); if (!t) return; if (t.dataset.hs === 'mine') igOpenCreate('story'); else { const v = ownVault() || V(); openStories(activeStories(v), +t.dataset.hsLocal); } });
   hb.addEventListener('click', e => {
     const t = e.target.closest('[data-hs],[data-hs-local],[data-home-me],[data-hp-share],[data-hp-like],[data-ig-like]'); if (!t) return;
     if (t.dataset.hs === 'mine') { igOpenCreate('story'); return; }
