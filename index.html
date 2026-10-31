@@ -609,8 +609,8 @@ footer a{color:var(--ink);text-decoration:none}footer a:hover{color:var(--gold-h
 })();
 </script>
 <script>
-/* 🪔 the Diwali link shows only in the festival season */
-(function () { var r = document.querySelector('.hero-reel'); if (r && new Date() > new Date('2026-11-16T00:00:00+05:30')) r.remove(); })();
+/* 🎉 hero link: Diwali until 9 Nov 2026, then the festival reel (the app picks the festival by itself) */
+(function () { var r = document.querySelector('.hero-reel'); if (r && new Date() > new Date('2026-11-09T23:59:00+05:30')) { r.setAttribute('href', 'app.html#fest'); r.setAttribute('data-t', 'fest_cta'); r.textContent = '🎉 Make your family’s festival reel — free'; } })();
 /* 📲 install the website as an app (PWA) */
 (function () {
   var btn = document.getElementById('pwaBtn'), ios = document.getElementById('pwaIos'), ev = null;

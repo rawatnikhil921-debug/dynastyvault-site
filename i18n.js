@@ -164,3 +164,24 @@ window.DV_I18N = {"langs":[{"code":"en","native":"English"},{"code":"hn","native
   H['ru'] = Object.assign(H['ru'] || {}, {"diwali_cta": "🪔 Сделайте ролик на Дивали для своей семьи — бесплатно"});
   H['ja'] = Object.assign(H['ja'] || {}, {"diwali_cta": "🪔 家族のディワリ・リールを作ろう — 無料"});
 })(window.DV_I18N && window.DV_I18N.home);
+
+/* v89: festival reel link */
+(function (H) {
+  if (!H) return;
+  H['en'] = Object.assign(H['en'] || {}, {"fest_cta": "🎉 Make your family’s festival reel — free"});
+  H['hn'] = Object.assign(H['hn'] || {}, {"fest_cta": "🎉 Apni family ki tyohaar reel banao — free"});
+  H['hi'] = Object.assign(H['hi'] || {}, {"fest_cta": "🎉 अपने परिवार की त्योहार रील बनाएँ — मुफ़्त"});
+  H['gu'] = Object.assign(H['gu'] || {}, {"fest_cta": "🎉 તમારા પરિવારની તહેવાર રીલ બનાવો — મફત"});
+  H['mr'] = Object.assign(H['mr'] || {}, {"fest_cta": "🎉 तुमच्या कुटुंबाची सण रील बनवा — मोफत"});
+  H['pa'] = Object.assign(H['pa'] || {}, {"fest_cta": "🎉 ਆਪਣੇ ਪਰਿਵਾਰ ਦੀ ਤਿਉਹਾਰ ਰੀਲ ਬਣਾਓ — ਮੁਫ਼ਤ"});
+  H['bn'] = Object.assign(H['bn'] || {}, {"fest_cta": "🎉 আপনার পরিবারের উৎসবের রিল বানান — বিনামূল্যে"});
+  H['ta'] = Object.assign(H['ta'] || {}, {"fest_cta": "🎉 உங்கள் குடும்ப பண்டிகை ரீலை உருவாக்குங்கள் — இலவசம்"});
+  H['te'] = Object.assign(H['te'] || {}, {"fest_cta": "🎉 మీ కుటుంబ పండుగ రీల్ చేయండి — ఉచితం"});
+  H['kn'] = Object.assign(H['kn'] || {}, {"fest_cta": "🎉 ನಿಮ್ಮ ಕುಟುಂಬದ ಹಬ್ಬದ ರೀಲ್ ಮಾಡಿ — ಉಚಿತ"});
+  H['ml'] = Object.assign(H['ml'] || {}, {"fest_cta": "🎉 നിങ്ങളുടെ കുടുംബത്തിന്റെ ഉത്സവ റീൽ ഉണ്ടാക്കൂ — സൗജന്യം"});
+  H['es'] = Object.assign(H['es'] || {}, {"fest_cta": "🎉 Haz el reel de fiestas de tu familia — gratis"});
+  H['fr'] = Object.assign(H['fr'] || {}, {"fest_cta": "🎉 Créez le reel de fête de votre famille — gratuit"});
+  H['pt'] = Object.assign(H['pt'] || {}, {"fest_cta": "🎉 Faça o reel de festas da sua família — grátis"});
+  H['ru'] = Object.assign(H['ru'] || {}, {"fest_cta": "🎉 Сделайте праздничный ролик своей семьи — бесплатно"});
+  H['ja'] = Object.assign(H['ja'] || {}, {"fest_cta": "🎉 家族の行事リールを作ろう — 無料"});
+})(window.DV_I18N && window.DV_I18N.home);
