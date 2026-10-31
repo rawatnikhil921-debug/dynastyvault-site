@@ -1,0 +1,52 @@
+/* "Social" look — clean black, colourful rings. Only applies when look.js says DV_LOOK = 'social'. */
+.phone-mock{display:none}
+html[data-look="social"]{--bg:#000;--panel:#121212;--panel2:#1a1a1a;--gold:#3B8BFF;--gold-hi:#FFFFFF;--gold-deep:#7B5CFF;
+  --ink:#F5F5F5;--muted:#A8A8A8;--line:#262626;--line-strong:#363636;--on-gold:#fff;--ok:#4ADE80;
+  --f-display:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Plus Jakarta Sans',sans-serif;--f-body:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Plus Jakarta Sans',sans-serif}
+html[data-look="social"] body{background:#000}
+html[data-look="social"] #dust,html[data-look="social"] .garland,html[data-look="social"] .hero::before{display:none}
+html[data-look="social"] h1,html[data-look="social"] .hero h1{background:none;color:#fff;-webkit-text-fill-color:#fff;font-weight:800;letter-spacing:-.035em;animation:none}
+html[data-look="social"] h2,html[data-look="social"] h3{color:#fff;font-weight:800;letter-spacing:-.02em}
+html[data-look="social"] .hero h1{font-size:clamp(2.4rem,7vw,4.4rem);line-height:1.02}
+html[data-look="social"] .hero h1::after{content:"";display:block;width:84px;height:6px;border-radius:6px;margin-top:18px;background:linear-gradient(90deg,#FFB627,#FF4F8B,#7B5CFF)}
+html[data-look="social"] .eyebrow{text-transform:none;letter-spacing:0;font-size:.92rem;font-weight:700;color:#A8A8A8}
+html[data-look="social"] .btn{border-radius:10px;font-weight:700}
+html[data-look="social"] .btn-gold{background:#3B8BFF;color:#fff;box-shadow:none}
+html[data-look="social"] .btn-gold:hover{background:#2F74E0;box-shadow:none}
+html[data-look="social"] .btn-ghost{background:#262626;border-color:#262626;color:#fff}
+html[data-look="social"] .btn-ghost:hover{background:#333;border-color:#333}
+html[data-look="social"] .top,html[data-look="social"] header{background:rgba(0,0,0,.88);border-bottom-color:#262626}
+html[data-look="social"] .brand,html[data-look="social"] .brand-t{color:#fff;letter-spacing:.06em}
+html[data-look="social"] .brand svg rect{fill:url(#none);fill:#FF4F8B;stroke:none}
+html[data-look="social"] .brand svg path{fill:#fff}
+html[data-look="social"] .offer{background:linear-gradient(90deg,#FFB627,#FF4F8B 50%,#7B5CFF);color:#fff;border-bottom:0}
+html[data-look="social"] .offer a{color:#fff}
+html[data-look="social"] .hero-quiz{color:#fff;border-bottom-color:#363636}
+html[data-look="social"] .nav a:hover{background:#1a1a1a}
+html[data-look="social"] .band{border-top-color:#262626}
+html[data-look="social"] .fcard,html[data-look="social"] .reel,html[data-look="social"] .heirloom{border-color:#363636;box-shadow:0 30px 70px rgba(0,0,0,.6)}
+html[data-look="social"] .fcard{background:#121212}
+html[data-look="social"] .reel-play{background:#fff;color:#000}
+html[data-look="social"] .fam-card{border-color:#262626;background:#121212}
+html[data-look="social"] .fam-av{border:0;background:conic-gradient(from 210deg,#FFB627,#FF4F8B,#7B5CFF,#FFB627);padding:2px}
+html[data-look="social"] .fam-av img{border-radius:50%;border:2px solid #000}
+html[data-look="social"] .fam-card b{color:#fff}
+html[data-look="social"] .feat .ico,html[data-look="social"] .feat svg{color:#FF4F8B}
+html[data-look="social"] .lang-pick,html[data-look="social"] select{background:#121212;border-color:#262626;color:#fff}
+/* hero: phone with a family profile instead of the tree card */
+html[data-look="social"] .hero .heirloom{display:none}
+html[data-look="social"] .phone-mock{display:block;justify-self:center;width:min(330px,88vw);margin:0;border-radius:38px;padding:14px 12px 16px;background:#000;border:1px solid #2a2a2a;
+  box-shadow:0 40px 90px -20px rgba(255,79,139,.28),0 0 0 8px #121212,0 0 0 9px #2a2a2a;font-family:var(--f-body);color:#f5f5f5;animation:pmIn .9s cubic-bezier(.2,.8,.2,1) .2s both}
+@keyframes pmIn{from{opacity:0;transform:translateY(24px) rotate(-2deg)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){html[data-look="social"] .phone-mock{animation:none}}
+.pm-top{display:flex;justify-content:space-between;align-items:center;padding:2px 6px 10px;font-size:15px}.pm-top i{font-style:normal;color:#aaa}
+.pm-head{display:flex;align-items:center;gap:12px;padding:0 4px}
+.pm-av{width:72px;height:72px;flex:none;border-radius:50%;padding:3px;background:conic-gradient(from 210deg,#FFB627,#FF4F8B,#7B5CFF,#FFB627)}
+.pm-av svg{display:block;width:100%;height:100%;border-radius:50%;background:#1d1b2b;border:2.5px solid #000}
+.pm-st{flex:1;display:flex;flex-direction:column;align-items:center}.pm-st b{font-size:16px}.pm-st small{font-size:11.5px;color:#ddd}
+.pm-bio{padding:10px 4px 0;font-size:12.5px;line-height:1.4}.pm-bio b{display:block;font-size:13px}.pm-bio small{color:#a8a8a8}.pm-bio p{margin:2px 0 0}
+.pm-btns{display:flex;gap:6px;padding:10px 4px 0}.pm-btns span{flex:1;text-align:center;font-size:12.5px;font-weight:700;padding:7px 0;border-radius:8px;background:#262626}.pm-btns .pri{background:#3B8BFF}
+.pm-hl{display:flex;justify-content:space-between;padding:12px 4px 10px}.pm-hl span{display:flex;flex-direction:column;align-items:center;gap:4px;width:25%}
+.pm-hl i{font-style:normal;width:48px;height:48px;border-radius:50%;display:grid;place-items:center;font-size:20px;background:#121212;box-shadow:0 0 0 1px #363636,0 0 0 3px #000,0 0 0 4px #262626}.pm-hl small{font-size:10.5px}
+.pm-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin:0 -12px -16px;border-radius:0 0 30px 30px;overflow:hidden;border-top:1px solid #262626;padding-top:2px}
+.pm-grid span{aspect-ratio:1;display:grid;place-items:center;padding:8px;text-align:center;font-size:10.5px;font-weight:800;line-height:1.25;color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.25)}

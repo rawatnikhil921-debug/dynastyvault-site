@@ -47,3 +47,11 @@ window.DV_I18N = {"langs":[{"code":"en","native":"English"},{"code":"hn","native
   add('hi', { film_eyebrow:'नया · फ़ैमिली डॉक्यूमेंट्री', film_h2:'उनकी तस्वीर, फिर से ज़िंदा', film_p:'दादा-दादी की एक पुरानी तस्वीर चुनिए और उनके जीवन के बारे में कुछ पंक्तियाँ लिखिए। हम उससे एक छोटी फ़िल्म बनाते हैं — तस्वीर तीन दृश्यों में धीरे-धीरे जीवंत होती है, सबटाइटल और हल्के संगीत के साथ। WhatsApp स्टेटस और Reels के लिए तैयार।', film_btn:'फ़ैमिली डॉक्यूमेंट्री बनाइए', film_t1:'हरि रावत', film_t2:'1962 में एक टिन के बक्से के साथ दिल्ली आए।',
     fam_eyebrow:'कम्युनिटी', fam_h2:'आपका अपना अकाउंट। आपके परिवार की कहानी।', fam_p:'अपने @username और प्रोफ़ाइल फ़ोटो के साथ मुफ़्त अकाउंट बनाइए — Instagram जैसा, पर परिवारों के लिए। अपना फ़ैमिली ट्री दिखाइए, रिश्तेदारों को फ़ॉलो कीजिए और उनकी यादें अपनी फ़ीड में देखिए। पब्लिक या प्राइवेट, आपकी मर्ज़ी।', fam_btn:'अपना अकाउंट बनाइए' });
 })(window.DV_I18N && window.DV_I18N.home);
+
+/* added v68: profile preview in the hero (English, Hinglish, Hindi) */
+(function (H) {
+  if (!H) return; const add = (c, o) => { H[c] = Object.assign(H[c] || {}, o); };
+  add('en', { pm_posts:'posts', pm_fol:'followers', pm_fing:'following', pm_bio:'From Almora to Delhi to Toronto. Keeping Dadi’s recipes and Dada ji’s stories alive.', pm_follow:'Follow', pm_share:'Share profile', pm_tree:'Family tree', pm_voices:'Voices', pm_mem:'Memories', pm_journey:'Journey' });
+  add('hn', { pm_bio:'Almora se Dilli, Dilli se Toronto. Dadi ki recipes aur Dada ji ki kahaniyaan zinda rakh rahe hain.', pm_share:'Profile share karo', pm_voices:'Awaazein', pm_mem:'Yaadein', pm_journey:'Safar' });
+  add('hi', { pm_posts:'पोस्ट', pm_fol:'फ़ॉलोअर्स', pm_fing:'फ़ॉलोइंग', pm_bio:'अल्मोड़ा से दिल्ली, दिल्ली से टोरंटो। दादी की रेसिपी और दादा जी की कहानियाँ ज़िंदा रख रहे हैं।', pm_follow:'फ़ॉलो', pm_share:'प्रोफ़ाइल शेयर', pm_tree:'फ़ैमिली ट्री', pm_voices:'आवाज़ें', pm_mem:'यादें', pm_journey:'सफ़र' });
+})(window.DV_I18N && window.DV_I18N.home);

@@ -2321,6 +2321,158 @@ html[data-theme="utsav"] .toast{background:rgba(30,20,72,.97)}
   body.dash-on .theme-preview-bar{bottom:96px}
   body.modal-open .dash-tabs{visibility:hidden}
 }
+/* ===== v68: social-style profile page ===== */
+#dynModal.ig-on .modal-panel{max-width:600px}
+#dynModal.ig-on .modal-panel>.p-5{padding:0}
+#dynModal.ig-on .modal-panel>.p-5>.flex:first-child{display:none}
+@media (max-width:640px){#dynModal.ig-on{align-items:stretch}#dynModal.ig-on .modal-panel{max-height:100dvh;height:100dvh;border-radius:0;border:0}}
+.ig{padding:0 16px 28px;color:var(--ink)}
+.ig-top{position:sticky;top:0;z-index:3;display:flex;align-items:center;justify-content:space-between;gap:8px;height:54px;margin:0 -16px;padding:0 8px;padding-top:env(safe-area-inset-top,0px);background:var(--s1);border-bottom:1px solid var(--line)}
+.ig-un{font-size:17px;font-weight:800;letter-spacing:-.01em;max-width:70%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-family:inherit}
+.ig-back{width:42px;height:42px;border:0;background:none;color:var(--ink);font-size:28px;line-height:1;cursor:pointer;border-radius:12px}
+.ig-back:hover{background:rgba(var(--g-rgb),.08)}
+.ig-head{display:flex;align-items:center;gap:22px;margin:18px 0 12px}
+.ig-av .ac-av.xxl{width:90px;height:90px}
+.ig-av.fresh .ac-av.story{animation:ringSpin 6s linear infinite}.ig-av.fresh .ac-av.story img,.ig-av.fresh .ac-av.story b{animation:ringSpin 6s linear infinite reverse}
+.ig-stats{flex:1;display:grid;grid-template-columns:repeat(3,1fr);text-align:center}
+.ig-stats>*{display:flex;flex-direction:column;align-items:center;gap:1px;background:none;border:0;color:var(--ink);cursor:pointer;padding:4px 0}
+.ig-stats>span{cursor:default}
+.ig-stats b{font-size:18px;font-weight:800;line-height:1.2}.ig-stats small{font-size:13px;color:var(--ink);opacity:.85}
+.ig-bio{display:flex;flex-direction:column;gap:2px;font-size:14px;line-height:1.45}
+.ig-bio>b{font-size:14.5px;font-weight:700}
+.ig-bio .ig-cat{color:var(--muted);font-size:13px}
+.ig-bio p{margin:2px 0 0;white-space:pre-line}
+.ig-bio .ig-city{color:var(--gold-soft);font-weight:600;font-size:13px}
+.ig-bio .ig-fy{align-self:flex-start;margin-top:4px;font-size:11.5px;padding:.15rem .5rem;border-radius:6px;background:rgba(var(--g-rgb),.1);color:var(--muted)}
+.ig-btns{display:flex;gap:6px;margin-top:14px}
+.ig-btn{flex:1;height:34px;border:0;border-radius:9px;background:rgba(var(--g-rgb),.12);color:var(--ink);font-family:inherit;font-weight:700;font-size:13.5px;line-height:1;cursor:pointer;white-space:nowrap;padding:0 10px}
+.ig-btn:hover{background:rgba(var(--g-rgb),.18)}
+.ig-btn.pri{background:var(--metal);color:var(--on-gold)}
+.ig-btn.sq{flex:none;width:38px;padding:0}
+.ig-hl{display:flex;gap:16px;overflow-x:auto;margin:18px -16px 4px;padding:0 16px 6px;scrollbar-width:none}
+.ig-hl::-webkit-scrollbar{display:none}
+.ig-hl-i{flex:none;display:flex;flex-direction:column;align-items:center;gap:6px;width:66px;border:0;background:none;color:var(--ink);cursor:pointer;padding:0}
+.ig-hl-i span{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;font-size:26px;background:var(--s1);box-shadow:0 0 0 1px var(--line-strong),0 0 0 4px var(--s2),0 0 0 5px var(--line)}
+.ig-hl-i.on span{box-shadow:0 0 0 2px var(--gold),0 0 0 4px var(--s2),0 0 0 5px var(--line)}
+.ig-hl-i small{font-size:12px;max-width:66px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ig-tabs{display:grid;grid-template-columns:repeat(3,1fr);margin:12px -16px 0;border-top:1px solid var(--line)}
+.ig-tabs button{height:46px;display:grid;place-items:center;border:0;background:none;color:var(--muted);cursor:pointer;font-size:20px;border-top:1.5px solid transparent;margin-top:-1px}
+.ig-tabs button.on{color:var(--ink);border-top-color:var(--ink)}
+.ig-body{min-height:200px}
+.ig-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin:0 -16px}
+.ig-tile{position:relative;aspect-ratio:1;border:0;padding:10px;overflow:hidden;cursor:pointer;color:#fff;display:flex;align-items:center;justify-content:center;text-align:center}
+.ig-tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ig-tile:hover{filter:brightness(1.08)}
+.ig-tt{font-size:12px;font-weight:700;line-height:1.3;display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden;text-shadow:0 1px 6px rgba(0,0,0,.25)}
+.ig-tk{position:absolute;top:6px;right:7px;font-style:normal;font-size:13px;filter:drop-shadow(0 1px 2px rgba(0,0,0,.5))}
+.ig-lock,.ig-empty{text-align:center;padding:42px 18px;border-top:1px solid var(--line);margin:12px -16px 0}
+.ig-lock-i,.ig-empty-i{display:inline-grid;place-items:center;width:62px;height:62px;border-radius:50%;border:2px solid var(--ink);font-size:24px;margin-bottom:12px}
+.ig-empty>span:not(.ig-empty-i){display:block;font-size:34px;margin-bottom:8px}
+.ig-lock b,.ig-empty b{display:block;font-size:16px}
+.ig-lock p,.ig-empty p{color:var(--muted);font-size:13.5px;margin-top:6px}
+.ig-tree{margin:0 -16px}
+.ig-tree #dynTView{border-radius:0;border-left:0;border-right:0}
+.ig-trail{margin-top:12px}
+.ig-pv{margin:0 -16px}
+.ig-ltabs{grid-template-columns:1fr 1fr;border-top:0;border-bottom:1px solid var(--line);margin-top:0}.ig-ltabs button{font-size:14px;font-weight:700;border-top:0;border-bottom:1.5px solid transparent;margin:0 0 -1px}.ig-ltabs button.on{border-bottom-color:var(--ink)}
+.ig-pv-top{display:flex;align-items:center;justify-content:space-between;height:48px;padding:0 8px;border-bottom:1px solid var(--line)}
+.ig-pv-top b{font-size:16px}.ig-pv-top span{width:42px}
+.ig-pv-h{display:flex;align-items:center;gap:10px;padding:10px 14px}
+.ig-pv-h b{display:block;font-size:14px}.ig-pv-h small{display:block;font-size:12px;color:var(--muted)}
+.ig-pv-media{aspect-ratio:1;display:grid;place-items:center;padding:28px;color:#fff;overflow:hidden}
+.ig-pv-media img{width:100%;height:100%;object-fit:cover}
+.ig-pv-media p{font-size:21px;font-weight:800;line-height:1.35;text-align:center;text-shadow:0 2px 10px rgba(0,0,0,.25)}
+.ig-pv-acts,.fd-acts{display:flex;gap:4px;padding:6px 8px}
+.ig-act{width:42px;height:42px;border:0;background:none;color:var(--ink);font-size:25px;cursor:pointer;border-radius:12px;line-height:1}
+.ig-act.on{color:#FF3B5C;animation:fpop .45s cubic-bezier(.2,1.6,.4,1)}
+.ig-pv-cap,.fd-cap{padding:0 14px;font-size:14px;line-height:1.45}
+.ig-pv-t,.fd-t{display:block;padding:4px 14px 12px;font-size:11.5px;color:var(--muted)}
+/* social-style feed */
+.fd{display:grid;gap:14px;margin:0 -4px}
+.fd-post{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:rgba(var(--bg-rgb),.4)}
+.fd-post header{display:flex;align-items:center;gap:10px;padding:10px 12px;cursor:pointer}
+.fd-post header b{display:block;font-size:14px}.fd-post header small{display:block;font-size:12px;color:var(--muted)}
+.fd-k{margin-left:auto;font-size:17px}
+.fd-media{aspect-ratio:1;display:grid;place-items:center;padding:26px;color:#fff;overflow:hidden}
+.fd-media img{width:100%;height:100%;object-fit:cover}
+.fd-media p{font-size:20px;font-weight:800;line-height:1.35;text-align:center;text-shadow:0 2px 10px rgba(0,0,0,.25)}
+@media (max-width:640px){.fd{margin:0 -14px}.fd-post{border-radius:0;border-left:0;border-right:0}}
+
+/* ===== v68: "Social" look — clean black like a photo-sharing app (THEMES.social) ===== */
+html[data-theme="social"]{--bg:#000;--bg2:#000;--bg3:#0c0c0c;--bg-rgb:0,0,0;--bg2-rgb:0,0,0;--s1:#121212;--s2:#000;--s1-rgb:18,18,18;--s2-rgb:0,0,0;
+  --gold:#3B8BFF;--gold-hi:#FFFFFF;--gold-lo:#7B5CFF;--gold-soft:#E8E8E8;--gold-pale:#FFFFFF;--gold-cream:#F5F5F5;--gold-deep:#1E3A8A;--on-gold:#FFFFFF;
+  --g-rgb:255,255,255;--hi-rgb:59,139,255;--lo-rgb:123,92,255;--pale-rgb:255,255,255;
+  --ink:#F5F5F5;--muted:#A8A8A8;--line:#262626;--line-strong:#3a3a3a;--land1:#1c1c1c;--land2:#121212;--ocean1:#0a0a0a;--ocean2:#000;
+  --metal:linear-gradient(0deg,#3B8BFF,#3B8BFF);color-scheme:dark}
+html[data-theme="social"] body{background:#000;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Plus Jakarta Sans',sans-serif}
+html[data-theme="social"] body::before,html[data-theme="social"] #themeFx,html[data-theme="social"] #goldDust,html[data-theme="social"] #treeDust{display:none}
+html[data-theme="social"] .font-regal{font-family:inherit;font-weight:800;letter-spacing:-.02em}
+html[data-theme="social"] #topbar .font-regal{letter-spacing:.01em;font-weight:800}
+html[data-theme="social"] .gold-text{background:none;color:var(--ink);-webkit-text-fill-color:var(--ink)}
+html[data-theme="social"] .eyebrow{text-transform:none;letter-spacing:0;font-size:13px;color:var(--muted);font-weight:600}
+html[data-theme="social"] .glass{background:#000;border:1px solid #262626;box-shadow:none;border-radius:18px}
+html[data-theme="social"] .gborder::before{display:none}
+html[data-theme="social"] .btn-gold{background:#3B8BFF;color:#fff;box-shadow:none;border-radius:10px;font-weight:700;letter-spacing:0}
+html[data-theme="social"] .btn-gold:hover{background:#2F74E0;filter:none;transform:none;box-shadow:none}
+html[data-theme="social"] .btn-gold::after,html[data-theme="social"] .btn-gold::before{display:none}
+html[data-theme="social"] .btn-ghost{background:#262626;border:0;color:#fff;border-radius:10px}
+html[data-theme="social"] .btn-ghost:hover{background:#333}
+html[data-theme="social"] .chip{background:#1a1a1a;border-color:#2a2a2a;color:#f0f0f0}
+html[data-theme="social"] .chip.on{background:#fff;color:#000}
+html[data-theme="social"] .icon-btn{background:transparent;border-color:#2a2a2a;color:#fff}
+html[data-theme="social"] .icon-btn:hover{background:#1a1a1a;color:#fff}
+html[data-theme="social"] #topbar{background:rgba(0,0,0,.9);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid #262626}
+html[data-theme="social"] #topbar::after{display:none}
+html[data-theme="social"] .crest{background:linear-gradient(135deg,#FFB627,#FF4F8B 55%,#7B5CFF);box-shadow:none}
+html[data-theme="social"] .crest svg path,html[data-theme="social"] .crest svg *{fill:#fff}
+html[data-theme="social"] .modal{background:rgba(0,0,0,.7)}
+html[data-theme="social"] .modal-panel{background:#121212;border-color:#262626;box-shadow:0 30px 80px -20px #000}
+html[data-theme="social"] .modal-panel::before{display:none}
+html[data-theme="social"] .input{background:#1a1a1a;border-color:#2e2e2e;border-radius:10px}
+html[data-theme="social"] .input:focus{border-color:#555;box-shadow:none}
+html[data-theme="social"] .stat{background:#121212;border-color:#262626}
+html[data-theme="social"] .price [data-price],html[data-theme="social"] .totals .grand b,html[data-theme="social"] .price-lg{background:none;color:#fff;-webkit-text-fill-color:#fff}
+html[data-theme="social"] .toast,html[data-theme="social"] .notif{background:#262626;border-color:#333;box-shadow:0 14px 40px -12px #000}
+html[data-theme="social"] #treeViewport,html[data-theme="social"] #treeSizer{background-color:#000}
+html[data-theme="social"] #treeSizer{background-image:radial-gradient(rgba(255,255,255,.07) 1px,transparent 1.4px);background-size:26px 26px}
+html[data-theme="social"] .ring{background:conic-gradient(from 210deg,#FFB627,#FF4F8B,#7B5CFF,#3B8BFF,#FFB627);box-shadow:none}
+html[data-theme="social"] .ring-gap{background:#000}
+html[data-theme="social"] .ring-inner{background:#000}
+html[data-theme="social"] .node:hover .ring{box-shadow:0 0 0 4px rgba(255,255,255,.08)}
+html[data-theme="social"] .node-label{background:#121212;border-color:#262626;box-shadow:none}
+html[data-theme="social"] .lrow .k{color:#A8A8A8}
+html[data-theme="social"] .ring-badge{background:#000;box-shadow:0 0 0 1.5px #3a3a3a}
+html[data-theme="social"] .ring-badge::before,html[data-theme="social"] .ring-badge::after{display:none}
+html[data-theme="social"] .photo span{background:none;color:#fff;-webkit-text-fill-color:#fff}
+html[data-theme="social"] .ac-av.story{background:conic-gradient(from 210deg,#FFB627,#FF4F8B,#7B5CFF,#FFB627)}
+html[data-theme="social"] .ac-av.story img,html[data-theme="social"] .ac-av.story b{border-color:#000;background:#1a1a1a;color:#fff}
+html[data-theme="social"] .ac-av b{color:#fff;font-family:inherit}
+html[data-theme="social"] .ac-av.halo{box-shadow:0 0 0 2px #000,0 0 0 4px #3a3a3a}
+html[data-theme="social"] .dash-tabs{background:#000;border-color:#262626;box-shadow:none}
+html[data-theme="social"] .dash-tabs button{color:#A8A8A8}
+html[data-theme="social"] .dash-tabs button.on{color:#fff;background:none;box-shadow:none}
+html[data-theme="social"] .dash-tabs .dt-plans{border-color:#333}
+html[data-theme="social"] .dt-ink{background:#fff;box-shadow:none}
+@media (max-width:640px){
+  html[data-theme="social"] body.dash-on .dash-tabs{left:0;right:0;bottom:0;border-radius:0;border:0;border-top:1px solid #262626;padding:4px 4px calc(4px + env(safe-area-inset-bottom,0px));background:rgba(0,0,0,.94);box-shadow:none}
+  html[data-theme="social"] body.dash-on .dash-tabs .dt-ink{display:none}
+  html[data-theme="social"] body.dash-on .dash-tabs .dt-plans{box-shadow:none}
+  html[data-theme="social"] body.dash-on{padding-bottom:calc(80px + env(safe-area-inset-bottom,0px))}
+}
+html[data-theme="social"] .srch-bar{background:#1a1a1a;border-color:#262626}
+html[data-theme="social"] .srch-bar:focus-within{border-color:#444;box-shadow:none}
+html[data-theme="social"] .srch-pill{background:#1a1a1a;border-color:#262626}
+html[data-theme="social"] .sr-row mark{background:rgba(59,139,255,.3);color:#fff}
+html[data-theme="social"] .sg-card,html[data-theme="social"] .ac-me,html[data-theme="social"] .ac-join,html[data-theme="social"] .ac-notes,html[data-theme="social"] .net-box{background:#121212;border-color:#262626}
+html[data-theme="social"] .ac-counts>*{background:#000;border-color:#262626}
+html[data-theme="social"] .seg button.on,html[data-theme="social"] .ptab.on{background:#fff;color:#000;box-shadow:none}
+html[data-theme="social"] .ig-top{background:#000}
+html[data-theme="social"] #dynModal.ig-on .modal-panel{background:#000}
+html[data-theme="social"] .ig-btn{background:#262626}
+html[data-theme="social"] .ig-btn:hover{background:#333}
+html[data-theme="social"] .ig-btn.pri{background:#3B8BFF;color:#fff}
+html[data-theme="social"] .ig-hl-i span{background:#121212;box-shadow:0 0 0 1px #363636,0 0 0 4px #000,0 0 0 5px #262626}
+html[data-theme="social"] ::selection{background:rgba(59,139,255,.4)}
 </style>
 </head>
 <body>
@@ -5991,8 +6143,10 @@ const dashOn = () => document.body.classList.contains('dash-on');
 
 /* ---------- 🎨 Theme Studio: themes & custom portrait frames ---------- */
 // The look new visitors get: Utsav Night (indigo, marigold, rani pink). Nabu: black & gold wapas chahiye? look.js mein DV_LOOK = 'classic' likho.
-const DEFAULT_THEME = window.DV_LOOK === 'classic' ? 'imperial' : 'utsav';
+const DEFAULT_THEME = window.DV_LOOK === 'classic' ? 'imperial' : window.DV_LOOK === 'utsav' ? 'utsav' : 'social';
 const THEMES = {
+  social:{ name:'Social', free:true, blurb:'Clean black, bright photos and colourful rings — like your favourite photo app.', hb:'Saaf black look, chamakti photos aur rangeen rings — aapki pasandida photo app jaisa.',
+    sw:['#000000', '#3B8BFF', '#FFFFFF', '#FF4F8B'], dust:['255,255,255', '200,200,210', '160,160,170', '120,120,130'], tree:['#FFFFFF', '#1f1f1f', '#4a4a4a', '#9a9a9a', '#e5e5e5'] },
   utsav:{ name:'Utsav Night', free:true, blurb:'Indigo night sky with marigold and rani-pink lights — festive, warm and bright.', hb:'Neela raat ka aasmaan, genda aur rani-pink roshni — tyohaar jaisa, garam aur chamakdaar.',
     sw:['#140C33', '#FFB627', '#FF4F8B', '#7B5CFF'], dust:['255,236,200', '255,182,39', '255,79,139', '123,92,255'], tree:['#FF4F8B', '#3A1550', '#FF7A59', '#FFB627', '#FFE7A8'] },
   imperial:{ name:'Imperial Gold', free:true, blurb:'Deep charcoal and rich metallic gold — the classic dynasty look.', hb:'Deep charcoal aur asli metallic gold — classic dynasty look.',
@@ -6916,6 +7070,8 @@ function initV10() {
   filmInit();
   accInit();
   srchInit();
+  igInit();
+  document.addEventListener('click', e => { const l = e.target.closest('#commHub [data-ig-like]'); if (!l) return; l.classList.toggle('on'); l.textContent = l.classList.contains('on') ? '♥' : '♡'; if (l.classList.contains('on')) srchBurst(l); });
   initRoute();
   initLeafUI();
   handleDynHash().then(pf => { if (!pf) return; renderArena(); if (state.onboarded && dashOn()) showTab('arena', { noScroll:true }); setTimeout(() => openDyn(pf.id), 500); });
@@ -7316,6 +7472,8 @@ function dynPostHTML(x, p) {
 function renderDynModal() {
   const box = $('#dynBody'); const p = dynUI.id && dynFind(dynUI.id); if (!box) return;
   if (!p) { box.innerHTML = `<p class="muted">${hx('This dynasty is no longer public.', 'Yeh dynasty ab public nahi hai.')}</p>`; return; }
+  $('#dynModal').classList.toggle('ig-on', p.kind === 'acct');
+  if (p.kind === 'acct') { igRender(p); return; }
   const v = V(); const mineNow = p.kind === 'own' && p.vid === v.id;
   const secs = dynSecList(p); if (dynUI.tab === 'vs' && (!state.onboarded || mineNow)) dynUI.tab = '';
   if (!secs.some(s => s[0] === dynUI.tab) && dynUI.tab !== 'vs') dynUI.tab = secs.length ? secs[0][0] : 'vs';
@@ -7468,6 +7626,7 @@ function dynPayload(v) {
 }
 async function netPayload(v) {
   const d = dynPayload(v); const pr = dynPrivacy(v);
+  if (pr.netPhotos) { const pf = profileFromVault(v); d.pp = await Promise.all(pf.posts.slice(0, 15).map(x => x.ph ? netThumb(x.ph, 360) : '')); }
   if (d.ts && pr.netPhotos) d.ts.ph = await Promise.all(Object.keys(indexVault(v)).map(id => netThumb(v.people[id] && v.people[id].avatar, 120)));
   const ids = Object.keys(indexVault(v)); const face = [v.self, ...ids].map(id => v.people[id]).find(p => p && p.avatar);
   const card = { n:d.n, pl:d.pl, f:d.f, mo:d.mo, st:d.st, ph:pr.netPhotos && face ? await netThumb(face.avatar, 160) : '' };
@@ -7578,7 +7737,7 @@ function netProfFromPayload(d, h) {
   const prof = { id, kind:'net', h, n:S(d.n, 60), place:S(d.pl, 60), flag:S(d.f, 8) || '🏰', bg:'gold', lang:'en-IN', motto:S(d.mo, 90), by:S(d.by, 60), at:+d.at || Date.now(),
     show:Object.keys(sh).reduce((o, k) => (o[k] = !!sh[k], o), {}),
     gens:(Array.isArray(d.g) ? d.g : []).slice(0, 20).map(g => (Array.isArray(g) ? g : []).slice(0, 80).map(r => ({ n:S(r[0], 80), r:S(r[1], 80), b:S(r[2], 280), y:S(r[3], 20), died:!!r[4] }))),
-    posts:(Array.isArray(d.p) ? d.p : []).slice(0, 15).map((r, i) => ({ id:`${id}_p${i}`, k:KIND[r[0]] || 'post', by:S(r[1], 60), text:S(r[2], 400), at:+r[3] || Date.now(), about:S(r[4], 80) })),
+    posts:(Array.isArray(d.p) ? d.p : []).slice(0, 15).map((r, i) => ({ id:`${id}_p${i}`, k:KIND[r[0]] || 'post', by:S(r[1], 60), text:S(r[2], 400), at:+r[3] || Date.now(), about:S(r[4], 80), ph:Array.isArray(d.pp) && typeof d.pp[i] === 'string' && /^data:image\/(jpeg|png|webp);base64,[A-Za-z0-9+/=]+$/.test(d.pp[i]) && d.pp[i].length < 90000 ? d.pp[i] : null })),
     trail:(Array.isArray(d.tr) ? d.tr : []).slice(0, 60).filter(r => Array.isArray(r) && isFinite(+r[4]) && isFinite(+r[5]) && Math.abs(+r[4]) <= 90 && Math.abs(+r[5]) <= 180).map(r => ({ y:Nn(r[0]), p:S(r[1], 60), c:S(r[2], 60), t:S(r[3], 90), lat:+r[4], lon:+r[5], f:Number.isInteger(r[6]) ? r[6] : -1, st:!!r[7], fp:S(r[8], 60), ppl:[] })),
     stories:(Array.isArray(d.s) ? d.s : []).slice(0, 8).filter(r => Date.now() - (+r[2] || 0) < DAY).map(r => ({ by:S(r[0], 60), text:S(r[1], 240), at:+r[2] || 0, bg:STORY_BG[r[3]] ? r[3] : 'gold' })),
     st:{ s:Nn(d.st && d.st.s), m:Nn(d.st && d.st.m), g:Nn(d.st && d.st.g), vo:Nn(d.st && d.st.vo), ph:Nn(d.st && d.st.ph) } };
@@ -7993,12 +8152,16 @@ function accPersonRow(c) {
     ${ACC.me && c.id === ACC.me.id ? '' : c.isFollowing ? `<span class="ac-pill">✓ ${hx('Following', 'Following')}</span>` : `<button class="btn-gold sm" data-ac-follow="${esc(c.un)}">${c.vis === 'private' ? '🔒 ' + hx('Request', 'Request') : hx('Follow', 'Follow')}</button>`}</div>`;
 }
 function accFeedHTML() {
-  if (ACC.loading && !ACC.feed) return `<p class="tiny muted mt-4">${hx('Loading your feed…', 'Feed load ho rahi hai…')}</p>`;
+  if (ACC.loading && !ACC.feed) return `<div class="sr-skel"><i></i><i></i><i></i></div>`;
   const it = ACC.feed || [];
-  if (!it.length) return `<div class="ac-empty"><span aria-hidden="true">🏡</span><b>${hx('Your feed is empty', 'Aapki feed khaali hai')}</b><p class="tiny muted">${hx('Follow your relatives and other families — their posts and memories show up here.', 'Rishtedaaron aur baaki families ko follow karo — unki posts aur yaadein yahan dikhengi.')}</p><button class="btn-gold sm mt-3" data-ac-tab="explore">🔍 ${hx('Find people', 'Log dhoondho')}</button></div>`;
-  const ico = { post:'📝', memory:'🕊️', voice:'🎙️', joined:'👋' };
-  return `<div class="ac-feed">${it.map(x => `<article class="ac-post"><header data-pf-open="${esc(x.who.un)}" role="button" tabindex="0">${accAv(x.who.ph, x.who.name, 'sm')}<div class="min-w-0"><b>${esc(x.who.name)}</b><small>@${esc(x.who.un)} · ${timeAgo(x.at)}</small></div><span class="ac-k" aria-hidden="true">${ico[x.k] || '📝'}</span></header>
-      ${x.k === 'joined' ? `<p>${hx(`Joined DynastyVault${x.who.fam ? ' with the ' + esc(x.who.fam) : ''}. Say hello!`, `DynastyVault pe aaye${x.who.fam ? ' — ' + esc(x.who.fam) : ''}. Hello bolo!`)}</p>` : `<p>${esc(x.text)}</p>${x.about ? `<small class="muted">${hx('about', 'ke baare mein')} ${esc(x.about)}</small>` : ''}`}</article>`).join('')}</div>`;
+  if (!it.length) return `<div class="ac-empty"><span aria-hidden="true">🏡</span><b>${hx('Your feed is empty', 'Aapki feed khaali hai')}</b><p class="tiny muted">${hx('Follow your relatives and other families — their posts and memories show up here.', 'Rishtedaaron aur baaki families ko follow karo — unki posts aur yaadein yahan dikhengi.')}</p><button class="btn-gold sm mt-3" data-sr-search>🔍 ${hx('Find people', 'Log dhoondho')}</button></div>`;
+  return `<div class="fd">${it.map((x, i) => {
+    const joined = x.k === 'joined';
+    const text = joined ? hx(`Joined DynastyVault${x.who.fam ? ' with the ' + x.who.fam : ''} 👋`, `DynastyVault pe aaye${x.who.fam ? ' — ' + x.who.fam : ''} 👋`) : x.text;
+    return `<article class="fd-post"><header data-pf-open="${esc(x.who.un)}" role="button" tabindex="0">${accAv(x.who.ph, x.who.name, 'sm story')}<div class="min-w-0"><b>${esc(x.who.un)}</b><small>${esc(x.who.name)}${x.about ? ' · ' + esc(x.about) : ''}</small></div><span class="fd-k" aria-hidden="true">${IG_ICO[x.k] || (joined ? '👋' : '📝')}</span></header>
+      <div class="fd-media${x.ph ? ' ph' : ''}" style="${x.ph ? '' : `background:${IG_GRADS[i % IG_GRADS.length]}`}">${x.ph ? `<img src="${x.ph}" alt="" loading="lazy">` : `<p>${esc(trunc(text, 220))}</p>`}</div>
+      <div class="fd-acts"><button class="ig-act" data-ig-like aria-label="${esc(hx('Like', 'Like'))}">♡</button><button class="ig-act" data-pf-open="${esc(x.who.un)}" aria-label="${esc(hx('Open profile', 'Profile kholo'))}">👤</button></div>
+      ${x.ph && text ? `<p class="fd-cap"><b>${esc(x.who.un)}</b> ${esc(text)}</p>` : ''}<small class="fd-t">${timeAgo(x.at)}</small></article>`; }).join('')}</div>`;
 }
 function accExploreHTML() {
   const it = ACC.list || [];
@@ -8059,7 +8222,7 @@ async function openPerson(un, tab) {
     if (j.d) prof = netProfFromPayload(j.d, un); else prof = { kind:'net', n:c.famName || c.name, place:c.city, flag:'', bg:'gold', show:{}, gens:[], posts:[], stories:[], trail:[], st:{ s:0, m:c.m || 0, g:c.g || 0, vo:0, ph:0 } };
     Object.assign(prof, { id:'acc_' + un, kind:'acct', un, h:un, person:c, vis:c.vis, open:j.open, fol:c.followers, fing:c.following, views:c.views, following:j.isFollowing, requested:j.requested, followsYou:j.followsYou, owner:j.self, hasFam:!!j.d });
     if (prof.snap) delete dynTreeCache[prof.id];
-    NET.cache['acc:' + un] = prof; dynStopVoice(); dynUI.id = prof.id; dynUI.list = null;
+    NET.cache['acc:' + un] = prof; dynStopVoice(); dynUI.id = prof.id; dynUI.list = null; dynUI.igPost = null; dynUI.igTab = tab || 'grid';
     dynUI.tab = tab || (dynSecList(prof)[0] || ['tree'])[0]; renderDynModal(); const sc = $('#dynModal .modal-panel'); if (sc) sc.scrollTop = 0;
   } catch (e) { const box = $('#dynBody'); if (box) box.innerHTML = `<p class="muted p-6">${e.status === 404 ? hx('This account does not exist any more.', 'Yeh account ab nahi hai.') : hx('Could not open the profile. Check the internet and try again.', 'Profile nahi khuli. Internet check karke phir try karo.')}</p>`; }
 }
@@ -8162,7 +8325,7 @@ function accInit() {
       const inModal = t.closest('#dynModal');
       if (!inModal) { if (ACC.me) { openPerson(ACC.me.un).then(() => { const q = NET.cache['acc:' + ACC.me.un]; if (q && t.dataset.pfList) { dynUI.list = t.dataset.pfList; renderDynModal(); accFillList(q); } }); } return; }
       if (!p) return; if (!p.open && t.dataset.pfList) { toast(hx('This account is private.', 'Yeh account private hai.'), 'info', 1600); return; }
-      dynUI.list = t.dataset.pfList || null; renderDynModal(); if (dynUI.list) accFillList(p); return;
+      dynUI.list = t.dataset.pfList || null; renderDynModal(); return;
     }
   }, true);
   document.addEventListener('keydown', e => { if (e.key === 'Enter' && e.target.id === 'acQ') { e.preventDefault(); openSearch(e.target.value.trim()); } if ((e.key === 'Enter' || e.key === ' ') && e.target.matches && e.target.matches('[data-pf-open][role=button]')) { e.preventDefault(); e.target.click(); } });
@@ -8346,6 +8509,80 @@ function srchInit() {
   document.addEventListener('keydown', e => {
     if ((e.key === 'Enter' || e.key === ' ') && e.target.matches && e.target.matches('[data-sr-open][role~=button],[data-sr-open][role=button]')) { e.preventDefault(); e.target.click(); }
     if (e.key === '/' && !/INPUT|TEXTAREA|SELECT/.test((document.activeElement || {}).tagName || '') && !document.querySelector('.modal.open')) { e.preventDefault(); openSearch(); }
+  });
+}
+
+/* ---------- 📱 Social-style profile page (photo + stats + bio + highlights + posts grid) ---------- */
+const IG_GRADS = ['linear-gradient(135deg,#FF8A5B,#FF4F8B)', 'linear-gradient(135deg,#7B5CFF,#3BA4FF)', 'linear-gradient(135deg,#FFB627,#FF7A59)', 'linear-gradient(135deg,#14B8A6,#3B82F6)', 'linear-gradient(135deg,#F472B6,#A855F7)', 'linear-gradient(135deg,#22C55E,#14B8A6)'];
+const IG_ICO = { post:'📝', memory:'🕊️', voice:'🎙️' };
+function igCount(n) { n = +n || 0; return n >= 1e6 ? (n / 1e6).toFixed(1).replace(/\.0$/, '') + 'M' : n >= 1e4 ? (n / 1e3).toFixed(1).replace(/\.0$/, '') + 'K' : dynNum(n); }
+function igTile(x, i) {
+  return `<button class="ig-tile${x.ph ? ' ph' : ''}" data-ig-post="${i}" style="${x.ph ? '' : `background:${IG_GRADS[i % IG_GRADS.length]}`}" aria-label="${esc(trunc(x.text || '', 60))}">
+    ${x.ph ? `<img src="${x.ph}" alt="" loading="lazy">` : `<span class="ig-tt">${esc(trunc(x.text || '', 90))}</span>`}<i class="ig-tk" aria-hidden="true">${IG_ICO[x.k] || '📝'}</i></button>`;
+}
+function igPostView(p, x) {
+  const c = p.person || {};
+  return `<div class="ig-pv"><div class="ig-pv-top"><button class="ig-back" data-ig-post="" aria-label="${esc(hx('Back', 'Wapas'))}">‹</button><b>${hx('Post', 'Post')}</b><span></span></div>
+    <div class="ig-pv-h">${accAv(c.ph, c.name, 'sm story')}<div class="min-w-0"><b>${esc(p.un)}</b><small>${esc(x.by || c.name)}${x.about ? ' · ' + hx('about', 'ke baare mein') + ' ' + esc(x.about) : ''}</small></div></div>
+    <div class="ig-pv-media" style="${x.ph ? '' : `background:${IG_GRADS[(p.posts.indexOf(x)) % IG_GRADS.length]}`}">${x.ph ? `<img src="${x.ph}" alt="">` : `<p>${esc(x.text || '')}</p>`}</div>
+    <div class="ig-pv-acts"><button class="ig-act" data-ig-like aria-label="${esc(hx('Like', 'Like'))}">♡</button><button class="ig-act" data-pf-share aria-label="${esc(hx('Share', 'Share'))}">↗</button></div>
+    ${x.ph && x.text ? `<p class="ig-pv-cap"><b>${esc(p.un)}</b> ${esc(x.text)}</p>` : ''}
+    <small class="ig-pv-t">${timeAgo(x.at)} · ${IG_ICO[x.k] || '📝'} ${x.k === 'memory' ? hx('Memory', 'Yaad') : x.k === 'voice' ? hx('Voice note', 'Voice note') : hx('Post', 'Post')}</small></div>`;
+}
+function igProfileHTML(p, tv) {
+  const c = p.person || {}; const posts = p.posts || []; const tab = dynUI.igTab || 'grid';
+  const mem = posts.filter(x => x.k === 'memory'); const gens = (p.st && p.st.g) || 0; const mem2 = (p.st && p.st.m) || 0;
+  const fresh = posts.some(x => Date.now() - x.at < DAY) || (p.stories || []).length;
+  const fbtn = p.owner ? `<button class="ig-btn" data-ac-edit>${hx('Edit profile', 'Profile edit karo')}</button>`
+    : p.following ? `<button class="ig-btn" data-pf-follow="off">${hx('Following', 'Following')} ⌄</button>`
+    : p.requested ? `<button class="ig-btn" data-pf-follow="off">${hx('Requested', 'Request bheji')}</button>`
+    : `<button class="ig-btn pri" data-pf-follow="on">${p.followsYou ? hx('Follow back', 'Follow back') : hx('Follow', 'Follow')}</button>`;
+  const hl = [];
+  if (p.open && p.hasFam) {
+    if (tv) hl.push(['tree', '🌳', hx('Family tree', 'Family tree')]);
+    if (posts.some(x => x.k === 'voice')) hl.push(['voice', '🎙️', hx('Voices', 'Awaazein')]);
+    if (mem.length) hl.push(['mem', '🕊️', hx('Memories', 'Yaadein')]);
+    if ((p.trail || []).length) hl.push(['trail', '🧭', hx('Journey', 'Safar')]);
+  }
+  if (dynUI.igPost != null && posts[dynUI.igPost] && p.open) return `<div class="ig">${igPostView(p, posts[dynUI.igPost])}</div>`;
+  if (dynUI.list) return `<div class="ig"><div class="ig-top"><button class="ig-back" data-pf-list="" aria-label="${esc(hx('Back', 'Wapas'))}">‹</button><b class="ig-un">${esc(p.un)}</b><span style="width:42px"></span></div>
+    <div class="ig-tabs ig-ltabs" role="tablist"><button role="tab" data-pf-list="followers" class="${dynUI.list === 'followers' ? 'on' : ''}">${igCount(p.fol)} ${hx('followers', 'followers')}</button><button role="tab" data-pf-list="following" class="${dynUI.list === 'following' ? 'on' : ''}">${igCount(p.fing)} ${hx('following', 'following')}</button></div>
+    <div class="ac-list mt-3" id="pfListBox"><div class="sr-skel"><i></i><i></i></div></div></div>`;
+  let body;
+  if (false) body = '';
+  else if (!p.open) body = `<div class="ig-lock"><span class="ig-lock-i" aria-hidden="true">🔒</span><b>${hx('This account is private', 'Yeh account private hai')}</b><p>${p.requested ? hx('Your request is waiting. You’ll see their family tree and posts once they accept.', 'Aapki request pending hai. Accept hote hi unka family tree aur posts dikhenge.') : hx('Follow this account to see their family tree and posts.', 'Unka family tree aur posts dekhne ke liye follow karo.')}</p></div>`;
+  else if (dynUI.igPost != null && posts[dynUI.igPost]) body = igPostView(p, posts[dynUI.igPost]);
+  else if (tab === 'tree') body = tv ? `<div class="ig-tree">${dynTreeShell(tv, p)}</div>` : `<div class="ig-empty"><span>🌱</span><b>${hx('No family tree shared yet', 'Abhi family tree share nahi kiya')}</b></div>`;
+  else if (tab === 'trail') body = `<div class="ig-trail">${dynTrailHTML(p)}</div>`;
+  else {
+    const list = tab === 'mem' ? mem : tab === 'voice' ? posts.filter(x => x.k === 'voice') : posts;
+    body = list.length ? `<div class="ig-grid">${list.map(x => igTile(x, posts.indexOf(x))).join('')}</div>`
+      : `<div class="ig-empty"><span class="ig-empty-i">📷</span><b>${p.owner ? hx('Share your first memory', 'Apni pehli yaad share karo') : hx('No posts yet', 'Abhi koi post nahi')}</b>${p.owner ? `<p>${hx('Posts and memories from your family feed show up here.', 'Aapki family feed ki posts aur yaadein yahan dikhengi.')}</p>` : ''}</div>`;
+  }
+  return `<div class="ig">
+    <div class="ig-top"><button class="ig-back" data-close aria-label="${esc(hx('Close', 'Band karo'))}">‹</button><b class="ig-un">${esc(p.un)}${p.vis === 'private' ? ' <span aria-label="private">🔒</span>' : ''}</b><button class="ig-back" data-pf-share aria-label="${esc(hx('Share profile', 'Profile share karo'))}">⋯</button></div>
+    <div class="ig-head"><span class="ig-av${fresh ? ' fresh' : ''}">${accAv(c.ph, c.name, 'xxl story')}</span>
+      <div class="ig-stats"><span><b>${igCount(posts.length)}</b><small>${hx('posts', 'posts')}</small></span><button data-pf-list="followers"><b>${igCount(p.fol)}</b><small>${hx('followers', 'followers')}</small></button><button data-pf-list="following"><b>${igCount(p.fing)}</b><small>${hx('following', 'following')}</small></button></div></div>
+    <div class="ig-bio"><b>${esc(c.name || p.un)}</b>${c.famName || mem2 ? `<small class="ig-cat">${c.famName ? '🏰 ' + esc(c.famName) : ''}${mem2 ? ` · ${dynNum(mem2)} ${hx('family members', 'family members')}${gens ? ` · ${gens} ${hx('generations', 'peedhiyan')}` : ''}` : ''}</small>` : ''}${c.bio ? `<p>${esc(c.bio)}</p>` : ''}${c.city ? `<small class="ig-city">📍 ${esc(c.city)}</small>` : ''}${p.followsYou && !p.owner ? `<small class="ig-fy">${hx('Follows you', 'Aapko follow karte hain')}</small>` : ''}</div>
+    <div class="ig-btns">${fbtn}<button class="ig-btn" data-pf-share>${hx('Share profile', 'Profile share karo')}</button>${p.owner ? `<button class="ig-btn sq" data-sr-search aria-label="${esc(hx('Find people', 'Log dhoondho'))}">👤+</button>` : `<button class="ig-btn sq" data-pf-report aria-label="${esc(hx('Report', 'Report'))}">⚑</button>`}</div>
+    ${hl.length ? `<div class="ig-hl" role="list">${hl.map(([k, ico, l]) => `<button class="ig-hl-i${tab === k ? ' on' : ''}" data-ig-tab="${k}" role="listitem"><span>${ico}</span><small>${l}</small></button>`).join('')}</div>` : ''}
+    ${p.open && !dynUI.list ? `<div class="ig-tabs" role="tablist"><button role="tab" data-ig-tab="grid" class="${tab === 'grid' || tab === 'voice' ? 'on' : ''}" aria-label="${esc(hx('Posts', 'Posts'))}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/></svg></button><button role="tab" data-ig-tab="tree" class="${tab === 'tree' ? 'on' : ''}" aria-label="${esc(hx('Family tree', 'Family tree'))}"><span aria-hidden="true">🌳</span></button><button role="tab" data-ig-tab="mem" class="${tab === 'mem' ? 'on' : ''}" aria-label="${esc(hx('Memories', 'Yaadein'))}"><span aria-hidden="true">🕊️</span></button></div>` : ''}
+    <div class="ig-body">${body}</div></div>`;
+}
+function igRender(p) {
+  const box = $('#dynBody'); const tv = p.open && p.hasFam ? dynTreeVault(p) : null;
+  box.innerHTML = igProfileHTML(p, tv);
+  if (!dynUI.list && dynUI.igPost == null && dynUI.igTab === 'tree' && tv) dynTreeMount(tv, p);
+  if (!dynUI.list && dynUI.igTab === 'trail') dynTrailMount(p);
+  if (dynUI.list) accFillList(p);
+}
+function igInit() {
+  $('#dynModal').addEventListener('click', e => {
+    const t = e.target.closest('[data-ig-tab],[data-ig-post],[data-ig-like]'); if (!t) return;
+    const p = dynFind(dynUI.id); if (!p || p.kind !== 'acct') return;
+    if (t.dataset.igTab) { dynUI.igTab = t.dataset.igTab; dynUI.igPost = null; dynUI.list = null; igRender(p); return; }
+    if (t.dataset.igPost != null) { dynUI.igPost = t.dataset.igPost === '' ? null : +t.dataset.igPost; igRender(p); const sc = $('#dynModal .modal-panel'); if (sc) sc.scrollTop = 0; return; }
+    if (t.hasAttribute('data-ig-like')) { t.classList.toggle('on'); t.textContent = t.classList.contains('on') ? '♥' : '♡'; if (t.classList.contains('on')) srchBurst(t); }
   });
 }
 
