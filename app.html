@@ -2574,6 +2574,47 @@ html[data-theme="social"] .srch-pill kbd{display:none}
   html[data-theme="social"] #topbar{position:sticky}
   html[data-theme="social"] #topbar>div{position:relative}
 }
+/* ===== v70: home feed, stories row, feature-page back bar, create grid ===== */
+.home-body{max-width:500px;margin:0 auto;padding-top:6px}
+.hs-row{display:flex;gap:14px;overflow-x:auto;padding:10px 2px 14px;margin:0 -2px;scrollbar-width:none;border-bottom:1px solid var(--line)}
+.hs-row::-webkit-scrollbar{display:none}
+.hs-i{flex:none;display:flex;flex-direction:column;align-items:center;gap:6px;width:70px;border:0;background:none;color:var(--ink);cursor:pointer;padding:0}
+.hs-i small{font-size:11.5px;max-width:70px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hs-av{position:relative;display:block}
+.hs-av .ac-av.lg{width:66px;height:66px}
+.hs-av .ac-av.lg b{font-size:22px}
+.hs-av.mine .ac-av{box-shadow:0 0 0 1px var(--line-strong)}
+.hs-av.mine i{position:absolute;right:-1px;bottom:-1px;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-weight:800;font-size:15px;line-height:1;background:#3B8BFF;color:#fff;box-shadow:0 0 0 2.5px var(--bg)}
+.hp-list{display:grid}
+.hp{border-bottom:1px solid var(--line);padding-bottom:6px}
+.hp-sug{font-weight:800;font-size:15px;padding:16px 4px 6px}
+.hp header{display:flex;align-items:center;gap:10px;padding:10px 4px;cursor:pointer}
+.hp header b{display:block;font-size:14px}.hp header small{display:block;font-size:12px;color:var(--muted)}
+.hp-more{margin-left:auto;color:var(--ink);font-size:18px;padding:0 6px}
+.hp-media{position:relative;aspect-ratio:1;display:grid;place-items:center;padding:28px;color:#fff;overflow:hidden;border-radius:4px;user-select:none}
+.hp-media img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.hp-media p{font-size:21px;font-weight:800;line-height:1.35;text-align:center;text-shadow:0 2px 10px rgba(0,0,0,.25)}
+.hp-heart{position:absolute;left:50%;top:50%;font-size:96px;color:#fff;transform:translate(-50%,-50%) scale(0);opacity:0;pointer-events:none;filter:drop-shadow(0 6px 20px rgba(0,0,0,.35))}
+.hp-heart.pop{animation:hpHeart .8s cubic-bezier(.2,1.4,.4,1)}
+@keyframes hpHeart{15%{transform:translate(-50%,-50%) scale(1.15);opacity:1}35%{transform:translate(-50%,-50%) scale(.95)}70%{opacity:1}100%{transform:translate(-50%,-50%) scale(1);opacity:0}}
+.hp-acts{display:flex;align-items:center;gap:2px;padding:4px 0}
+.hp-k{margin-left:auto;font-size:17px;padding-right:6px}
+.hp-cap{padding:0 4px;font-size:14px;line-height:1.45}
+.hp-t{display:block;padding:4px 4px 8px;font-size:11.5px;color:var(--muted)}
+.hp-join{margin:14px 0;padding:18px;border-radius:16px;border:1px solid var(--line);background:var(--s1);text-align:center}
+.hp-join b{display:block;font-size:16px}.hp-join p{color:var(--muted);font-size:13.5px;margin:6px 0 12px}
+.hp-sgw{padding:12px 0;border-bottom:1px solid var(--line)}
+@media (max-width:640px){.home-body{margin:0 -16px}.hp-media{border-radius:0}.hs-row{padding-left:12px;padding-right:12px}.hp header,.hp-cap,.hp-t,.hp-sug{padding-left:12px;padding-right:12px}.hp-acts{padding:4px 6px}.hp-join{margin:14px 12px}.hp-sgw{padding-left:12px;padding-right:12px}}
+.ig-page-bar{position:sticky;top:var(--tbh,60px);z-index:30;display:flex;align-items:center;justify-content:space-between;height:48px;margin:0 -16px 8px;padding:0 6px;background:rgba(0,0,0,.92);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.ig-page-bar b{font-size:16.5px;font-weight:800}
+@media (min-width:640px){.ig-page-bar{margin:0 0 8px;border-radius:0 0 14px 14px}}
+.cr-h{font-size:13px;font-weight:800;color:var(--muted);margin:12px 4px 6px}
+.cr-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.cr-tile{display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 4px 10px;border:0;border-radius:16px;background:rgba(var(--g-rgb),.06);color:var(--ink);cursor:pointer;text-align:center}
+.cr-tile:hover{background:rgba(var(--g-rgb),.12)}
+.cr-tile span{font-size:26px;line-height:1}
+.cr-tile small{font-size:11.5px;font-weight:700;line-height:1.2}
+@media (max-width:360px){.cr-grid{grid-template-columns:repeat(3,1fr)}}
 </style>
 </head>
 <body>
@@ -2634,6 +2675,7 @@ html[data-theme="social"] .srch-pill kbd{display:none}
 
 <nav id="igNav" class="ig-nav" aria-label="Main"></nav>
 <main class="max-w-[1680px] mx-auto px-4 sm:px-6 lg:px-10">
+  <div id="igPage" class="ig-page-bar" hidden></div>
   <!-- WELCOME CANVAS -->
   <section id="welcome" class="welcome" aria-label="Welcome">
     <div class="wl-aura" aria-hidden="true"></div>
@@ -2911,6 +2953,9 @@ html[data-theme="social"] .srch-pill kbd{display:none}
       <div id="filmBody" class="mt-5"></div>
     </div>
   </section>
+
+  <!-- 🏠 HOME FEED -->
+  <section id="homeHub" data-panel="home" class="hub"><div id="homeBody" class="home-body"></div></section>
 
   <!-- 🔍 EXPLORE -->
   <section id="exploreHub" data-panel="explore" class="hub"><div id="exploreBody" class="explore-body"></div></section>
@@ -4644,7 +4689,7 @@ function applyMode() {
   const welcome = !state.onboarded;
   document.body.classList.toggle('welcome-mode', welcome);
   document.body.classList.toggle('dash-on', !welcome);
-  if (!welcome && !dash.tab) { renderDashTabs(); showTab(state.tab || 'canvas', { noScroll:true }); }
+  if (!welcome && !dash.tab) { renderDashTabs(); const st = window.__startTab || (curTheme() === 'social' ? 'home' : state.tab || 'canvas'); window.__startTab = null; showTab(st, { noScroll:true }); }
   if (typeof renderRefBanners === 'function') renderRefBanners();
   const ban = $('#demoBanner');
   if (ban) { const v = V(); ban.hidden = welcome || !isDemo(v); }
@@ -4688,7 +4733,7 @@ function createFromWizard() {
   state.view = hasDual(v) && isRoyal() ? 'fused' : 'paternal';
   closeModal('wizModal');
   if (LANG_BY[d.lang] && d.lang !== state.lang) setLang(d.lang, true);
-  saveNow(); applyMode();
+  window.__startTab = 'canvas'; saveNow(); applyMode();
   renderVaultSelect(); renderHero(); renderViewTabs(); renderAddons(); renderGpt(); renderPromo(); tickPresence(true);
   requestAnimationFrame(() => { renderTree({ animate:true, fit:true }); document.getElementById('vault').scrollIntoView({ behavior:'smooth' }); });
   goldBurst();
@@ -4883,7 +4928,7 @@ function startDemo() {
   const demo = state.order.map(id => state.vaults[id]).find(v => v && v.demo && v.name === 'Kapoor Dynasty') || state.order.map(id => state.vaults[id]).find(isDemo);
   state.onboarded = true; closeModal('wizModal');
   if (demo && demo.id !== state.active) { state.active = demo.id; }
-  saveNow(); applyMode();
+  window.__startTab = 'canvas'; saveNow(); applyMode();
   renderVaultSelect(); renderHero(); renderViewTabs(); renderAddons(); renderGpt(); renderPromo(); tickPresence(true);
   requestAnimationFrame(() => { renderTree({ animate:true, fit:true }); document.getElementById('vault').scrollIntoView({ behavior:'smooth' }); });
   setTimeout(showReminderPop, 1600);
@@ -6349,6 +6394,7 @@ const DASH_TABS = [
   { id:'film', ico:'🎬', en:'Documentary', hn:'Documentary', sen:'Film', shn:'Film', main:true },
   { id:'voice', ico:'🎙️', en:'Voices', hn:'Awaaz', sen:'Voices', shn:'Awaaz', main:true },
   { id:'refer', ico:'🎁', en:'Share & Earn', hn:'Share & Kamao', sen:'Share', shn:'Share', main:true },
+  { id:'home', ico:'🏠', en:'Home', hn:'Home' },
   { id:'explore', ico:'🔍', en:'Explore', hn:'Explore' },
   { id:'photo', ico:'🧩', en:'Family Collage', hn:'Family Collage' },
   { id:'reunion', ico:'✨', en:'Reunion Portrait', hn:'Reunion Portrait' },
@@ -6398,7 +6444,7 @@ function showTab(id, opts = {}) {
     try { const want = id === 'trail' ? 'map' : 'tree'; if (prev !== id || (want === 'map') !== mapUI.open) setCanvasTab(want); } finally { dash.syncing = false; }
   } else if (mapUI.open) stopJourney();
   refreshPanel(id, true);
-  if (typeof igNavRender === 'function') igNavRender();
+  if (typeof igNavRender === 'function') { igNavRender(); igPageBar(); }
   if (id === 'reunion' && typeof rpMountInline === 'function') rpMountInline();
   const bar = $('#dashTabs'); const btn = bar && bar.querySelector(`[data-tab="${id}"]`);
   if (btn && bar.scrollWidth > bar.clientWidth) bar.scrollTo({ left:btn.offsetLeft - bar.clientWidth / 2 + btn.offsetWidth / 2, behavior:prev ? 'smooth' : 'auto' });
@@ -6408,6 +6454,7 @@ function refreshPanel(id, force) {
   if (id === 'canvas' && typeof renderJourney === 'function') { renderJourney(); return; }
   if (id === 'film') { renderFilm(); return; }
   if (id === 'explore') { renderExplore(); return; }
+  if (id === 'home') { renderHome(); return; }
   if (id === 'arena' && typeof renderDyn === 'function') { renderDyn(); return; }
   const hub = { themes:'#themeStudio', refer:'#referHub', voice:'#voiceHub', social:'#socialHub', vault:'#vaultHub' }[id]; if (!hub) return;
   const el = $(hub); if (!el) return;
@@ -7188,6 +7235,7 @@ function initV10() {
   srchInit();
   igInit();
   igInitNav();
+  homeInit();
   document.addEventListener('click', e => { const l = e.target.closest('#commHub [data-ig-like]'); if (!l) return; l.classList.toggle('on'); l.textContent = l.classList.contains('on') ? '♥' : '♡'; if (l.classList.contains('on')) srchBurst(l); });
   initRoute();
   initLeafUI();
@@ -8371,7 +8419,7 @@ async function accFollow(un, on, fromCard) {
     const p = NET.cache['acc:' + un]; if (p) { Object.assign(p, { following:j.isFollowing, requested:j.requested, fol:j.followers }); if (isOpen('dynModal') && dynUI.id === p.id) { if (j.isFollowing && !p.open) { openPerson(un); } else renderDynModal(); } }
     (ACC.list || []).forEach(c => { if (c.un === un) c.isFollowing = j.isFollowing; });
     if (on) toast(j.isFollowing ? hx(`✓ Following @${un}`, `✓ @${un} ko follow kar rahe ho`) : hx('✓ Request sent', '✓ Request bhej di'), 'info', 1800);
-    ACC.feed = null; accRefresh(true);
+    ACC.feed = null; SRCH.ring = null; accRefresh(true);
   } catch (e) { toast(e.message, 'warn'); }
 }
 async function accShare(un, name) {
@@ -8651,7 +8699,8 @@ function igProfileHTML(p, tv) {
   const c = p.person || {}; const posts = p.posts || []; const tab = dynUI.igTab || 'grid';
   const mem = posts.filter(x => x.k === 'memory'); const gens = (p.st && p.st.g) || 0; const mem2 = (p.st && p.st.m) || 0;
   const fresh = posts.some(x => Date.now() - x.at < DAY) || (p.stories || []).length;
-  const fbtn = p.owner ? `<button class="ig-btn" data-ac-edit>${hx('Edit profile', 'Profile edit karo')}</button>`
+  const fbtn = p.local ? (accOn() ? `<button class="ig-btn pri" data-ac-auth="signup">${hx('Create account to share', 'Share ke liye account banao')}</button>` : `<button class="ig-btn" data-ig-go="canvas">${hx('Edit family tree', 'Family tree edit karo')}</button>`)
+    : p.owner ? `<button class="ig-btn" data-ac-edit>${hx('Edit profile', 'Profile edit karo')}</button>`
     : p.following ? `<button class="ig-btn" data-pf-follow="off">${hx('Following', 'Following')} ⌄</button>`
     : p.requested ? `<button class="ig-btn" data-pf-follow="off">${hx('Requested', 'Request bheji')}</button>`
     : `<button class="ig-btn pri" data-pf-follow="on">${p.followsYou ? hx('Follow back', 'Follow back') : hx('Follow', 'Follow')}</button>`;
@@ -8680,9 +8729,9 @@ function igProfileHTML(p, tv) {
   return `<div class="ig">
     <div class="ig-top"><button class="ig-back" data-close aria-label="${esc(hx('Close', 'Band karo'))}">‹</button><b class="ig-un">${esc(p.un)}${p.vis === 'private' ? ' <span aria-label="private">🔒</span>' : ''}</b><button class="ig-back" data-pf-share aria-label="${esc(hx('Share profile', 'Profile share karo'))}">⋯</button></div>
     <div class="ig-head"><span class="ig-av${fresh ? ' fresh' : ''}">${accAv(c.ph, c.name, 'xxl story')}</span>
-      <div class="ig-stats"><span><b>${igCount(posts.length)}</b><small>${hx('posts', 'posts')}</small></span><button data-pf-list="followers"><b>${igCount(p.fol)}</b><small>${hx('followers', 'followers')}</small></button><button data-pf-list="following"><b>${igCount(p.fing)}</b><small>${hx('following', 'following')}</small></button></div></div>
+      <div class="ig-stats"><span><b>${igCount(posts.length)}</b><small>${hx('posts', 'posts')}</small></span>${p.local ? `<span><b>${dynNum(mem2)}</b><small>${hx('family', 'family')}</small></span><span><b>${gens}</b><small>${hx('generations', 'peedhiyan')}</small></span>` : `<button data-pf-list="followers"><b>${igCount(p.fol)}</b><small>${hx('followers', 'followers')}</small></button><button data-pf-list="following"><b>${igCount(p.fing)}</b><small>${hx('following', 'following')}</small></button>`}</div></div>
     <div class="ig-bio"><b>${esc(c.name || p.un)}</b>${c.famName || mem2 ? `<small class="ig-cat">${c.famName ? '🏰 ' + esc(c.famName) : ''}${mem2 ? ` · ${dynNum(mem2)} ${hx('family members', 'family members')}${gens ? ` · ${gens} ${hx('generations', 'peedhiyan')}` : ''}` : ''}</small>` : ''}${c.bio ? `<p>${esc(c.bio)}</p>` : ''}${c.city ? `<small class="ig-city">📍 ${esc(c.city)}</small>` : ''}${p.followsYou && !p.owner ? `<small class="ig-fy">${hx('Follows you', 'Aapko follow karte hain')}</small>` : ''}</div>
-    <div class="ig-btns">${fbtn}<button class="ig-btn" data-pf-share>${hx('Share profile', 'Profile share karo')}</button>${p.owner ? `<button class="ig-btn sq" data-sr-search aria-label="${esc(hx('Find people', 'Log dhoondho'))}">👤+</button>` : `<button class="ig-btn sq" data-pf-report aria-label="${esc(hx('Report', 'Report'))}">⚑</button>`}</div>
+    <div class="ig-btns">${fbtn}<button class="ig-btn" ${p.local ? 'data-ig-card' : 'data-pf-share'}>${p.local ? hx('Family Card', 'Family Card') : hx('Share profile', 'Profile share karo')}</button>${p.owner ? `<button class="ig-btn sq" data-sr-search aria-label="${esc(hx('Find people', 'Log dhoondho'))}">👤+</button>` : `<button class="ig-btn sq" data-pf-report aria-label="${esc(hx('Report', 'Report'))}">⚑</button>`}</div>
     ${hl.length ? `<div class="ig-hl" role="list">${hl.map(([k, ico, l]) => `<button class="ig-hl-i${tab === k ? ' on' : ''}" data-ig-tab="${k}" role="listitem"><span>${ico}</span><small>${l}</small></button>`).join('')}</div>` : ''}
     ${p.open && !dynUI.list ? `<div class="ig-tabs" role="tablist"><button role="tab" data-ig-tab="grid" class="${tab === 'grid' || tab === 'voice' ? 'on' : ''}" aria-label="${esc(hx('Posts', 'Posts'))}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/></svg></button><button role="tab" data-ig-tab="tree" class="${tab === 'tree' ? 'on' : ''}" aria-label="${esc(hx('Family tree', 'Family tree'))}"><span aria-hidden="true">🌳</span></button><button role="tab" data-ig-tab="mem" class="${tab === 'mem' ? 'on' : ''}" aria-label="${esc(hx('Memories', 'Yaadein'))}"><span aria-hidden="true">🕊️</span></button></div>` : ''}
     <div class="ig-body">${body}</div></div>`;
@@ -8696,6 +8745,7 @@ function igRender(p) {
 }
 function igInit() {
   $('#dynModal').addEventListener('click', e => {
+    const g = e.target.closest('[data-ig-go],[data-ig-card]'); if (g) { closeModal('dynModal'); if (g.dataset.igGo) showTab(g.dataset.igGo); else openFamilyCard(); return; }
     const t = e.target.closest('[data-ig-tab],[data-ig-post],[data-ig-like]'); if (!t) return;
     const p = dynFind(dynUI.id); if (!p || p.kind !== 'acct') return;
     if (t.dataset.igTab) { dynUI.igTab = t.dataset.igTab; dynUI.igPost = null; dynUI.list = null; igRender(p); return; }
@@ -8718,14 +8768,16 @@ const IGI = {
   peopleOn:'<svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-4 3.4-6 6.5-6s5.7 2 6.5 6z"/><circle cx="17.5" cy="9" r="2.6"/><path d="M17 14c2.6.2 4.2 2 4.6 5h-4.4" fill="none"/></svg>',
   film:'<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><path d="M3 8.5h18M8 3l3 5.5M14 3l3 5.5"/><path d="M10 12.5v5l4.5-2.5z" fill="currentColor"/></svg>',
   heart:'<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 20.5S3 15 3 8.8A4.8 4.8 0 0 1 12 6.4a4.8 4.8 0 0 1 9 2.4C21 15 12 20.5 12 20.5z"/></svg>',
+  tree:'<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2.6"/><circle cx="5.5" cy="18.5" r="2.6"/><circle cx="18.5" cy="18.5" r="2.6"/><path d="M12 7.6V12M12 12H5.5v3.9M12 12h6.5v3.9"/></svg>',
+  treeOn:'<svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2.8"/><circle cx="5.5" cy="18.5" r="2.8"/><circle cx="18.5" cy="18.5" r="2.8"/><path d="M12 7.6V12M12 12H5.5v3.9M12 12h6.5v3.9" fill="none"/></svg>',
   more:'<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>'
 };
 const IGN_ITEMS = () => [
-  ['canvas', IGI.home, IGI.homeOn, hx('Home', 'Home')],
+  ['home', IGI.home, IGI.homeOn, hx('Home', 'Home')],
   ['explore', IGI.search, IGI.searchOn, hx('Search', 'Search')],
   ['create', IGI.plus, IGI.plus, hx('Create', 'Banao')],
-  ['arena', IGI.people, IGI.peopleOn, hx('People', 'Log')],
-  ['film', IGI.film, IGI.film, hx('Film', 'Film'), 'wide'],
+  ['canvas', IGI.tree, IGI.treeOn, hx('Family tree', 'Family tree')],
+  ['arena', IGI.people, IGI.peopleOn, hx('People', 'Log'), 'wide'],
   ['heart', IGI.heart, IGI.heart, hx('Activity', 'Activity'), 'wide'],
   ['me', '', '', hx('Profile', 'Profile')],
   ['more', IGI.more, IGI.more, hx('More', 'Aur'), 'wide']
@@ -8735,7 +8787,8 @@ function igNavRender() {
   const dot = igActUnread();
   nav.innerHTML = IGN_ITEMS().map(([id, ico, icoOn, label, cls]) => {
     const on = dash.tab === id;
-    const face = id === 'me' ? `<span class="ign-me${on || (isOpen('dynModal') && me && dynUI.id === 'acc_' + me.un) ? ' on' : ''}">${me && me.ph ? `<img src="${me.ph}" alt="">` : `<b>${esc(me ? initials(me.name) : '👤')}</b>`}</span>` : (on ? icoOn : ico);
+    const sv = ownVault(); const sp = sv && sv.people[sv.self]; const myPh = (me && me.ph) || (sp && sp.avatar); const myNm = (me && me.name) || (sp && sp.name);
+    const face = id === 'me' ? `<span class="ign-me${on || (isOpen('dynModal') && dynUI.id && NET.cache['acc:' + String(dynUI.id).slice(4)] && NET.cache['acc:' + String(dynUI.id).slice(4)].owner) ? ' on' : ''}">${myPh ? `<img src="${myPh}" alt="">` : `<b>${esc(myNm ? initials(myNm) : '👤')}</b>`}</span>` : (on ? icoOn : ico);
     return `<button type="button" class="ign${on ? ' on' : ''}${cls ? ' ' + cls : ''}" data-ign="${id}" aria-label="${esc(label)}"${on ? ' aria-current="page"' : ''}>${face}${id === 'heart' && dot ? '<i class="ign-dot"></i>' : ''}<span class="ign-l">${esc(label)}</span></button>`;
   }).join('');
   const hh = $('#hdrHeart'); if (hh) { hh.hidden = !accOn(); hh.classList.toggle('dot', !!dot); }
@@ -8794,14 +8847,15 @@ function igOpenCreate(kind) {
   const el = $('#igCreateBody'); if (!el) return;
   if (!kind) {
     const opt = (k, ico, en, hn, sen, shn) => `<button class="cr-opt" data-cr="${k}"><span>${ico}</span><div><b>${hx(en, hn)}</b><small>${hx(sen, shn)}</small></div></button>`;
-    el.innerHTML = `<div class="cr-list">
+    el.innerHTML = `<div class="cr-h">${hx('Share', 'Share karo')}</div><div class="cr-list">
       ${opt('post', '📝', 'Post', 'Post', 'Share news or a photo with your family', 'Family ke saath khabar ya photo share karo')}
       ${opt('memory', '🕊️', 'Memory', 'Yaad', 'Write down a memory of someone', 'Kisi ki yaad likho')}
-      ${opt('story', '⏱️', '24-hour story', '24-ghante ki story', 'Disappears after a day', 'Ek din baad gayab')}
-      ${opt('voice', '🎙️', 'Voice note', 'Voice note', 'Record their voice and story', 'Unki awaaz aur kahani record karo')}
-      ${opt('member', '👤', 'Family member', 'Family member', 'Add someone to your tree', 'Tree mein kisi ko jodo')}
-      ${opt('film', '🎬', 'Documentary', 'Documentary', 'Turn a photo into a short film', 'Photo se chhoti film banao')}
-      ${opt('card', '🪪', 'Family Card', 'Family Card', 'A golden card for WhatsApp Status', 'WhatsApp Status ke liye card')}</div>`;
+      ${opt('story', '⏱️', '24-hour story', '24-ghante ki story', 'Disappears after a day', 'Ek din baad gayab')}</div>
+      <div class="cr-h">DynastyVault</div><div class="cr-grid">
+      ${[['tab:canvas', '🌳', 'Family tree', 'Family tree'], ['member', '👤', 'Add member', 'Member jodo'], ['tab:voice', '🎙️', 'Voice studio', 'Voice studio'], ['tab:film', '🎬', 'Documentary', 'Documentary'],
+        ['tab:photo', '🧩', 'Family Collage', 'Family Collage'], ['tab:reunion', '✨', 'Reunion Portrait', 'Reunion Portrait'], ['tab:trail', '🗺️', 'Migration Trail', 'Migration Safar'], ['card', '🪪', 'Family Card', 'Family Card'],
+        ['tab:arena', '⚔️', 'Dynasty vs Dynasty', 'Dynasty vs Dynasty'], ['tab:refer', '🎁', 'Share & Earn', 'Share & Kamao'], ['tab:themes', '🎨', 'Theme Studio', 'Theme Studio'], ['tab:plans', '👑', 'Plans', 'Plans']]
+        .map(([k, ico, en, hn]) => `<button class="cr-tile" data-cr="${k}"><span>${ico}</span><small>${hx(en, hn)}</small></button>`).join('')}</div>`;
     $('#igCreateTitle').textContent = hx('Create', 'Banao');
   } else {
     if (!ownVault() && isDemo(V())) { closeModal('igCreate'); openWizard('form'); toast(hx('Make your family tree first — then you can post.', 'Pehle apna family tree banao — phir post kar paoge.'), 'info'); return; }
@@ -8817,7 +8871,7 @@ function igOpenCreate(kind) {
 function igNavGo(id, btn) {
   if (id === 'create') { igOpenCreate(); return; }
   if (id === 'heart') { igOpenActivity(); return; }
-  if (id === 'me') { if (ACC.tok && ACC.me) openPerson(ACC.me.un); else if (accOn()) accOpenAuth('signup'); else showTab('arena'); return; }
+  if (id === 'me') { if (accOn() && ACC.tok && ACC.me) openPerson(ACC.me.un); else if (ownVault() || V()) openLocalProfile(); else if (accOn()) accOpenAuth('signup'); return; }
   if (id === 'more') { igMoreOpen(btn); return; }
   if (isOpen('dynModal')) closeModal('dynModal');
   if (dash.tab === id) { window.scrollTo({ top:0, behavior:'smooth' }); if (id === 'explore') openSearch(); return; }
@@ -8826,14 +8880,14 @@ function igNavGo(id, btn) {
 function igMoreOpen(btn) {
   const old = $('#igMoreMenu'); if (old) { old.remove(); return; }
   const m = document.createElement('div'); m.id = 'igMoreMenu'; m.className = 'dt-menu'; m.setAttribute('role', 'menu');
-  m.innerHTML = DASH_TABS.filter(t => !['canvas', 'explore', 'arena'].includes(t.id)).map(t => `<button role="menuitem" type="button" data-tab="${t.id}" class="${t.id === dash.tab ? 'on' : ''}"><span aria-hidden="true">${t.ico}</span>${esc(hx(t.en, t.hn))}</button>`).join('') + `<button role="menuitem" type="button" data-tab="plans"><span aria-hidden="true">👑</span>${hx('Plans', 'Plans')}</button>`;
+  m.innerHTML = DASH_TABS.filter(t => !['canvas', 'explore', 'home'].includes(t.id)).map(t => `<button role="menuitem" type="button" data-tab="${t.id}" class="${t.id === dash.tab ? 'on' : ''}"><span aria-hidden="true">${t.ico}</span>${esc(hx(t.en, t.hn))}</button>`).join('') + `<button role="menuitem" type="button" data-tab="plans"><span aria-hidden="true">👑</span>${hx('Plans', 'Plans')}</button>`;
   document.body.appendChild(m); const r = btn.getBoundingClientRect(); const w = 240;
   m.style.width = w + 'px'; m.style.left = Math.min(innerWidth - w - 12, r.right + 8) + 'px'; m.style.top = Math.max(8, Math.min(innerHeight - m.offsetHeight - 8, r.top - m.offsetHeight + r.height)) + 'px';
   m.addEventListener('click', e => { const t = e.target.closest('[data-tab]'); if (!t) return; m.remove(); if (isOpen('dynModal')) closeModal('dynModal'); showTab(t.dataset.tab); });
   setTimeout(() => document.addEventListener('click', function off(e) { if (!m.contains(e.target)) { m.remove(); document.removeEventListener('click', off); } }), 0);
 }
 function igSecsHTML() {   // section grid inside the ☰ menu on phones
-  return DASH_TABS.filter(t => !['canvas', 'explore', 'arena'].includes(t.id)).map(t => `<button type="button" data-hm-tab="${t.id}"><span aria-hidden="true">${t.ico}</span>${esc(hx(t.en, t.hn))}</button>`).join('') + `<button type="button" data-hm-tab="plans"><span aria-hidden="true">👑</span>${hx('Plans', 'Plans')}</button>`;
+  return DASH_TABS.filter(t => !['canvas', 'explore', 'home'].includes(t.id)).map(t => `<button type="button" data-hm-tab="${t.id}"><span aria-hidden="true">${t.ico}</span>${esc(hx(t.en, t.hn))}</button>`).join('') + `<button type="button" data-hm-tab="plans"><span aria-hidden="true">👑</span>${hx('Plans', 'Plans')}</button>`;
 }
 function igInitNav() {
   const nav = $('#igNav'); if (!nav) return;
@@ -8846,14 +8900,90 @@ function igInitNav() {
     if (['post', 'memory', 'story', 'voice'].includes(k)) { igOpenCreate(k); return; }
     closeModal('igCreate');
     if (k === 'member') { if (ownVault() || !isDemo(V())) openAddAncestor(); else openWizard('form'); }
-    else if (k === 'film') showTab('film'); else if (k === 'card') openFamilyCard();
+    else if (k.startsWith('tab:')) { if (isOpen('dynModal')) closeModal('dynModal'); showTab(k.slice(4)); window.scrollTo({ top:0 }); } else if (k === 'card') openFamilyCard();
   });
   $('#igCreate').addEventListener('click', e => {   // a post was published → close and refresh the profile
     if (!e.target.closest('[data-c="post"]')) return;
-    setTimeout(() => { if (!feedUI.drafts.ig) { closeModal('igCreate'); accSyncFamily(true); ACC.feed = null; if (dash.tab === 'arena') accPaint(); } }, 250);
+    setTimeout(() => { if (!feedUI.drafts.ig) { closeModal('igCreate'); accSyncFamily(true); ACC.feed = null; if (dash.tab === 'arena') accPaint(); if (isSocial() && dash.tab !== 'home') showTab('home'); else if (dash.tab === 'home') renderHome(); window.scrollTo({ top:0 }); } }, 250);
   });
   igNavRender();
   setInterval(() => { if (isSocial()) igNavRender(); }, 30000);
+}
+
+/* ---------- 🏠 Home feed (Social look): stories row + posts from your family and the people you follow ---------- */
+const HOME = { busy:false };
+const localUn = v => { const me = v && v.people[v.self]; return (ACC.tok && ACC.me && ACC.me.un) || slug((me && me.name) || (v && v.name) || 'me').replace(/-/g, '.'); };
+function homeLocalPosts() {
+  const v = ownVault() || V(); if (!v) return [];
+  return (v.feed || []).slice(0, 30).map(f => { const a = v.people[f.byPid]; return { k:f.kind === 'memory' ? 'memory' : (f.kind === 'voice' || f.audio) ? 'voice' : 'post', text:f.text || '', at:f.at, ph:f.photo || '', local:true,
+    who:{ un:localUn(v), name:f.by || (a && a.name) || v.name, ph:(a && a.avatar) || '' }, about:f.about && v.people[f.about] ? v.people[f.about].name : '' }; });
+}
+function homeSamplePosts() { return igSampleExplore().slice(0, 8).map(x => Object.assign({}, x, { suggested:true })); }
+function homeStoriesHTML() {
+  const v = ownVault() || V(); const me = ACC.tok && ACC.me; const self = v && v.people[v.self];
+  const items = [`<button class="hs-i" data-hs="mine"><span class="hs-av mine">${accAv((me && me.ph) || (self && self.avatar), (me && me.name) || (self && self.name) || 'Me', 'lg')}<i>+</i></span><small>${hx('Your story', 'Aapki story')}</small></button>`];
+  const st = v ? activeStories(v) : []; const by = new Map(); st.forEach((s, i) => { if (!by.has(s.byPid)) by.set(s.byPid, i); });
+  by.forEach((i, pid) => { const a = v.people[pid]; items.push(`<button class="hs-i" data-hs-local="${i}"><span class="hs-av">${accAv(a && a.avatar, (a && a.name) || st[i].by, 'lg story live')}</span><small>${esc(((a && a.name) || st[i].by).split(' ')[0])}</small></button>`); });
+  (SRCH.ring || []).forEach(c => items.push(`<button class="hs-i" data-sr-open="${esc(c.un)}"><span class="hs-av">${accAv(c.ph, c.name, 'lg story')}</span><small>${esc(c.un)}</small></button>`));
+  if (items.length < 6) SAMPLE_DYN.slice(0, 6 - items.length).forEach(s => items.push(`<button class="hs-i" data-dyn-open="${s.id}"><span class="hs-av"><span class="ac-av lg story"><b>${s.flag}</b></span></span><small>${esc(s.n.replace(/^(The |Familia |Família )/, '').replace(/ Family$/, ''))}</small></button>`));
+  return `<div class="hs-row" role="list">${items.join('')}</div>`;
+}
+function homePostHTML(x, i) {
+  const open = x.sample ? `data-dyn-open="${esc(x.sample)}"` : x.local ? 'data-home-me' : `data-sr-open="${esc(x.who.un)}"`;
+  const joined = x.k === 'joined'; const text = joined ? hx(`Joined DynastyVault${x.who.fam ? ' with the ' + x.who.fam : ''} 👋`, `DynastyVault pe aaye${x.who.fam ? ' — ' + x.who.fam : ''} 👋`) : x.text;
+  return `<article class="hp">${x.suggested && i === x._first ? `<div class="hp-sug">${hx('Suggested posts', 'Suggested posts')}</div>` : ''}
+    <header ${open} role="button" tabindex="0">${accAv(x.who.ph, x.who.name, 'sm story')}<div class="min-w-0"><b>${esc(x.who.un)}</b>${x.about || x.suggested ? `<small>${x.suggested ? hx('Suggested for you', 'Aapke liye') : esc(x.about)}</small>` : ''}</div><span class="hp-more" aria-hidden="true">⋯</span></header>
+    <div class="hp-media${x.ph ? ' ph' : ''}" data-hp-like style="${x.ph ? '' : `background:${IG_GRADS[i % IG_GRADS.length]}`}">${x.ph ? `<img src="${x.ph}" alt="" loading="lazy">` : `<p>${esc(trunc(text, 240))}</p>`}<span class="hp-heart" aria-hidden="true">♥</span></div>
+    <div class="hp-acts"><button class="ig-act" data-ig-like aria-label="${esc(hx('Like', 'Like'))}">♡</button><button class="ig-act" ${open} aria-label="${esc(hx('Comment', 'Comment'))}">💬</button><button class="ig-act" data-hp-share="${i}" aria-label="${esc(hx('Share', 'Share'))}">✈</button><span class="hp-k" aria-hidden="true">${IG_ICO[x.k] || (joined ? '👋' : '📝')}</span></div>
+    ${x.ph && text ? `<p class="hp-cap"><b>${esc(x.who.un)}</b> ${esc(text)}</p>` : ''}<small class="hp-t">${timeAgo(x.at)}</small></article>`;
+}
+function renderHome() {
+  const box = $('#homeBody'); if (!box) return;
+  const loggedIn = accOn() && ACC.tok && ACC.me;
+  let posts = homeLocalPosts().concat(loggedIn ? (ACC.feed || []) : []).sort((a, b) => b.at - a.at);
+  if (posts.length < 4) { const s = homeSamplePosts(); s.forEach(x => { x._first = posts.length; }); posts = posts.concat(s); }
+  HOME.posts = posts;
+  const sug = loggedIn ? (SRCH.sug || []).filter(c => !c.isFollowing).slice(0, 10) : [];
+  const parts = posts.map((x, i) => homePostHTML(x, i));
+  if (sug.length && parts.length > 1) parts.splice(Math.min(2, parts.length), 0, `<div class="sg-wrap hp-sgw"><div class="sr-head"><b>${hx('Suggested for you', 'Aapke liye suggestions')}</b><button class="kin-link" data-sr-search>${hx('See all', 'Sab dekho')}</button></div><div class="sg-strip">${sug.map(srchSugCard).join('')}</div></div>`);
+  if (accOn() && !loggedIn) parts.splice(Math.min(1, parts.length), 0, `<div class="hp-join"><b>${hx('Follow your family on DynastyVault', 'DynastyVault pe apni family ko follow karo')}</b><p>${hx('Make a free account to see your relatives’ posts here and share yours.', 'Free account banao — rishtedaaron ki posts yahan dikhengi aur aap apni share kar paoge.')}</p><button class="btn-gold sm" data-ac-auth="signup">${hx('Create account', 'Account banao')}</button></div>`);
+  box.innerHTML = `${homeStoriesHTML()}<div class="hp-list">${parts.join('')}</div>`;
+  if (loggedIn && !ACC.feed && !ACC.loading) accLoadFeed().then(() => { if (dash.tab === 'home') renderHome(); });
+  if (loggedIn && SRCH.sug == null) srchLoadSug().then(() => { if (dash.tab === 'home') renderHome(); });
+  if (loggedIn && SRCH.ring == null) srchRingLoad().then(() => { if (dash.tab === 'home') renderHome(); });
+}
+/* --- your profile from this phone, when you have no account yet (or no server) --- */
+function openLocalProfile(tab) {
+  const v = ownVault() || V(); if (!v) return; const self = v.people[v.self] || {};
+  const prof = netProfFromPayload(dynPayload(v), localUn(v));
+  const vp = (v.feed || []).slice(0, 15); prof.posts.forEach((x, i) => { if (vp[i] && vp[i].photo) x.ph = vp[i].photo; });
+  Object.assign(prof, { id:'acc_' + prof.h, kind:'acct', un:prof.h, local:true, owner:true, open:true, hasFam:true, vis:'private', fol:0, fing:0, views:0,
+    person:{ name:self.name || v.name, ph:self.avatar || '', bio:v.motto ? v.motto.replace(/^[“"']+|[”"']+$/g, '') : '', city:String(v.region || '').split(',')[0], famName:v.name } });
+  delete dynTreeCache[prof.id]; NET.cache['acc:' + prof.h] = prof; dynStopVoice(); dynUI.id = prof.id; dynUI.list = null; dynUI.igPost = null; dynUI.igTab = tab || 'grid';
+  renderDynModal(); openModal('dynModal'); const sc = $('#dynModal .modal-panel'); if (sc) sc.scrollTop = 0;
+}
+/* --- the ‹ back bar on feature pages --- */
+function igPageBar() {
+  const bar = $('#igPage'); if (!bar) return;
+  const id = dash.tab; const t = DASH_TABS.find(x => x.id === id);
+  const show = isSocial() && document.body.classList.contains('dash-on') && !['home', 'explore'].includes(id);
+  bar.hidden = !show; if (!show) return;
+  bar.innerHTML = `<button class="ig-back" data-ign="home" aria-label="${esc(hx('Back to home', 'Home pe wapas'))}">‹</button><b>${id === 'plans' ? hx('Plans', 'Plans') : t ? esc(hx(t.en, t.hn)) : ''}</b><button class="ig-back" data-ign="create" aria-label="${esc(hx('Create', 'Banao'))}">＋</button>`;
+}
+function homeInit() {
+  const hb = $('#homeHub'); if (!hb) return;
+  hb.addEventListener('click', e => {
+    const t = e.target.closest('[data-hs],[data-hs-local],[data-home-me],[data-hp-share],[data-hp-like],[data-ig-like]'); if (!t) return;
+    if (t.dataset.hs === 'mine') { igOpenCreate('story'); return; }
+    if (t.dataset.hsLocal != null) { const v = ownVault() || V(); openStories(activeStories(v), +t.dataset.hsLocal); return; }
+    if (t.hasAttribute('data-home-me')) { igNavGo('me'); return; }
+    if (t.dataset.hpShare != null) { const x = HOME.posts[+t.dataset.hpShare]; if (x) shareWhatsApp(`${x.who.name}: “${trunc(x.text || '', 200)}” — DynastyVault 👑`); return; }
+    const like = t.hasAttribute('data-ig-like') ? t : t.closest('.hp').querySelector('[data-ig-like]');
+    if (t.hasAttribute('data-hp-like')) { if (e.detail < 2) return; const h = t.querySelector('.hp-heart'); h.classList.remove('pop'); void h.offsetWidth; h.classList.add('pop'); if (like.classList.contains('on')) return; }
+    like.classList.toggle('on'); like.textContent = like.classList.contains('on') ? '♥' : '♡'; if (like.classList.contains('on')) srchBurst(like);
+  });
+  document.addEventListener('click', e => { const o = e.target.closest('[data-dyn-open]'); if (!o || o.closest('#arena') || o.closest('#dynModal')) return; e.preventDefault(); openDyn(o.dataset.dynOpen); });
+  const pb = $('#igPage'); if (pb) pb.addEventListener('click', e => { const b = e.target.closest('[data-ign]'); if (b) igNavGo(b.dataset.ign, b); });
 }
 
 /* ---------- 🌳 Dynasty-Canvas-style tree inside dynasty profiles ---------- */
@@ -14269,7 +14399,7 @@ setTimeout(async () => {
     if (live !== HAS_CLOUD) { HAS_CLOUD = live; setRoyalFeatures(); try { renderPlans(); renderAddons(); updatePrices(true); } catch (e) { /* views refresh later */ } }
   } catch (e) { /* server asleep or offline — keep the last known state */ }
 }, 900);
-if (/[?&]dvtest=1/.test(location.search)) window.__dv = { get state() { return state; }, save, saveNow, startDemo, openTutorial, NET, FILM, ACC, SRCH, openSearch, IGN, igOpenCreate, igOpenActivity, dynUI, dynTreeVault, renderFilm, filmPoll, openPerson };   // test hook, only with ?dvtest=1
+if (/[?&]dvtest=1/.test(location.search)) window.__dv = { get state() { return state; }, save, saveNow, startDemo, openTutorial, NET, FILM, ACC, SRCH, openSearch, IGN, igOpenCreate, igOpenActivity, openLocalProfile, HOME, dynUI, dynTreeVault, renderFilm, filmPoll, openPerson };   // test hook, only with ?dvtest=1
 
 
 function toast(msg, type = 'info', ms = 3200) {
