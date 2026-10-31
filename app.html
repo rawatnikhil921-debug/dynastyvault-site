@@ -14049,7 +14049,7 @@ const RP_LOCKED = true;   // Nabu: AI reunion portrait stays locked until the Ge
 function rpHTML(v, n) {
   const royal = isRoyal();
   let btn;
-  if (RP_LOCKED) btn = `<button class="btn-gold w-full btn-wrap" id="rpLocked">✨ ${hx('Generate portrait', 'Portrait banao')}</button>
+  if (RP_LOCKED) btn = `<button class="btn-gold w-full btn-wrap rp-locked" id="rpLocked" aria-disabled="true">🔒 ${hx('Generate portrait', 'Portrait banao')}</button>
       <label class="btn-ghost w-full btn-wrap mt-2 gm-up" style="cursor:pointer;justify-content:center"><input type="file" id="gmFile" accept="image/*" class="hidden">📁 ${hx('Upload a family photo', 'Family photo upload karo')}</label>
       <button class="btn-ghost w-full btn-wrap mt-2" data-gm-collage-go>🧩 ${hx('Make the free Family Collage', 'Free Family Collage banao')}</button>`;
   else if (!royal) btn = `<button class="btn-gold w-full btn-wrap" id="rpBuy">🔒 ${hx('Generate portrait', 'Portrait banao')}</button>
