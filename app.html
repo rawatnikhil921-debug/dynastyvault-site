@@ -2647,6 +2647,59 @@ html[data-theme]:not([data-theme="social"]) .rq-b{background:rgba(255,255,255,.0
 .kf-row>div{min-width:0;flex:1}.kf-row b{display:block;font-size:14px}.kf-row small{display:block;font-size:12px;color:var(--muted);line-height:1.35}.kf-row em{font-style:normal;color:var(--ink);font-weight:700}
 .kf-go{flex:none;font-size:13px;font-weight:700;padding:7px 12px;border-radius:9px;background:#3B8BFF;color:#fff}
 .kf-note{font-size:11.5px;color:var(--muted);margin-top:8px}
+
+/* ===== v74: Aaj ka game — This or That + 60-second quiz ===== */
+.pl{position:relative;overflow:hidden;padding:14px 16px 12px;border-radius:16px;background:var(--s1,#121212);border:1px solid var(--line,#262626);color:var(--ink)}
+.pl::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:linear-gradient(90deg,#FFB627,#FF4F8B,#7B5CFF)}
+.pl-top{display:flex;align-items:center;gap:8px}.pl-top span{font-size:18px}.pl-top b{font-size:15px}
+.pl-st{margin-left:auto;font-size:12.5px!important;font-weight:800;padding:.15rem .55rem;border-radius:999px;background:rgba(255,79,139,.16)}
+.pl-poll{margin-top:10px}.pl-poll small{font-size:12px;color:var(--muted);font-weight:600}
+.pl-q{margin:2px 0 10px;font-size:18px;line-height:1.25;font-weight:800;letter-spacing:-.01em}
+.pl-opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.pl-o{position:relative;overflow:hidden;display:flex;align-items:center;gap:8px;min-height:52px;padding:8px 12px;border-radius:14px;border:1.5px solid #363636;background:#1a1a1a;color:var(--ink);font-weight:700;font-size:14px;text-align:left;cursor:pointer;transition:transform .12s,border-color .2s}
+.pl-o:active{transform:scale(.97)}.pl-o i{font-style:normal;font-size:22px;position:relative;z-index:1}.pl-o span{position:relative;z-index:1;flex:1;min-width:0;line-height:1.2}
+.pl-o em{position:relative;z-index:1;font-style:normal;font-weight:800;font-size:15px}
+.pl-o s{position:absolute;inset:0 auto 0 0;background:rgba(255,255,255,.07);transition:width .7s cubic-bezier(.2,.8,.2,1);text-decoration:none}
+.pl-o.shown{cursor:default;display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;column-gap:6px;row-gap:0;padding:8px 12px}.pl-o.shown em{grid-column:1/3;grid-row:1;font-size:20px;line-height:1.1}.pl-o.shown i{grid-row:2;font-size:16px}.pl-o.shown span{grid-row:2;font-size:13px;overflow-wrap:anywhere}.pl-o.on{border-color:transparent;background:linear-gradient(#1a1a1a,#1a1a1a) padding-box,linear-gradient(90deg,#FFB627,#FF4F8B,#7B5CFF) border-box}
+.pl-o.on s{background:linear-gradient(90deg,rgba(255,182,39,.28),rgba(255,79,139,.28),rgba(123,92,255,.28))}
+.pl-ask{margin-top:8px;border:0;background:none;color:#3B8BFF;font-weight:700;font-size:13px;padding:4px 0;cursor:pointer}
+.pl-quiz{display:flex;align-items:center;gap:12px;margin-top:12px;padding-top:12px;border-top:1px solid var(--line,#262626)}
+.pl-qi{width:42px;height:42px;flex:none;border-radius:12px;display:grid;place-items:center;font-size:21px;background:linear-gradient(135deg,#7B5CFF,#FF4F8B)}
+.pl-quiz b{display:block;font-size:14px}.pl-quiz small{display:block;font-size:12px;color:var(--muted)}
+.pl-go{flex:none;height:34px;padding:0 18px;border-radius:9px;border:0;background:#3B8BFF;color:#fff;font-weight:800;font-size:13.5px;cursor:pointer}
+.pl-go.ghost{background:#262626;color:var(--ink)}
+html[data-theme]:not([data-theme="social"]) .pl-o{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.12)}
+/* quiz sheet */
+body.pls-on{overflow:hidden}
+.pls{position:fixed;inset:0;z-index:200;display:flex;flex-direction:column;padding:max(12px,env(safe-area-inset-top)) 16px max(18px,env(safe-area-inset-bottom));color:#fff;
+  background:radial-gradient(120% 80% at 0% 0%,#7B5CFF 0%,transparent 55%),radial-gradient(120% 80% at 100% 100%,#FF4F8B 0%,transparent 55%),#140d24;animation:plsIn .28s ease-out}
+.pls[hidden]{display:none}
+@keyframes plsIn{from{opacity:0;transform:scale(.98)}to{opacity:1;transform:none}}
+.pls-bars{display:flex;gap:4px;max-width:520px;width:100%;margin:0 auto}
+.pls-bars i{flex:1;height:3px;border-radius:3px;background:rgba(255,255,255,.3);overflow:hidden}.pls-bars i b{display:block;height:100%;width:0;background:#fff}
+.pls-bars i.done b{width:100%}.pls-bars i.now:not(.done) b{width:0;animation:plsBar 10s linear forwards}
+@keyframes plsBar{to{width:100%}}
+.pls-x{position:absolute;top:max(22px,calc(env(safe-area-inset-top) + 10px));right:14px;width:40px;height:40px;border-radius:50%;border:0;background:rgba(0,0,0,.25);color:#fff;font-size:18px;cursor:pointer}
+.pls-body,.pls-end{flex:1;display:flex;flex-direction:column;justify-content:center;max-width:520px;width:100%;margin:0 auto}
+.pls-tag{align-self:flex-start;font-size:12.5px;font-weight:800;padding:5px 11px;border-radius:999px;background:rgba(255,255,255,.16)}
+.pls-q{margin:14px 0 22px;font-size:clamp(22px,6vw,30px);line-height:1.2;font-weight:800;letter-spacing:-.02em}
+.pls-opts{display:grid;gap:10px}
+.pls-o{min-height:56px;padding:12px 16px;border-radius:16px;border:0;background:rgba(255,255,255,.95);color:#111;font-weight:800;font-size:16px;text-align:left;cursor:pointer;transition:transform .12s,background .2s,color .2s}
+.pls-o:active{transform:scale(.98)}.pls-o:focus-visible{outline:3px solid #FFB627;outline-offset:2px}
+.pls-o.right{background:#22C55E;color:#fff}.pls-o.wrong{background:#EF4444;color:#fff;animation:plsShake .35s}
+.pls-o:disabled:not(.right):not(.wrong){opacity:.55}
+@keyframes plsShake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.pls-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:20px;font-size:14px;font-weight:700}
+.pls-late{font-weight:800;color:#FFB627}
+.pls-time{position:relative;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:rgba(0,0,0,.25)}
+.pls-time i{position:absolute;inset:0;border-radius:50%;background:conic-gradient(#fff calc(var(--p) * 360deg),transparent 0);-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 4px),#000 calc(100% - 3px));mask:radial-gradient(farthest-side,transparent calc(100% - 4px),#000 calc(100% - 3px));transition:background .3s}
+.pls-time b{font-size:16px}.pls-time.low i{background:conic-gradient(#FFB627 calc(var(--p) * 360deg),transparent 0)}
+.pls-end{align-items:center;text-align:center}
+.pls-score{display:flex;align-items:baseline;gap:2px}.pls-score b{font-size:96px;line-height:1;font-weight:900;letter-spacing:-.04em}.pls-score span{font-size:32px;font-weight:800;opacity:.75}
+.pls-end h3{margin:10px 0 6px;font-size:26px;font-weight:800}.pls-end p{margin:0 0 24px;max-width:340px;opacity:.85;line-height:1.45}
+.pls-cta{width:100%;max-width:340px;height:52px;border-radius:14px;border:0;background:#fff;color:#111;font-weight:800;font-size:16px;cursor:pointer}
+.pls-sec{margin-top:10px;width:100%;max-width:340px;height:46px;border-radius:14px;border:1px solid rgba(255,255,255,.4);background:none;color:#fff;font-weight:700;cursor:pointer}
+@media (prefers-reduced-motion:reduce){.pls,.pls-o.wrong{animation:none}.pls-bars i.now:not(.done) b{animation:none;width:50%}}
 </style>
 </head>
 <body>
@@ -9028,62 +9081,183 @@ function homeInit() {
   const pb = $('#igPage'); if (pb) pb.addEventListener('click', e => { const b = e.target.closest('[data-ign]'); if (b) igNavGo(b.dataset.ign, b); });
 }
 
-/* ---------- 🌅 Roots: daily question + 🧬 Kin Finder (the parts no photo app has) ---------- */
-const RQ = [
-  ['What was your very first job, and how much did it pay?', 'Aapki pehli naukri kya thi, aur kitni tankhwah milti thi?'],
-  ['What did your childhood home look like?', 'Aapka bachpan ka ghar kaisa dikhta tha?'],
-  ['How did you and your partner first meet?', 'Aap aur aapke jeevan-saathi pehli baar kaise mile?'],
-  ['What is the one dish only you can make the family way?', 'Kaunsi dish sirf aap ghar wale tareeke se bana sakte ho?'],
-  ['What was your favourite game as a child?', 'Bachpan mein aapka pasandida khel kaunsa tha?'],
-  ['Which festival do you remember most from childhood, and why?', 'Bachpan ka kaunsa tyohaar sabse zyada yaad hai, aur kyun?'],
-  ['What was school like for you?', 'Aapka school kaisa tha?'],
-  ['Who was your best friend growing up?', 'Bade hote hue aapka sabse accha dost kaun tha?'],
-  ['What did your parents do for a living?', 'Aapke maa-baap kya kaam karte the?'],
-  ['What is the bravest thing you have ever done?', 'Aapne zindagi mein sabse himmat wala kaam kya kiya?'],
-  ['What song reminds you of your youth?', 'Kaunsa gaana aapko jawani ki yaad dilata hai?'],
-  ['What was the first film you saw in a cinema?', 'Cinema mein dekhi aapki pehli film kaunsi thi?'],
-  ['How did your family celebrate weddings back then?', 'Us zamane mein shaadiyan kaise manayi jaati thi?'],
-  ['What was the biggest change you saw in your lifetime?', 'Aapne apni zindagi mein sabse bada badlav kya dekha?'],
-  ['What advice would you give your 20-year-old self?', 'Apne 20 saal ke roop ko aap kya salah doge?'],
-  ['Where did our family come from, as far back as you know?', 'Jitna aap jaante ho, hamari family kahan se aayi thi?'],
-  ['What did a normal day look like when you were ten?', 'Jab aap das saal ke the, ek aam din kaisa hota tha?'],
-  ['What was the first thing you ever bought with your own money?', 'Apne paise se khareedi pehli cheez kya thi?'],
-  ['Which grandparent were you closest to, and why?', 'Aap kis dada-dadi ya nana-nani ke sabse kareeb the, aur kyun?'],
-  ['What is a saying your mother or father always used?', 'Aapki maa ya papa ka koi takiya-kalaam kya tha?'],
-  ['What did you want to become when you grew up?', 'Bade hoke aap kya banna chahte the?'],
-  ['What was your proudest moment?', 'Aapka sabse garv wala pal kaunsa tha?'],
-  ['How did people send news to family far away?', 'Door rehne wali family ko khabar kaise bhejte the?'],
-  ['What was the hardest time our family went through?', 'Hamari family ka sabse mushkil waqt kaunsa tha?'],
-  ['What is a family tradition you want us to keep?', 'Family ki kaunsi parampara aap chahte ho ki hum zinda rakhein?'],
-  ['What did you eat on special days?', 'Khaas dinon pe kya khaana banta tha?'],
-  ['Tell the story behind your name.', 'Apne naam ke peeche ki kahani batao.'],
-  ['What was the first trip you ever took?', 'Aapki pehli yatra kaunsi thi?'],
-  ['What made you laugh the most as a child?', 'Bachpan mein aapko sabse zyada hasi kis baat pe aati thi?'],
-  ['What do you want your great-grandchildren to know about you?', 'Aap chahte ho ki aapke parpote aapke baare mein kya jaanein?']
+/* ---------- 🎮 Aaj ka game: "This or That" poll + a 60-second family & filmy quiz ---------- */
+const PLAY_POLLS = [
+  ['Sunday plan?', 'Sunday ka plan?', ['🛋️', 'Rest at home', 'Ghar pe aaram'], ['🚗', 'Family outing', 'Family outing']],
+  ['Pick one', 'Kya chahiye?', ['🫖', 'Chai', 'Chai'], ['☕', 'Coffee', 'Coffee']],
+  ['Best part of a wedding?', 'Shaadi mein sabse best?', ['💃', 'Dance floor', 'Dance floor'], ['🍛', 'The food', 'Khana']],
+  ['Rainy day snack?', 'Baarish mein kya?', ['🥟', 'Pakode', 'Pakode'], ['🍜', 'Maggi', 'Maggi']],
+  ['Holiday?', 'Chhutti mein kahan?', ['🏔️', 'Mountains', 'Pahad'], ['🏖️', 'Beach', 'Beach']],
+  ['Breakfast?', 'Nashta?', ['🫓', 'Aloo paratha', 'Aloo paratha'], ['🥣', 'Poha', 'Poha']],
+  ['Family WhatsApp group is mostly…', 'Family WhatsApp group mein zyada…', ['😂', 'Memes', 'Memes'], ['🌸', 'Good morning photos', 'Good morning photos']],
+  ['Golgappe?', 'Golgappe?', ['🌶️', 'Extra spicy', 'Teekhe'], ['🍯', 'Sweet chutney', 'Meethe']],
+  ['Travel by?', 'Safar?', ['🚆', 'Train', 'Train'], ['✈️', 'Flight', 'Flight']],
+  ['Songs?', 'Gaane?', ['📻', 'Old classics', 'Purane gaane'], ['🎧', 'New hits', 'Naye gaane']],
+  ['Dinner tonight?', 'Aaj raat ka khana?', ['🍕', 'Order in', 'Bahar se order'], ['🍲', 'Home food', 'Ghar ka khana']],
+  ['Summer?', 'Garmi mein?', ['🍦', 'Ice cream', 'Ice cream'], ['🥭', 'Mangoes', 'Aam'], ],
+  ['You are a…', 'Aap ho…', ['🌅', 'Early riser', 'Jaldi uthne wale'], ['🌙', 'Night owl', 'Der tak jaagne wale']],
+  ['Favourite festival?', 'Pasandida tyohaar?', ['🎨', 'Holi', 'Holi'], ['🪔', 'Diwali', 'Diwali']],
+  ['Shopping?', 'Shopping?', ['🛍️', 'The market', 'Market'], ['📦', 'Online', 'Online']],
+  ['Best gift?', 'Gift mein kya?', ['💵', 'Cash', 'Cash'], ['🎁', 'A surprise', 'Surprise gift']],
+  ['Paratha with?', 'Paratha ke saath?', ['🧈', 'Butter', 'Makkhan'], ['🥛', 'Curd', 'Dahi']],
+  ['Real boss of the house?', 'Ghar ka asli boss?', ['👩', 'Mummy', 'Mummy'], ['👨', 'Papa', 'Papa']],
+  ['Weekend?', 'Weekend pe?', ['📺', 'Web series', 'Web series'], ['🎬', 'A movie', 'Movie']],
+  ['Sweet?', 'Mithai?', ['🟠', 'Jalebi', 'Jalebi'], ['⚪', 'Rasgulla', 'Rasgulla']],
+  ['In photos?', 'Photo mein?', ['🤳', 'Selfie', 'Selfie'], ['👨‍👩‍👧', 'Group photo', 'Group photo']],
+  ['Childhood game?', 'Bachpan ka game?', ['🙈', 'Hide and seek', 'Chhupan-chhupai'], ['🎲', 'Ludo', 'Ludo']],
+  ['Tea-time snack?', 'Chai ke saath?', ['🍪', 'Biscuits', 'Biscuit'], ['🥨', 'Namkeen', 'Namkeen']],
+  ['Wedding?', 'Shaadi kaisi?', ['🎉', 'Big and loud', 'Badi dhoom-dhaam'], ['🌿', 'Small and simple', 'Simple']],
+  ['Sport?', 'Khel?', ['🏏', 'Cricket', 'Cricket'], ['⚽', 'Football', 'Football']],
+  ['Who calls more?', 'Phone zyada kaun karta hai?', ['👵', 'Nani/Dadi', 'Nani/Dadi'], ['👩', 'Mummy', 'Mummy']],
+  ['Biryani or…', 'Biryani ya…', ['🍗', 'Biryani', 'Biryani'], ['🫕', 'Rajma chawal', 'Rajma chawal']],
+  ['Picnic?', 'Picnic?', ['🌳', 'A park', 'Park'], ['🏬', 'A mall', 'Mall']],
+  ['Your family’s style?', 'Aapki family ka style?', ['🔊', 'Loud and fun', 'Shor-sharaba'], ['🤫', 'Calm and quiet', 'Shaant']],
+  ['Best family time?', 'Family ka best time?', ['🍽️', 'Dinner together', 'Saath mein dinner'], ['🧳', 'Trips together', 'Saath mein trip']]
 ];
-const RQ_DAY0 = Date.UTC(2026, 9, 1);
-const rqDay = () => Math.floor((Date.now() + 5.5 * 3600000 - RQ_DAY0) / 86400000);
-const rqToday = () => RQ[((rqDay() % RQ.length) + RQ.length) % RQ.length];
-function rqState() { state.rq = state.rq || { streak:0, last:-9, done:{} }; return state.rq; }
-function rqStreak() { const r = rqState(); return r.last >= rqDay() - 1 ? r.streak : 0; }
-function rqMarkDone() {
-  const r = rqState(); const d = rqDay(); if (r.done[d]) return;
-  r.streak = r.last === d - 1 ? r.streak + 1 : 1; r.last = d; r.done[d] = 1; save();
-  toast(hx(`🔥 ${r.streak}-day Roots streak!`, `🔥 ${r.streak} din ki Roots streak!`), 'info', 2600);
+const PLAY_FILMY = [   // [question en, question hn, answer, wrong1, wrong2, wrong3]
+  ['In “Kabhi Khushi Kabhie Gham”, what is Amitabh Bachchan’s character called?', '“Kabhi Khushi Kabhie Gham” mein Amitabh Bachchan ka naam kya tha?', 'Yashvardhan Raichand', 'Raj Malhotra', 'Baldev Singh', 'Vijay Dinanath Chauhan'],
+  ['In “Baghban”, how many sons do Raj and Pooja have?', '“Baghban” mein Raj aur Pooja ke kitne bete the?', '4', '2', '3', '5'],
+  ['Who says “Ja Simran ja, jee le apni zindagi”?', '“Ja Simran ja, jee le apni zindagi” kisne kaha?', 'Baldev Singh (her father)', 'Raj', 'Simran’s mother', 'Kuljeet'],
+  ['What is the dog called in “Hum Aapke Hain Koun”?', '“Hum Aapke Hain Koun” mein kutte ka naam?', 'Tuffy', 'Moti', 'Sheru', 'Bruno'],
+  ['Whom does Aamir Khan play in “Dangal”?', '“Dangal” mein Aamir Khan ka role?', 'Mahavir Singh Phogat', 'Milkha Singh', 'Kabir Khan', 'Bhuvan'],
+  ['In “3 Idiots”, what is Rancho’s real name?', '“3 Idiots” mein Rancho ka asli naam?', 'Phunsukh Wangdu', 'Ranchoddas Chanchad', 'Chatur Ramalingam', 'Raju Rastogi'],
+  ['In “Kapoor & Sons”, what is Dadu’s last wish?', '“Kapoor & Sons” mein Dadu ki aakhri wish?', 'A family photo', 'A trip to Goa', 'A new house', 'A grand birthday party'],
+  ['In “Piku”, what is Bhaskor Banerjee always worried about?', '“Piku” mein Bhaskor Banerjee ko kis baat ki fikar rehti hai?', 'His constipation', 'His knees', 'His sleep', 'His money'],
+  ['In “Taare Zameen Par”, what does Ishaan have?', '“Taare Zameen Par” mein Ishaan ko kya hai?', 'Dyslexia', 'Asthma', 'Stammering', 'Colour blindness'],
+  ['Which village is “Panchayat” set in?', '“Panchayat” kis gaon mein hai?', 'Phulera', 'Mirzapur', 'Rampur', 'Basti'],
+  ['What are the two Mishra brothers called in “Gullak”?', '“Gullak” mein Mishra bhaiyon ke naam?', 'Annu and Aman', 'Ram and Shyam', 'Bunty and Babli', 'Raju and Pappu'],
+  ['What is Basanti’s mare called in “Sholay”?', '“Sholay” mein Basanti ki ghodi ka naam?', 'Dhanno', 'Rani', 'Bijli', 'Chandni'],
+  ['What is Shah Rukh Khan’s character called in “Kal Ho Naa Ho”?', '“Kal Ho Naa Ho” mein Shah Rukh ka naam?', 'Aman Mathur', 'Rahul Raichand', 'Raj Malhotra', 'Mohan Bhargava'],
+  ['What is Poo’s real name in “Kabhi Khushi Kabhie Gham”?', '“K3G” mein Poo ka asli naam?', 'Pooja', 'Poonam', 'Puja Rani', 'Pallavi'],
+  ['Who plays Babu Bhaiya in “Hera Pheri”?', '“Hera Pheri” mein Babu Bhaiya kaun hai?', 'Paresh Rawal', 'Akshay Kumar', 'Suniel Shetty', 'Om Puri'],
+  ['Where do the friends go in “Zindagi Na Milegi Dobara”?', '“Zindagi Na Milegi Dobara” mein dost trip pe kahan gaye?', 'Spain', 'Italy', 'Switzerland', 'Greece'],
+  ['Which subject does Jeetu Bhaiya teach in “Kota Factory”?', '“Kota Factory” mein Jeetu Bhaiya kya padhate hain?', 'Physics', 'Chemistry', 'Maths', 'Biology'],
+  ['In “Bajrangi Bhaijaan”, where is Munni from?', '“Bajrangi Bhaijaan” mein Munni kahan se hai?', 'Pakistan', 'Nepal', 'Bangladesh', 'Afghanistan'],
+  ['What is Shah Rukh Khan’s character called in “Swades”?', '“Swades” mein Shah Rukh ka naam?', 'Mohan Bhargava', 'Aman Mathur', 'Kabir Khan', 'Rizwan Khan'],
+  ['What is Kaleen Bhaiya’s real name in “Mirzapur”?', '“Mirzapur” mein Kaleen Bhaiya ka asli naam?', 'Akhandanand Tripathi', 'Munna Tripathi', 'Guddu Pandit', 'Ramakant Pandit'],
+  ['In “Gadar”, Tara Singh crosses the border for…', '“Gadar” mein Tara Singh kiske liye Pakistan jaata hai?', 'Sakeena', 'Simran', 'Basanti', 'Shabnam'],
+  ['In “Queen”, where does Rani go first on her solo honeymoon?', '“Queen” mein Rani akeli honeymoon pe pehle kahan jaati hai?', 'Paris', 'London', 'Rome', 'Dubai'],
+  ['Who plays Circuit in “Munna Bhai M.B.B.S.”?', '“Munna Bhai M.B.B.S.” mein Circuit kaun hai?', 'Arshad Warsi', 'Boman Irani', 'Sanjay Dutt', 'Rajpal Yadav'],
+  ['Which sport does Kabir Khan coach in “Chak De! India”?', '“Chak De! India” mein Kabir Khan kis khel ke coach hain?', 'Hockey', 'Cricket', 'Football', 'Kabaddi']
+];
+const PLAY = { poll:null, busy:false, q:null };
+const PLAY_DAY0 = Date.UTC(2026, 9, 1);
+const playDay = () => Math.floor((Date.now() + 5.5 * 3600000 - PLAY_DAY0) / 86400000);
+const playPick = (arr, d) => arr[((d % arr.length) + arr.length) % arr.length];
+function playRng(seed) { let a = seed >>> 0; return () => { a = (a + 0x6D2B79F5) >>> 0; let t = a; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+function playState() {
+  state.play = state.play || { streak:0, last:-9, poll:null, quiz:null, id:'' };
+  if (!state.play.id) state.play.id = Array.from(crypto.getRandomValues(new Uint8Array(12)), b => b.toString(16).padStart(2, '0')).join('');
+  return state.play;
 }
-function rqCardHTML() {
-  const q = rqToday(); const r = rqState(); const done = !!r.done[rqDay()]; const st = rqStreak();
-  return `<div class="rq${done ? ' done' : ''}"><div class="rq-top"><span class="rq-sun" aria-hidden="true">🌅</span><span class="rq-k">${hx('Today’s Roots question', 'Aaj ka Roots sawaal')}</span>${st ? `<span class="rq-st">🔥 ${st}</span>` : ''}</div>
-    <p class="rq-q">${esc(hx(q[0], q[1]))}</p>
-    ${done ? `<p class="rq-ok">✓ ${hx('Answered today — come back tomorrow for a new question.', 'Aaj ka jawab ho gaya — kal naya sawaal aayega.')}</p>` : ''}
-    <div class="rq-btns"><button class="rq-b pri" data-rq="voice">🎙️ ${hx('Record the answer', 'Jawab record karo')}</button><button class="rq-b" data-rq="write">✍️ ${hx('Write', 'Likho')}</button><button class="rq-b" data-rq="ask" aria-label="${esc(hx('Ask family on WhatsApp', 'WhatsApp pe family se poocho'))}">📤 ${hx('Ask family', 'Family se poocho')}</button></div></div>`;
+function playStreak() { const p = playState(); return p.last >= playDay() - 1 ? p.streak : 0; }
+function playMark() {   // a day counts once you vote or play the quiz
+  const p = playState(); const d = playDay(); if (p.last === d) return;
+  p.streak = p.last === d - 1 ? p.streak + 1 : 1; p.last = d; save();
+  if (p.streak > 1) toast(hx(`🔥 ${p.streak}-day game streak!`, `🔥 ${p.streak} din ki game streak!`), 'info', 2400);
 }
-function rqGo(kind) {
-  const q = rqToday(); const text = hx(q[0], q[1]);
-  if (kind === 'ask') { shareWhatsApp(isHn() ? `🌅 Aaj ka sawaal — ${text}\nJawab voice note mein bhejo, main hamare family tree mein save karunga 🌳` : `🌅 Today’s question for our family — ${text}\nReply with a voice note and I’ll save it in our family tree 🌳`); return; }
-  if (!ownVault() && isDemo(V())) { openWizard('form'); toast(hx('Make your family tree first — then save answers in it.', 'Pehle family tree banao — phir jawab usme save karo.'), 'info'); return; }
-  feedUI.drafts.ig = { text:`🌅 ${text}\n\n`, about:'', as:defaultAuthor(ownVault() || V()), photo:null, audio:null, secs:0, kind:kind === 'voice' ? 'voice' : 'memory', vis:'family', bg:'gold' };
-  state.rqPending = rqDay(); igOpenCreate(kind === 'voice' ? 'voice' : 'memory');
+function playCardHTML() {
+  const d = playDay(); const p = playState(); const P = playPick(PLAY_POLLS, d); const st = playStreak();
+  const mine = p.poll && p.poll.d === d ? p.poll.c : null; const cnt = PLAY.poll && PLAY.poll.d === d ? PLAY.poll : null;
+  const tot = cnt ? cnt.a + cnt.b : 0; const pct = c => tot ? Math.round((c ? cnt.b : cnt.a) / tot * 100) : (mine === c ? 100 : 0);
+  const opt = c => { const o = P[2 + c]; const on = mine === c; return `<button class="pl-o${mine != null ? ' shown' : ''}${on ? ' on' : ''}" data-pl-v="${c}" ${mine != null ? 'aria-pressed="' + on + '"' : ''}><i aria-hidden="true">${o[0]}</i><span>${esc(hx(o[1], o[2]))}</span>${mine != null ? `<em>${pct(c)}%</em><s style="width:${pct(c)}%"></s>` : ''}</button>`; };
+  const q = p.quiz && p.quiz.d === d ? p.quiz : null;
+  return `<div class="pl"><div class="pl-top"><span aria-hidden="true">🎮</span><b>${hx('Today’s game', 'Aaj ka game')}</b>${st ? `<span class="pl-st" title="${esc(hx('Days in a row', 'Lagatar din'))}">🔥 ${st}</span>` : ''}</div>
+    <div class="pl-poll"><small>${hx('This or That', 'This or That')}${mine != null && tot ? ` · ${tot.toLocaleString('en-IN')} ${hx(tot === 1 ? 'vote' : 'votes', 'votes')}` : ''}</small><p class="pl-q">${esc(hx(P[0], P[1]))}</p>
+      <div class="pl-opts">${opt(0)}${opt(1)}</div>
+      ${mine != null ? `<button class="pl-ask" data-pl-ask>📤 ${hx('Ask the family group', 'Family group se poocho')}</button>` : ''}</div>
+    <div class="pl-quiz"><span class="pl-qi" aria-hidden="true">🧠</span><div class="min-w-0 flex-1"><b>${hx('60-second quiz', '60 second quiz')}</b><small>${q ? hx(`Today’s score: ${q.s}/${q.n}`, `Aaj ka score: ${q.s}/${q.n}`) + (q.s === q.n ? ' 🏆' : '') : hx('5 questions · your family + filmy families', '5 sawaal · aapki family + filmy families')}</small></div>
+      ${q ? `<button class="pl-go ghost" data-pl-share>${hx('Challenge', 'Challenge')}</button>` : `<button class="pl-go" data-pl-quiz>${hx('Play', 'Khelo')}</button>`}</div></div>`;
+}
+async function playLoadPoll() {
+  if (!accOn() || PLAY.busy) return; PLAY.busy = true;
+  try { PLAY.poll = await accApi('/api/play/poll', null, ''); } catch (e) { /* offline is fine */ }
+  PLAY.busy = false;
+}
+async function playVote(c) {
+  const p = playState(); const d = playDay(); if (p.poll && p.poll.d === d) return;
+  p.poll = { d, c }; playMark(); save(); rootsPaint();
+  if (!accOn()) return;
+  try { PLAY.poll = await accApi('/api/play/vote', { d, c, id:p.id }, ''); } catch (e) { if (e.code === 'DAY') PLAY.poll = null; }
+  rootsPaint();
+}
+/* --- the quiz: full-screen, story-style bars, 10 seconds a question --- */
+function playFamQs(v, R) {   // "Who is Mohan's father?" — options are other names from the same tree
+  const g = lineageGraph(v); const ns = Object.values(g); const names = [...new Set(ns.map(n => n.p.name).filter(Boolean))]; const out = []; const seen = new Set();
+  const mk = (q, a, subj) => { if (seen.has(q)) return; const d = shuffle(names.filter(x => x !== a && x !== subj), R).slice(0, 3); if (d.length >= 2) { seen.add(q); out.push({ q, a, o:[a, ...d] }); } };
+  ns.forEach(n => {
+    const nm = n.p.name; if (!nm) return;
+    n.parents.forEach(pid => { const gd = genderOf(g[pid]); if (gd === 'm') mk(hx(`Who is ${nm}’s father?`, `${nm} ke papa kaun hain?`), g[pid].p.name, nm); else if (gd === 'f') mk(hx(`Who is ${nm}’s mother?`, `${nm} ki mummy kaun hain?`), g[pid].p.name, nm); });
+    if (n.spouse && !n.married) mk(hx(`Who is ${nm} married to?`, `${nm} ki shaadi kisse hui?`), g[n.spouse].p.name, nm);
+    [...new Set(n.parents.flatMap(pid => g[pid].parents))].forEach(pid => { const f = genderOf(g[pid]) === 'f'; mk(hx(`Who is ${nm}’s ${f ? 'grandmother' : 'grandfather'}?`, `${nm} ke ${f ? 'dadi/nani' : 'dada/nana'} kaun hain?`), g[pid].p.name, nm); });
+  });
+  return out;
+}
+function playQuestions() {
+  const d = playDay(); const R = playRng(d * 7919 + 17); const qs = [];
+  const v = ownVault(); let fam = [];
+  if (v && !isDemo(v)) { try { fam = shuffle(playFamQs(v, R), R); if (fam.length < 2) fam = fam.concat(shuffle(makeQuiz(v).filter(x => !/generation/i.test(x.q)), R)); fam = fam.slice(0, 2); } catch (e) { fam = []; } }
+  fam.forEach(x => qs.push({ q:x.q, a:x.a, o:shuffle(x.o, R), tag:'🌳 ' + hx('Your family', 'Aapki family') }));
+  shuffle(PLAY_FILMY, R).slice(0, 5 - qs.length).forEach(f => qs.push({ q:hx(f[0], f[1]), a:f[2], o:shuffle([f[2], f[3], f[4], f[5]], R), tag:'🎬 ' + hx('Filmy family', 'Filmy family') }));
+  return shuffle(qs, R);
+}
+function playSheet() {
+  let el = $('#playSheet'); if (el) return el;
+  el = document.createElement('div'); el.id = 'playSheet'; el.className = 'pls'; el.hidden = true; el.setAttribute('role', 'dialog'); el.setAttribute('aria-modal', 'true'); el.setAttribute('aria-label', hx('Quiz', 'Quiz'));
+  document.body.appendChild(el);
+  el.addEventListener('click', e => {
+    const t = e.target.closest('[data-pls-o],[data-pls-close],[data-pls-share],[data-pls-again]'); if (!t) return;
+    if (t.hasAttribute('data-pls-close')) playClose();
+    else if (t.hasAttribute('data-pls-share')) playShare();
+    else if (t.dataset.plsO != null) playAnswer(+t.dataset.plsO);
+  });
+  return el;
+}
+function playOpen() {
+  const el = playSheet(); PLAY.q = { qs:playQuestions(), i:0, s:0, locked:false, t:0, timer:null, next:null };
+  el.hidden = false; document.body.classList.add('pls-on'); playRender(); dvT('quiz_play');
+  setTimeout(() => { const b = el.querySelector('.pls-o'); if (b) b.focus(); }, 50);
+}
+function playClose() { const Q = PLAY.q; if (Q) { clearInterval(Q.timer); clearTimeout(Q.next); } const el = $('#playSheet'); if (el) el.hidden = true; document.body.classList.remove('pls-on'); rootsPaint(); }
+function playRender() {
+  const el = $('#playSheet'); const Q = PLAY.q; const n = Q.qs.length;
+  const bars = `<div class="pls-bars">${Q.qs.map((x, i) => `<i class="${i < Q.i ? 'done' : i === Q.i ? 'now' : ''}"><b></b></i>`).join('')}</div>`;
+  const close = `<button class="pls-x" data-pls-close aria-label="${esc(hx('Close', 'Band karo'))}">✕</button>`;
+  if (Q.i >= n) {
+    const s = Q.s; const title = s === n ? hx('Family legend! 🏆', 'Family legend! 🏆') : s >= n - 1 ? hx('So close! 🔥', 'Bas thoda sa! 🔥') : s >= 3 ? hx('Not bad at all 😎', 'Bura nahi 😎') : hx('Ask Dadi for help 😅', 'Dadi se help lo 😅');
+    el.innerHTML = `${bars}${close}<div class="pls-end"><div class="pls-score"><b>${s}</b><span>/${n}</span></div><h3>${title}</h3><p>${hx('Send it to the family group — who can beat your score today?', 'Family group mein bhejo — aaj aapka score kaun todega?')}</p>
+      <button class="pls-cta" data-pls-share>💬 ${hx('Challenge on WhatsApp', 'WhatsApp pe challenge karo')}</button><button class="pls-sec" data-pls-close>${hx('Done', 'Ho gaya')}</button></div>`;
+    const p = playState(); p.quiz = { d:playDay(), s, n }; playMark(); save();
+    if (s >= n - 1) setTimeout(() => { const sc = el.querySelector('.pls-score'); if (sc) srchBurst(sc); }, 150);
+    return;
+  }
+  const q = Q.qs[Q.i]; Q.locked = false; Q.t = 10;
+  el.innerHTML = `${bars}${close}<div class="pls-body"><span class="pls-tag">${esc(q.tag)}</span><p class="pls-q">${esc(q.q)}</p>
+    <div class="pls-opts">${q.o.map((o, i) => `<button class="pls-o" data-pls-o="${i}">${esc(o)}</button>`).join('')}</div>
+    <div class="pls-foot"><span class="pls-time" aria-live="off"><i style="--p:1"></i><b>10</b></span><span>${hx('Score', 'Score')} <b>${Q.s}</b></span></div></div>`;
+  clearInterval(Q.timer);
+  Q.timer = setInterval(() => {
+    Q.t--; const tb = el.querySelector('.pls-time'); if (tb) { tb.querySelector('b').textContent = Math.max(0, Q.t); tb.querySelector('i').style.setProperty('--p', Math.max(0, Q.t) / 10); tb.classList.toggle('low', Q.t <= 3); }
+    if (Q.t <= 0) playAnswer(-1);
+  }, 1000);
+}
+function playAnswer(i) {
+  const Q = PLAY.q; if (!Q || Q.locked) return; Q.locked = true; clearInterval(Q.timer);
+  const q = Q.qs[Q.i]; const right = i >= 0 && q.o[i] === q.a; if (right) Q.s++;
+  $$('#playSheet .pls-o').forEach((b, k) => { b.disabled = true; if (q.o[k] === q.a) b.classList.add('right'); else if (k === i) b.classList.add('wrong'); });
+  if (i < 0) { const f = $('#playSheet .pls-foot'); if (f) f.insertAdjacentHTML('afterbegin', `<span class="pls-late">⏰ ${hx('Time’s up!', 'Time khatam!')}</span>`); }
+  if (right) { const b = $$('#playSheet .pls-o')[i]; if (b) srchBurst(b); const sc = $('#playSheet .pls-foot > span:last-child b'); if (sc) sc.textContent = Q.s; }
+  const now = $('#playSheet .pls-bars .now'); if (now) now.classList.add('done');
+  Q.next = setTimeout(() => { Q.i++; playRender(); }, right ? 900 : 1500);
+}
+function playShare() {
+  const p = playState(); const q = p.quiz && p.quiz.d === playDay() ? p.quiz : null;
+  shareWhatsApp(q ? hx(`🧠 I scored ${q.s}/${q.n} on today’s DynastyVault quiz — family + filmy questions, 10 seconds each. Beat me! 🎬🌳`, `🧠 Maine aaj ke DynastyVault quiz mein ${q.s}/${q.n} score kiya — family + filmy sawaal, 10 second har ek. Mujhe hara ke dikhao! 🎬🌳`)
+    : hx('🎮 Today’s DynastyVault game — 5 quick family & filmy questions. Who in our family scores highest?', '🎮 Aaj ka DynastyVault game — 5 jaldi wale family aur filmy sawaal. Hamari family mein sabse zyada score kiska aayega?'));
+}
+function playAsk() {
+  const P = playPick(PLAY_POLLS, playDay());
+  shareWhatsApp(hx(`🎮 This or That — ${P[0]}\n${P[2][0]} ${P[2][1]}  or  ${P[3][0]} ${P[3][1]}?\nReply with your pick! 👇`, `🎮 This or That — ${P[1]}\n${P[2][0]} ${P[2][2]}  ya  ${P[3][0]} ${P[3][2]}?\nApna jawab bhejo! 👇`));
 }
 /* --- 🧬 Kin Finder --- */
 const KIN = { items:null, busy:false, at:0, err:'' };
@@ -9110,20 +9284,22 @@ function kinCardHTML() {
     <p class="kf-note">${hx('Same names can be a coincidence — open their tree and ask them before you assume.', 'Ek jaise naam sanyog bhi ho sakte hain — pehle unka tree dekho aur unse poocho.')}</p></div>`;
 }
 function rootsPaint() {
-  const html = rqCardHTML() + kinCardHTML();
+  const p = playState(); const voted = p.poll && p.poll.d === playDay();
+  if (voted && accOn() && !(PLAY.poll && PLAY.poll.d === playDay()) && !PLAY.busy) playLoadPoll().then(() => { if (PLAY.poll) rootsPaint(); });
+  const html = playCardHTML() + kinCardHTML();
   ['#rootsTree', '#rootsFeed'].forEach(sel => { const el = $(sel); if (!el) return; const show = isSocial() && (sel === '#rootsTree' ? dash.tab === 'canvas' : dash.tab === 'home'); el.hidden = !show; if (show) el.innerHTML = html; });
 }
 function rootsInit() {
   document.addEventListener('click', e => {
-    const t = e.target.closest('[data-rq],[data-kin],[data-kin-open]'); if (!t) return;
-    if (t.dataset.rq) { rqGo(t.dataset.rq); return; }
+    const t = e.target.closest('[data-pl-v],[data-pl-quiz],[data-pl-share],[data-pl-ask],[data-kin],[data-kin-open]'); if (!t) return;
+    if (t.dataset.plV != null) { playVote(+t.dataset.plV); return; }
+    if (t.hasAttribute('data-pl-quiz')) { playOpen(); return; }
+    if (t.hasAttribute('data-pl-share')) { playShare(); return; }
+    if (t.hasAttribute('data-pl-ask')) { playAsk(); return; }
     if (t.dataset.kin === 'add') { if (ownVault()) openAddAncestor(); return; }
     if (t.dataset.kinOpen) { dynUI.list = null; openPerson(t.dataset.kinOpen, 'tree'); }
   });
-  $('#igCreate').addEventListener('click', e => {   // the daily answer was posted → streak
-    if (!e.target.closest('[data-c="post"]') || state.rqPending !== rqDay()) return;
-    setTimeout(() => { if (!feedUI.drafts.ig) { state.rqPending = null; rqMarkDone(); rootsPaint(); } }, 300);
-  });
+  document.addEventListener('keydown', e => { const el = $('#playSheet'); if (e.key === 'Escape' && el && !el.hidden) playClose(); });
 }
 
 /* ---------- 🌳 Dynasty-Canvas-style tree inside dynasty profiles ---------- */
@@ -14539,7 +14715,7 @@ setTimeout(async () => {
     if (live !== HAS_CLOUD) { HAS_CLOUD = live; setRoyalFeatures(); try { renderPlans(); renderAddons(); updatePrices(true); } catch (e) { /* views refresh later */ } }
   } catch (e) { /* server asleep or offline — keep the last known state */ }
 }, 900);
-if (/[?&]dvtest=1/.test(location.search)) window.__dv = { get state() { return state; }, save, saveNow, startDemo, openTutorial, NET, FILM, ACC, SRCH, openSearch, IGN, igOpenCreate, igOpenActivity, openLocalProfile, HOME, KIN, rqMarkDone, rootsPaint, dynUI, dynTreeVault, renderFilm, filmPoll, openPerson };   // test hook, only with ?dvtest=1
+if (/[?&]dvtest=1/.test(location.search)) window.__dv = { get state() { return state; }, save, saveNow, startDemo, openTutorial, NET, FILM, ACC, SRCH, openSearch, IGN, igOpenCreate, igOpenActivity, openLocalProfile, HOME, KIN, PLAY, playOpen, playState, rootsPaint, dynUI, dynTreeVault, renderFilm, filmPoll, openPerson };   // test hook, only with ?dvtest=1
 
 
 function toast(msg, type = 'info', ms = 3200) {
