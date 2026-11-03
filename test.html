@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DV test</title>
+<style>
+html,body{background:#000;color:#fff;margin:0;font:15px/1.45 system-ui,sans-serif}
+main{padding:16px;max-width:640px;margin:auto}
+h1{font-size:20px;margin:4px 0 12px;color:#d4af37}
+.row{padding:8px 10px;border-radius:8px;background:#161616;margin:6px 0;word-break:break-word}
+.ok{color:#5be37d}.bad{color:#ff6b6b}.mid{color:#ffd166}
+button{font:600 16px system-ui;padding:12px 16px;border-radius:10px;border:0;background:#d4af37;color:#000;margin:10px 0}
+iframe{width:100%;height:420px;border:1px solid #333;border-radius:8px;background:#222;margin-top:8px}
+</style></head>
+<body><main>
+<h1>DynastyVault test</h1>
+<div id="log"></div>
+<button id="run" hidden>2. App ko yahan chalao</button>
+<div id="fr"></div>
+</main>
+<script>
+(function(){
+  var log=document.getElementById('log'), t0=Date.now();
+  function row(html,cls){var d=document.createElement('div');d.className='row '+(cls||'');d.innerHTML=html;log.appendChild(d);return d}
+  function sec(){return ((Date.now()-t0)/1000).toFixed(1)+'s'}
+  row('Phone: '+navigator.userAgent.replace(/</g,'')+'<br>RAM: '+(navigator.deviceMemory||'?')+' GB · Net: '+((navigator.connection&&navigator.connection.effectiveType)||'?'));
+  var p=row('1. app.html download ho rahi hai… 0 KB','mid');
+  var url='app.html?t='+Date.now();
+  fetch(url,{cache:'no-store'}).then(function(res){
+    row('Server jawab: '+res.status+' · type: '+(res.headers.get('content-type')||'?')+' · size: '+(res.headers.get('content-length')||'?'));
+    if(!res.body||!res.body.getReader) return res.text().then(function(tx){return tx});
+    var rd=res.body.getReader(), n=0, chunks=[];
+    function pump(){return rd.read().then(function(r){
+      if(r.done){var all=new Blob(chunks);return all.text()}
+      n+=r.value.length;chunks.push(r.value);p.textContent='1. app.html download ho rahi hai… '+Math.round(n/1024)+' KB ('+sec()+')';return pump()})}
+    return pump();
+  }).then(function(tx){
+    var good=/^<!DOCTYPE html>/i.test(tx)&&/<\/html>\s*$/.test(tx);
+    p.className='row '+(good?'ok':'bad');
+    p.innerHTML='1. Download '+(good?'poora ✅':'adhura ya galat ❌')+' · '+(tx.length/1048576).toFixed(2)+' M chars · '+sec()
+      +'<br>Debug wala version: '+(tx.indexOf('__dvShow')>-1?'haan':'nahi')+' · Font fix: '+(tx.indexOf('media="print" onload')>-1?'haan':'nahi')
+      +'<br>Shuru: '+tx.slice(0,40).replace(/</g,'&lt;')+'<br>Aakhir: '+tx.slice(-30).replace(/</g,'&lt;');
+    var b=document.getElementById('run');b.hidden=false;
+    b.onclick=function(){
+      b.hidden=true; var t1=Date.now();
+      var st=row('2. App frame mein khul rahi hai… 0s','mid');
+      var f=document.createElement('iframe'); f.src='app.html?frame='+Date.now();
+      document.getElementById('fr').appendChild(f);
+      var iv=setInterval(function(){
+        var s=((Date.now()-t1)/1000).toFixed(0)+'s', d=null; try{d=f.contentDocument}catch(e){}
+        var info=d?('state: '+d.readyState+' · title: '+(d.title||'-').slice(0,24)+' · body: '+(d.body?d.body.innerHTML.length:0)+' · nav: '+(d.querySelector('.ig-nav')?'haan':'nahi')):'frame nahi padh paaya';
+        var err=''; try{var w=f.contentWindow; if(w&&w.__dvErr){var e=d.getElementById('dvBoot'); err=' · ERROR: '+(e?e.innerText.slice(0,300):'?')}}catch(e){}
+        st.textContent='2. '+s+' · '+info+err;
+        if(d&&d.querySelector('.ig-nav')){st.className='row ok';st.textContent+=' ✅ App chal gayi';clearInterval(iv)}
+        else if(err){st.className='row bad'}
+      },1000);
+      f.onload=function(){row('Frame load event: '+((Date.now()-t1)/1000).toFixed(1)+'s')};
+    };
+  }).catch(function(e){p.className='row bad';p.textContent='1. Download fail ❌: '+e+' ('+sec()+')'});
+  window.addEventListener('error',function(e){row('Test page error: '+e.message,'bad')});
+})();
+</script>
+</body></html>
